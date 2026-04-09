@@ -125,10 +125,51 @@
   /**
    * Mobile nav toggle
    */
-  on('click', '.mobile-nav-toggle', function(e) {
+  const toggleMobileNav = () => {
     select('#navbar').classList.toggle('navbar-mobile')
-    this.classList.toggle('bi-list')
-    this.classList.toggle('bi-x')
+    const overlay = select('#navbar-overlay')
+    if (overlay) overlay.classList.toggle('active')
+
+    const toggleBtn = select('.mobile-nav-toggle')
+    if (toggleBtn) {
+      toggleBtn.classList.toggle('bi-list')
+      toggleBtn.classList.toggle('bi-x')
+    }
+  }
+
+  on('click', '.mobile-nav-toggle', function(e) {
+    toggleMobileNav()
+  })
+
+  /**
+   * Desktop side drawer toggle logic
+   */
+  on('click', '.deskHamburger', function(e) {
+    const popup = select('.deskHamburgerPopup')
+    if (popup) popup.classList.add('visible')
+  })
+
+  on('click', '#deskHamburgerClose', function(e) {
+    const popup = select('.deskHamburgerPopup')
+    if (popup) popup.classList.remove('visible')
+  })
+
+  on('click', '.deskHamburgerOverlay', function(e) {
+    // Close when clicking overlay (outside popup)
+    if (e.target.classList.contains('deskHamburgerOverlay')) {
+      const popup = select('.deskHamburgerPopup')
+      if (popup) popup.classList.remove('visible')
+    }
+  })
+
+  on('click', '#mobile-nav-close', function(e) {
+    toggleMobileNav()
+  })
+
+  on('click', '#navbar-overlay', function(e) {
+    if (select('#navbar').classList.contains('navbar-mobile')) {
+      toggleMobileNav()
+    }
   })
 
   /**
