@@ -72,11 +72,14 @@ h1, h2, h3, h4, h5, h6, .font-primary {
 # Top Bar
 --------------------------------------------------------------*/
 #topbar {
-    background: #252325;
-    border-bottom: 1px solid #eee;
+    background: rgba(17, 17, 17, 0.82) !important;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     font-size: 15px;
     height: 40px;
     padding: 0;
+    z-index: 1000; /* Stays above header glass */
 }
 
     #topbar .contact-info a {
@@ -120,20 +123,18 @@ h1, h2, h3, h4, h5, h6, .font-primary {
 --------------------------------------------------------------*/
 #header {
     height: 90px;
-    background: #d7df21;
+    background: rgba(255, 255, 255, 0.72) !important;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
     z-index: 999;
-    box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.06);
+    box-shadow: 0px 5px 25px 0px rgba(0, 0, 0, 0.05);
     position: relative;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 @media(min-width:991px) {
     #header::before {
-        width: 30%;
-        content: "";
-        position: absolute;
-        height: 100%;
-        background: white;
-        clip-path: polygon(0 0, 100% 0%, 95% 100%, 0% 100%);
+        display: none;
     }
 }
 
@@ -172,7 +173,7 @@ h1, h2, h3, h4, h5, h6, .font-primary {
     padding: 0;
     margin: 0;
     max-height: 80px;
-    mix-blend-mode: multiply;
+    /* Removed multiply blend for glass transparency compatibility */
 }
 
 .scrolled-offset {
@@ -206,9 +207,10 @@ h1, h2, h3, h4, h5, h6, .font-primary {
         align-items: center;
         justify-content: space-between;
         padding: 10px 0 10px 30px;
-        font-family: "Open Sans", sans-serif;
-        font-size: 18px;
-        color: #252325;
+        font-family: 'Outfit', sans-serif;
+        font-size: 16px;
+        font-weight: 500;
+        color: #111111;
         white-space: nowrap;
         transition: 0.3s;
     }

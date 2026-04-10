@@ -139,7 +139,11 @@
     /* 3. Benefits Section */
     .benefits-section { background: #f9f9f9; }
     .benefit-item { display: flex; align-items: flex-start; gap: 20px; padding: 30px; background: #fff; border: 1px solid #eee; height: 100%; transition: var(--transition-premium); }
-    .benefit-item:hover { border-color: var(--primary-bc); box-shadow: 0 15px 40px rgba(0,0,0,0.08); transform: translateY(-5px); }
+    .benefit-item:hover { 
+        border-color: var(--primary-bc); 
+        box-shadow: 0 15px 40px rgba(255, 204, 0, 0.15); 
+        transform: translateY(-8px); 
+    }
     .benefit-icon { flex-shrink: 0; width: 64px; height: 64px; background: #fff8cc; display: flex; align-items: center; justify-content: center; border-radius: 0; border: 2px solid var(--primary-bc); }
     .benefit-icon span { font-size: 2rem; color: var(--primary-bc); }
     .benefit-title { font-weight: 800; font-family: var(--font-headline); margin-bottom: 8px; font-size: 1.05rem; }
@@ -174,7 +178,11 @@
 
     /* 5. Product Cards */
     .prod-card { background: #fff; border: 1px solid #eee; overflow: hidden; height: 100%; display: flex; flex-direction: column; transition: var(--transition-premium); }
-    .prod-card:hover { transform: translateY(-8px); box-shadow: 0 25px 60px rgba(0,0,0,0.1); border-color: var(--primary-bc); }
+    .prod-card:hover { 
+        transform: translateY(-10px); 
+        box-shadow: 0 30px 60px rgba(0,0,0,0.12), 0 0 25px rgba(255, 204, 0, 0.08); 
+        border-color: var(--primary-bc); 
+    }
     .prod-img-wrap { height: 240px; overflow: hidden; }
     .prod-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s ease; }
     .prod-card:hover .prod-img { transform: scale(1.08); }
@@ -437,19 +445,19 @@
             <div class="swiper hero-swiper-premium">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide">
-                        <img src="/Uploads/img1.jpg" class="hero-bg" alt="Bestchoice Qatar Industrial 1">
+                        <img src="/Uploads/img1.jpg" class="hero-bg" alt="Bestchoice Qatar Industrial 1" data-swiper-parallax="20%">
                     </div>
                     <div class="swiper-slide">
-                        <img src="/Uploads/img2.jpg" class="hero-bg" alt="Bestchoice Qatar Industrial 2">
+                        <img src="/Uploads/img2.jpg" class="hero-bg" alt="Bestchoice Qatar Industrial 2" data-swiper-parallax="20%">
                     </div>
                     <div class="swiper-slide">
-                        <img src="/Uploads/img3.jpg" class="hero-bg" alt="Bestchoice Qatar Industrial 3">
+                        <img src="/Uploads/img3.jpg" class="hero-bg" alt="Bestchoice Qatar Industrial 3" data-swiper-parallax="20%">
                     </div>
                     <div class="swiper-slide">
-                        <img src="/Uploads/img4.jpg" class="hero-bg" alt="Bestchoice Qatar Industrial 4">
+                        <img src="/Uploads/img4.jpg" class="hero-bg" alt="Bestchoice Qatar Industrial 4" data-swiper-parallax="20%">
                     </div>
                     <div class="swiper-slide">
-                        <img src="/Uploads/img5.jpg" class="hero-bg" alt="Bestchoice Qatar Industrial 5">
+                        <img src="/Uploads/img5.jpg" class="hero-bg" alt="Bestchoice Qatar Industrial 5" data-swiper-parallax="20%">
                     </div>
                 </div>
             </div>
@@ -492,12 +500,12 @@
                         <img src="~/Uploads/slide-2.jpg" class="about-img-bottom shadow" alt="Bestchoice Qatar Modular Construction">
                         <!-- Years Badge -->
                         <div class="about-badge about-badge-years">
-                            <span class="badge-num">15+</span>
+                            <span class="badge-num purecounter" data-purecounter-start="0" data-purecounter-end="15" data-purecounter-duration="1.5">0</span><span class="badge-num">+</span>
                             <span class="badge-label">Years Experience<br>In Qatar</span>
                         </div>
                         <!-- Experts Badge -->
                         <div class="about-badge about-badge-experts">
-                            <span class="badge-num">150+</span>
+                            <span class="badge-num purecounter" data-purecounter-start="0" data-purecounter-end="150" data-purecounter-duration="1.5">0</span><span class="badge-num">+</span>
                             <span class="badge-label">Expert Team<br>Members</span>
                         </div>
                     </div>
@@ -1095,17 +1103,21 @@
             // Hero Swiper with Safety Block
             try {
                 const heroSwiper = new Swiper('.hero-swiper-premium', {
-                    effect: 'fade',
+                    speed: 1500,
+                    parallax: true,
                     loop: true,
-                    speed: 2000,
                     autoplay: {
-                        delay: 6000,
+                        delay: 5000,
                         disableOnInteraction: false,
                     },
-                    fadeEffect: {
-                        crossFade: true
-                    }
+                    pagination: {
+                        el: '.swiper-pagination',
+                        clickable: true,
+                    },
                 });
+
+                // Initialize PureCounter
+                new PureCounter();
                 console.log("Hero Swiper Initialized Successfully");
             } catch (e) {
                 console.error("Hero Swiper Initialization Failed:", e);
