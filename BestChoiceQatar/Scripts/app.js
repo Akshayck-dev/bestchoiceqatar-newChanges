@@ -106,7 +106,7 @@ var WebApp = {
             });
         },
         ActivateMiscOnDemandPlugins: function () {
-            $('.timepicker').livequery(function () {
+            $('.timepicker').each(function () {
                 $(this).timepicker({
                     timeFormat: 'h:mm p',
                     interval: 10,
@@ -122,7 +122,7 @@ var WebApp = {
     Events: {
         Init: function () {
             WebApp.Events.BindStaticEvents();
-            WebApp.Events.BindLiveEvents();
+            WebApp.Events.BindPluginInitializations();
         },
         BindStaticEvents: function () {
             $(document)
@@ -168,7 +168,7 @@ var WebApp = {
                     }
                 })
                 .on('change', 'input,select,textarea', function () {
-                    $(this).valid();
+                    if($(this).valid) $(this).valid();
                 })
                 .on("change", '.document-uploader', function (e) {
                     var _this = $(this);
@@ -227,67 +227,48 @@ var WebApp = {
 
              
         },
-        BindLiveEvents: function () {
-            $('select').not('.dataTables_length select').livequery(function () {
+        BindPluginInitializations: function () {
+            // Standard Plugin Initialization (Replaces livequery)
+            $('select').not('.dataTables_length select').each(function () {
                 $(this).select2();
-                $(this).trigger('change');
             });
-            $('select.auto-select').livequery(function () {
-                $(this).val($(this).attr('data-selected'));
+            $('select.auto-select').each(function () {
+                $(this).val($(this).attr('data-selected')).trigger('change');
             });
-            $('.data-table').livequery(function () {
+            $('.data-table').each(function () {
                 $('.dataTables_filter input[type=search]').attr('placeholder', 'Search');
                 $('.dataTables_length select').addClass('form-control');
             });
-            $('select.form-select').livequery(function () {
+            $('select.form-select').each(function () {
                 $(this).select2();
             });
-            $('.styled').livequery(function () {
-                $(this).uniform({ radioClass: 'choice' });
+            $('.styled').each(function () {
+                if($(this).uniform) $(this).uniform({ radioClass: 'choice' });
             });
-            $('.file-styled').livequery(function () {
-                $(this).uniform({
+            $('.file-styled').each(function () {
+                if($(this).uniform) $(this).uniform({
                     fileButtonHtml: '<i class="icon-upload"></i>',
                     wrapperClass: 'bg-primary'
                 });
             });
-            $('.html-editor').livequery(function () {
-                $(this).summernote({
-                    height: 150
-                });
+            $('.html-editor').each(function () {
+                if($(this).summernote) $(this).summernote({ height: 150 });
             });
-            $('.toggle-switch').livequery(function () {
-                $(this).bootstrapToggle({
-                    on: 'Yes',
-                    off: 'No'
-                });
+            $('.toggle-switch').each(function () {
+                if($(this).bootstrapToggle) $(this).bootstrapToggle({ on: 'Yes', off: 'No' });
             });
-            $('[data-toggle="popover"]').livequery(function () {
-                $(this).popover();
+            $('[data-toggle="popover"]').popover();
+            
+            $('input.datepicker,input.pickadate').each(function () {
+                var _options = { todayHighlight: true, autoclose: true, format: "mm/dd/yyyy" };
+                if ($(this).attr('data-min') != null) _options.startDate = $(this).attr('data-min');
+                if ($(this).attr('data-max') != null) _options.endDate = $(this).attr('data-max');
+                if ($(this).is('.hidden-previous')) _options.startDate = new Date();
+                if($(this).datepicker) $(this).datepicker(_options);
             });
-            $('input.datepicker,input.pickadate').livequery(function () {
-                var _options = {};
 
-                _options.todayHighlight = true;
-                _options.autoclose = true;
-                _options.format = "mm/dd/yyyy";
-
-                if ($(this).attr('data-min') != null) {
-                    _options.startDate = $(this).attr('data-min');
-                }
-
-                if ($(this).attr('data-max') != null) {
-                    _options.endDate = $(this).attr('data-max');
-                }
-
-                if ($(this).is('.hidden-previous')) {
-                    _options.startDate = new Date();
-                }
-
-                $(this).datepicker(_options);
-            });
-            $('input.autocomplete').livequery(function () {
-                $(this).removeClass('autocomplete')
+            $('input.autocomplete').each(function () {
+                $(this).removeClass('autocomplete');
                 var source = $(this).attr('data-source');
                 var multiple = $(this).attr('data-multiple') == 'true' ? true : false;
                 $(this).select2({
@@ -296,75 +277,28 @@ var WebApp = {
                     allowClear: true,
                     ajax: {
                         quietMillis: 150,
-                        url: function () {
-
-                            return source;
-                        },
+                        url: function () { return source; },
                         dataType: 'json',
-                        data: function (term, page) {
-                            return {
-                                i: page,
-                                q: term
-                            };
-                        },
-
+                        data: function (term, page) { return { i: page, q: term }; },
                         results: function (data, page) {
                             var _hasMoreResults = (page * 20) < data.Total;
-                            return {
-                                results: data.Results,
-                                more: _hasMoreResults
-                            };
+                            return { results: data.Results, more: _hasMoreResults };
                         }
                     }
                 });
 
                 var deafult = $(this).attr('data-select2-default');
-
-                if (typeof deafult !== typeof undefined && deafult !== false) {
-                    var _item = $.parseJSON($(this).attr('data-select2-default'));
+                if (deafult) {
+                    var _item = $.parseJSON(deafult);
                     $(this).select2('data', _item);
                 }
             });
-            $('input.autocomplete').livequery(function () {
-                $(this).removeClass('autocomplete')
-                var source = $(this).attr('data-source');
-                var multiple = $(this).attr('data-multiple') == 'true' ? true : false;
-                $(this).select2({
-                    multiple: multiple,
-                    minimumInputLength: 0,
-                    allowClear: true,
-                    ajax: {
-                        quietMillis: 150,
-                        url: function () {                                                       
-                            return source;
-                        },
-                        dataType: 'json',
-                        data: function (term, page) {
-                            return {
-                                i: page,
-                                q: term
-                            };
-                        },
-
-                        results: function (data, page) {
-                            var _hasMoreResults = (page * 20) < data.Total;
-                            return {
-                                results: data.Results,
-                                more: _hasMoreResults
-                            };
-                        }
+            
+            $('.form-group').each(function () {
+                if ($(this).find('input[data-val-required],textarea[data-val-required],select[data-val-required]').not('[type="checkbox"]').length > 0) {
+                    if($(this).find('label span.text-danger').length === 0) {
+                        $(this).find('label').first().append('<span class="text-danger">&nbsp;*</span>');
                     }
-                });
-
-                var deafult = $(this).attr('data-select2-default');
-                if (typeof deafult !== typeof undefined && deafult !== false) {
-                    var _item = $.parseJSON($(this).attr('data-select2-default'));
-                    $(this).select2('data', _item);
-                }
-            });
-            $('.form-group').livequery(function () {
-                if ($(this).find('input[data-val-required],textarea[data-val-required],textarea[data-val-summernote],select[data-val-required]').not('[type="checkbox"]').length > 0) {
-                    $(this).find('label').first().append('<span class="text-danger">&nbsp;*</span>');
                 }
             });
         }

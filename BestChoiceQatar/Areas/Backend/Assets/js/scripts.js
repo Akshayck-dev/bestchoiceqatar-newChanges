@@ -1,10 +1,6 @@
 $(function () {
-    $('.dataTables_length span').livequery(function () {
-        $(this).hide();
-    });
-    $('.dataTables_length select').livequery(function () {
-        $(this).addClass('form-control');
-    });
+    $('.dataTables_length span').hide();
+    $('.dataTables_length select').addClass('form-control');
 });
 if ($('.select').each(function () { $(this).select2() }));
 if ($(".styled").each(function () { $(this).uniform({ radioClass: 'choice' }) }));

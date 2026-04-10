@@ -1,4 +1,4 @@
-<!-- BESTCHOICE_NAV_RELOAD_FORCE_V10.0 -->
+<!-- BESTCHOICE_NAV_RELOAD_FORCE_V14.0 -->
 @using BestChoiceQatar.Core.Entities.Common
 @{ 
     BestChoiceQatar.Models.BestChoiceQatarEntities db = new BestChoiceQatar.Models.BestChoiceQatarEntities();
@@ -36,7 +36,7 @@
 
 
     <!-- Template Main CSS File (w/ Cache Buster V2.5) -->
-    <link href="~/Content/assets/css/style.css?v=10.0" rel="stylesheet">
+    <link href="~/Content/assets/css/style.css?v=14.0" rel="stylesheet">
     
     <!-- JSON-LD Local Business Schema -->
     <script type="application/ld+json">
@@ -70,18 +70,9 @@
                 <a href="/index"><img class="img-responsive" src="~/content/assets/img/logo/animation.gif" alt="Bestchoice Contracting"></a>
             </div>
 
+            <!-- Desktop-only nav links -->
             <nav id="navbar" class="navbar">
-                <ul class="drawer">
-                    <li class="mobile-nav-header d-lg-none">
-                        <div class="sidebar-header-wrapper">
-                            <div class="sidebar-logo">
-                                <img src="~/content/assets/img/logo/animation.gif" alt="BestChoice Logo">
-                            </div>
-                            <button type="button" class="mobile-nav-close-btn" id="mobile-nav-close" aria-label="Close Menu">
-                                <i class="bi bi-x"></i>
-                            </button>
-                        </div>
-                    </li>
+                <ul class="navbar-desktop-links">
                     <li><a class="nav-link" href="/index">Home</a></li>
                     <li><a class="nav-link" href="/about">About</a></li>
                     <li class="dropdown">
@@ -100,29 +91,15 @@
                     <li><a class="nav-link" href="/#faq">FAQ</a></li>
                     <li><a class="nav-link" href="/contact">Contact</a></li>
                     <li><a class="nav-link" target="_blank" href="~/Content/assets/Brochure/Brochure.html.pdf">Brochure</a></li>
-
-                    <!-- Sidebar Bottom CTA Section (Mobile Only) -->
-                    <li class="sidebar-cta-container d-lg-none">
-                        <div class="sidebar-cta-wrapper">
-                            <a href="tel:@settings.Mobile1" class="s-cta-btn s-cta-call">
-                                <i class="bi bi-telephone"></i>
-                                <span>Call Now</span>
-                            </a>
-                            <a href="@settings.Whatsup" target="_blank" class="s-cta-btn s-cta-wa">
-                                <i class="bi bi-whatsapp"></i>
-                                <span>WhatsApp</span>
-                            </a>
-                        </div>
-                    </li>
                 </ul>
-                <div class="mobile-nav-toggle-placeholder d-lg-none">
-                    <!-- Toggle relocated to bottom of body for strict visibility -->
-                </div>
             </nav>
-            <div id="navbar-overlay" class="navbar-overlay"></div>
 
             <div class="header-cta d-none d-lg-flex align-items-center gap-3">
                 <a href="#quote" class="header-pill-cta" data-bs-toggle="modal" data-bs-target="#quoteModal">GET A QUOTE</a>
+                <!-- Left Services Drawer Trigger -->
+                <button id="servicesDrawerBtn" class="services-drawer-trigger" title="Our Services" aria-label="Open Services Menu">
+                    <i class="bi bi-grid-3x3-gap"></i>
+                </button>
                 <i class="bi bi-list deskHamburger" style="font-size: 2rem; cursor: pointer; color: #111;"></i>
             </div>
         </div>
@@ -131,6 +108,8 @@
     <!-- No Overlay Here - Relocated to Bottom -->
 
 
+
+    <!-- Navbar/Drawer Elements will be at the bottom for unified stacking -->
 
     <!-- ======= Top Bar ======= -->
     <section id="topbar" class="d-flex align-items-center">
@@ -164,8 +143,7 @@
                 <div class="row">
 
                     <div class="col-lg-3 col-md-6 footer-contact">
-                        <img width="200px" height="58px"
-                        <img src="~/content/assets/img/logo/logo-1.png" alt="">
+                        <img width="200px" height="58px" src="~/content/assets/img/logo/logo-1.png" alt="BestChoice Logo">
 
                         <p>
                             <br>
@@ -238,8 +216,161 @@
         </div>
     </footer><!-- End Footer -->
 
-    <!-- Drawer Overlays (Top Level Stacking) -->
-    <div id="navbar-overlay" class="navbar-overlay" style="z-index: 999997 !important;"></div>
+    <!-- Drawer Overlays (Unified v13 Stacking) -->
+    <div id="navbar-overlay" class="navbar-overlay"></div>
+
+    <!-- ======= MOBILE NAV DRAWER ======= -->
+    <ul id="mobileDrawer" class="drawer" role="dialog" aria-label="Mobile Navigation Menu" aria-modal="true" aria-hidden="true">
+        <li class="mobile-nav-header">
+            <div class="sidebar-header-wrapper">
+                <div class="sidebar-logo">
+                    <img src="~/content/assets/img/logo/animation.gif" alt="BestChoice Logo">
+                </div>
+                <button type="button" class="mobile-nav-close-btn" id="mobile-nav-close" aria-label="Close Menu">
+                    <i class="bi bi-x"></i>
+                </button>
+            </div>
+        </li>
+        <li><a class="nav-link" href="/index"><i class="bi bi-house me-2"></i>Home</a></li>
+        <li><a class="nav-link" href="/about"><i class="bi bi-info-circle me-2"></i>About</a></li>
+        <li class="dropdown">
+            <a class="nav-link" href="#"><span><i class="bi bi-box-seam me-2"></i>Our Products / Services</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+                <li><a href="/site-cabins-offices-welfare-accommodation" class="parent-highlight"><span>Porta Cabin Offices</span></a></li>
+                <li><a href="/building-painting-contractor">Building Painting Contractor</a></li>
+                <li><a href="/steel-aluminum-fabrication">Steel & Aluminum Fabrication</a></li>
+                <li><a href="/general-contracting">General Contracting</a></li>
+                <li><a href="/optical-fibre-networks">Optical Fibre Networks</a></li>
+            </ul>
+        </li>
+        <li><a class="nav-link" href="/blog"><i class="bi bi-journal-text me-2"></i>Blog</a></li>
+        <li><a class="nav-link" href="/#faq"><i class="bi bi-question-circle me-2"></i>FAQ</a></li>
+        <li><a class="nav-link" href="/contact"><i class="bi bi-envelope me-2"></i>Contact</a></li>
+        <li><a class="nav-link" target="_blank" href="~/Content/assets/Brochure/Brochure.html.pdf"><i class="bi bi-file-earmark-pdf me-2"></i>Brochure</a></li>
+
+        <!-- Bottom CTA -->
+        <li class="sidebar-cta-container">
+            <div class="sidebar-cta-wrapper">
+                <a href="tel:@settings.Mobile1" class="s-cta-btn s-cta-call">
+                    <i class="bi bi-telephone"></i>
+                    <span>Call Now</span>
+                </a>
+                <a href="@settings.Whatsup" target="_blank" class="s-cta-btn s-cta-wa">
+                    <i class="bi bi-whatsapp"></i>
+                    <span>WhatsApp</span>
+                </a>
+            </div>
+        </li>
+    </ul>
+
+    <!-- ======= LEFT SERVICES DRAWER ======= -->
+    <div id="servicesDrawerOverlay" class="services-drawer-overlay"></div>
+    <aside id="servicesDrawer" class="services-drawer" role="navigation" aria-label="Services Menu">
+        <div class="services-drawer-header">
+            <img src="~/Content/assets/img/logo/animation.gif" alt="BestChoice" class="services-drawer-logo">
+            <button id="servicesDrawerClose" class="services-drawer-close" aria-label="Close Services Menu">
+                <i class="bi bi-x-lg"></i>
+            </button>
+        </div>
+        <div class="services-drawer-body">
+            <p class="services-drawer-tagline">Premium Construction &amp; Fabrication Solutions in Qatar</p>
+            <h5 class="services-drawer-section-title"><i class="bi bi-box-seam"></i> Products</h5>
+            <ul class="services-drawer-links">
+                <li>
+                    <a href="/site-cabins-offices-welfare-accommodation" class="services-drawer-link">
+                        <span class="sdl-icon"><i class="bi bi-building"></i></span>
+                        <span class="sdl-info">
+                            <strong>Porta Cabin Offices</strong>
+                            <small>Modular site offices &amp; welfare units</small>
+                        </span>
+                        <i class="bi bi-chevron-right sdl-arrow"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="/portable-cabin-fabrication" class="services-drawer-link">
+                        <span class="sdl-icon"><i class="bi bi-house-gear"></i></span>
+                        <span class="sdl-info">
+                            <strong>Portable Cabin Fabrication</strong>
+                            <small>Custom-built cabins &amp; site shelters</small>
+                        </span>
+                        <i class="bi bi-chevron-right sdl-arrow"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="/product/security-guard-cabins" class="services-drawer-link">
+                        <span class="sdl-icon"><i class="bi bi-shield-check"></i></span>
+                        <span class="sdl-info">
+                            <strong>Security Guard Cabins</strong>
+                            <small>Robust prefab guard posts</small>
+                        </span>
+                        <i class="bi bi-chevron-right sdl-arrow"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="/product/labor-camps-accommodation" class="services-drawer-link">
+                        <span class="sdl-icon"><i class="bi bi-people"></i></span>
+                        <span class="sdl-info">
+                            <strong>Labour Camp Accommodation</strong>
+                            <small>Compliant, comfortable camps</small>
+                        </span>
+                        <i class="bi bi-chevron-right sdl-arrow"></i>
+                    </a>
+                </li>
+            </ul>
+
+            <h5 class="services-drawer-section-title mt-4"><i class="bi bi-tools"></i> Services</h5>
+            <ul class="services-drawer-links">
+                <li>
+                    <a href="/steel-aluminum-fabrication" class="services-drawer-link">
+                        <span class="sdl-icon"><i class="bi bi-layers"></i></span>
+                        <span class="sdl-info">
+                            <strong>Steel &amp; Aluminum Fabrication</strong>
+                            <small>Precision metal works &amp; structures</small>
+                        </span>
+                        <i class="bi bi-chevron-right sdl-arrow"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="/building-painting-contractor" class="services-drawer-link">
+                        <span class="sdl-icon"><i class="bi bi-brush"></i></span>
+                        <span class="sdl-info">
+                            <strong>Building Painting</strong>
+                            <small>Interior &amp; exterior painting services</small>
+                        </span>
+                        <i class="bi bi-chevron-right sdl-arrow"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="/general-contracting" class="services-drawer-link">
+                        <span class="sdl-icon"><i class="bi bi-hammer"></i></span>
+                        <span class="sdl-info">
+                            <strong>General Contracting</strong>
+                            <small>End-to-end project execution</small>
+                        </span>
+                        <i class="bi bi-chevron-right sdl-arrow"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="/optical-fibre-networks" class="services-drawer-link">
+                        <span class="sdl-icon"><i class="bi bi-router"></i></span>
+                        <span class="sdl-info">
+                            <strong>Optical Fibre Networks</strong>
+                            <small>High-speed cabling &amp; infrastructure</small>
+                        </span>
+                        <i class="bi bi-chevron-right sdl-arrow"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="services-drawer-footer">
+            <a href="/contact" class="services-drawer-cta">
+                <i class="bi bi-chat-dots"></i> Get a Free Quote
+            </a>
+            <a href="~/Content/assets/Brochure/Brochure.html.pdf" target="_blank" class="services-drawer-cta-outline">
+                <i class="bi bi-file-earmark-pdf"></i> Download Brochure
+            </a>
+        </div>
+    </aside>
 
     <div class="deskHamburgerOverlay" style="z-index: 999996 !important;">
         <div class="deskHamburgerPopup" style="z-index: 999999 !important;">
@@ -357,31 +488,45 @@
 
     <!-- Vendor JS Files -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-    <script src="/Areas/backend/assets/js/jquery.livequery.js" type="text/javascript"></script>
+    
     <!-- JavaScript Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
-    <script src="~/Content/assets/vendor/purecounter/purecounter.js"></script>
+    
+    <!-- Modern Counter & Animations -->
+    <script src="https://cdn.jsdelivr.net/npm/@@srexi/purecounterjs/dist/purecounter_vanilla.js"></script>
     <script src="~/Content/assets/vendor/aos/aos.js"></script>
-    <script src="~/Content/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Vendor Extras -->
     <script src="~/Content/assets/vendor/glightbox/js/glightbox.min.js"></script>
     <script src="~/Content/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
     <script src="~/Content/assets/vendor/swiper/swiper-bundle.min.js"></script>
     <script src="~/Content/assets/vendor/php-email-form/validate.js"></script>
     <script src="~/Content/bootstrap-toastr/toastr.min.js"></script>
-    <script src="~/Content/app.js" type="text/javascript"></script>
-    <script src="~/Scripts/app.js"></script>
-    <!-- Template Main JS File (w/ Cache Buster V2.5) -->
-    <script src="~/Content/assets/js/main.js?v=4.0"></script>
-    <script src="~/Content/assets/js/main.js?v=5.0"></script>
-    @* <script src="https://www.chatbase.co/embed.min.js" chatbotId="Bh3opGpJSXUX7p-WJMamC" defer></script> *@
+
+    <!-- Application Core (Cleaned v11.0) -->
+    <script src="~/Content/app.js?v=11.0" type="text/javascript"></script>
+    <script src="~/Scripts/app.js?v=11.0"></script>
+    
+    <!-- Template Main (Consolidated) -->
+    <script src="~/Content/assets/js/main.js?v=11.0"></script>
+
     <script>
         $(document).ready(function () {
-            App.init();
+            // Initialize Core App
+            if (typeof App !== 'undefined') App.init();
+            
+            // Initialize PureCounter
+            try {
+                if (typeof PureCounter !== 'undefined') {
+                    new PureCounter();
+                }
+            } catch (e) { console.error("PureCounter Init Error:", e); }
+
             @{
                 if (TempData["Notification"] != null)
                 {
                     Notification notification = (Notification)TempData["Notification"];
-                    <text>WebApp.Notifications.Show('@notification.Type', '@notification.Text');</text>
+                    <text>if(typeof WebApp !== 'undefined') WebApp.Notifications.Show('@notification.Type', '@notification.Text');</text>
                 }
              }
         });
@@ -426,162 +571,166 @@
     </div>
 
     <style>
-        .premium-floating-nav {
-            position: fixed;
-            right: 20px;
-            bottom: 100px; /* Above the chatbot bubble */
-            z-index: 10000;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
-
-        .floating-item {
-            width: 52px;
-            height: 52px;
-            background: #111; /* Industrial Black */
-            color: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 22px;
-            text-decoration: none;
-            border-radius: 5px; /* Slight roundness for premium feel */
-            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            border: 1px solid rgba(255,204,0,0.1);
-        }
-
-        .floating-item.phone-link { background: #000; color: #ffcc00; } /* Black/Yellow signature */
+        /* [MAINTAINED FROM v10.0 HARD FIX] */
+        .premium-floating-nav { position: fixed; right: 20px; bottom: 100px; z-index: 10000; display: flex; flex-direction: column; gap: 8px; }
+        .floating-item { width: 52px; height: 52px; background: #111; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 22px; text-decoration: none; border-radius: 5px; box-shadow: 0 8px 15px rgba(0,0,0,0.2); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); border: 1px solid rgba(255,204,0,0.1); }
+        .floating-item.phone-link { background: #000; color: #ffcc00; }
         .floating-item.whatsapp-link { background: #25D366; }
-        .floating-item.email-link { background: #111; }
-
-        .floating-item:hover {
-            transform: scale(1.1) translateX(-5px);
-            box-shadow: 0 12px 20px rgba(0,0,0,0.3);
-            color: #fff;
-        }
-
-        /* Black Theme Overrides for Chatbase Bubble */
-        #chatbase-bubble-button {
-            background-color: #000 !important;
-            border: 2px solid #ffcc00 !important;
-        }
-
-        @@media (max-width: 767.98px) {
-            .premium-floating-nav {
-                display: none !important; /* Hide vertical stack on mobile to prevent clutter */
-            }
-            .floating-item {
-                width: 48px;
-                height: 48px;
-                font-size: 20px;
-            }
-        }
-
-        /* Modern Mobile Floating CTA Styles */
-        .modern-mobile-cta-bar {
-            position: fixed;
-            bottom: 25px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 9999;
-            width: 92%;
-            max-width: 400px;
-        }
-
-        .cta-inner {
-            background: rgba(17, 17, 17, 0.85); /* Industrial Dark Glass */
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: space-around;
-            padding: 8px 15px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
-        }
-
-        .cta-btn {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none !important;
-            color: #fff;
-            padding: 6px 8px; /* Slightly reduced for 4 items */
-            transition: all 0.3s ease;
-            flex: 1;
-        }
-
-        .cta-btn i {
-            font-size: 20px;
-            margin-bottom: 2px;
-        }
-
-        .cta-btn span {
-            font-size: 9px; /* Slightly smaller for 4 items */
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            opacity: 0.8;
-        }
-
-        .cta-home i { color: #fff; }
-        .cta-phone i { color: #ffcc00; } /* Signature Yellow */
+        .floating-item:hover { transform: scale(1.1) translateX(-5px); box-shadow: 0 12px 20px rgba(0,0,0,0.3); color: #fff; }
+        @@media (max-width: 767.98px) { .premium-floating-nav { display: none !important; } }
+        .modern-mobile-cta-bar { position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%); z-index: 9999; width: 92%; max-width: 400px; }
+        .cta-inner { background: rgba(17, 17, 17, 0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 50px; display: flex; align-items: center; justify-content: space-around; padding: 8px 15px; box-shadow: 0 15px 35px rgba(0,0,0,0.4); }
+        .cta-btn { display: flex; flex-direction: column; align-items: center; justify-content: center; text-decoration: none !important; color: #fff; padding: 6px 8px; transition: all 0.3s ease; flex: 1; }
+        .cta-btn i { font-size: 20px; margin-bottom: 2px; }
+        .cta-btn span { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
+        .cta-phone i { color: #ffcc00; } 
         .cta-whatsapp i { color: #25D366; }
-        .cta-email i { color: #fff; }
-
-        .cta-btn:active {
-            transform: scale(0.95);
-            opacity: 0.7;
-        }
-
-        .cta-divider {
-            width: 1px;
-            height: 30px;
-            background: rgba(255, 255, 255, 0.1);
-        }
+        .cta-divider { width: 1px; height: 30px; background: rgba(255, 255, 255, 0.1); }
     </style>
 
-    <!-- v10.0 ABSOLUTE HARD FIX LOGIC -->
-    <i class="bi bi-list mobile-nav-toggle" id="menuBtn"></i>
+    <!-- v13.0 Mobile Hamburger Toggle (Always On Top) -->
+    <button id="menuBtn"
+            class="d-lg-none"
+            aria-label="Open Navigation Menu"
+            aria-expanded="false"
+            aria-controls="mobileDrawer"
+            style="position: fixed; top: 18px; right: 18px; z-index: 2000005; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; background: #111; color: #fff; border: none; border-radius: 6px; font-size: 26px; cursor: pointer; box-shadow: 0 4px 20px rgba(0,0,0,0.4);">
+        <i class="bi bi-list"></i>
+    </button>
 
     <script>
         (function() {
             "use strict";
-            const menuBtn = document.getElementById("menuBtn");
-            if (!menuBtn) return;
 
-            menuBtn.addEventListener("click", function () {
-                console.log("v10.0 Hard Toggle Fired");
-                document.body.classList.toggle("drawer-open");
-                document.querySelector(".drawer").classList.toggle("open");
-                document.querySelector(".navbar-overlay").classList.toggle("active");
-                
-                // Safety icon swap logic
-                if (document.querySelector(".drawer").classList.contains("open")) {
-                    menuBtn.classList.replace("bi-list", "bi-x");
-                    document.documentElement.style.overflow = "hidden";
-                } else {
-                    menuBtn.classList.replace("bi-x", "bi-list");
-                    document.documentElement.style.overflow = "";
+            /* ── UNIFIED DRAWER ENGINE v13.0 ── */
+            function forceCloseAll() {
+                const mobileDrawer = document.getElementById("mobileDrawer");
+                const servicesDrawer = document.getElementById("servicesDrawer");
+                const navOverlay = document.getElementById("navbar-overlay");
+                const servOverlay = document.getElementById("servicesDrawerOverlay");
+                const menuBtn = document.getElementById("menuBtn");
+
+                mobileDrawer && mobileDrawer.classList.remove("open");
+                servicesDrawer && servicesDrawer.classList.remove("open");
+                navOverlay && navOverlay.classList.remove("active");
+                servOverlay && servOverlay.classList.remove("active");
+                if (menuBtn) menuBtn.innerHTML = '<i class="bi bi-list"></i>';
+                document.documentElement.style.overflow = "";
+                console.log("v13.0: All drawers forced closed");
+            }
+
+            /* ── RIGHT MOBILE NAV DRAWER ── */
+            function initMobileDrawer() {
+                const menuBtn = document.getElementById("menuBtn");
+                const drawer  = document.getElementById("mobileDrawer");
+                const overlay = document.getElementById("navbar-overlay");
+                if (!menuBtn || !drawer || !overlay) {
+                    console.warn("v13.0 Mobile Drawer: missing element", { menuBtn, drawer, overlay });
+                    return;
                 }
-            });
 
-            // v10.0 Overlay Close Binding
-            document.querySelector(".navbar-overlay").addEventListener("click", function() {
-                menuBtn.click();
-            });
-            
-            // v10.0 Scroll Lockdown Guard
-            window.addEventListener("load", function() {
-                setTimeout(() => {
-                    document.documentElement.style.overflowX = 'hidden';
-                    document.body.style.overflowX = 'hidden';
-                }, 200);
-            });
+                console.log("v13.0 Mobile Drawer Engine Active");
+
+                function openMobileDrawer() {
+                    // Close others first
+                    const servicesDrawer = document.getElementById("servicesDrawer");
+                    const servOverlay = document.getElementById("servicesDrawerOverlay");
+                    servicesDrawer && servicesDrawer.classList.remove("open");
+                    servOverlay && servOverlay.classList.remove("active");
+
+                    drawer.classList.add("open");
+                    overlay.classList.add("active");
+                    menuBtn.innerHTML = '<i class="bi bi-x"></i>';
+                    document.documentElement.style.overflow = "hidden";
+                    menuBtn.setAttribute("aria-expanded", "true");
+                    console.log("v13.0 Mobile Drawer Opened");
+                }
+
+                function toggleMobileDrawer() {
+                    drawer.classList.contains("open") ? forceCloseAll() : openMobileDrawer();
+                }
+
+                menuBtn.onclick = function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    toggleMobileDrawer();
+                };
+
+                overlay.onclick = forceCloseAll;
+
+                const closeBtn = document.getElementById("mobile-nav-close");
+                if (closeBtn) closeBtn.onclick = forceCloseAll;
+
+                // Dropdown toggles inside mobile drawer
+                drawer.querySelectorAll(".dropdown > a").forEach(function(link) {
+                    link.addEventListener("click", function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        var subMenu = this.nextElementSibling;
+                        if (subMenu) {
+                            subMenu.classList.toggle("dropdown-active");
+                            // Toggle chevron icon
+                            const icon = this.querySelector("i:last-child");
+                            if (icon) {
+                                icon.classList.toggle("bi-chevron-up");
+                                icon.classList.toggle("bi-chevron-down");
+                            }
+                        }
+                    });
+                });
+            }
+
+            /* ── LEFT SERVICES DRAWER ── */
+            function initServicesDrawer() {
+                const openBtn  = document.getElementById("servicesDrawerBtn");
+                const closeBtn = document.getElementById("servicesDrawerClose");
+                const drawer   = document.getElementById("servicesDrawer");
+                const overlay  = document.getElementById("servicesDrawerOverlay");
+                if (!openBtn || !drawer || !overlay) return;
+
+                console.log("v13.0 Services Drawer Engine Active");
+
+                function openServicesDrawer() {
+                    // Close Mobile Nav first
+                    const mobileDrawer = document.getElementById("mobileDrawer");
+                    const navOverlay = document.getElementById("navbar-overlay");
+                    const menuBtn = document.getElementById("menuBtn");
+                    mobileDrawer && mobileDrawer.classList.remove("open");
+                    navOverlay && navOverlay.classList.remove("active");
+                    if(menuBtn) menuBtn.innerHTML = '<i class="bi bi-list"></i>';
+
+                    drawer.classList.add("open");
+                    overlay.classList.add("active");
+                    document.documentElement.style.overflow = "hidden";
+                    openBtn.setAttribute("aria-expanded", "true");
+                    console.log("v13.0 Services Drawer Opened");
+                }
+
+                openBtn.onclick  = function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    drawer.classList.contains("open") ? forceCloseAll() : openServicesDrawer();
+                };
+                overlay.onclick  = forceCloseAll;
+                if (closeBtn) closeBtn.onclick = forceCloseAll;
+
+                // ESC key to close all
+                document.addEventListener("keydown", function(e) {
+                    if (e.key === "Escape") forceCloseAll();
+                });
+            }
+
+            // Boot both engines
+            function boot() {
+                initMobileDrawer();
+                initServicesDrawer();
+            }
+
+            if (document.readyState === "loading") {
+                document.addEventListener("DOMContentLoaded", boot);
+            } else {
+                boot();
+            }
         })();
     </script>
 </body>
