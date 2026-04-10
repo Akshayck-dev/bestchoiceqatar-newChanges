@@ -1,4 +1,4 @@
-<!-- BESTCHOICE_NAV_RELOAD_FORCE_V8.0 -->
+<!-- BESTCHOICE_NAV_RELOAD_FORCE_V9.0 -->
 @using BestChoiceQatar.Core.Entities.Common
 @{ 
     BestChoiceQatar.Models.BestChoiceQatarEntities db = new BestChoiceQatar.Models.BestChoiceQatarEntities();
@@ -36,7 +36,7 @@
 
 
     <!-- Template Main CSS File (w/ Cache Buster V2.5) -->
-    <link href="~/Content/assets/css/style.css?v=8.0" rel="stylesheet">
+    <link href="~/Content/assets/css/style.css?v=9.0" rel="stylesheet">
     
     <!-- JSON-LD Local Business Schema -->
     <script type="application/ld+json">
@@ -544,82 +544,55 @@
         }
     </style>
 
-    <!-- v8.0 SINGLE AUTHORITY NAVIGATION LOGIC -->
+    <!-- v9.0 ABSOLUTE AUTHORITY NAVIGATION -->
     <i class="bi bi-list mobile-nav-toggle" id="menuBtn"></i>
 
     <script>
         (function() {
             "use strict";
             const menuBtn = document.getElementById("menuBtn");
-            const navbar = document.getElementById("navbar");
-            const overlay = document.getElementById("navbar-overlay");
             const body = document.body;
-            const html = document.documentElement;
 
-            if (!menuBtn || !navbar) {
-                console.warn("v8.0: Navigation elements missing from this page view.");
-                return;
-            }
+            if (!menuBtn) return;
 
-            console.log("v8.0 Single Authority Navigation Active");
+            console.log("v9.0 Absolute Authority Navigation Armed");
 
-            const toggleDrawer = (forceClose = false) => {
-                const isOpen = navbar.classList.contains("navbar-mobile");
+            const toggleMobileNav = () => {
+                body.classList.toggle("mobile-nav-active");
                 
-                if (isOpen || forceClose) {
-                    navbar.classList.remove("navbar-mobile");
-                    overlay.classList.remove("active");
-                    body.classList.remove("drawer-open");
-                    body.classList.remove("mobile-nav-active");
-                    menuBtn.classList.add("bi-list");
-                    menuBtn.classList.remove("bi-x");
-                    html.style.overflow = "";
-                    body.style.overflow = "";
+                // Toggle Icon
+                if (body.classList.contains("mobile-nav-active")) {
+                    menuBtn.classList.replace("bi-list", "bi-x");
+                    document.documentElement.style.overflow = "hidden";
                 } else {
-                    navbar.classList.add("navbar-mobile");
-                    overlay.classList.add("active");
-                    body.classList.add("drawer-open");
-                    body.classList.add("mobile-nav-active");
-                    menuBtn.classList.remove("bi-list");
-                    menuBtn.classList.add("bi-x");
-                    html.style.overflow = "hidden";
-                    body.style.overflow = "hidden";
+                    menuBtn.classList.replace("bi-x", "bi-list");
+                    document.documentElement.style.overflow = "";
                 }
             };
 
-            // Authority Switch: Stop other scripts from catching this click
             menuBtn.addEventListener("click", (e) => {
                 e.preventDefault();
                 e.stopPropagation();
                 e.stopImmediatePropagation();
-                console.log("v8.0 Authoritative Toggle Fired");
-                toggleDrawer();
-            }, true); // Use capture phase to be first
+                console.log("v9.0 Toggle Fired");
+                toggleMobileNav();
+            }, true);
 
-            overlay.addEventListener("click", (e) => {
-                e.stopPropagation();
-                toggleDrawer(true);
-            });
-            
+            // Overlay Close
             document.addEventListener("click", (e) => {
-                if (e.target.closest("#mobile-nav-close")) {
-                    toggleDrawer(true);
+                if (e.target.id === "navbar-overlay" || e.target.classList.contains("navbar-overlay")) {
+                    if (body.classList.contains("mobile-nav-active")) {
+                        toggleMobileNav();
+                    }
                 }
             });
 
-            window.addEventListener("resize", () => {
-                if (window.innerWidth >= 992 && navbar.classList.contains("navbar-mobile")) {
-                    toggleDrawer(true);
-                }
-            });
-            
+            // Prevent scroll stretching
             window.addEventListener("load", () => {
-                 setTimeout(() => {
-                    html.style.maxWidth = "100vw";
-                    body.style.maxWidth = "100vw";
-                    html.style.overflowX = "hidden";
-                    body.style.overflowX = "hidden";
-                 }, 500);
+                setTimeout(() => {
+                    document.documentElement.style.overflowX = 'hidden';
+                    document.body.style.overflowX = 'hidden';
+                }, 100);
             });
         })();
     </script>
