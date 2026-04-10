@@ -336,27 +336,48 @@ h1, h2, h3, h4, h5, h6, .font-primary {
     }
 
     .navbar > ul {
-        display: flex !important; /* Force flex for alignment for only the main menu */
-        flex-direction: column !important;
+        display: none;
+    }
+
+    .navbar-mobile {
+        position: fixed;
+        overflow: hidden;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.9);
+        transition: 0.3s;
+        z-index: 999;
+    }
+
+    .navbar-mobile .mobile-nav-toggle {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+    }
+
+    .navbar-mobile > ul {
+        display: block !important;
         position: fixed;
         top: 0;
         bottom: 0;
         left: 0;
         width: 300px;
-        background-color: transparent !important; 
+        background-color: #111111 !important;
         overflow-y: auto;
-        transition: transform 0.45s cubic-bezier(0.165, 0.84, 0.44, 1);
-        transform: translateX(-100%);
+        transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
         padding: 0;
-        z-index: 10005 !important; /* Cover floating elements */
+        z-index: 10005 !important;
         box-shadow: 10px 0 40px rgba(0,0,0,0.6);
+        transform: translateX(-100%);
     }
 
-    .navbar.navbar-mobile > ul {
+    .navbar-mobile.navbar-mobile > ul {
         transform: translateX(0);
     }
 
-    /* Disable hover-to-show for dropdowns on mobile */
+    /* Dropdown overrides for mobile menu */
     .navbar .dropdown:hover > ul {
         opacity: 0;
         visibility: hidden;
@@ -370,21 +391,7 @@ h1, h2, h3, h4, h5, h6, .font-primary {
     }
 }
 
-.navbar-mobile {
-    position: fixed;
-    overflow: hidden;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
-    background: #111 !important; /* Premium Dark Background */
-    transition: 0.3s;
-    z-index: 10007 !important; /* Above everything */
-    width: 280px !important;
-    right: auto !important;
-    left: -100% !important;
-    box-shadow: 10px 0 30px rgba(0,0,0,0.1);
-}
+/* Removed redundant .navbar-mobile definition - consolidated into media query */
 
     .navbar-mobile .mobile-nav-toggle {
         position: absolute;
