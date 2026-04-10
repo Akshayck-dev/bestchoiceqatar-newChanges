@@ -439,6 +439,56 @@ html, body {
   transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), visibility 0s 0s !important;
 }
 
+/* 🚨 v14.0 DRAWER CONTENT ENGINE */
+.drawer-body {
+    flex: 1 !important;
+    overflow-y: auto !important;
+    padding: 10px 0 !important;
+    display: block !important;
+    width: 100% !important;
+    background: #0d0d0d !important;
+}
+
+.drawer-links-list {
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.drawer-links-list li {
+    display: block !important;
+    width: 100% !important;
+}
+
+.drawer-links-list .nav-link {
+    color: #ffffff !important;
+    padding: 15px 25px !important;
+    font-size: 16px !important;
+    font-weight: 500 !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+    display: flex !important;
+    align-items: center !important;
+    text-decoration: none !important;
+    background: transparent !important;
+}
+
+.drawer-links-list .nav-link i {
+    color: #ffcc00 !important;
+    font-size: 18px !important;
+}
+
+.drawer-links-list .nav-link:hover {
+    background: rgba(255, 204, 0, 0.08) !important;
+    color: #ffcc00 !important;
+}
+
+.drawer-footer {
+    flex-shrink: 0 !important;
+    padding: 20px !important;
+    background: #111 !important;
+    border-top: 1px solid rgba(255, 204, 0, 0.15) !important;
+}
+
 /* OVERLAY FIX */
 .navbar-overlay {
   position: fixed !important;
