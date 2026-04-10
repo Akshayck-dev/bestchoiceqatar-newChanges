@@ -1,0 +1,79 @@
+﻿@model BestChoiceQatar.Models.Gallery
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Backend/Views/Shared/_Layout.cshtml";
+}
+@section JavaScript{
+    <script type="text/javascript">$(document).ready(function () { WebApp.Core.HighlightCurrentMenuItem('Services') });</script>
+}
+
+<div class="page-header">
+    <div class="page-header-content">
+        <div class="page-title">
+            <h4><span class="text-semibold">Edit Service</span></h4>
+        </div>
+        <div class="heading-elements">
+            <div class="heading-btn-group">
+                <a class="btn btn-link btn-float has-text" href="/backend/service/index"><i class="icon-user-lock"></i><span>All Service</span></a>
+            </div>
+        </div>
+    </div>
+    <div class="breadcrumb-line">
+        <ul class="breadcrumb">
+            @{
+
+                <li><a href="/backend/default/dashboard"><i class="icon-home4 position-left"></i>Dashboard</a></li>
+            }
+            <li><a href="/backend/service/index"> Service</a></li>
+
+            <li class="active">Edit Service</li>
+        </ul>
+    </div>
+</div>
+<div class="content">
+    <form method="post" class="form-horizontal" action="" enctype="multipart/form-data" autocomplete="off">
+        <div class="panel panel-flat">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Title:</label>
+                            <div class="col-lg-7">
+                                @Html.TextBoxFor(model => model.Title, new { @placeholder = "Please enter the Title", @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Description:</label>
+                            <div class="col-lg-7">
+                                @Html.TextAreaFor(model => model.Description, new { @placeholder = "Please enter the Description", @class = "form-control html-editor" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Uploaded Service Image:</label>
+                            @{
+                                if (!string.IsNullOrEmpty(Model.Image))
+                                {
+                                    <div class="col-lg-7">
+                                        <input type="file" class="file-styled form-control" name="Photo" placeholder="Please select a images">
+                                        <a href="~/Uploads/@Model.Image" target="_blank"><img src="~/Uploads/@Model.Image" style="width:100px;height:100px;" /></a>
+                                    </div>
+                                }
+                            }
+                        </div>
+
+                    </div>
+                </div>
+                <hr>
+                <div class="text-right">
+                    <a href="/backend/service/edit/@Model.ID" class="btn btn-default">Reset<i class="icon-reload-alt position-right"></i> </a>
+                    <button type="submit" class="btn btn-primary">Submit <i class="icon-arrow-right14 position-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+

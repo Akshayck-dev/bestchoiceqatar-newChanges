@@ -1,72 +1,23 @@
-﻿
+
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Experienced General Contracting Services | Bestchoice for Civil, Electrical, and More";
     ViewBag.description = "Experienced General Contracting Services. We offer solutions for Civil, Electrical, Mechanical, Carpentry, and more. Quality and cost-effective solutions.";
     ViewBag.keywords = "general contracting services, civil contracting, electrical services, mechanical solutions, carpentry contractors, maintenance and repairs";
-
+    BestChoiceQatar.Models.BestChoiceQatarEntities db = new BestChoiceQatar.Models.BestChoiceQatarEntities();
+    var settings = db.Settings.FirstOrDefault();
+    var _product = (from b in db.Galleries
+                    where b.IsDataActive && b.Category == "General Contracting"
+                    select new
+                    {
+                        b.ID,
+                        b.Title,
+                        b.Description,
+                        b.Image,
+                        b.ChildImages
+                    }).FirstOrDefault();
 }
 
-<!-- ======= Header ======= -->
-<header id="header" class="d-flex align-items-center">
-    <div class="container d-flex align-items-center">
-
-        <div class="logo me-auto">
-            <a href="/index"><img class="img-responsive" src="~/content/assets/img/logo/animation.gif" alt="Bestchoice Contracting"></a></h1>
-
-            <!-- Uncomment below if you prefer to use an image logo -->
-            <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
-        </div>
-
-        <nav id="navbar" class="navbar">
-            <ul>
-                <li><a class="nav-link" href="/index">Home</a></li>
-                <li><a class="nav-link" href="/about">About</a></li>
-                <li class="dropdown">
-                    <a class="" href=""><span>Our Products</span> <i class="bi bi-chevron-down"></i></a>
-                    <ul>
-                        <li><a href="/portable-cabin-fabrication">Portable Cabin Fabrication</a></li>
-                        <li><a href="/building-painting-contractor">Building Painting Contractor</a></li>
-                        @*<li><a href="/designing">Designing & Printing </a></li>*@
-                        <li><a href="/steel-aluminum-fabrication">Steel & Aluminum Fabrication</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a class="nav-link active" href=""><span>Our Services</span> <i class="bi bi-chevron-down"></i></a>
-                    <ul>
-                        <li><a class="nav-link active" href="/general-contracting">General Contracting</a></li>
-                        @*<li><a href="/car-rental">Rent a Car</a></li>*@
-                        <li><a href="/optical-fibre-networks">Optical Fibre Networks</a></li>
-                    </ul>
-                </li>
-
-                <li><a class="nav-link" href="/blog">Blog</a></li>
-                <li><a class="nav-link" href="/contact">Contact</a></li>
-                <li><a target="_blank" href="~/Content/assets/Brochure/Brochure.html.pdf">Brochure</a></li>
-            </ul>
-            <i class="bi bi-list mobile-nav-toggle"></i>
-        </nav><!-- .navbar -->
-
-    </div>
-</header><!-- End Header -->
-<!-- ======= Whatsapp ======= -->
-
-<link rel="stylesheet" href="">
-<a href="https://wa.me/97450307568" class="float" target="_blank"><i class="bi bi-whatsapp"></i> </a>
-<i class="fa fa-whatsapp my-float"></i>
-       </a>
-
-<!-- ======= Call ======= -->
-<link rel="stylesheet" href="">
-<a href="tel:+974 5030 7568" class="call"><i class="bi bi-telephone"></i> </a>
-<i class="fa fa-whatsapp my-call"></i>
-       </a>
-
-<!-- ======= Tagline ======= -->
-<link rel="stylesheet" href="">
-<a href="" class="tagline"><i class=""></i> <h2>Creative Fabrication</h2></a>
-<i class="fa fa-whatsapp my-tagline"></i>
-       </a>
 
 
 <!-- ======= Breadcrumbs ======= -->
@@ -87,30 +38,11 @@
 
         <div class="row">
             <div class="col-lg-6 order-1 order-lg-2" data-aos="fade-left" data-aos-delay="100">
-                <img src="~/content/assets/img/Products/General Contracting.png" class="img-fluid" alt="Experienced General Contracting Services">
+                <img src="~/Uploads/Products/@_product.Image" class="img-fluid" alt="Experienced General Contracting Services">
             </div>
             <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content" data-aos="fade-right" data-aos-delay="100">
-                <h1>General Contracting</h1>
-                <p class="fst-italic">
-                    Bestchoice has vast and extensive experience in
-                </p>
-                <ul>
-                    <li><i class="bi bi-check-all"></i> Civil</li>
-                    <li><i class="bi bi-check-all"></i> Electrical</li>
-                    <li><i class="bi bi-check-all"></i> Mechanical</li>
-                    <li><i class="bi bi-check-all"></i> Carpentry</li>
-                    <li><i class="bi bi-check-all"></i> Structural Painting</li>
-                    <li><i class="bi bi-check-all"></i> Building Painting</li>
-
-                </ul>
-                <p>
-                    Bestchoice
-                    We also undertake Maintenance, Modifications, Upgrades and Repairs.Our team of
-                    expert engineers and skilled workforce ensure that you get on the spot solutions to messy and baffling
-                    problems. They deliver quality service that is cost effective and instant. And we have in place a specialized
-                    technical team exclusively for Electrical Installation and related work and Industrial Instrumentation
-                    and Control Systems.
-                </p>
+                <h1>@_product.Title</h1>
+                @Html.Raw(_product.Description)
             </div>
         </div>
     </div>
@@ -129,12 +61,21 @@
 
             <div class="recent-photos-slider swiper">
                 <div class="swiper-wrapper align-items-center">
-                    <div class="swiper-slide"><a href="~/content/assets/img/Products/General Contracting/General Contracting-1.jpg" class="glightbox"><img src="~/content/assets/img/Products/General Contracting/General Contracting-1.jpg" class="img-fluid" alt="Experienced General Contracting Services"></a></div>
+                    @if (!string.IsNullOrEmpty(_product.ChildImages))
+                    {
+                        List<string> _files = _product.ChildImages.Split('|').ToList();
+                        foreach (var _fileName in _files.Where(f => !string.IsNullOrEmpty(f)).ToList())
+                        {
+                            <div class="swiper-slide"><a href="~/Uploads/Products/@_fileName" class="glightbox"><img src="~/Uploads/Products/@_fileName" class="img-fluid" alt="Experienced General Contracting Services"></a></div>
+                        }
+                    }
+
+                    @*<div class="swiper-slide"><a href="~/content/assets/img/Products/General Contracting/General Contracting-1.jpg" class="glightbox"><img src="~/content/assets/img/Products/General Contracting/General Contracting-1.jpg" class="img-fluid" alt="Experienced General Contracting Services"></a></div>
                     <div class="swiper-slide"><a href="~/content/assets/img/Products/General Contracting/General Contracting-2.jpg" class="glightbox"><img src="~/content/assets/img/Products/General Contracting/General Contracting-2.jpg" class="img-fluid" alt="Experienced General Contracting Services"></a></div>
                     <div class="swiper-slide"><a href="~/content/assets/img/Products/General Contracting/General Contracting-3.jpg" class="glightbox"><img src="~/content/assets/img/Products/General Contracting/General Contracting-3.jpg" class="img-fluid" alt="Experienced General Contracting Services"></a></div>
                     <div class="swiper-slide"><a href="~/content/assets/img/Products/General Contracting/General Contracting-4.jpg" class="glightbox"><img src="~/content/assets/img/Products/General Contracting/General Contracting-4.jpg" class="img-fluid" alt="Experienced General Contracting Services"></a></div>
                     <div class="swiper-slide"><a href="~/content/assets/img/Products/General Contracting/General Contracting-5.JPG" class="glightbox"><img src="~/content/assets/img/Products/General Contracting/General Contracting-5.jpg" class="img-fluid" alt="Experienced General Contracting Services"></a></div>
-                    <div class="swiper-slide"><a href="~/content/assets/img/Products/General Contracting/General Contracting-6.JPG" class="glightbox"><img src="~/content/assets/img/Products/General Contracting/General Contracting-6.jpg" class="img-fluid" alt="Experienced General Contracting Services"></a></div>
+                    <div class="swiper-slide"><a href="~/content/assets/img/Products/General Contracting/General Contracting-6.JPG" class="glightbox"><img src="~/content/assets/img/Products/General Contracting/General Contracting-6.jpg" class="img-fluid" alt="Experienced General Contracting Services"></a></div>*@
 
                 </div>
                 <div class="swiper-pagination"></div>

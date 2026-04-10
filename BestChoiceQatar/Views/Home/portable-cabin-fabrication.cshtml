@@ -1,69 +1,41 @@
-﻿
-@{  
+@{
+    var slug = Request.QueryString["slug"];
+    if (!string.IsNullOrEmpty(slug))
+    {
+        @Html.Partial("ProductDetails")
+        return;
+    }
+}
+
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Explore High-Quality Portable Cabin Fabrication Services";
     ViewBag.description = "Discover custom portable cabins at bestchoice contracting: quality, durability, and tailored solutions. Contact us today.";
     ViewBag.keywords = "portable cabin fabrication services, custom portable cabins, cabin fabrication in qatar, steel cabin fabrication";
 
+    int i = 1;
+    BestChoiceQatar.Models.BestChoiceQatarEntities db = new BestChoiceQatar.Models.BestChoiceQatarEntities();
+    var _product = (from b in db.Galleries
+                    where b.IsDataActive && b.Category == "Portable Cabin Fabrication"
+                    select new
+                    {
+                        b.ID,
+                        b.Title,
+                        b.Description,
+                        b.Image,
+                        b.ChildImages
+                    }).FirstOrDefault();
+    var settings = db.Settings.FirstOrDefault();
 }
 
-<!-- ======= Header ======= -->
-<header id="header" class="d-flex align-items-center">
-    <div class="container d-flex align-items-center">
-
-        <div class="logo me-auto">
-            <a href="/index"><img class="img-responsive" src="~/content/assets/img/logo/animation.gif" alt="Bestchoice Contracting"></a></h1>
-
-            <!-- Uncomment below if you prefer to use an image logo -->
-            <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
-        </div>
-
-        <nav id="navbar" class="navbar">
-            <ul>
-                <li><a class="nav-link" href="/index">Home</a></li>
-                <li><a class="nav-link" href="/about">About</a></li>
-                <li class="dropdown">
-                    <a class="nav-link active" href=""><span>Our Products</span> <i class="bi bi-chevron-down"></i></a>
-                    <ul>
-                        <li><a href="/portable-cabin-fabrication">Portable Cabin Fabrication</a></li>
-                        <li><a href="/building-painting-contractor">Building Painting Contractor</a></li>
-                        @*<li><a href="/designing">Designing & Printing </a></li>*@
-                        <li><a href="/steel-aluminum-fabrication">Steel & Aluminum Fabrication</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a class="" href=""><span>Our Services</span> <i class="bi bi-chevron-down"></i></a>
-                    <ul>
-                        <li><a href="/general-contracting">General Contracting</a></li>
-                        @*<li><a href="/car-rental">Rent a Car</a></li>*@
-                        <li><a href="/optical-fibre-networks">Optical Fibre Networks</a></li>
-                    </ul>
-                </li>
-
-                <li><a class="nav-link" href="/blog">Blog</a></li>
-                <li><a class="nav-link" href="/contact">Contact</a></li>
-                <li><a target="_blank" href="~/Content/assets/Brochure/Brochure.html.pdf">Brochure</a></li>
-            </ul>
-            <i class="bi bi-list mobile-nav-toggle"></i>
-        </nav><!-- .navbar -->
-
-    </div>
-</header><!-- End Header -->
-<!-- ======= Whatsapp ======= -->
-
-<link rel="stylesheet" href="">
-<a href="https://wa.me/97450307568" class="float" target="_blank"><i class="bi bi-whatsapp"></i> </a>
-<i class="fa fa-whatsapp my-float"></i>
-     </a>
 
 <!-- ======= Call ======= -->
-<link rel="stylesheet" href="">
+<!--<link rel="stylesheet" href="">
 <a href="tel:+974 5030 7568" class="call"><i class="bi bi-telephone"></i> </a>
 <i class="fa fa-whatsapp my-call"></i>
-     </a>
+     </a>-->
 
 <!-- ======= Tagline ======= -->
-<link rel="stylesheet" href="">
 <a href="" class="tagline"><i class=""></i> <h2>Creative Fabrication</h2></a>
 <i class="fa fa-whatsapp my-tagline"></i>
      </a>
@@ -72,81 +44,711 @@
 
 
 
-<!-- ======= Breadcrumbs ======= -->
-<div class="breadcrumbs d-flex align-items-center" style="background-image: url('../content/assets/img/header/Cabin\ Fabrication.jpg');">
-    <div class="container position-relative d-flex flex-column align-items-center">
 
-        <h2>Portable Cabin Fabrication</h2>
-        <ol>
-            <li><a href="/index">Home</a></li>
-            <li>Portable Cabin Fabrication</li>
-        </ol>
+<!-- ======= Premium UI Styles ======= -->
+<style>
+    @@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;900&display=swap');
 
-    </div>
-</div><!-- End Breadcrumbs -->
-<!-- ======= Products ======= -->
-<section id="Products" class="Products">
-    <div class="container" data-aos="fade-up">
+    :root {
+        --primary-yellow: #ffcc00;
+        --dark-bg: #111111;
+        --light-bg: #ffffff;
+        --transition-smooth: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
 
-        <div class="row">
-            <div class="col-lg-6 order-1 order-lg-2" data-aos="fade-left" data-aos-delay="100">
-                <img src="~/content/assets/img/Products/cabin fabrication.jpg" class="img-fluid" alt="Portable Cabin Fabrication">
-            </div>
-            <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content" data-aos="fade-right" data-aos-delay="100">
-                <h1>Portable Cabin Fabrication</h1>
-                <p class="fst-italic">
-                    At BESTCHOICE Contracting, we understand that every customer has unique requirements.
-                    That's why we offer a range of portable cabins in various sizes, styles, and configurations.
-                    Whether you need a temporary office, a portable classroom, or a custom-designed cabin for your
-                    remote work site, we have the expertise to deliver the right solution for you.
-                </p>
+    body {
+        font-family: 'Outfit', sans-serif;
+        background-color: var(--light-bg);
+        color: var(--dark-bg);
+    }
 
-                <p>
-                    Our portable cabins are built to withstand harsh weather conditions and heavy usage.
-                    We use only the finest materials and advanced manufacturing techniques to ensure that our
-                    products are of the highest quality. Our team also offers customized designs to meet your specific needs and preferences.
+    /* Hero Section */
+    .premium-hero {
+        position: relative;
+        height: 90vh;
+        min-height: 600px;
+        background: url('https://images.unsplash.com/photo-1503387762-592dea58ef23?q=80&w=2000&auto=format&fit=crop') center/cover no-repeat;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+    }
 
-                </p>
-                <p>
-                    So, whether you need a portable cabin for your construction site, event, or business,
-                    BESTCHOICE Contracting has got you covered. Contact us today to learn more about our portable
-                    cabins and how we can help you with your specific needs.
+    .hero-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 100%);
+    }
 
-                </p>
+    .hero-content {
+        position: relative;
+        z-index: 2;
+        max-width: 900px;
+    }
 
+    .hero-title {
+        font-weight: 900;
+        font-size: clamp(3rem, 8vw, 6rem);
+        line-height: 0.95;
+        text-transform: uppercase;
+        color: #fff;
+        margin-bottom: 2rem;
+        letter-spacing: -2px;
+    }
 
+    .hero-subtitle {
+        font-size: clamp(1.1rem, 2vw, 1.4rem);
+        color: rgba(255, 255, 255, 0.8);
+        margin-bottom: 3rem;
+        border-left: 4px solid var(--primary-yellow);
+        padding-left: 20px;
+    }
+
+    .btn-premium {
+        padding: 18px 40px;
+        font-weight: 700;
+        text-transform: uppercase;
+        border-radius: 0;
+        transition: var(--transition-smooth);
+        letter-spacing: 1px;
+    }
+
+    .btn-yellow {
+        background-color: var(--primary-yellow);
+        color: #000;
+        border: 2px solid var(--primary-yellow);
+    }
+
+    .btn-yellow:hover {
+        background-color: transparent;
+        color: var(--primary-yellow);
+    }
+
+    .btn-outline-white {
+        background-color: transparent;
+        color: #fff;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        margin-left: 15px;
+    }
+
+    .btn-outline-white:hover {
+        border-color: #fff;
+        background-color: #fff;
+        color: #000;
+    }
+
+    /* Trust Strip */
+    .trust-strip {
+        background: #000;
+        padding: 40px 0;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .trust-item h3 {
+        color: var(--primary-yellow);
+        font-weight: 800;
+        font-size: 2.5rem;
+        margin-bottom: 0;
+    }
+
+    .trust-item p {
+        color: #888;
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        font-weight: 600;
+        letter-spacing: 1px;
+    }
+
+    body { overflow-x: hidden; width: 100%; position: relative; }
+    html { overflow-x: hidden; width: 100%; }
+    
+    /* Global Image Safety */
+    img { max-width: 100% !important; height: auto !important; }
+
+    /* Section Spacing */
+    section {
+        padding: 120px 0;
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .section-header {
+        margin-bottom: 80px;
+    }
+
+    .section-label {
+        color: var(--primary-yellow);
+        text-transform: uppercase;
+        font-weight: 700;
+        letter-spacing: 2px;
+        font-size: 0.9rem;
+        display: block;
+        margin-bottom: 15px;
+    }
+
+    .section-title {
+        font-weight: 800;
+        font-size: clamp(2rem, 5vw, 3.5rem);
+        text-transform: uppercase;
+        letter-spacing: -1px;
+    }
+
+    /* Cabin Types */
+    .cabin-card {
+        background: #fff;
+        border: 1px solid #eee;
+        padding: 40px;
+        height: 100%;
+        transition: var(--transition-smooth);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .cabin-card:hover {
+        transform: translateY(-15px);
+        border-color: var(--primary-yellow);
+        box-shadow: 0 30px 60px rgba(0,0,0,0.05);
+    }
+
+    .cabin-card .icon-box {
+        width: 60px;
+        height: 60px;
+        background: #f8f8f8;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+        color: var(--dark-bg);
+        margin-bottom: 30px;
+        transition: var(--transition-smooth);
+    }
+
+    .cabin-card:hover .icon-box {
+        background: var(--primary-yellow);
+        color: #000;
+    }
+
+    .cabin-card h4 {
+        font-weight: 700;
+        margin-bottom: 15px;
+        text-transform: uppercase;
+    }
+
+    /* Features Grid */
+    .feature-item {
+        margin-bottom: 40px;
+        padding: 30px;
+        border-left: 2px solid #eee;
+        transition: var(--transition-smooth);
+    }
+
+    .feature-item:hover {
+        border-left-color: var(--primary-yellow);
+        background: #fdfdfd;
+    }
+
+    .feature-item i {
+        font-size: 2.5rem;
+        color: var(--primary-yellow);
+        margin-bottom: 20px;
+        display: block;
+    }
+
+    /* Swiper Gallery Carousel */
+    .gallery-swiper {
+        padding: 40px 0 80px;
+        overflow: hidden;
+    }
+
+    .swiper-slide {
+        height: 400px;
+        overflow: hidden;
+        border: 1px solid rgba(0,0,0,0.05);
+        transition: var(--transition-smooth);
+    }
+
+    .swiper-slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 1.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+
+    .swiper-slide:hover img {
+        transform: scale(1.1);
+    }
+
+    .swiper-button-next, .swiper-button-prev {
+        color: var(--primary-yellow);
+        background: rgba(0,0,0,0.8);
+        width: 50px;
+        height: 50px;
+        border-radius: 0;
+    }
+
+    .swiper-button-next:after, .swiper-button-prev:after {
+        font-size: 1.2rem;
+        font-weight: 900;
+    }
+
+    .swiper-pagination-bullet {
+        background: #000;
+        opacity: 0.2;
+        width: 12px;
+        height: 12px;
+        border-radius: 0;
+    }
+
+    .swiper-pagination-bullet-active {
+        background: var(--primary-yellow);
+        opacity: 1;
+        width: 30px;
+    }
+
+    /* Animations */
+    [data-aos] {
+        transition-duration: 800ms !important;
+    }
+
+    /* Process Section */
+    .dark-section {
+        background-color: var(--dark-bg);
+        color: #fff;
+    }
+
+    .process-step {
+        position: relative;
+        padding-top: 50px;
+    }
+
+    .step-number {
+        font-size: 6rem;
+        font-weight: 900;
+        color: rgba(255, 204, 0, 0.08);
+        position: absolute;
+        top: 0;
+        left: 0;
+        line-height: 1;
+    }
+
+    .process-content {
+        position: relative;
+        z-index: 1;
+    }
+
+    .process-content h5 {
+        color: var(--primary-yellow);
+        font-weight: 700;
+        text-transform: uppercase;
+        margin-bottom: 15px;
+        font-size: 1.2rem;
+    }
+
+    /* Final CTA */
+    .final-cta {
+        background: var(--primary-yellow);
+        text-align: center;
+        padding: 150px 0;
+    }
+
+    .final-cta h2 {
+        font-weight: 900;
+        font-size: 4.5rem;
+        text-transform: uppercase;
+        margin-bottom: 50px;
+        color: #000;
+        line-height: 1;
+    }
+
+    /* --- COMPREHENSIVE MOBILE RESPONSIVENESS --- */
+    @@media (max-width: 991.98px) {
+        section { padding: 80px 0; }
+        .hero-title { font-size: 3.5rem; }
+        .final-cta { padding: 80px 0; }
+        .final-cta h2 { font-size: 3rem; }
+    }
+
+    @@media (max-width: 767.98px) {
+        section { padding: 50px 0; }
+        
+        /* Hero Refinement */
+        .premium-hero { height: auto; min-height: 550px; padding: 120px 0 60px; text-align: center; }
+        .hero-title { font-size: 2.8rem; line-height: 1.1; margin-bottom: 1.5rem; letter-spacing: -1px; }
+        .hero-subtitle { border-left: none; border-top: 4px solid var(--primary-yellow); padding-left: 0; padding-top: 15px; margin-bottom: 2.5rem; }
+        
+        /* Button Stacking */
+        .btn-premium { width: 100%; margin-left: 0 !important; margin-bottom: 10px; }
+        
+        /* Trust Strip */
+        .trust-strip { padding: 40px 20px; text-align: center; }
+        .trust-item { margin-bottom: 30px; }
+        .trust-item:last-child { margin-bottom: 0; }
+        
+        /* Content Spacing */
+        .section-header { margin-bottom: 50px; text-align: center; }
+        .feature-item { padding: 20px; border-left: none; border-top: 2px solid #eee; }
+        .feature-item:hover { border-top-color: var(--primary-yellow); }
+        
+        /* Process Section */
+        .process-step { padding-top: 30px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 30px; }
+        .step-number { position: relative; font-size: 4rem; margin-bottom: 10px; display: block; width: 100%; }
+        
+        /* Modern CSS Carousel for Mobile Gallery */
+        .gallery-grid {
+            display: flex;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            gap: 15px;
+            padding: 0 15px 30px;
+            margin: 0 -15px;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+        }
+        .gallery-grid::-webkit-scrollbar { display: none; }
+        .gallery-grid .gallery-item {
+            flex: 0 0 85%;
+            width: 85% !important;
+            max-width: 85% !important;
+            scroll-snap-align: center;
+        }
+
+        /* Final CTA */
+        .final-cta h2 { font-size: 2rem; margin-bottom: 30px; }
+
+        /* Hide conflicting legacy elements */
+        .tagline, .my-tagline { display: none !important; }
+    }
+            width: auto;
+        }
+    }
+</style>
+
+<main id="main">
+    <!-- Hero Section -->
+    <section class="premium-hero p-0">
+        <div class="hero-overlay"></div>
+        <div class="container position-relative">
+            <div class="hero-content" data-aos="fade-up">
+                <span class="section-label">Architecture & Fabrication</span>
+                <h1 class="hero-title">Beyond<br><span style="color: var(--primary-yellow)">Standard</span> Cabins</h1>
+                <p class="hero-subtitle">Engineering premium modular spaces that redefine versatility and durability in Qatar's landscape.</p>
+                <div class="hero-actions">
+                    <a href="#final-cta" class="btn btn-premium btn-yellow">Get a Quote</a>
+                    <a href="tel:@settings.Mobile1" class="btn btn-premium btn-outline-white">Call Specialist</a>
+                </div>
             </div>
         </div>
+    </section>
 
-    </div>
-</section><!-- End Products Section -->
-<!-- ======= Recent Photos Section ======= -->
-<section id="recent-photos" class="recent-photos">
-    <div class="container">
-
-        <div class="section-title">
-            <h2>Photos</h2>
-            <p>Portable Cabin Fabrication</p>
-        </div>
-
-        <div class="recent-photos-slider swiper">
-            <div class="swiper-wrapper align-items-center">
-                <div class="swiper-slide"><a href="~/content/assets/img/Products/cabin/cabin-1.jpg" class="glightbox"><img src="~/content/assets/img/Products/cabin/cabin-1.jpg" class="img-fluid" alt="Portable Cabin Fabrication"></a></div>
-                <div class="swiper-slide"><a href="~/content/assets/img/Products/cabin/cabin-2.jpg" class="glightbox"><img src="~/content/assets/img/Products/cabin/cabin-2.jpg" class="img-fluid" alt="Portable Cabin Fabrication"></a></div>
-                <div class="swiper-slide"><a href="~/content/assets/img/Products/cabin/cabin-3.jpg" class="glightbox"><img src="~/content/assets/img/Products/cabin/cabin-3.jpg" class="img-fluid" alt="Portable Cabin Fabrication"></a></div>
-                <div class="swiper-slide"><a href="~/content/assets/img/Products/cabin/cabin-4.jpg" class="glightbox"><img src="~/content/assets/img/Products/cabin/cabin-4.jpg" class="img-fluid" alt="Portable Cabin Fabrication"></a></div>
-                <div class="swiper-slide"><a href="~/content/assets/img/Products/cabin/cabin-5.JPG" class="glightbox"><img src="~/content/assets/img/Products/cabin/cabin-5.JPG" class="img-fluid" alt="Portable Cabin Fabrication"></a></div>
-                <div class="swiper-slide"><a href="~/content/assets/img/Products/cabin/cabin-6.JPG" class="glightbox"><img src="~/content/assets/img/Products/cabin/cabin-6.JPG" class="img-fluid" alt="Portable Cabin Fabrication"></a></div>
-                <div class="swiper-slide"><a href="~/content/assets/img/Products/cabin/cabin-7.jpg" class="glightbox"><img src="~/content/assets/img/Products/cabin/cabin-7.jpg" class="img-fluid" alt="Portable Cabin Fabrication"></a></div>
-                <div class="swiper-slide"><a href="~/content/assets/img/Products/cabin/cabin-8.jpg" class="glightbox"><img src="~/content/assets/img/Products/cabin/cabin-8.jpg" class="img-fluid" alt="Portable Cabin Fabrication"></a></div>
-                <div class="swiper-slide"><a href="~/content/assets/img/Products/cabin/cabin-9.jpg" class="glightbox"><img src="~/content/assets/img/Products/cabin/cabin-9.jpg" class="img-fluid" alt="Portable Cabin Fabrication"></a></div>
-                <div class="swiper-slide"><a href="~/content/assets/img/Products/cabin/cabin-10.jpg" class="glightbox"><img src="~/content/assets/img/Products/cabin/cabin-10.jpg" class="img-fluid" alt="Portable Cabin Fabrication"></a></div>
-                <div class="swiper-slide"><a href="~/content/assets/img/Products/cabin/cabin-11.JPG" class="glightbox"><img src="~/content/assets/img/Products/cabin/cabin-11.JPG" class="img-fluid" alt="Portable Cabin Fabrication"></a></div>
-                <div class="swiper-slide"><a href="~/content/assets/img/Products/cabin/cabin-12.JPG" class="glightbox"><img src="~/content/assets/img/Products/cabin/cabin-12.JPG" class="img-fluid" alt="Portable Cabin Fabrication"></a></div>
+    <!-- Trust Strip -->
+    <div class="trust-strip">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-6 col-md-3 trust-item" data-aos="fade-up" data-aos-delay="100">
+                    <h3>10+</h3>
+                    <p>Years in Qatar</p>
+                </div>
+                <div class="col-6 col-md-3 trust-item" data-aos="fade-up" data-aos-delay="200">
+                    <h3>FAST</h3>
+                    <p>Turnaround Time</p>
+                </div>
+                <div class="col-6 col-md-3 trust-item" data-aos="fade-up" data-aos-delay="300">
+                    <h3>BESPOKE</h3>
+                    <p>Design Focus</p>
+                </div>
+                <div class="col-6 col-md-3 trust-item" data-aos="fade-up" data-aos-delay="400">
+                    <h3>BEST</h3>
+                    <p>Market Pricing</p>
+                </div>
             </div>
-            <div class="swiper-pagination"></div>
         </div>
-
     </div>
-</section><!-- End Recent Photos Section -->
-  </main><!-- End #main -->
+
+    <!-- Cabin Types -->
+    <section id="types">
+        <div class="container">
+            <div class="section-header text-center" data-aos="fade-up">
+                <span class="section-label">Product Portfolio</span>
+                <h2 class="section-title">Specialized Fabrication</h2>
+            </div>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
+                    <div class="cabin-card">
+                        <div class="icon-box"><i class="bi bi-briefcase"></i></div>
+                        <h4>Site Office</h4>
+                        <p>Optimized workspace environments for construction and project management teams.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
+                    <div class="cabin-card">
+                        <div class="icon-box"><i class="bi bi-people"></i></div>
+                        <h4>Accommodation</h4>
+                        <p>High-comfort living quarters with advanced thermal insulation and interior finish.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="300">
+                    <div class="cabin-card">
+                        <div class="icon-box"><i class="bi bi-water"></i></div>
+                        <h4>Toilet Cabin</h4>
+                        <p>Premium sanitary solutions built for hygiene and long-term maintenance ease.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="400">
+                    <div class="cabin-card">
+                        <div class="icon-box"><i class="bi bi-cpu"></i></div>
+                        <h4>Container Office</h4>
+                        <p>Sustainable, modern layouts using high-cube architectural container formats.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="bg-light">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-5" data-aos="fade-right">
+                    <span class="section-label">Superior Standards</span>
+                    <h2 class="section-title mb-4">Engineering That Speaks Quality</h2>
+                    <p class="lead text-muted mb-5">We utilize advanced fabrication techniques and premium materials to ensure every cabin meets international safety and comfort standards.</p>
+                    <img src="https://images.unsplash.com/photo-1541976590-713941681591?q=80&w=1000&auto=format&fit=crop" class="img-fluid rounded-0 shadow-lg" alt="Industrial">
+                </div>
+                <div class="col-lg-6 offset-lg-1">
+                    <div class="row">
+                        <div class="col-sm-6" data-aos="fade-up" data-aos-delay="100">
+                            <div class="feature-item">
+                                <i class="bi bi-shield-lock"></i>
+                                <h5>Ultra Durable</h5>
+                                <p>Double-welded steel frames designed for high-stress industrial use.</p>
+                            </div>
+                        </div>
+                        <div class="col-sm-6" data-aos="fade-up" data-aos-delay="200">
+                            <div class="feature-item">
+                                <i class="bi bi-thermometer-half"></i>
+                                <h5>Climate Controlled</h5>
+                                <p>Engineered insulation layers to maintain 22°C even in 50°C external heat.</p>
+                            </div>
+                        </div>
+                        <div class="col-sm-6" data-aos="fade-up" data-aos-delay="300">
+                            <div class="feature-item">
+                                <i class="bi bi-tools"></i>
+                                <h5>Plug & Play</h5>
+                                <p>Pre-installed electrical, plumbing, and communication systems.</p>
+                            </div>
+                        </div>
+                        <div class="col-sm-6" data-aos="fade-up" data-aos-delay="400">
+                            <div class="feature-item">
+                                <i class="bi bi-geo-fill"></i>
+                                <h5>Relocatable</h5>
+                                <p>Optimized for repeated lifting and transport across multiple sites.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery-section">
+        <div class="container">
+            <div class="section-header text-center" data-aos="fade-up">
+                <span class="section-label">Visual Journal</span>
+                <h2 class="section-title">Fabrication Excellence</h2>
+            </div>
+            <div class="swiper gallery-swiper" data-aos="fade-up">
+                <div class="swiper-wrapper">
+                    @{
+                        List<string> allImages = new List<string>();
+                        for (int j = 1; j <= 13; j++) {
+                            string ext = (j == 5 || j == 6) ? "JPG" : "jpg";
+                            allImages.Add(Url.Content("~/Content/assets/img/Products/cabin/cabin-" + j + "." + ext));
+                        }
+                        if (!string.IsNullOrEmpty(_product.ChildImages)) {
+                            var dbFiles = _product.ChildImages.Split('|').Where(f => !string.IsNullOrEmpty(f) && !f.Contains("cabin-"));
+                            foreach (var file in dbFiles) {
+                                allImages.Add(Url.Content("~/Uploads/Products/" + file));
+                            }
+                        }
+                        foreach (var imgUrl in allImages.Take(10))
+                        {
+                            <div class="swiper-slide">
+                                <a href="@imgUrl" class="glightbox">
+                                    <img src="@imgUrl" alt="Portable Cabin Fabrication">
+                                </a>
+                            </div>
+                        }
+                    }
+                </div>
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="dark-section">
+        <div class="container">
+            <div class="section-header text-center" data-aos="fade-up">
+                <span class="section-label">Workflow</span>
+                <h2 class="section-title">The Path to Delivery</h2>
+            </div>
+            <div class="row g-5">
+                <div class="col-md-3" data-aos="fade-up" data-aos-delay="100">
+                    <div class="process-step">
+                        <span class="step-number">01</span>
+                        <div class="process-content">
+                            <h5>Consultation</h5>
+                            <p>Defining space requirements and technical specifications for your site.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3" data-aos="fade-up" data-aos-delay="200">
+                    <div class="process-step">
+                        <span class="step-number">02</span>
+                        <div class="process-content">
+                            <h5>Bespoke Design</h5>
+                            <p>Architectural drafting and material selection tailored to your needs.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3" data-aos="fade-up" data-aos-delay="300">
+                    <div class="process-step">
+                        <span class="step-number">03</span>
+                        <div class="process-content">
+                            <h5>Precision Build</h5>
+                            <p>Controlled fabrication within our facility with rigorous quality testing.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3" data-aos="fade-up" data-aos-delay="400">
+                    <div class="process-step">
+                        <span class="step-number">04</span>
+                        <div class="process-content">
+                            <h5>Installation</h5>
+                            <p>Seamless delivery and on-site integration by our specialized crew.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEO CONTENT SECTION -->
+    <section class="seo-content-section" style="background-color: var(--dark-bg); color: #fff; padding: 100px 0; border-top: 1px solid rgba(255,255,255,0.05);">
+        <div class="container">
+            <div class="row g-5 align-items-center">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <span class="text-uppercase fw-bold mb-3 d-block" style="color: var(--primary-yellow); letter-spacing: 2px; font-size: 0.85rem;">Qatar's Top Cabin Manufacturers</span>
+                    <h2 class="hero-title fw-bold mb-4" style="font-size: clamp(2rem, 3.5vw, 2.8rem); line-height: 1.1; color: #fff; letter-spacing: -1px; text-transform:none;">High-Quality Porta Cabin Fabrication in Doha</h2>
+                    <p class="mb-4" style="font-size: 1.05rem; line-height: 1.8; color: #aaa;">
+                        Operating as a trusted <strong>portable cabin supplier in Qatar</strong>, BestChoice Contracting leads the industry in fabricating versatile, climate-proof modular structures. For over 15 years, our team has engineered specialized <a href="/porta-cabin-offices" style="color:#fff; text-decoration:none; border-bottom: 2px solid var(--primary-yellow);">temporary site offices</a>, expansive <a href="/labor-camps-accommodation" style="color:#fff; text-decoration:none; border-bottom: 2px solid var(--primary-yellow);">labor camp accommodations</a>, and secure <a href="/security-guard-cabins" style="color:#fff; text-decoration:none; border-bottom: 2px solid var(--primary-yellow);">guard cabins</a> customized for the demanding environment of the Middle East.
+                    </p>
+                    <p style="line-height: 1.8; color: #aaa;">
+                        We understand that every industrial, commercial, and oil &amp; gas project has specific footprint and regulatory requirements. Our robust <a href="/container-office-cabins" style="color:#fff; text-decoration:none; border-bottom: 2px solid var(--primary-yellow);">shipping container modifications</a> and multi-storey prefab buildings are constructed with precision—integrating high-grade EPS/Rockwool insulation, rigorous structural steel frameworks, and premium epoxy finishing. Choose BestChoice Contracting for rapid, reliable, and compliant modular construction.
+                    </p>
+                </div>
+                <div class="col-lg-6" data-aos="fade-left">
+                    <div class="row g-4">
+                        <div class="col-sm-6">
+                            <div class="p-4 h-100" style="background:#111; border-left: 3px solid var(--primary-yellow);">
+                                <h4 class="fw-bold mb-3" style="font-size: 1.15rem; color: #fff;">In-House Manufacturing</h4>
+                                <p class="small mb-0" style="line-height:1.7; color:#888;">Complete fabrication control at our Doha workshop, enabling strict quality assurance and fast turnaround.</p>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="p-4 h-100" style="background:#111; border-left: 3px solid var(--primary-yellow);">
+                                <h4 class="fw-bold mb-3" style="font-size: 1.15rem; color: #fff;">Custom Container Conversions</h4>
+                                <p class="small mb-0" style="line-height:1.7; color:#888;">Expert modification of 20ft and 40ft containers into compliant, durable site workspaces and stores.</p>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="p-4 h-100" style="background:#111; border-left: 3px solid var(--primary-yellow);">
+                                <h4 class="fw-bold mb-3" style="font-size: 1.15rem; color: #fff;">Qatar Labour Law Compliant</h4>
+                                <p class="small mb-0" style="line-height:1.7; color:#888;">All accommodation cabins and sanitary blocks exceed local municipal and worker welfare standards.</p>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="p-4 h-100" style="background:#111; border-left: 3px solid var(--primary-yellow);">
+                                <h4 class="fw-bold mb-3" style="font-size: 1.15rem; color: #fff;">Delivery &amp; Installation</h4>
+                                <p class="small mb-0" style="line-height:1.7; color:#888;">Turnkey logistics handling flat-pack or fully assembled unit delivery directly to your project site.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BROCHURE LEAD MAGNET SECTION -->
+    <section class="brochure-section py-5" style="background: var(--primary-yellow); position: relative; overflow: hidden;">
+        <div class="container py-4">
+            <div class="row align-items-center g-4">
+                <div class="col-lg-8" data-aos="fade-right">
+                    <h2 class="font-headline fw-bold text-dark mb-2" style="font-size: 2.2rem; text-transform: uppercase; letter-spacing: -1px;">Technical Specifications Brochure</h2>
+                    <p class="text-dark opacity-75 mb-0 fs-5 font-body">Download our full 2026 Product Catalog for detailed architectural drawings and material specifications.</p>
+                </div>
+                <div class="col-lg-4 text-lg-end" data-aos="fade-left">
+                    <a href="~/Content/assets/Brochure/Brochure.html.pdf" target="_blank" class="btn btn-dark px-5 py-3 fw-bold rounded-0 shadow-lg" style="letter-spacing:1px;">
+                        <i class="bi bi-file-earmark-pdf-fill me-2"></i> DOWNLOAD PDF (8.4MB)
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- Decorative background text -->
+        <span style="position: absolute; right: -50px; bottom: -30px; font-size: 15rem; font-weight: 900; color: rgba(0,0,0,0.03); pointer-events: none; user-select: none;">PDF</span>
+    </section>
+
+    <!-- Final CTA -->
+    <section id="final-cta" class="final-cta">
+        <div class="container">
+            <div data-aos="fade-up">
+                <h2 class="mb-5">Build Your Solution<br>With Experts</h2>
+                <div class="d-flex flex-wrap justify-content-center gap-3">
+                    <a href="tel:@settings.Mobile1" class="btn btn-premium btn-yellow px-5 py-3">
+                        <i class="bi bi-telephone-fill me-2"></i> Request Callback
+                    </a>
+                    <a href="@settings.Whatsup" target="_blank" class="btn btn-premium btn-outline-white px-5 py-3" style="border-color: #000; color: #000;">
+                        <i class="bi bi-whatsapp me-2"></i> Instant Message
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Swiper Initialization -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            new Swiper('.gallery-swiper', {
+                slidesPerView: 1,
+                spaceBetween: 30,
+                loop: true,
+                speed: 1000,
+                autoplay: {
+                    delay: 3000,
+                    disableOnInteraction: false,
+                },
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+                breakpoints: {
+                    768: {
+                        slidesPerView: 2,
+                    },
+                    1024: {
+                        slidesPerView: 3,
+                    }
+                }
+            });
+        });
+    </script>
+</main>

@@ -1,6 +1,11 @@
-﻿using Newtonsoft.Json;
+﻿using BestChoiceQatar.Core.Entities;
+using BestChoiceQatar.Core.Entities.Charts;
+using BestChoiceQatar.Core.Entities.Common;
+using BestChoiceQatar.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -17,13 +22,15 @@ namespace BestChoiceQatar.Core
     public class Appmanager
     {
 
-        //public static AppUser User
-        //{
-        //    get
-        //    {
-        //        return HttpContext.Current.Session["GreenAshe_User"] as AppUser;
-        //    }
-        //}
+        public static BestChoiceQatarEntities db = new BestChoiceQatarEntities();
+
+        public static AppUser User
+        {
+            get
+            {
+                return HttpContext.Current.Session["Geri_User"] as AppUser;
+            }
+        }
 
         public static DateTime Now
         {
@@ -128,5 +135,153 @@ namespace BestChoiceQatar.Core
             TeamLead = 5,
            
         }
+
+        public static void SendExceptionLogEmail(Exception log)
+        {
+            try
+            {
+                if (log == null)
+                {
+                    return;
+                }
+
+                HttpException _httpEx = log as HttpException;
+
+                if (_httpEx != null && _httpEx.GetHttpCode() == 404)
+                {
+                    return;
+                }
+
+                string _body = JsonConvert.SerializeObject(log, Formatting.Indented);
+
+                _body = _body.Replace("\r\n", "<br />");
+
+                if (User != null)
+                {
+                    _body = "User: " + JsonConvert.SerializeObject(User, Formatting.Indented) + "<br />" + _body;
+                }
+
+                if (HttpContext.Current != null)
+                {
+                    _body = "URL: " + HttpContext.Current.Request.Url + "<br />" + "Prev URL: " + HttpContext.Current.Request.UrlReferrer + "<br />" + _body;
+
+                    if (HttpContext.Current.Request.Form.Count > 0)
+                    {
+                        _body += $"<br />------------- POST DATA -------------<br />";
+
+                        for (int i = 0; i < HttpContext.Current.Request.Form.Count; i++)
+                        {
+                            _body += $"{HttpContext.Current.Request.Form.Keys[i]} ==> {string.Join("|", HttpContext.Current.Request.Form.GetValues(HttpContext.Current.Request.Form.Keys[i]))} <br />";
+                            i++;
+                        }
+                    }
+
+                    if (HttpContext.Current.Request.QueryString.Count > 0)
+                    {
+                        _body += $"<br />------------- GET DATA -------------<br />";
+
+                        for (int i = 0; i < HttpContext.Current.Request.QueryString.Count; i++)
+                        {
+                            _body += $"{HttpContext.Current.Request.QueryString.Keys[i]} ==> {string.Join("|", HttpContext.Current.Request.QueryString.GetValues(HttpContext.Current.Request.QueryString.Keys[i]))} <br />";
+                            i++;
+                        }
+                    }
+
+                    if (HttpContext.Current.Request.Cookies.Count > 0)
+                    {
+                        _body += $"<br />------------- COOKIES -------------<br />";
+
+                        for (int i = 0; i < HttpContext.Current.Request.Cookies.Count; i++)
+                        {
+                            _body += $"{HttpContext.Current.Request.Cookies.Keys[i]} ==> {HttpContext.Current.Request.Cookies[HttpContext.Current.Request.Cookies.Keys[i]].Value} <br />";
+                            i++;
+                        }
+                    }
+                }
+                MailMessage _msg = new MailMessage();
+
+                _msg.To.Add("princetomy12@gmail.com");
+                _msg.From = new MailAddress("no-reply@NavaloorDevelopers.com", "GERI International Consultancy");
+                _msg.CC.Add("praveentomy1234@gmail.com");
+                _msg.Subject = _body;
+                using (SmtpClient _client = new SmtpClient())
+                {
+                    _client.Send(_msg);
+                }
+            }
+            catch
+            {
+
+            }
+        }
+
+        public static async Task<DashboardData> GetDashboardData()
+        {
+            DashboardData _result = new DashboardData();
+
+            try
+            {
+                var db = new BestChoiceQatarEntities();
+                DateTime _lastMonth = DateTime.Now.Date.AddDays(-30);
+
+                _result.Lastmonth = _lastMonth.ToString("dd/MM/yyyy");
+                DateTime end = DateTime.Now.Date.AddDays(1);
+                DateTime start = DateTime.Now.Date.AddDays(-30);
+
+                var _chartItems = Enumerable.Range(0, end.Subtract(start).Days)
+                 .Select(o => new ChartItem { x = start.AddDays(o).Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds })
+                 .ToList();
+
+                var _query = from t in db.Enquiries
+                             where t.IsDataActive/* && t.CreatedOn >= start && t.CreatedOn < end*/
+                             select new
+                             {
+                                 t.CreatedOn,
+                                 t.Message,
+                                 t.ID,
+                                 t.FullName,
+                                 t.Email,
+                                 t.ContactNumber,
+                                 t.Subject
+                             };
+
+                var _lineChartData = (await _query.ToListAsync()).GroupBy(i => i.CreatedOn.Date).Select(g => new ChartItem
+                {
+                    x = g.Key.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds,
+                    y = g.Count(),
+                    z = g.Count()
+                }).ToList();
+
+                _chartItems = _chartItems.Select(i => new ChartItem
+                {
+                    x = i.x,
+                    y = _lineChartData.Any(a => a.x == i.x) ? _lineChartData.FirstOrDefault(a => a.x == i.x).y : 0
+                }).ToList();
+                //_result.TopHospitals = (await db.Hospitals.Where(h => h.IsDataActive).Select(i => new DonutChartItem
+                //{
+                //    label = i.Name,
+                //    value = db.Registrations.Where(r => r.HospitalLookedFor.Contains(i.ID.ToString()) && r.IsDataActive).Count()
+                //}).ToListAsync());
+
+                //_result.TopHospitals = _result.TopHospitals.OrderByDescending(o => o.value).Take(5).ToList();
+                _result.OrderSummary = _chartItems;
+                _result.RecentAppointments = (await _query.ToListAsync()).OrderByDescending(r => r.ID).Take(6).Select(r => new RecentAppointments
+                {
+                    Id = r.ID,
+                    Name = r.FullName,
+                    Subject = r.Subject,
+                    Email = r.Email
+                }).ToList();
+
+                _result.count = db.Enquiries.Where(x => x.IsDataActive).Count();
+            }
+            catch (Exception ex)
+            {
+                SendExceptionLogEmail(ex);
+            }
+
+            return _result;
+        }
+
     }
 }

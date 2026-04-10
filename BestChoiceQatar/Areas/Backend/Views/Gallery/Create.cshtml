@@ -1,0 +1,100 @@
+﻿@model BestChoiceQatar.Models.Gallery
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Backend/Views/Shared/_Layout.cshtml";
+}
+
+@section JavaScript{
+    <script type="text/javascript">$(document).ready(function () { WebApp.Core.HighlightCurrentMenuItem('Products') });</script>
+}
+
+<div class="page-header">
+    <div class="page-header-content">
+
+        <div class="page-title">
+            <h4><span class="text-semibold">Create Product</span></h4>
+        </div>
+        <div class="heading-elements">
+            <div class="heading-btn-group">
+                <a class="btn btn-link btn-float has-text" href="/backend/gallery/index"><i class="icon-user-lock"></i><span>All Products</span></a>
+            </div>
+        </div>
+    </div>
+    <div class="breadcrumb-line">
+        <ul class="breadcrumb">
+            @{
+
+                <li><a href="/backend/default/dashboard"><i class="icon-home4 position-left"></i>Dashboard</a></li>
+            }
+            <li><a href="/backend/gallery/index"> Product</a></li>
+
+            <li class="active">Create New Product</li>
+        </ul>
+    </div>
+</div>
+<div class="content">
+    <form method="post" class="form-horizontal" action="" enctype="multipart/form-data" autocomplete="off">
+        <div class="panel panel-flat">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">@Html.DisplayNameFor(model => model.Category):</label>
+                            <div class="col-lg-7">
+                                <select class="form-control" name="Category" data-val="true" data-val-required="Please select the Category">
+                                    <option value="Portable Cabin Fabrication">Portable Cabin Fabrication</option>
+                                    <option value="Building Painting Contractor">Building Painting Contractor</option>
+                                    <option value="Steel & Aluminum Fabrication">Steel & Aluminum Fabrication</option>
+                                    <option value="General Contracting">General Contracting</option>
+                                    <option value="Optical Fibre Networks">Optical Fibre Networks</option>
+                                </select>
+                                @Html.ValidationMessageFor(model => model.Category, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Title</label>
+                            <div class="col-lg-7">
+                                @Html.TextBoxFor(model => model.Title, new { @placeholder = "Enter Title", @class = "form-control", @type = "text" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Description</label>
+                            <div class="col-lg-7">
+                                @Html.TextAreaFor(model => model.Description, 15, 74, new { @placeholder = "Enter Description", @class = "form-control html-editor", @type = "text" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Product Image</label>
+                            <div class="col-lg-7">
+                                <input type="file" class="file-styled form-control" name="Photo" placeholder="Please select a images" data-val="true" data-val-required="Please select the Service Images">
+                                <span class="help-block">Size should be  255 * 360 Px</span>
+                                @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Other Images:</label>
+                            <div class="col-lg-7">
+                                <input type="file" class="file-styled form-control document-uploader" name="FileUpload" file-list-area="file8-list" multiple>
+                                <div id="file8-list" class="upload-list"></div>
+                                @Html.ValidationMessageFor(model => model.ChildImages, "", new { @class = "text-danger" })
+                            </div>
+                            <input type="hidden" id="IPbill_upload" class="filesCollected" name="IPBillFile" data-attribute="_IPbill" />
+                        </div>
+
+                    </div>
+                </div>
+                <hr>
+                <div class="text-right">
+                    <a href="/backend/gallery/create" class="btn btn-default">Reset<i class="icon-reload-alt position-right"></i> </a>
+                    <button type="submit" class="btn btn-primary">Submit <i class="icon-arrow-right14 position-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+

@@ -1,0 +1,214 @@
+﻿@using BestChoiceQatar.Core.Entities.Charts
+@model  BestChoiceQatar.Core.Entities.DashboardData
+@{
+    ViewBag.Title = "Admin Dashboard | Bestchoice";
+    Layout = "~/Areas/Backend/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .badge {
+        width: auto;
+        min-width: 18px;
+    }
+</style>
+@section JavaScript{
+    <script type="text/javascript">$(document).ready(function () { WebApp.Core.HighlightCurrentMenuItem('Dashboard') });</script>
+    <script type="text/javascript" src="~/Areas/Backend/Assets/plugins/morris/raphael-min.js"></script>
+    <script type="text/javascript" src="~/Areas/Backend/Assets/plugins/morris/morris.min.js"></script>
+    <script>
+        @*Morris.Area({
+            element: 'graph',
+            parseTime: true,
+            lineColors: ['#2196f3'],
+            pointFillColors: ['#337ab7','#ffa500','#5cb85c'],
+            pointStrokeColors: ['#337ab7','#ffa500','#5cb85c'],
+            xLabels:'day',
+            dateFormat: function (x) { return moment.unix(x/1000).format("DD-MM-YYYY");},
+            data: @Html.Raw( Newtonsoft.Json.JsonConvert.SerializeObject(Model.OrderSummary)),
+            xkey: ['x'],
+            ykeys: ['y'],
+            labels: ['Appointments'],
+            //yLabelFormat: function(y) {
+            //    return y = Math.round(y);
+            //}
+        }).on('click', function (i, row) {
+            console.log(i, row);
+        });*@
+
+        @*Morris.Donut({
+            element: 'TopServiceTypes',
+            resize: true,
+            data: @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.TopHospitals != null ? Model.TopHospitals : null)),
+            colors:["#7cb342 ","#fb8c00", "#039be5", "#3949ab","#e53935"]
+
+        });*@
+
+        $(function () {
+            $(".donut-radios input").uniform({
+                radioClass: 'choice'
+            });
+        });
+    </script>
+}
+@section CSS{
+    <link href="~/Areas/Backend/Assets/plugins/morris/morris.css" rel="stylesheet" type="text/css" />
+}
+
+
+
+<div class="page-header">
+    <div class="content">
+        <div class="row">
+            <div class="col-lg-2 approved" style="cursor:pointer">
+                <div class="panel bg-orange-400">
+                    <div class="panel-body rst">
+                        <h1 class="no-margin">Enquirys&nbsp;(@(ViewBag.queryCount != null ? ViewBag.queryCount : 0))</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2 approved" style="cursor:pointer">
+                <div class="panel bg-green-400">
+                    <div class="panel-body rst">
+                        <h1 class="no-margin">Services&nbsp;(@(ViewBag.serviceCount != null ? ViewBag.serviceCount : 0))</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2 approved" style="cursor:pointer">
+                <div class="panel bg-blue-400">
+                    <div class="panel-body rst">
+                        <h1 class="no-margin">Sliders&nbsp;(@(ViewBag.sliderCount != null ? ViewBag.sliderCount : 0))</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 approved" style="cursor:pointer">
+                <div class="panel bg-brown-400">
+                    <div class="panel-body rst">
+                        <h1 class="no-margin">Products&nbsp;(@(ViewBag.galleryCount != null ? ViewBag.galleryCount : 0))</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 approved" style="cursor:pointer">
+                <div class="panel bg-pink-400">
+                    <div class="panel-body rst">
+                        <h1 class="no-margin">Clients&nbsp;(@(ViewBag.clientCount != null ? ViewBag.clientCount : 0))</h1>
+                    </div>
+                </div>
+            </div>
+            @*<div class="col-lg-3 approved" style="cursor:pointer">
+                <div class="panel bg-indigo-400">
+                    <div class="panel-body rst">
+                        <h1 class="no-margin">Users&nbsp;(@(ViewBag.userCount != null ? ViewBag.userCount : 0))</h1>
+                    </div>
+                </div>
+            </div>*@
+
+        </div>
+        </div>
+        @*<div class="page-header-content">
+            <div class="page-title">
+                <h3><span class="text-semibold">Summary Since @Model.Lastmonth - @DateTime.Now.ToString("dd/MM/yyyy")</span></h3>
+            </div>
+        </div>*@
+    </div>
+    <div class="content">
+        @*<div class="row">
+            <div class="col-lg-12">
+                <div class="panel panel-flat">
+                    <div class="panel-heading page-title-sec">
+                        <h3 class="panel-title">Queries Summary</h3>
+                    </div>
+                    <div class="panel-heading page-title-count"><button type="button" class="btn btn-primary"><a href="/backend/queries" style="color:#fff;">Total Appointments: <span class="badge" style="width:40px;font-size:15px;">@Model.count</span></a></button></div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="row">
+                                    <div id="graph" style="height: 300px;width:auto;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+
+        <div class="row">
+            @*<div class="col-lg-6">*@
+            @*<div class="panel panel-flat">*@
+            @*<div class="panel-heading">
+                    <h5 class="panel-title"><i class="icon-medal-star text-muted"></i> Recent Enquiries</h5>
+                    <a class="heading-elements-toggle"><i class="icon-more"></i></a>
+                </div>*@
+            @*<div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-xs">
+                            <tr><th>Name</th><th>Mobile No</th></tr>
+                            <tbody>
+                                @foreach (var _recentregistrations in Model.RecentAppointments)
+                                {
+                                    <tr><td><a href="/backend/appointments/details/@_recentregistrations.Id">@_recentregistrations.Name</a></td><td>@_recentregistrations.MobileNo</td></tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>*@
+            @*<div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-xs">
+                            <tbody>
+                                <tr>
+                                    <td rowspan="@(Model.TopHospitals.Count + 1)" class="col-lg-6 service-types">
+                                        <div id="TopServiceTypes" style="height: 220px;"></div>
+                                    </td>
+                                </tr>
+                                @{
+                                    string[] _colors1 = new string[] { "green", "orange", "blue", "indigo", "danger" };
+                                    int c2 = 0;
+
+                                    if (Model.TopHospitals != null)
+                                    {
+                                        foreach (DonutChartItem service in Model.TopHospitals)
+                                        {
+                                            <tr>
+                                                <td style="padding:8px 6px;"><span class="label text-@(_colors1[c2])-600 bg-@(_colors1[c2])-600">.</span> @service.label</td>
+                                                <td class="text-right" style="padding:8px 0px;"><b>@service.value</b></td>
+                                            </tr>
+
+                                            c2++;
+                                        }
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>*@
+            @*</div>*@
+            @*</div>*@
+            <div class="col-lg-12">
+                <div class="panel panel-flat">
+                    <div class="panel-heading">
+                        <h5 class="panel-title"><i class="icon-user"></i> Recent Contact</h5>
+                        <a class="heading-elements-toggle"><i class="icon-more"></i></a>
+                    </div>
+                    <div class="panel-body">
+                        <div class="table-responsive ">
+                            <table class="table table-bordered table-xs ">
+                                <thead class="text-center table-head">
+                                    <tr>
+                                        <th class="text-center">Name</th>
+                                        <th class="text-center">Email</th>
+                                        <th class="text-center">Subject</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-center">
+                                    @foreach (var _recentregistrations in Model.RecentAppointments)
+                                    {
+                                        <tr><td><a href="/backend/queries/details/@_recentregistrations.Id">@_recentregistrations.Name</a></td><td>@_recentregistrations.Email</td><td>@_recentregistrations.Subject</td></tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

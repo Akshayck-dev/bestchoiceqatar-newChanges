@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
@@ -45,10 +45,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -120,16 +128,163 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\Backend\BackendAreaRegistration.cs" />
+    <Compile Include="Areas\Backend\Controllers\AppointmentsController.cs" />
+    <Compile Include="Areas\Backend\Controllers\BackendBaseController.cs" />
+    <Compile Include="Areas\Backend\Controllers\ClientController.cs" />
+    <Compile Include="Areas\Backend\Controllers\DefaultController.cs" />
+    <Compile Include="Areas\Backend\Controllers\EmailNotificationsController.cs" />
+    <Compile Include="Areas\Backend\Controllers\GalleryController.cs" />
+    <Compile Include="Areas\Backend\Controllers\QueriesController.cs" />
+    <Compile Include="Areas\Backend\Controllers\ServiceController.cs" />
+    <Compile Include="Areas\Backend\Controllers\SettingsController.cs" />
+    <Compile Include="Areas\Backend\Controllers\SliderController.cs" />
+    <Compile Include="Areas\Backend\Controllers\UsersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Core\Appmanager.cs" />
+    <Compile Include="Core\Entities\Charts\ChartItem.cs" />
+    <Compile Include="Core\Entities\Charts\DonutChartItem.cs" />
+    <Compile Include="Core\Entities\Common\AppUser.cs" />
+    <Compile Include="Core\Entities\Common\DataTableRequest.cs" />
+    <Compile Include="Core\Entities\Common\DataTableResponse.cs" />
     <Compile Include="Core\Entities\Common\Notification.cs" />
+    <Compile Include="Core\Entities\Common\Select2Item.cs" />
+    <Compile Include="Core\Entities\Common\Select2PagedResult.cs" />
+    <Compile Include="Core\Entities\DashboardData.cs" />
+    <Compile Include="Core\Entities\RecentAppointments.cs" />
+    <Compile Include="Core\Security\AuthorizeAccessAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\BestChoiceQatar.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BestChoiceQatar.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BestChoiceQatar.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BestChoiceQatar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BestChoiceQatar.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BestChoiceQatar.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\Contact.cs" />
+    <Compile Include="Models\Enquiry.cs">
+      <DependentUpon>BestChoiceQatar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Gallery.cs">
+      <DependentUpon>BestChoiceQatar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Setting.cs">
+      <DependentUpon>BestChoiceQatar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\User.cs">
+      <DependentUpon>BestChoiceQatar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ViewModels\Appointment.cs" />
+    <Compile Include="Models\ViewModels\ChangePassword.cs" />
+    <Compile Include="Models\ViewModels\Enquiry.cs" />
+    <Compile Include="Models\ViewModels\Event.cs" />
+    <Compile Include="Models\ViewModels\Gallery.cs" />
+    <Compile Include="Models\ViewModels\Setting.cs" />
+    <Compile Include="Models\ViewModels\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Backend\Assets\css\animate.min.css" />
+    <Content Include="Areas\Backend\Assets\css\bootstrap.css" />
+    <Content Include="Areas\Backend\Assets\css\icons\fontawesome\fonts\fontawesome-webfonte0a5.svg" />
+    <Content Include="Areas\Backend\Assets\css\icons\fontawesome\styles.min.css" />
+    <Content Include="Areas\Backend\Assets\css\icons\glyphicons\glyphicons-halflings-regular.svg" />
+    <Content Include="Areas\Backend\Assets\css\icons\icomoon\fonts\icomoone627.svg" />
+    <Content Include="Areas\Backend\Assets\css\icons\icomoon\styles.css" />
+    <Content Include="Areas\Backend\Assets\css\jquery.tagit.css" />
+    <Content Include="Areas\Backend\Assets\css\loader.css" />
+    <Content Include="Areas\Backend\Assets\css\select2.css" />
+    <Content Include="Areas\Backend\Assets\css\select2.png" />
+    <Content Include="Areas\Backend\Assets\css\styles.css" />
+    <Content Include="Areas\Backend\Assets\css\tagit.ui-zendesk.css" />
+    <Content Include="Areas\Backend\Assets\css\theme.css" />
+    <Content Include="Areas\Backend\Assets\images\avatar2.jpg" />
+    <Content Include="Areas\Backend\Assets\images\back.svg" />
+    <Content Include="Areas\Backend\Assets\images\backend_img.jpg" />
+    <Content Include="Areas\Backend\Assets\images\blue.svg" />
+    <Content Include="Areas\Backend\Assets\images\businessman-icon.png" />
+    <Content Include="Areas\Backend\Assets\images\GERI LOGO-01.png" />
+    <Content Include="Areas\Backend\Assets\js\app.js" />
+    <Content Include="Areas\Backend\Assets\js\bootstrap.min.js" />
+    <Content Include="Areas\Backend\Assets\js\jquery.cookie.min.js" />
+    <Content Include="Areas\Backend\Assets\js\jquery.livequery.js" />
+    <Content Include="Areas\Backend\Assets\js\jquery.min.js" />
+    <Content Include="Areas\Backend\Assets\js\moment.min.js" />
+    <Content Include="Areas\Backend\Assets\js\scripts.js" />
+    <Content Include="Areas\Backend\Assets\js\select2.js" />
+    <Content Include="Areas\Backend\Assets\js\tag-it.min.js" />
+    <Content Include="Areas\Backend\Assets\plugins\bootstrap-toastr\toastr-icon.png" />
+    <Content Include="Areas\Backend\Assets\plugins\bootstrap-toastr\toastr.css" />
+    <Content Include="Areas\Backend\Assets\plugins\bootstrap-toastr\toastr.js" />
+    <Content Include="Areas\Backend\Assets\plugins\bootstrap-toastr\toastr.min.css" />
+    <Content Include="Areas\Backend\Assets\plugins\bootstrap-toastr\toastr.min.js" />
+    <Content Include="Areas\Backend\Assets\plugins\bootstrap-toggle\bootstrap-toggle.min.css" />
+    <Content Include="Areas\Backend\Assets\plugins\bootstrap-toggle\bootstrap-toggle.min.js" />
+    <Content Include="Areas\Backend\Assets\plugins\extensions\contextmenu.js" />
+    <Content Include="Areas\Backend\Assets\plugins\extensions\cookie.js" />
+    <Content Include="Areas\Backend\Assets\plugins\extensions\mockjax.min.js" />
+    <Content Include="Areas\Backend\Assets\plugins\extensions\mousewheel.min.js" />
+    <Content Include="Areas\Backend\Assets\plugins\extensions\session_timeout.min.js" />
+    <Content Include="Areas\Backend\Assets\plugins\forms\editable\address.js" />
+    <Content Include="Areas\Backend\Assets\plugins\forms\editable\editable.min.js" />
+    <Content Include="Areas\Backend\Assets\plugins\forms\inputs\autosize.min.js" />
+    <Content Include="Areas\Backend\Assets\plugins\forms\inputs\duallistbox.min.js" />
+    <Content Include="Areas\Backend\Assets\plugins\forms\inputs\formatter.min.js" />
+    <Content Include="Areas\Backend\Assets\plugins\forms\inputs\maxlength.min.js" />
+    <Content Include="Areas\Backend\Assets\plugins\forms\inputs\passy.js" />
+    <Content Include="Areas\Backend\Assets\plugins\forms\inputs\touchspin.min.js" />
+    <Content Include="Areas\Backend\Assets\plugins\forms\inputs\typeahead\handlebars.js" />
+    <Content Include="Areas\Backend\Assets\plugins\forms\inputs\typeahead\typeahead.bundle.min.js" />
+    <Content Include="Areas\Backend\Assets\plugins\forms\selects\bootstrap_multiselect.js" />
+    <Content Include="Areas\Backend\Assets\plugins\forms\selects\bootstrap_select.min.js" />
+    <Content Include="Areas\Backend\Assets\plugins\forms\selects\select2.min.js" />
+    <Content Include="Areas\Backend\Assets\plugins\forms\selects\selectboxit.min.js" />
+    <Content Include="Areas\Backend\Assets\plugins\forms\styling\switch.min.js" />
+    <Content Include="Areas\Backend\Assets\plugins\forms\styling\switchery.min.js" />
+    <Content Include="Areas\Backend\Assets\plugins\forms\styling\uniform.min.js" />
+    <Content Include="Areas\Backend\Assets\plugins\forms\tags\tagsinput.min.js" />
+    <Content Include="Areas\Backend\Assets\plugins\forms\tags\tokenfield.min.js" />
+    <Content Include="Areas\Backend\Assets\plugins\forms\validation\validate.min.js" />
+    <Content Include="Areas\Backend\Assets\plugins\forms\wizards\form_wizard\form.min.js" />
+    <Content Include="Areas\Backend\Assets\plugins\forms\wizards\form_wizard\form_wizard.min.js" />
+    <Content Include="Areas\Backend\Assets\plugins\forms\wizards\steps.min.js" />
+    <Content Include="Areas\Backend\Assets\plugins\forms\wizards\stepy.min.js" />
+    <Content Include="Areas\Backend\Assets\plugins\loaders\blockui.min.js" />
+    <Content Include="Areas\Backend\Assets\plugins\loaders\pace.min.js" />
+    <Content Include="Areas\Backend\Assets\plugins\loaders\progressbar.min.js" />
+    <Content Include="Areas\Backend\Assets\plugins\Location\locationpicker.jquery.js" />
+    <Content Include="Areas\Backend\Assets\plugins\morris\morris.css" />
+    <Content Include="Areas\Backend\Assets\plugins\morris\morris.min.js" />
+    <Content Include="Areas\Backend\Assets\plugins\morris\raphael-min.js" />
+    <Content Include="Areas\Backend\Assets\plugins\pickers\anytime.min.js" />
+    <Content Include="Areas\Backend\Assets\plugins\pickers\color\spectrum.js" />
+    <Content Include="Areas\Backend\Assets\plugins\pickers\datepicker.js" />
+    <Content Include="Areas\Backend\Assets\plugins\pickers\daterangepicker.js" />
+    <Content Include="Areas\Backend\Assets\plugins\pickers\location\autocomplete_addresspicker.js" />
+    <Content Include="Areas\Backend\Assets\plugins\pickers\location\location.js" />
+    <Content Include="Areas\Backend\Assets\plugins\pickers\location\typeahead_addresspicker.js" />
+    <Content Include="Areas\Backend\Assets\plugins\pickers\pickadate\legacy.js" />
+    <Content Include="Areas\Backend\Assets\plugins\pickers\pickadate\picker.date.js" />
+    <Content Include="Areas\Backend\Assets\plugins\pickers\pickadate\picker.js" />
+    <Content Include="Areas\Backend\Assets\plugins\pickers\pickadate\picker.time.js" />
+    <Content Include="Areas\Backend\Assets\plugins\tables\datatables\datatables.min.js" />
+    <Content Include="Areas\Backend\Assets\plugins\visualization\c3\c3.min.js" />
+    <Content Include="Areas\Backend\Assets\plugins\visualization\d3\d3.min.js" />
+    <Content Include="Areas\Backend\Assets\plugins\visualization\d3\d3_tooltip.js" />
+    <Content Include="Areas\Backend\Assets\plugins\visualization\d3\venn.js" />
+    <Content Include="Areas\Backend\Assets\plugins\visualization\dimple\dimple.min.js" />
+    <Content Include="Areas\Backend\Assets\plugins\visualization\echarts\echarts.js" />
+    <Content Include="Areas\Backend\Assets\plugins\visualization\sparkline.min.js" />
     <Content Include="Content\app.js" />
     <Content Include="Content\assets\css\style.css" />
     <Content Include="Content\assets\img\about.jpg" />
@@ -281,6 +436,16 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Models\BestChoiceQatar.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>BestChoiceQatar.Context.cs</LastGenOutput>
+      <DependentUpon>BestChoiceQatar.edmx</DependentUpon>
+    </Content>
+    <Content Include="Models\BestChoiceQatar.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>BestChoiceQatar.edmx</DependentUpon>
+      <LastGenOutput>BestChoiceQatar.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\app.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -317,6 +482,59 @@
     <Content Include="Content\bootstrap-toastr\README.md" />
     <Content Include="Content\bootstrap-toastr\toastr.less" />
     <Content Include="Content\bootstrap-toastr\toastr.min.js.map" />
+    <Content Include="Areas\Backend\Assets\css\icons\fontawesome\fonts\fontawesome-webfontd41d.eot" />
+    <Content Include="Areas\Backend\Assets\css\icons\fontawesome\fonts\fontawesome-webfonte0a5.eot" />
+    <Content Include="Areas\Backend\Assets\css\icons\fontawesome\fonts\fontawesome-webfonte0a5.ttf" />
+    <Content Include="Areas\Backend\Assets\css\icons\fontawesome\fonts\fontawesome-webfonte0a5.woff" />
+    <Content Include="Areas\Backend\Assets\css\icons\fontawesome\fonts\fontawesome-webfonte0a5.woff2" />
+    <Content Include="Areas\Backend\Assets\css\icons\glyphicons\glyphicons-halflings-regular.eot" />
+    <Content Include="Areas\Backend\Assets\css\icons\glyphicons\glyphicons-halflings-regular.ttf" />
+    <Content Include="Areas\Backend\Assets\css\icons\glyphicons\glyphicons-halflings-regular.woff" />
+    <Content Include="Areas\Backend\Assets\css\icons\glyphicons\glyphicons-halflings-regular.woff2" />
+    <Content Include="Areas\Backend\Assets\css\icons\glyphicons\glyphicons-halflings-regulard41d.eot" />
+    <Content Include="Areas\Backend\Assets\css\icons\icomoon\fonts\icomoond41d.eot" />
+    <Content Include="Areas\Backend\Assets\css\icons\icomoon\fonts\icomoone627.eot" />
+    <Content Include="Areas\Backend\Assets\css\icons\icomoon\fonts\icomoone627.ttf" />
+    <Content Include="Areas\Backend\Assets\css\icons\icomoon\fonts\icomoone627.woff" />
+    <Content Include="Areas\Backend\Assets\plugins\bootstrap-toastr\README.md" />
+    <Content Include="Areas\Backend\Assets\plugins\bootstrap-toastr\toastr.less" />
+    <Content Include="Areas\Backend\Assets\plugins\bootstrap-toastr\toastr.min.js.map" />
+    <Content Include="Areas\Backend\Views\Client\Create.cshtml" />
+    <Content Include="Areas\Backend\Views\Client\Details.cshtml" />
+    <Content Include="Areas\Backend\Views\Client\Edit.cshtml" />
+    <Content Include="Areas\Backend\Views\Client\Index.cshtml" />
+    <Content Include="Areas\Backend\Views\Default\ChangePassword.cshtml" />
+    <Content Include="Areas\Backend\Views\Default\Dashboard.cshtml" />
+    <Content Include="Areas\Backend\Views\Default\index.cshtml" />
+    <Content Include="Areas\Backend\Views\EmailNotifications\Index.cshtml" />
+    <Content Include="Areas\Backend\Views\Gallery\Create.cshtml" />
+    <Content Include="Areas\Backend\Views\Gallery\Details.cshtml" />
+    <Content Include="Areas\Backend\Views\Gallery\Edit.cshtml" />
+    <Content Include="Areas\Backend\Views\Gallery\Index.cshtml" />
+    <Content Include="Areas\Backend\Views\Queries\Details.cshtml" />
+    <Content Include="Areas\Backend\Views\Queries\Index.cshtml" />
+    <Content Include="Areas\Backend\Views\Service\Create.cshtml" />
+    <Content Include="Areas\Backend\Views\Service\Details.cshtml" />
+    <Content Include="Areas\Backend\Views\Service\Edit.cshtml" />
+    <Content Include="Areas\Backend\Views\Service\Index.cshtml" />
+    <Content Include="Areas\Backend\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Backend\Views\Slider\Create.cshtml" />
+    <Content Include="Areas\Backend\Views\Slider\Details.cshtml" />
+    <Content Include="Areas\Backend\Views\Slider\Edit.cshtml" />
+    <Content Include="Areas\Backend\Views\Slider\Index.cshtml" />
+    <Content Include="Areas\Backend\Views\Users\Details.cshtml" />
+    <Content Include="Areas\Backend\Views\Users\Edit.cshtml" />
+    <Content Include="Areas\Backend\Views\Users\Index.cshtml" />
+    <Content Include="Areas\Backend\Views\web.config" />
+    <Content Include="Areas\Backend\Views\_ViewStart.cshtml" />
+    <EntityDeploy Include="Models\BestChoiceQatar.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>BestChoiceQatar.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\BestChoiceQatar.edmx.diagram">
+      <DependentUpon>BestChoiceQatar.edmx</DependentUpon>
+    </Content>
+    <Content Include="Areas\Backend\Views\Settings\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -328,6 +546,11 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Uploads\0da5b1d6-92c2-4e1c-93c9-bbc8d99a26c6.jpg" />
+    <Content Include="Uploads\adbe5e6c-c803-4761-b920-c425a4489ad5.jpg" />
+    <Content Include="Uploads\slide-1.jpg" />
+    <Content Include="Uploads\slide-2.jpg" />
+    <Content Include="Uploads\slide-3.jpg" />
     <Content Include="Views\Home\Template.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -359,7 +582,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Backend\Views\BackendBase\" />
+    <Folder Include="Areas\Backend\Views\Base\" />
     <Folder Include="Content\assets\img\Products\ELV Solutions\" />
+    <Folder Include="Uploads\Products\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -374,13 +600,16 @@
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
-  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <!-- <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" /> -->
+  <!-- <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" /> -->
   <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
     <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
   </Target>

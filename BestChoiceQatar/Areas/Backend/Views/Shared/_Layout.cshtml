@@ -1,0 +1,205 @@
+﻿@using BestChoiceQatar.Core
+@{
+    AppUser user = Session["Geri_User"] as AppUser;
+}
+
+
+
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewBag.Title</title>
+    <link href="~/areas/backend/assets/images/welcomekeralalogo.jpg" rel="icon" type="image/png">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
+
+    <link href="/areas/backend/assets/css/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="/areas/backend/assets/css/icons/icomoon/styles.css" rel="stylesheet" type="text/css">
+    <link href="/areas/backend/assets/css/styles.css?_=@DateTime.Now.Ticks" rel="stylesheet" type="text/css">
+    <link href="/areas/backend/assets/css/theme.css?_=@DateTime.Now.Ticks" rel="stylesheet" type="text/css">
+    <link href="~/Areas/Backend/Assets/css/select2.css" rel="stylesheet" type="text/css">
+    <link href="/areas/backend/assets/css/jquery.tagit.css" rel="stylesheet" type="text/css">
+    <link href="/areas/backend/assets/css/tagit.ui-zendesk.css" rel="stylesheet" type="text/css">
+    <link href="/areas/backend/assets/plugins/bootstrap-toastr/toastr.min.css" rel="stylesheet" type="text/css" />
+    @*<link href="/areas/backend/assets/plugins/bootstrap-daterangepicker/daterangepicker-bs3.css" rel="stylesheet" type="text/css" />*@
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
+    <link href="~/areas/backend/assets/plugins/bootstrap-toggle/bootstrap-toggle.min.css" rel="stylesheet" />
+    <!-- include summernote css/js -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.css" rel="stylesheet">
+    @RenderSection("CSS", required: false)
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+
+    <div class="navbar navbar-inverse navbar-color">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/backend/default/dashboard"><img src="~/Content/assets/img/logo/animation.gif" alt="RoyalEngineers"></a>
+            <ul class="nav navbar-nav pull-right visible-xs-block">
+                <li><a data-toggle="collapse" data-target="#menu-type-2" style="background-color:black;" class="second-menu-trigger"><i class="icon-tree5"></i></a></li>
+                <li><a data-toggle="collapse" data-target="#navbar-mobile" style="background-color:black;"><i class="icon-paragraph-justify3"></i></a></li>
+            </ul>
+        </div>
+
+
+        <div class="navbar-collapse collapse" id="navbar-mobile">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown dropdown-user profile-sec">
+                    <a class="dropdown-toggle user-profile" data-toggle="dropdown">
+                        @{
+                            if (user != null)
+                            {
+                                if (!string.IsNullOrEmpty(user.Photo))
+                                {
+                                    string _path = HttpContext.Current.Server.MapPath(@"~/images/users/" + (Appmanager.User.Photo));
+
+                                    FileInfo _file = new FileInfo(_path);
+
+                                    if (!_file.Exists)
+                                    {
+                                        <img src="/areas/backend/assets/images/avatar2.jpg" class="img-circle" alt="">
+                                    }
+                                    else
+                                    {
+                                        <img src="~/Images/users/@(user.Photo)" class="img-circle" alt="">
+                                    }
+                                }
+                                else
+                                {
+                                    <img src="~/areas/backend/assets/images/avatar2.jpg" class="img-circle" alt="">
+                                }
+
+                                @(user.Name)
+                            }
+                        }
+
+                        <i class="caret"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-right dropdown-index">
+
+                        @{
+                            if (user != null)
+                            {
+                                <li><a href="/backend/users/details/@(user.ID)"><i class="icon-user-plus"></i> My profile</a></li>
+                                <li><a href="/backend/default/changepassword"><i class="icon-lock2"></i> Change Password</a></li>
+
+                            }
+                        }
+
+                        <li class="/divider"></li>
+                        <li><a href="/backend/default/logout"><i class="icon-switch2"></i> Logout</a></li>
+                    </ul>
+
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="page-container">
+        <div class="page-content">
+
+            <div class="content-wrapper">
+                <div class="navbar navbar-inverse navbar-fixed-top second-menu navbar-color-bottom settings-menu" style="position: relative; border-top-color: #fff; z-index: 1020 !important;">
+                    <div class="navbar-collapse collapse" id="menu-type-2">
+
+                        <ul class="navigation navigation-main nav navbar-nav inner navbar-top-menu">
+
+                            <li class="dropdown home-menu">
+                                <a href="/backend/default/dashboard"><i class="icon-home4"></i> <span>Dashboard</span></a>
+                            </li>
+
+                            <li class="dropdown">
+                                <a href="/backend/queries"><i class="icon-phone-wave"></i> <span>Enquiries</span></a>
+                            </li>
+                            @*<li>
+                                    <a href="/backend/projects"><i class="icon-newspaper"></i> <span>Projects</span></a>
+                                </li>*@
+                            <li class="dropdown">
+                                <a href="/backend/service"><i class="icon-stack"></i> <span>Services</span></a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="/backend/slider"><i class="icon-newspaper"></i> <span>Slider</span></a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="/backend/client"><i class="icon-user-tie"></i> <span>Clients</span></a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="/backend/gallery"><i class="icon-book3"></i> <span>Products</span></a>
+                            </li>
+
+
+
+                            <li>
+                                <a href="/backend/users"><i class="icon-user"></i> <span>Users</span></a>
+                            </li>
+
+                            <li>
+                                <a href="/backend/settings"><i class="icon-scissors"></i> <span>Settings</span></a>
+                            </li>
+
+
+
+
+
+
+
+                        </ul>
+                    </div>
+                </div>
+                @RenderBody()
+                <div class='footer text-muted hidden-xs'>
+                    <p>
+                        Copyright © 2024 <a><strong>Bestchoice</strong></a>. All rights reserved.
+                        Powered By <a href="https://www.mbws.in" target="_blank"><strong><u>MBWS</u></strong></a>
+                    </p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="/areas/backend/assets/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/areas/backend/assets/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment.min.js"></script>
+    <script type="text/javascript" src="~/Areas/Backend/Assets/js/select2.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/2.9.1/fullcalendar.min.js"></script>
+    <script type="text/javascript" src="/areas/backend/assets/plugins/pickers/pickadate/picker.js"></script>
+    <script type="text/javascript" src="/areas/backend/assets/plugins/pickers/pickadate/picker.date.js"></script>
+    <script type="text/javascript" src="/areas/backend/assets/plugins/forms/styling/uniform.min.js"></script>
+    <script type="text/javascript" src="/areas/backend/assets/plugins/tables/datatables/datatables.min.js"></script>
+    <script src="~/Areas/Backend/Assets/js/app.js" type="text/javascript"></script>
+    <script src="/areas/backend/assets/js/jquery.livequery.js" type="text/javascript"></script>
+    <script src="~/Scripts/jquery.validate.min.js" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.15.0/additional-methods.min.js"></script>
+    <script src="/areas/backend/assets/plugins/bootstrap-toastr/toastr.min.js" type="text/javascript"></script>
+    <script src="/areas/backend/assets/plugins/pickers/daterangepicker.js"></script>
+    <script src="/areas/backend/assets/plugins/pickers/datepicker.js" type="text/javascript"></script>
+    <script src="/areas/backend/assets/js/jquery.cookie.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/areas/backend/assets/js/scripts.js"></script>
+    <script src="~/areas/backend/assets/plugins/bootstrap-toggle/bootstrap-toggle.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>'
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.2/summernote.js"></script>
+    @RenderSection("JavaScript", required: false)
+    <script src="~/Scripts/app.js?_=@DateTime.Now.Ticks" type="text/javascript"></script>
+    <script>
+        $(document).ready(function () {
+            App.init();
+
+
+            @{
+                if (TempData["Notification"] != null)
+                {
+                    Notification notification = (Notification)TempData["Notification"];
+                    <text>WebApp.Notifications.Show('@notification.Type', '@notification.Text');</text>
+                }
+             }
+        });
+    </script>
+
+</body>
+</html>

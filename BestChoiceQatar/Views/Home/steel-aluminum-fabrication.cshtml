@@ -1,71 +1,25 @@
-﻿
+
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Premium Steel and Aluminum Fabrication in Qatar | Expert Installation Services";
     ViewBag.description = "Excellence in steel and aluminum fabrication. We specialize in products like doors, windows, racks, and handrails. Partner with us for quality.";
     ViewBag.keywords = "steel fabrication, aluminum products, wall systems, contracting partnerships, rack fabrication, qatar construction";
 
+    int i = 1;
+    BestChoiceQatar.Models.BestChoiceQatarEntities db = new BestChoiceQatar.Models.BestChoiceQatarEntities();
+    var _product = (from b in db.Galleries
+                    where b.IsDataActive && b.Category == "Steel & Aluminum Fabrication"
+                    select new
+                    {
+                        b.ID,
+                        b.Title,
+                        b.Description,
+                        b.Image,
+                        b.ChildImages
+                    }).FirstOrDefault();
+    var settings = db.Settings.FirstOrDefault();
+
 }
-<!-- ======= Header ======= -->
-<header id="header" class="d-flex align-items-center">
-    <div class="container d-flex align-items-center">
-
-        <div class="logo me-auto">
-            <a href="/index"><img class="img-responsive" src="~/content/assets/img/logo/animation.gif" alt="Bestchoice Contracting"></a></h1>
-
-            <!-- Uncomment below if you prefer to use an image logo -->
-            <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
-        </div>
-
-        <nav id="navbar" class="navbar">
-            <ul>
-                <li><a class="nav-link" href="/index">Home</a></li>
-                <li><a class="nav-link" href="/about">About</a></li>
-                <li class="dropdown">
-                    <a class="nav-link active" href=""><span>Our Products</span> <i class="bi bi-chevron-down"></i></a>
-                    <ul>
-                        <li><a href="/portable-cabin-fabrication">Portable Cabin Fabrication</a></li>
-                        <li><a href="/building-painting-contractor">Building Painting Contractor</a></li>
-                        @*<li><a href="/designing">Designing & Printing </a></li>*@
-                        <li><a href="/steel-aluminum-fabrication">Steel & Aluminum Fabrication</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a class="" href=""><span>Our Services</span> <i class="bi bi-chevron-down"></i></a>
-                    <ul>
-                        <li><a href="/general-contracting">General Contracting</a></li>
-                        @*<li><a href="/car-rental">Rent a Car</a></li>*@
-                        <li><a href="/optical-fibre-networks">Optical Fibre Networks</a></li>
-                    </ul>
-                </li>
-
-                <li><a class="nav-link" href="/blog">Blog</a></li>
-                <li><a class="nav-link" href="/contact">Contact</a></li>
-                <li><a target="_blank" href="~/Content/assets/Brochure/Brochure.html.pdf">Brochure</a></li>
-            </ul>
-            <i class="bi bi-list mobile-nav-toggle"></i>
-        </nav><!-- .navbar -->
-
-    </div>
-</header><!-- End Header -->
-<!-- ======= Whatsapp ======= -->
-
-<link rel="stylesheet" href="">
-<a href="https://wa.me/97450307568" class="float" target="_blank"><i class="bi bi-whatsapp"></i> </a>
-<i class="fa fa-whatsapp my-float"></i>
-     </a>
-
-<!-- ======= Call ======= -->
-<link rel="stylesheet" href="">
-<a href="tel:+974 5030 7568" class="call"><i class="bi bi-telephone"></i> </a>
-<i class="fa fa-whatsapp my-call"></i>
-     </a>
-
-<!-- ======= Tagline ======= -->
-<link rel="stylesheet" href="">
-<a href="" class="tagline"><i class=""></i> <h2>Creative Fabrication</h2></a>
-<i class="fa fa-whatsapp my-tagline"></i>
-     </a>
 
 
 <!-- ======= Breadcrumbs ======= -->
@@ -86,27 +40,11 @@
 
         <div class="row">
             <div class="col-lg-6 order-1 order-lg-2" data-aos="fade-left" data-aos-delay="100">
-                <img src="~/content/assets/img/Products/Steel & Aluminum Fabrication.jpg" class="img-fluid" alt="Steel and Aluminum Fabrication">
+                <img src="~/Uploads/Products/@_product.Image" class="img-fluid" alt="Steel and Aluminum Fabrication">
             </div>
             <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content" data-aos="fade-right" data-aos-delay="100">
-                <h1>Steel & Aluminum Fabrication</h1>
-                <p class="fst-italic">
-                    We are committed towards achieving excellence through supplying and installing aluminum, steel & stainless steel products,
-                </p>
-                <p>
-                    it also includes glass, wall cladding, technical system, structural and curtain wall.
-                    We are in its partnership with main contracting companies in Qatar executing and delivering
-                    projects that are icons in the ever growing and developing State of Qatar.
-                    Specializing in Aluminum, Steel & Stainless Steel products, with all related supports and accessories,
-                    with one goal in mind, exceeding customer’s expectations in terms of quality of work and delivery.
-                    The overwhelming majority of our business comes from our excellent reputation that: "We can deliver".
-                </p>
-                <ul>
-                    <li><i class="bi bi-check-all"></i> Doors</li>
-                    <li><i class="bi bi-check-all"></i> Windows</li>
-                    <li><i class="bi bi-check-all"></i> Racks</li>
-                    <li><i class="bi bi-check-all"></i> Handrails</li>
-                    <li><i class="bi bi-check-all"></i> Step Ladders etc..</li>
+                <h1>@_product.Title</h1>
+                @Html.Raw(_product.Description)
             </div>
         </div>
 
@@ -123,12 +61,21 @@
 
         <div class="recent-photos-slider swiper">
             <div class="swiper-wrapper align-items-center">
-                <div class="swiper-slide"><a href="~/content/assets/img/Products/Steel & Aluminum Fabrication/Fabrication-1.jpg" class="glightbox"><img src="~/content/assets/img/Products/Steel & Aluminum Fabrication/Fabrication-1.jpg" class="img-fluid" alt="Steel and Aluminum Fabrication"></a></div>
-                <div class="swiper-slide"><a href="~/content/assets/img/Products/Steel & Aluminum Fabrication/Fabrication-2.jpg" class="glightbox"><img src="~/content/assets/img/Products/Steel & Aluminum Fabrication/Fabrication-2.jpg" class="img-fluid" alt="Steel and Aluminum Fabrication"></a></div>
-                <div class="swiper-slide"><a href="~/content/assets/img/Products/Steel & Aluminum Fabrication/Fabrication-3.jpg" class="glightbox"><img src="~/content/assets/img/Products/Steel & Aluminum Fabrication/Fabrication-3.jpg" class="img-fluid" alt="Steel and Aluminum Fabrication"></a></div>
-                <div class="swiper-slide"><a href="~/content/assets/img/Products/Steel & Aluminum Fabrication/Fabrication-4.jpg" class="glightbox"><img src="~/content/assets/img/Products/Steel & Aluminum Fabrication/Fabrication-4.jpg" class="img-fluid" alt="Steel and Aluminum Fabrication"></a></div>
-                <div class="swiper-slide"><a href="~/content/assets/img/Products/Steel & Aluminum Fabrication/Fabrication-5.jpg" class="glightbox"><img src="~/content/assets/img/Products/Steel & Aluminum Fabrication/Fabrication-5.jpg" class="img-fluid" alt="Steel and Aluminum Fabrication"></a></div>
-                <div class="swiper-slide"><a href="~/content/assets/img/Products/Steel & Aluminum Fabrication/Fabrication-6.jpg" class="glightbox"><img src="~/content/assets/img/Products/Steel & Aluminum Fabrication/Fabrication-6.jpg" class="img-fluid" alt="Steel and Aluminum Fabrication"></a></div>
+                @if (!string.IsNullOrEmpty(_product.ChildImages))
+                {
+                    List<string> _files = _product.ChildImages.Split('|').ToList();
+                    foreach (var _fileName in _files.Where(f => !string.IsNullOrEmpty(f)).ToList())
+                    {
+                        <div class="swiper-slide"><a href="~/Uploads/Products/@_fileName" class="glightbox"><img src="~/Uploads/Products/@_fileName" class="img-fluid" alt="Steel and Aluminum Fabrication"></a></div>
+                    }
+                }
+
+                @*<div class="swiper-slide"><a href="~/content/assets/img/Products/Steel & Aluminum Fabrication/Fabrication-1.jpg" class="glightbox"><img src="~/content/assets/img/Products/Steel & Aluminum Fabrication/Fabrication-1.jpg" class="img-fluid" alt="Steel and Aluminum Fabrication"></a></div>
+                    <div class="swiper-slide"><a href="~/content/assets/img/Products/Steel & Aluminum Fabrication/Fabrication-2.jpg" class="glightbox"><img src="~/content/assets/img/Products/Steel & Aluminum Fabrication/Fabrication-2.jpg" class="img-fluid" alt="Steel and Aluminum Fabrication"></a></div>
+                    <div class="swiper-slide"><a href="~/content/assets/img/Products/Steel & Aluminum Fabrication/Fabrication-3.jpg" class="glightbox"><img src="~/content/assets/img/Products/Steel & Aluminum Fabrication/Fabrication-3.jpg" class="img-fluid" alt="Steel and Aluminum Fabrication"></a></div>
+                    <div class="swiper-slide"><a href="~/content/assets/img/Products/Steel & Aluminum Fabrication/Fabrication-4.jpg" class="glightbox"><img src="~/content/assets/img/Products/Steel & Aluminum Fabrication/Fabrication-4.jpg" class="img-fluid" alt="Steel and Aluminum Fabrication"></a></div>
+                    <div class="swiper-slide"><a href="~/content/assets/img/Products/Steel & Aluminum Fabrication/Fabrication-5.jpg" class="glightbox"><img src="~/content/assets/img/Products/Steel & Aluminum Fabrication/Fabrication-5.jpg" class="img-fluid" alt="Steel and Aluminum Fabrication"></a></div>
+                    <div class="swiper-slide"><a href="~/content/assets/img/Products/Steel & Aluminum Fabrication/Fabrication-6.jpg" class="glightbox"><img src="~/content/assets/img/Products/Steel & Aluminum Fabrication/Fabrication-6.jpg" class="img-fluid" alt="Steel and Aluminum Fabrication"></a></div>*@
 
             </div>
             <div class="swiper-pagination"></div>

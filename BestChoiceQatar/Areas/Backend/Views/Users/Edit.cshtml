@@ -1,0 +1,97 @@
+﻿@model BestChoiceQatar.Models.User
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Backend/Views/Shared/_Layout.cshtml";
+}
+
+@section JavaScript{
+    <script type="text/javascript">$(document).ready(function () { WebApp.Core.HighlightCurrentMenuItem('Users') });</script>
+}
+
+<div class="page-header">
+    <div class="page-header-content">
+        <div class="page-title">
+            <h4><span class="text-semibold">Edit User</span></h4>
+        </div>
+        <div class="heading-elements">
+            <div class="heading-btn-group">
+                <a class="btn btn-link btn-float has-text" href="/backend/users/index"><i class="icon-user-lock"></i><span>All Users</span></a>
+            </div>
+        </div>
+    </div>
+    <div class="breadcrumb-line">
+        <ul class="breadcrumb">
+            @{
+
+                <li><a href="/backend/default/dashboard"><i class="icon-home4 position-left"></i>Dashboard</a></li>
+            }
+            <li><a href="/backend/users/index"> Users</a></li>
+
+            <li class="active">Edit Users</li>
+        </ul>
+    </div>
+</div>
+<div class="content">
+    <form method="post" class="form-horizontal" action="" enctype="multipart/form-data" autocomplete="off">
+        <div class="panel panel-flat">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <input type="hidden" class="UserID" id="UserID" value="@Model.ID" />
+
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">@Html.DisplayNameFor(model => model.Username)</label>
+                            <div class="col-lg-7">
+                                @Html.TextBoxFor(model => model.Username, new { @placeholder = "Username", @class = "form-control", @readonly = "readonly" })
+                                @Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">@Html.DisplayNameFor(model => model.Email):</label>
+                            <div class="col-lg-7">
+                                @Html.TextBoxFor(model => model.Email, new { @placeholder = "Please enter the Email", @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">@Html.DisplayNameFor(model => model.MobileNumber)</label>
+                            <div class="col-lg-7">
+                                @Html.EditorFor(model => model.MobileNumber, new { htmlAttributes = new { @placeholder = "Please enter the Mobile Number", @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.MobileNumber, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">@Html.DisplayNameFor(model => model.Password)</label>
+                            <div class="col-lg-7">
+                                @Html.PasswordFor(model => model.Password, new { @placeholder = "Password", @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">@Html.DisplayNameFor(model => model.ConfirmPassword)</label>
+                            <div class="col-lg-7">
+                                @Html.PasswordFor(model => model.ConfirmPassword, new { @placeholder = "Confirm Password", @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">@Html.DisplayNameFor(model => model.IsSuperAdmin)</label>
+                            <div class="col-lg-7">
+                                @Html.EditorFor(model => model.IsSuperAdmin, new { htmlAttributes = new { @class = "toggle-switch toggle", @disabled = "disabled" } })
+                                @Html.ValidationMessageFor(model => model.IsSuperAdmin, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="text-right">
+                    <a href="/backend/users/edit/@Model.ID" class="btn btn-default">Reset<i class="icon-reload-alt position-right"></i> </a>
+                    <button type="submit" class="btn btn-primary">Submit <i class="icon-arrow-right14 position-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

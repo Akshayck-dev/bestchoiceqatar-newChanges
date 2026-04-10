@@ -156,20 +156,74 @@ var WebApp = {
 
                 .on('click', '.confirm', function () {
                     return confirm($(this).attr('data-confirm'));
-                })               
-                 .on("change", "#chk_all_emails", function () {
-                     if ($(this).is(':checked')) {
-                         $.get('/backend/registrations/GetEmails?i=1&q=&all=true',
-                             function (response) {
-                                 $('#EmailID').select2('data', response.Results);
-                             });
-                     } else {
-                         $('#EmailID').select2('data', []);
-                     }
-                 })
+                })
+                .on("change", "#chk_all_emails", function () {
+                    if ($(this).is(':checked')) {
+                        $.get('/backend/registrations/GetEmails?i=1&q=&all=true',
+                            function (response) {
+                                $('#EmailID').select2('data', response.Results);
+                            });
+                    } else {
+                        $('#EmailID').select2('data', []);
+                    }
+                })
                 .on('change', 'input,select,textarea', function () {
                     $(this).valid();
                 })
+                .on("change", '.document-uploader', function (e) {
+                    var _this = $(this);
+
+                    $("#" + _this.attr("file-list-area")).empty();
+
+                    if (_this.valid()) {
+                        selDiv = $("#" + _this.attr("file-list-area"));
+
+                        if (_this.attr("multiple") != "multiple") {
+                            selDiv.html('');
+                            storedFiles = [];
+                        }
+
+                        WebApp.Core.handleDocumentSelect(e);
+                    }
+                });
+            $(document).on('click', '.close_imgip', function () {
+
+                var _confirm = confirm("Are you sure want to delete?");
+
+                if (_confirm != false) {
+                    var currentItem = $(this).closest('div');
+                    var _currentPage = currentItem.find('input.current_Pageip').val();
+
+                    var _index = currentItem.find('input.photo_IDip').val();
+                    var modelID = $('.model_idip').val();
+                    var modelfile = $('.model_fileip_' + _index).val();
+
+                    if (_currentPage == "ProjectDocument") {
+                        $.get('/backend/Gallery/DeleteDocumentFile', { id: modelID, File: modelfile }, function (data) {
+                            if (data.status == true) {
+                                currentItem.find('input[type="hidden"]').remove();
+                                $('._uploaded_photoip').val(data.file);
+                                $('._uploaded_photoip').trigger('change');
+                                $('.model_fileip_' + _index).remove();
+                                $('.closeip_' + _index).remove();
+                                $('.urlip_' + _index).remove();
+                                $("a").closest('.urlip_' + _index).removeAttr("href");
+                            }
+                            else {
+                                return false;
+                            }
+                        })
+                    }
+
+                    else {
+                        alert("Requested Image is not Removed, try Later!");
+                        return false;
+                    }
+                }
+                else {
+                    return false;
+                }
+            });
 
              
         },
@@ -447,6 +501,44 @@ var WebApp = {
                 $(this).rules("add", {
                     required: true
                 });
+            });
+        },
+        handleDocumentSelect: function (e) {
+            var storedFiles = [];
+            var files = e.target.files;
+
+            var filesArr = Array.prototype.slice.call(files);
+            var i = 0;
+            var filename = "";
+            var _fileName;
+            filesArr.forEach(function (f) {
+                var ext = f.name.split('.').pop();
+                // filename = f.name.split('.')[0].length > 15 ? f.name.substring(0, 15).replace(/ /g, "_") + "...." + ext : f.name;
+                filename = f.name;
+
+                var icon = "";
+                switch (ext) {
+                    case 'pdf':
+                        icon = "icon-print";
+                        break;
+                    default:
+                        icon = "icon-print";
+                }
+
+                storedFiles.push(f);
+                var html = "<div class='upload_main7 upload_div7_" + i + "'><i class='" + icon + "'></i><label id='delete-IPbill'>" + filename + "</label> <i class='icon-cancel-square IPbill-delete delete2_" + i + "' data-attribute=" + i + "></i> <br clear=\"left\"/></div>";
+
+                selDiv.append(html);
+
+                console.log(storedFiles);
+
+                i = i + 1;
+                var _uploadedPaymentFiles = $('#IPbill_upload').val();
+
+                _fileName = _uploadedPaymentFiles + "|" + filename
+
+                $('#IPbill_upload').val(_fileName);
+
             });
         },
     },

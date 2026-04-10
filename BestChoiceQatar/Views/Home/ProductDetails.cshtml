@@ -1,0 +1,676 @@
+@{
+    var slug = ViewContext.RouteData.Values["slug"]?.ToString() ?? Request.QueryString["slug"];
+    var product = GetProductData().FirstOrDefault(p => p.Slug == (slug ?? "").ToLower());
+    
+    BestChoiceQatar.Models.BestChoiceQatarEntities db = new BestChoiceQatar.Models.BestChoiceQatarEntities();
+    var settings = db.Settings.FirstOrDefault();
+    var allProducts = GetProductData();
+
+    if (product == null) {
+        Response.Redirect("/index");
+        return;
+    }
+}
+
+@functions {
+    public class ServiceModel
+    {
+        public string Slug { get; set; }
+        public string Title { get; set; }
+        public string Subtitle { get; set; }
+        public string Description { get; set; }
+        public string DetailedContent { get; set; }
+        public List<string> Features { get; set; }
+        public List<KeyValuePair<string, string>> Specifications { get; set; }
+        public string MainImage { get; set; }
+        public List<string> GalleryImages { get; set; }
+        public string MetaDescription { get; set; }
+        public string MetaKeywords { get; set; }
+        public string SectionLabel { get; set; }
+    }
+
+    public List<ServiceModel> GetProductData()
+    {
+        return new List<ServiceModel>
+        {
+            new ServiceModel {
+                Slug = "container-office-cabins",
+                Title = "Container Office Cabins",
+                SectionLabel = "Structural Excellence",
+                Subtitle = "Rugged ISO shipping container conversions providing unmatched security and longevity for remote site deployments.",
+                Description = "Our <strong>container office cabins</strong> are the gold standard for site security and structural integrity. By modifying 20ft and 40ft ISO shipping containers, BestChoice Contracting creates nearly indestructible workspaces that are ideal for high-impact environments, long-term projects, and sensitive equipment storage.",
+                DetailedContent = "The conversion process involves cutting-edge steel fabrication, reinforced apertures, and multi-layer climate control systems. Unlike standard timber or light-steel cabins, these units offer superior protection against harsh weather, unauthorized access, and are naturally stackable up to three levels high without additional external framework. Each unit is a turnkey solution delivered fully fitted and ready for immediate operation.",
+                MainImage = "/Content/assets/img/Products/cabin/container-office-hero.png",
+                Features = new List<string> { 
+                    "Authentic ISO Corten steel structure for extreme durability", 
+                    "High-security steel doors and reinforced window shutters", 
+                    "Superior thermal performance with custom internal lining", 
+                    "Naturally relocatable via crane or container handler",
+                    "Compact footprint with high internal load capacity",
+                    "Ideal for IT/Server rooms and remote site workshops"
+                },
+                Specifications = new List<KeyValuePair<string, string>> { 
+                    new KeyValuePair<string, string>("Sizes", "20ft (6.06M) / 40ft (12.19M) / High-Cube"),
+                    new KeyValuePair<string, string>("Wall Lining", "Gypsum / Marine Ply / Steel Sheet Options"),
+                    new KeyValuePair<string, string>("Floor Type", "Original 28mm Marine Plywood + Vinyl Overlay"),
+                    new KeyValuePair<string, string>("Exterior", "Marine-grade Epoxy Primer + PU Topcoat"),
+                    new KeyValuePair<string, string>("Certification", "Structural integrity verified for stacking")
+                },
+                GalleryImages = new List<string> { "/Content/assets/img/Products/cabin/container-office-hero.png", "/Uploads/Products/cabin-2.jpg", "/Uploads/Products/Fabrication-1.jpg" },
+                MetaDescription = "High-security container office conversions in Qatar. 20ft and 40ft units.",
+                MetaKeywords = "container office Qatar, shipping container conversion Doha, modified containers"
+            },
+            new ServiceModel {
+                Slug = "labor-camps-accommodation",
+                Title = "Labor Camps & Accommodation",
+                SectionLabel = "Workforce Welfare",
+                Subtitle = "Dignified and compliant modular housing solutions that exceed Qatar Labour Law standards for worker welfare.",
+                Description = "BestChoice Contracting specializes in the design-build of large-scale <strong>labor accommodation complexes</strong>. We understand that a comfortable workforce is a productive one, which is why our units are engineered for maximum thermal comfort, hygiene, and durability in high-occupancy industrial environments.",
+                DetailedContent = "Our labor camp solutions vary from individual sleeper units to entire modular cities including dining halls, recreation centers, and laundry blocks. We work closely with project managers to ensure every unit is 100% compliant with Qatar Ministry of Labor and Civil Defense regulations. High-density Rockwool insulation and fire-rated materials are standard in all our accommodation builds to ensure safety and energy efficiency.",
+                MainImage = "/Content/assets/img/Products/cabin/labor-camp-hero.png",
+                Features = new List<string> { 
+                    "100% Qatar Labour Law & Welfare Standard Compliant", 
+                    "High-density thermal insulation for energy-efficient cooling", 
+                    "Anti-slip, industrial-grade washable floor finishes", 
+                    "Standardized modular units for rapid camp expansion",
+                    "Integrated sanitary partitions and plumbing systems",
+                    "Robust steel framework for high-traffic environments"
+                },
+                Specifications = new List<KeyValuePair<string, string>> { 
+                    new KeyValuePair<string, string>("Unit Sizes", "3.75M x 12M / 4M x 12M / Custom Blocks"),
+                    new KeyValuePair<string, string>("Insulation", "Fire-rated Rockwool / EPS Sandwich Panels"),
+                    new KeyValuePair<string, string>("Plumbing", "PPR/PVC High-pressure piping systems"),
+                    new KeyValuePair<string, string>("Ventilation", "Standardized AC window/split unit provisions"),
+                    new KeyValuePair<string, string>("Capacity", "Optimized for 4, 6, or 8 person configurations")
+                },
+                GalleryImages = new List<string> { "/Content/assets/img/Products/cabin/labor-camp-hero.png", "/Uploads/Products/Fabrication-1.jpg", "/Uploads/Products/Fabrication-2.jpg" },
+                MetaDescription = "Compliant labor accommodation and camp solutions in Qatar.",
+                MetaKeywords = "labor camp Qatar, workforce housing Doha, accommodation cabins"
+            },
+            new ServiceModel {
+                Slug = "security-guard-cabins",
+                Title = "Security / Guard Cabins",
+                SectionLabel = "Vigilance & Protection",
+                Subtitle = "Compact, high-visibility security posts designed for entrance gates and checkpoints across Qatar.",
+                Description = "Protect your site perimeter with our professional <strong>security guard cabins</strong>. These specialized units are engineered to provide security personnel with 360-degree visibility, climate control, and a secure environment to monitor entry points and checkpoints effectively.",
+                DetailedContent = "Our guard cabins are built to be compact yet fully functional, fitting into tight gate configurations or checkpoint zones. They are fabricated with high-strength steel frames and impact-resistant panels. Each unit features full-width silver or black aluminum sliding windows to facilitate clear communication and observation. Despite their small footprint, they include full electrical fittings and AC provisions to ensure guard alertness throughout 24/7 shifts.",
+                MainImage = "/Uploads/Products/cabin fabrication.jpg",
+                Features = new List<string> { 
+                    "360-degree 'Panoramic' visibility configurations", 
+                    "Compact footprints tailored for gate entry points", 
+                    "Fast-build turnaround (5-10 working days)", 
+                    "Secure, lockable steel doors with vision panels",
+                    "Internal desk and storage shelf provisions",
+                    "Fully relocatable via integrated lifting hooks"
+                },
+                Specifications = new List<KeyValuePair<string, string>> { 
+                    new KeyValuePair<string, string>("Standard Sizes", "1.5M x 1.5M / 2.0M x 2.0M / 2M x 3M"),
+                    new KeyValuePair<string, string>("Frame", "Cold-rolled structural steel sections"),
+                    new KeyValuePair<string, string>("Windows", "Tempered glass sliding aluminum windows"),
+                    new KeyValuePair<string, string>("Lighting", "Internal LED + External spotlight provisions"),
+                    new KeyValuePair<string, string>("Finish", "Two-tone automotive grade epoxy paint")
+                },
+                GalleryImages = new List<string> { "/Uploads/Products/cabin fabrication.jpg", "/Uploads/Products/cabin-1.jpg", "/Uploads/Products/cabin-8.jpg" },
+                MetaDescription = "Compact security guard cabins and checkpoints in Qatar.",
+                MetaKeywords = "guard cabin Qatar, security booth Doha, gate house cabis"
+            },
+            new ServiceModel {
+                Slug = "toilet-sanitary-cabins",
+                Title = "Toilet & Sanitary Cabins",
+                SectionLabel = "Hygiene Solutions",
+                Subtitle = "Modular sanitary blocks and portable toilet units engineered for site hygiene and long-term durability.",
+                Description = "BestChoice Contracting provides the most robust **portable toilet and sanitary cabins** in the Qatar market. Built with water-resistant materials and industrial-grade plumbing, our units are designed to maintain high hygiene standards even in heavy-usage construction environments.",
+                DetailedContent = "Our sanitary units range from single person mobile toilets to massive multi-bay ablution blocks featuring showers, washbasins, and laundry facilities. We utilize anti-slip checkered aluminium or PVC flooring and moisture-resistant internal lining to ensure longevity. Every unit is pressure-tested before delivery to ensure leak-free operation and seamless integration with site sewage tanks or mains connections.",
+                MainImage = "/Uploads/Products/Fabrication-2.jpg",
+                Features = new List<string> { 
+                    "Male / Female separate entrance configurations", 
+                    "Anti-bacterial easy-clean internal wall surfaces", 
+                    "C-PVC / PPR high-grade plumbing for hot & cold water", 
+                    "Forced extraction ventilation systems (exhaust fans)",
+                    "Anti-corrosive floor gradients for easy wash-down",
+                    "Available in mobile/relocatable or skid-mounted options"
+                },
+                Specifications = new List<KeyValuePair<string, string>> { 
+                    new KeyValuePair<string, string>("Types", "Individual WC / Shower Blocks / Full Ablution Complexes"),
+                    new KeyValuePair<string, string>("Flooring", "Aluminium Checkered Plate / Anti-slip Vinyl"),
+                    new KeyValuePair<string, string>("Fittings", "Premium ceramic / Stainless steel options"),
+                    new KeyValuePair<string, string>("Tanking", "Optional integrated fresh/waste water tanks"),
+                    new KeyValuePair<string, string>("Insulation", "Moisture-sealed EPS Panels")
+                },
+                GalleryImages = new List<string> { "/Uploads/Products/Fabrication-2.jpg", "/Uploads/Products/cabin-10.jpg", "/Uploads/Products/cabin-11.jpg" },
+                MetaDescription = "Portable toilet and sanitary cabins for construction sites in Qatar.",
+                MetaKeywords = "toilet cabin Qatar, sanitary block Doha, portable WC"
+            },
+            new ServiceModel {
+                Slug = "single-double-story-cabins",
+                Title = "Single & Double Story Cabins",
+                SectionLabel = "Vertical Innovation",
+                Subtitle = "Sophisticated multi-level modular buildings that maximize site footprint without compromising on safety or design.",
+                Description = "When project sites are space-constrained, our <strong>double and triple-story modular cabins</strong> offer the ultimate vertical solution. BestChoice Contracting engineers these multi-level complexes with reinforced structural systems to provide safe, expansive workspace environments in a compact footprint.",
+                DetailedContent = "Scaling vertically requires precision engineering. Our multi-story units feature heavy-duty structural steel columns and bracing that exceed standard cabin loads. We provide integrated external staircases, walkways with safety railings, and fire-rated floor-to-ceiling partitions. This vertical approach is perfect for large site headquarters, compound management hubs, and multi-tenant site facilities where land area is at a premium.",
+                MainImage = "/Content/assets/img/Products/cabin/multi-story-hero.png",
+                Features = new List<string> { 
+                    "Reinforced structural steel columns for multi-level stacking", 
+                    "External industrial-grade staircases and safety walkways", 
+                    "Interconnected fire alarm and emergency lighting systems", 
+                    "Modular floor plans (Open-plan or cellular partitions)",
+                    "Enhanced sound and thermal insulation between floors",
+                    "Rapid on-site assembly by specialized rigging teams"
+                },
+                Specifications = new List<KeyValuePair<string, string>> { 
+                    new KeyValuePair<string, string>("Configuration", "G+1 / G+2 Multi-story blocks"),
+                    new KeyValuePair<string, string>("Staircases", "Anti-skid steel stairs with safety handrails"),
+                    new KeyValuePair<string, string>("Floor Support", "Heavy-duty C-Channel structural members"),
+                    new KeyValuePair<string, string>("Cladding", "Premium flat-panel look with epoxy finish"),
+                    new KeyValuePair<string, string>("Turnaround", "Engineered design + Fast-track fabrication")
+                },
+                GalleryImages = new List<string> { "/Content/assets/img/Products/cabin/multi-story-hero.png", "/Uploads/Products/cabin-2.jpg", "/Uploads/Products/cabin-3.jpg" },
+                MetaDescription = "Multi-story and double-story porta cabins in Qatar.",
+                MetaKeywords = "double story cabin Qatar, stacked porta cabins Doha, modular buildings"
+            }
+        };
+    }
+}
+
+@{
+    ViewBag.Title = product.Title + " | Bestchoice Contracting Qatar";
+    ViewBag.description = product.MetaDescription;
+    ViewBag.keywords = product.MetaKeywords;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- ======= Premium UI Styles ======= -->
+<style>
+    @@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;900&display=swap');
+
+    :root {
+        --primary-yellow: #ffcc00;
+        --dark-bg: #111111;
+        --light-bg: #ffffff;
+        --transition-smooth: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+
+    body {
+        font-family: 'Outfit', sans-serif;
+        background-color: var(--light-bg);
+    }
+
+    /* Hero Section */
+    .premium-hero {
+        position: relative;
+        height: 70vh;
+        min-height: 500px;
+        background: url('@product.MainImage') center/cover no-repeat;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+    }
+
+    .hero-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 100%);
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 2;
+        max-width: 800px;
+    }
+
+    .hero-title {
+        font-weight: 900;
+        font-size: clamp(2.5rem, 6vw, 4.5rem);
+        line-height: 0.95;
+        text-transform: uppercase;
+        color: #fff;
+        margin-bottom: 2rem;
+        letter-spacing: -2px;
+    }
+
+    .hero-subtitle {
+        font-size: clamp(1rem, 1.8vw, 1.3rem);
+        color: rgba(255, 255, 255, 0.8);
+        margin-bottom: 3rem;
+        border-left: 4px solid var(--primary-yellow);
+        padding-left: 20px;
+        line-height: 1.6;
+    }
+
+    .section-label {
+        color: var(--primary-yellow);
+        text-transform: uppercase;
+        font-weight: 700;
+        letter-spacing: 2px;
+        font-size: 0.9rem;
+        display: block;
+        margin-bottom: 15px;
+    }
+
+    .bc-breadcrumb { margin-bottom: 20px; }
+    .bc-breadcrumb a { color: var(--primary-yellow); text-decoration: none; font-weight: 600; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; }
+    .bc-breadcrumb span { color: #888; margin: 0 10px; font-size: 0.8rem; }
+
+    /* Main Content */
+    .product-main { padding: 100px 0; }
+    
+    .content-card {
+        background: #fff;
+        padding: 0;
+    }
+
+    .main-description {
+        font-size: 1.15rem;
+        line-height: 1.8;
+        color: #444;
+        margin-bottom: 40px;
+    }
+
+    .detailed-text {
+        color: #666;
+        line-height: 1.8;
+        margin-bottom: 60px;
+    }
+
+    /* Features Grid */
+    .feature-item {
+        margin-bottom: 30px;
+        padding: 25px;
+        background: #fdfdfd;
+        border-bottom: 3px solid #eee;
+        transition: var(--transition-smooth);
+        height: 100%;
+    }
+
+    .feature-item:hover {
+        border-bottom-color: var(--primary-yellow);
+        transform: translateY(-5px);
+        background: #fff;
+        box-shadow: 0 15px 30px rgba(0,0,0,0.05);
+    }
+
+    .feature-item i {
+        font-size: 1.5rem;
+        color: var(--primary-yellow);
+        margin-bottom: 15px;
+        display: block;
+    }
+
+    .feature-item p {
+        margin-bottom: 0;
+        font-weight: 600;
+        font-size: 0.95rem;
+        color: #333;
+    }
+
+    /* Specifications Table */
+    .spec-table-container {
+        margin-top: 80px;
+        background: #111;
+        padding: 50px;
+        color: #fff;
+    }
+
+    .spec-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .spec-table th, .spec-table td {
+        padding: 20px;
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+        text-align: left;
+    }
+
+    .spec-table th {
+        width: 35%;
+        font-weight: 800;
+        text-transform: uppercase;
+        font-size: 0.85rem;
+        letter-spacing: 1px;
+        color: var(--primary-yellow);
+    }
+
+    .spec-table td {
+        color: #aaa;
+        font-size: 1rem;
+    }
+
+    /* Sidebar Navigation */
+    .sidebar-nav {
+        position: sticky;
+        top: 100px;
+    }
+
+    .nav-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        border: 1px solid #eee;
+    }
+
+    .nav-header {
+        background: #000;
+        color: #fff;
+        padding: 20px 25px;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-size: 0.9rem;
+    }
+
+    .nav-list li a {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 18px 25px;
+        border-bottom: 1px solid #eee;
+        color: #444;
+        text-decoration: none;
+        font-weight: 700;
+        transition: var(--transition-smooth);
+        font-size: 0.95rem;
+    }
+
+    .nav-list li a:hover, .nav-list li a.active {
+        background: var(--primary-yellow);
+        color: #000;
+        padding-left: 35px;
+    }
+
+    .cta-sidebar {
+        background: #f8f8f8;
+        padding: 40px;
+        margin-top: 40px;
+        border-left: 5px solid var(--primary-yellow);
+    }
+
+    .cta-sidebar h4 { font-weight: 900; text-transform: uppercase; margin-bottom: 20px; font-size: 1.2rem; }
+    .cta-sidebar p { color: #666; font-size: 0.95rem; margin-bottom: 30px; }
+
+    .btn-premium {
+        display: block;
+        width: 100%;
+        text-align: center;
+        padding: 15px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        text-decoration: none;
+        transition: var(--transition-smooth);
+        margin-bottom: 15px;
+    }
+
+    .btn-yellow { background: var(--primary-yellow); color: #000; }
+    .btn-yellow:hover { background: #000; color: #fff; }
+
+    .btn-dark-outline { border: 2px solid #000; color: #000; }
+    .btn-dark-outline:hover { background: #000; color: #fff; }
+
+    /* Gallery Section */
+    .gallery-swiper {
+        padding: 50px 0;
+    }
+
+    .swiper-slide {
+        height: 350px;
+        overflow: hidden;
+    }
+
+    .swiper-slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: var(--transition-smooth);
+    }
+
+    .swiper-slide:hover img { transform: scale(1.1); }
+
+    /* Fixed Contact Icons */
+    .fixedIcons {
+        position: fixed;
+        bottom: 30px;
+        left: 30px;
+        z-index: 999;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .fixedIcons .icon {
+        width: 55px;
+        height: 55px;
+        background: #fff;
+        border-radius: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        transition: 0.3s;
+        text-decoration: none;
+        color: #000;
+        font-size: 1.4rem;
+        position: relative;
+    }
+
+    .fixedIcons .icon:hover { transform: translateX(10px); background: var(--primary-yellow); }
+
+    .fixedIcons .icon span {
+        position: absolute;
+        left: 65px;
+        background: #000;
+        color: #fff;
+        padding: 8px 15px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        white-space: nowrap;
+        opacity: 0;
+        visibility: hidden;
+        transition: 0.3s;
+    }
+
+    .fixedIcons .icon:hover span { opacity: 1; visibility: visible; }
+
+    /* --- MOBILE RESPONSIVENESS --- */
+    @@media (max-width: 991.98px) {
+        .premium-hero { height: 60vh; }
+        .product-main { padding: 60px 0; }
+        .spec-table-container { padding: 30px; }
+        .sidebar-nav { margin-top: 60px; position: static; }
+    }
+
+    @@media (max-width: 767.98px) {
+        .hero-title { font-size: 2.2rem; }
+        .hero-subtitle { border-left: none; border-top: 4px solid var(--primary-yellow); padding-left: 0; padding-top: 15px; }
+        .spec-table th { width: 100%; display: block; padding-bottom: 5px; }
+        .spec-table td { display: block; padding-top: 0; padding-bottom: 15px; }
+    }
+</style>
+
+
+<main id="main">
+    <!-- Hero Section -->
+    <section class="premium-hero">
+        <div class="hero-overlay"></div>
+        <div class="container position-relative">
+            <div class="hero-content" data-aos="fade-up">
+                <nav class="bc-breadcrumb">
+                    <a href="/index">Home</a>
+                    <span>/</span>
+                    <a href="/portable-cabin-fabrication">Fabrication</a>
+                    <span>/</span>
+                    <span style="color:rgba(255,255,255,0.5)">@product.Title</span>
+                </nav>
+                <span class="section-label">@product.SectionLabel</span>
+                <h1 class="hero-title">@Html.Raw(product.Title.Replace(" ", "<br>"))</h1>
+                <p class="hero-subtitle">@product.Subtitle</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="product-main">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-8">
+                    <div class="content-card" data-aos="fade-up">
+                        <h2 class="section-label mb-3">Overview</h2>
+                        <p class="main-description">@Html.Raw(product.Description)</p>
+                        <p class="detailed-text">@product.DetailedContent</p>
+
+                        <div class="row g-4">
+                            <div class="col-12"><h2 class="section-label mb-4">Technical Highlights</h2></div>
+                            @foreach (var feature in product.Features)
+                            {
+                                <div class="col-md-6" data-aos="fade-up">
+                                    <div class="feature-item">
+                                        <i class="bi bi-shield-check"></i>
+                                        <p>@feature</p>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+
+                        <div class="spec-table-container" data-aos="fade-up">
+                            <h2 class="section-label mb-4" style="color: #fff;">Standard Specifications</h2>
+                            <table class="spec-table">
+                                <tbody>
+                                    @foreach (var spec in product.Specifications)
+                                    {
+                                        <tr>
+                                            <th>@spec.Key</th>
+                                            <td>@spec.Value</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <div class="col-lg-4">
+                    <aside class="sidebar-nav" data-aos="fade-left">
+                        <div class="nav-header">Cabin Categories</div>
+                        <ul class="nav-list">
+                            @foreach (var item in allProducts)
+                            {
+                                <li>
+                                    <a href="/product/@item.Slug" class="@(item.Slug == product.Slug ? "active" : "")">
+                                        @item.Title <i class="bi bi-chevron-right"></i>
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+
+                        <div class="cta-sidebar">
+                            <h4>Ready to Start?</h4>
+                            <p>Get a customized quote for your modular project including technical drawings and on-site delivery costs.</p>
+                            <a href="/contact" class="btn-premium btn-yellow">Request Quote</a>
+                            <a href="tel:@settings.Mobile1" class="btn-premium btn-dark-outline">Call Specialist</a>
+                        </div>
+
+                        <div class="mt-4 p-4 border text-center">
+                            <h5 class="fw-bold mb-3">Download Brochure</h5>
+                            <a href="~/Content/assets/Brochure/Brochure.html.pdf" target="_blank" class="text-dark text-decoration-none fw-bold">
+                                <i class="bi bi-file-earmark-pdf-fill fs-3 d-block mb-2 text-danger"></i>
+                                Get Full PDF Catalog
+                            </a>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="bg-light py-5">
+        <div class="container">
+            <div class="section-header text-center mb-5" data-aos="fade-up">
+                <span class="section-label">Gallery</span>
+                <h2 class="fw-black text-uppercase" style="font-size: 2.5rem; letter-spacing: -1px;">Project Showcase</h2>
+            </div>
+            <div class="swiper gallery-swiper" data-aos="fade-up">
+                <div class="swiper-wrapper">
+                    @foreach (var img in product.GalleryImages)
+                    {
+                        <div class="swiper-slide">
+                            <a href="@img" class="glightbox">
+                                <img src="@img" alt="BestChoice Qatar Cabin">
+                            </a>
+                        </div>
+                    }
+                </div>
+                <div class="swiper-pagination mt-4"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEO CONTENT SECTION -->
+    <section class="dark-section" style="background-color: var(--dark-bg); color: #fff; padding: 100px 0;">
+        <div class="container" data-aos="fade-up">
+            <div class="row g-5 align-items-center">
+                <div class="col-lg-6">
+                    <span class="section-label">Expertise in Qatar</span>
+                    <h2 class="hero-title" style="font-size: 2.5rem; text-transform: none;">Leading Modular Fabrication in Doha</h2>
+                    <p style="color: #888; line-height: 1.8; font-size: 1.1rem;">
+                        BestChoice Contracting is a premier provider of <strong>portable cabins and modular buildings in Qatar</strong>. With over 15 years of experience in the Doha market, we have mastered the art of fabricating structures that specifically address the environmental and regulatory challenges of the region.
+                    </p>
+                    <p style="color: #888; line-height: 1.8;">
+                        Our solutions for <a href="/product/labor-camps-accommodation" style="color: var(--primary-yellow);">labor accommodation</a>, <a href="/product/porta-cabin-offices" style="color: var(--primary-yellow);">site offices</a>, and <a href="/product/container-office-cabins" style="color: var(--primary-yellow);">container conversions</a> are utilized by Qatar's largest infrastructure and oil & gas projects. We pride ourselves on engineering excellence, rapid deployment, and unmatched durability.
+                    </p>
+                </div>
+                <div class="col-lg-6">
+                    <div class="row g-4">
+                        <div class="col-6">
+                            <div class="p-4 border border-secondary h-100">
+                                <h3 class="fw-bold fs-1 text-white">10+</h3>
+                                <p class="text-warning text-uppercase fw-bold small">Years Expertise</p>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="p-4 border border-secondary h-100">
+                                <h3 class="fw-bold fs-1 text-white">500+</h3>
+                                <p class="text-warning text-uppercase fw-bold small">Units Delivered</p>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="p-4 border border-secondary h-100">
+                                <h3 class="fw-bold fs-1 text-white">BEST</h3>
+                                <p class="text-warning text-uppercase fw-bold small">Market Pricing</p>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="p-4 border border-secondary h-100">
+                                <h3 class="fw-bold fs-1 text-white">FAST</h3>
+                                <p class="text-warning text-uppercase fw-bold small">Turnaround</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        new Swiper('.gallery-swiper', {
+            slidesPerView: 1,
+            spaceBetween: 20,
+            loop: true,
+            pagination: { el: '.swiper-pagination', clickable: true },
+            breakpoints: {
+                768: { slidesPerView: 2 },
+                1024: { slidesPerView: 3 }
+            },
+            autoplay: { delay: 3000 }
+        });
+        
+        GLightbox({ selector: '.glightbox' });
+    });
+</script>

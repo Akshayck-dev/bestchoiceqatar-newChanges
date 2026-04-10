@@ -1,0 +1,97 @@
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Our Projects | BestChoice Contracting Qatar";
+    ViewBag.description = "View our portfolio of premium portable cabins, container modifications, and industrial fabrication projects completed across Doha and Qatar.";
+}
+
+<style>
+    :root { --primary-bc: #ffcc00; }
+    body { background: #f9f9f9; }
+    .hero-projects { background: url('/Uploads/Products/container-office.jpg') center/cover no-repeat; height: 380px; position:relative; display:flex; align-items:center; justify-content:center; margin-top: 80px; }
+    .hero-projects::before { content:''; position:absolute; inset:0; background: linear-gradient(to bottom, rgba(0,0,0,0.8), rgba(0,0,0,0.5)); }
+    .hero-content { position:relative; z-index:2; text-align:center; width:100%; color:#fff; }
+    .hero-content h1 { font-family: 'Outfit', sans-serif; font-weight:900; font-size:clamp(2.5rem, 5vw, 4rem); text-transform:uppercase; letter-spacing:1px; margin-bottom: 5px; }
+    .hero-content p { color: var(--primary-bc); font-family: 'Inter', sans-serif; font-weight:800; letter-spacing:3px; text-transform:uppercase; font-size:0.9rem;}
+
+    .masonry-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); grid-gap: 25px; padding: 60px 0; }
+    .masonry-item { overflow: hidden; border-radius: 12px; position: relative; aspect-ratio: 4/3; box-shadow: 0 10px 30px rgba(0,0,0,0.08); background: #000; }
+    .masonry-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.4s ease; opacity: 0.9; }
+    .masonry-item:hover img { transform: scale(1.1); opacity: 0.4; }
+    
+    .masonry-content { position: absolute; inset:0; display:flex; flex-direction: column; align-items:flex-start; justify-content:flex-end; padding: 25px; opacity:0; transition: opacity 0.3s ease; }
+    .masonry-item:hover .masonry-content { opacity: 1; }
+    .masonry-content h4 { color: #fff; font-family: 'Outfit', sans-serif; font-weight:800; font-size:1.4rem; margin:0; transform: translateY(15px); transition: transform 0.4s ease; }
+    .masonry-content span { color: var(--primary-bc); font-size:0.85rem; font-weight:700; text-transform:uppercase; letter-spacing: 1px; transform: translateY(15px); transition: transform 0.5s ease; }
+    
+    .masonry-item:hover .masonry-content h4, .masonry-item:hover .masonry-content span { transform: translateY(0); }
+
+    /* CTA Section */
+    .project-cta { background: #111; color: #fff; border-radius: 16px; padding: 60px 40px; text-align: center; margin-bottom: 80px; border-bottom: 5px solid var(--primary-bc); }
+</style>
+
+<div class="hero-projects">
+    <div class="hero-content mt-4">
+        <p data-aos="fade-down">DELIVERED EXCELLENCE</p>
+        <h1 data-aos="zoom-in">Our Portfolio</h1>
+    </div>
+</div>
+
+<main class="container">
+    <div class="masonry-grid">
+        <!-- Project 1 -->
+        <div class="masonry-item" data-aos="fade-up">
+            <img src="~/Uploads/Products/Fabrication-1.jpg" alt="Labor Camp Project Qatar">
+            <div class="masonry-content">
+                <span>Al Khor</span>
+                <h4>Labor Camp Complex</h4>
+            </div>
+        </div>
+        <!-- Project 2 -->
+        <div class="masonry-item" data-aos="fade-up" data-aos-delay="100">
+            <img src="~/Uploads/Products/Fabrication-2.jpg" alt="Site Office Qatar">
+            <div class="masonry-content">
+                <span>Doha Industrial Area</span>
+                <h4>Executive Site Office</h4>
+            </div>
+        </div>
+        <!-- Project 3 -->
+        <div class="masonry-item" data-aos="fade-up" data-aos-delay="200">
+            <img src="~/Uploads/Products/cabin fabrication.jpg" alt="Guard Room Qatar">
+            <div class="masonry-content">
+                <span>Lusail City</span>
+                <h4>Security Gatehouse</h4>
+            </div>
+        </div>
+        <!-- Project 4 -->
+        <div class="masonry-item" data-aos="fade-up" data-aos-delay="100">
+            <img src="~/Uploads/Products/Fabrication-3.jpg" alt="Sanitary Block Qatar">
+            <div class="masonry-content">
+                <span>Ras Laffan</span>
+                <h4>Ablution & Sanitary Block</h4>
+            </div>
+        </div>
+        <!-- Project 5 -->
+        <div class="masonry-item" data-aos="fade-up" data-aos-delay="200">
+            <img src="~/Uploads/Products/container-office.jpg" alt="Container Mod Qatar">
+            <div class="masonry-content">
+                <span>Mesaieed</span>
+                <h4>Container Modification</h4>
+            </div>
+        </div>
+        <!-- Project 6 -->
+        <div class="masonry-item" data-aos="fade-up" data-aos-delay="300">
+            <img src="~/Uploads/Products/Fabrication-1.jpg" alt="Mosque Cabin Qatar">
+            <div class="masonry-content">
+                <span>Umm Salal</span>
+                <h4>Prefabricated Mosque</h4>
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA Box -->
+    <div class="project-cta shadow-lg" data-aos="zoom-in">
+        <h3 class="fw-bold mb-3" style="font-family:'Outfit', sans-serif; font-size:2rem;">Ready to start your project?</h3>
+        <p class="text-muted mb-5 max-w-2xl mx-auto" style="font-size:1.1rem; line-height:1.7;">Contact our technical team to discuss your specific footprint and requirements. From design to delivery, we provide turnkey modular solutions across all of Doha.</p>
+        <a href="/contact" style="background:var(--primary-bc); color:#111; padding: 18px 45px; font-weight:800; letter-spacing:1px; text-decoration:none; border-radius:4px; text-transform:uppercase;">Request a Proposal</a>
+    </div>
+</main>

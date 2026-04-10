@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,6 +10,8 @@ namespace BestChoiceQatar.Controllers
 {
     public class HomeController : Controller
     {
+        protected BestChoiceQatarEntities db = new BestChoiceQatarEntities();
+
         [ActionName("index")]
         public ActionResult Index()
         {
@@ -21,33 +23,60 @@ namespace BestChoiceQatar.Controllers
             return RedirectPermanent("https://bestchoiceqatar.net/");
         }
 
+        [ActionName("previous-projects")]
+        public ActionResult PreviousProjects()
+        {
+            return View();
+        }
+
         [ActionName("about")]
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
-
             return View();
         }
+
         [ActionName("contact")]
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
-
             return View();
         }
+
         [HttpPost]
         public ActionResult Contact(Contact model)
         {
-            Appmanager.SendEmail($"Hi BestChoice, You have new Enquiry.", $"Dear BestChoice Team,<br/><br /> Please find the contact details <br/> Subject : {model.subject} <br/> Email: {model.email} <br/> Message: {model.message} <br/>");
-            TempData["Notification"] = new Core.Entities.Common.Notification("Success", "Your contact request has been sent successfully. BestChoice Team will contact you soon.");
-            return RedirectToAction("Index");
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    Enquiry obj = new Enquiry();
+                    obj.FullName = model.name;
+                    obj.Email = model.email;
+                    obj.Subject = model.subject;
+                    obj.Message = model.message;
+                    obj.CreatedOn = DateTime.Now;
+                    obj.IsDataActive = true;
+                    db.Enquiries.Add(obj);
+                    db.SaveChanges();
+
+                    Appmanager.SendEmail($"Hi BestChoice, You have new Enquiry.", $"Dear BestChoice Team,<br/><br /> Please find the contact details <br/> Subject : {model.subject} <br/> Email: {model.email} <br/> Message: {model.message} <br/>");
+                    TempData["Notification"] = new Core.Entities.Common.Notification("Success", "Your contact request has been sent successfully. BestChoice Team will contact you soon.");
+
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (Exception exception)
+            {
+            }
+            TempData["Notification"] = new Core.Entities.Common.Notification("Error", "One or more fields are missing or contains invalid value. Please try again later.");
+            return View(model);
         }
 
         [ActionName("portable-cabin-fabrication")]
         public ActionResult CabinFabrication()
         {
             ViewBag.Message = "Your contact page.";
-
             return View();
         }
 
@@ -55,7 +84,6 @@ namespace BestChoiceQatar.Controllers
         public ActionResult Designing()
         {
             ViewBag.Message = "Your contact page.";
-
             return View();
         }
 
@@ -63,7 +91,6 @@ namespace BestChoiceQatar.Controllers
         public ActionResult ELVSolutions()
         {
             ViewBag.Message = "Your contact page.";
-
             return View();
         }
 
@@ -71,7 +98,6 @@ namespace BestChoiceQatar.Controllers
         public ActionResult GeneralContracting()
         {
             ViewBag.Message = "Your contact page.";
-
             return View();
         }
 
@@ -79,7 +105,6 @@ namespace BestChoiceQatar.Controllers
         public ActionResult Printing()
         {
             ViewBag.Message = "Your contact page.";
-
             return View();
         }
 
@@ -87,7 +112,6 @@ namespace BestChoiceQatar.Controllers
         public ActionResult Rent_a_Car_And_Limousine()
         {
             ViewBag.Message = "Your contact page.";
-
             return View();
         }
 
@@ -95,7 +119,6 @@ namespace BestChoiceQatar.Controllers
         public ActionResult Steel_Aluminum_Fabrication()
         {
             ViewBag.Message = "Your contact page.";
-
             return View();
         }
 
@@ -103,13 +126,12 @@ namespace BestChoiceQatar.Controllers
         public ActionResult Painting_Contracting()
         {
             ViewBag.Message = "Your contact page.";
-
             return View();
         }
+
         public ActionResult Blog()
         {
             ViewBag.Message = "Your contact page.";
-
             return View();
         }
 
@@ -117,7 +139,6 @@ namespace BestChoiceQatar.Controllers
         public ActionResult portable_cabin_manufacturers_in_qatar()
         {
             ViewBag.Message = "Your contact page.";
-
             return View();
         }
 
@@ -125,7 +146,6 @@ namespace BestChoiceQatar.Controllers
         public ActionResult guid_to_choose_best_container()
         {
             ViewBag.Message = "Your contact page.";
-
             return View();
         }
 
@@ -133,7 +153,6 @@ namespace BestChoiceQatar.Controllers
         public ActionResult site_cabins_offices_welfare_accommodation()
         {
             ViewBag.Message = "Your contact page.";
-
             return View();
         }
 
@@ -141,7 +160,11 @@ namespace BestChoiceQatar.Controllers
         public ActionResult optical_fibre_networks()
         {
             ViewBag.Message = "Your contact page.";
+            return View();
+        }
 
+        public ActionResult ProductDetails(string slug)
+        {
             return View();
         }
     }

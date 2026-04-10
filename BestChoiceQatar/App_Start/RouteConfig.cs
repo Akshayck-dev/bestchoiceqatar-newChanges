@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,11 +13,14 @@ namespace BestChoiceQatar
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            routes.MapMvcAttributeRoutes();
+
             routes.MapRoute(
-                name: "RedirectToRoot",
-                url: "index",
-                defaults: new { controller = "Home", action = "RedirectToRoot" }
+                name: "ProductDetails",
+                url: "product/{slug}",
+                defaults: new { controller = "Home", action = "ProductDetails" }
             );
+
             routes.MapRoute(
                 name: "Default",
                 url: "{action}/{id}",

@@ -1,0 +1,128 @@
+﻿@model BestChoiceQatar.Models.Gallery
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Backend/Views/Shared/_Layout.cshtml";
+}
+@section JavaScript{
+    <script type="text/javascript">$(document).ready(function () { WebApp.Core.HighlightCurrentMenuItem('Products') });</script>
+}
+
+<div class="page-header">
+    <div class="page-header-content">
+        <div class="page-title">
+            <h4><span class="text-semibold">Edit Product</span></h4>
+        </div>
+        <div class="heading-elements">
+            <div class="heading-btn-group">
+                <a class="btn btn-link btn-float has-text" href="/backend/gallery/index"><i class="icon-user-lock"></i><span>All Products</span></a>
+            </div>
+        </div>
+    </div>
+    <div class="breadcrumb-line">
+        <ul class="breadcrumb">
+            @{
+
+                <li><a href="/backend/default/dashboard"><i class="icon-home4 position-left"></i>Dashboard</a></li>
+            }
+            <li><a href="/backend/gallery/index"> Product</a></li>
+
+            <li class="active">Edit Product</li>
+        </ul>
+    </div>
+</div>
+<div class="content">
+    <form method="post" class="form-horizontal" action="" enctype="multipart/form-data" autocomplete="off">
+        <div class="panel panel-flat">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">@Html.DisplayNameFor(model => model.Category):</label>
+                            <div class="col-lg-7">
+                                <select class="form-control" disabled name="Category" data-val="true" data-val-required="Please select the Category">
+                                    <option value="Portable Cabin Fabrication" @(Model.Category == "Portable Cabin Fabrication" ? "selected" : string.Empty)>Portable Cabin Fabrication</option>
+                                    <option value="Building Painting Contractor" @(Model.Category == "Building Painting Contractor" ? "selected" : string.Empty)>Building Painting Contractor</option>
+                                    <option value="Steel & Aluminum Fabrication" @(Model.Category == "Steel & Aluminum Fabrication" ? "selected" : string.Empty)>Steel & Aluminum Fabrication</option>
+                                    <option value="General Contracting" @(Model.Category == "General Contracting" ? "selected" : string.Empty)>General Contracting</option>
+                                    <option value="Optical Fibre Networks" @(Model.Category == "Optical Fibre Networks" ? "selected" : string.Empty)>Optical Fibre Networks</option>
+                                </select>
+                                @Html.ValidationMessageFor(model => model.Category, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Title:</label>
+                            <div class="col-lg-7">
+                                @Html.TextBoxFor(model => model.Title, new { @placeholder = "Please enter the Title Name", @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Description:</label>
+                            <div class="col-lg-7">
+                                @Html.TextAreaFor(model => model.Description,15,74, new { @placeholder = "Please enter the Description Name", @class = "form-control html-editor" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Uploaded Product Image:</label>
+                            @{
+                                if (!string.IsNullOrEmpty(Model.Image))
+                                {
+                                    <div class="col-lg-7">
+                                        <input type="file" class="file-styled form-control" name="Photo" placeholder="Please select a images">
+                                        <a href="~/Uploads/Products/@Model.Image" target="_blank"><img src="~/Uploads/Products/@Model.Image" style="width:100px;height:100px;" /></a>
+                                    </div>
+                                }
+                            }
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">@Html.DisplayNameFor(model => model.ChildImages):</label>
+                            <div class="col-lg-7">
+                                <input type="file" class="file-styled form-control document-uploader" name="FileUpload" file-list-area="file8-list" multiple>
+                                <div id="file8-list" class="upload-list"></div>
+                                @Html.ValidationMessageFor(model => model.ChildImages, "", new { @class = "text-danger" })
+                            </div>
+                            <input type="hidden" id="IPbill_upload" class="filesCollected" name="IPBillFile" data-attribute="_IPbill" />
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Uploaded Other Images :</label>
+                            <div class="col-lg-7">
+                                @{
+                                    if (!string.IsNullOrEmpty(Model.ChildImages))
+                                    {
+                                        List<string> _files = Model.ChildImages.Split('|').ToList();
+                                        int _index = 0;
+
+                                        foreach (var _fileName in _files.Where(f => !string.IsNullOrEmpty(f)).ToList())
+                                        {
+                                            <div class="form-group col-md-12">
+                                                <input type="hidden" value="ProjectDocument" class="current_Pageip" />
+                                                <a class="urlip_@_index" href="~/Uploads/Products/@_fileName" target="_blank">@_fileName</a>
+                                                <input type="hidden" value="@_index" class="photo_IDip" />
+                                                <input type="hidden" class="model_idip" value="@Model.ID" />
+                                                <input type="hidden" class="model_fileip_@_index" value="@_fileName" />
+                                                <a class='mr5 close_imgip closeip_@_index'><i class='icon-cancel-square'></i></a>
+                                                <input type="hidden" class="_uploaded_photoip" name="IPBillUpload" value="@Model.ChildImages" />
+                                                <br />
+                                            </div>
+                                            _index++;
+                                        }
+                                    }
+                                }
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+                <hr>
+                <div class="text-right">
+                    <a href="/backend/gallery/edit/@Model.ID" class="btn btn-default">Reset<i class="icon-reload-alt position-right"></i> </a>
+                    <button type="submit" class="btn btn-primary">Submit <i class="icon-arrow-right14 position-right"></i></button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+

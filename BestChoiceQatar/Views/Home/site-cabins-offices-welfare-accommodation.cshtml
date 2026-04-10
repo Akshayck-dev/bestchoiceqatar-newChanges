@@ -1,279 +1,689 @@
-﻿@{
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Porto Cabin Offices in Qatar | BestChoice Contracting";
+    ViewBag.description = "Premium Porto cabin offices and site office solutions in Qatar. Durable, relocatable, and custom-designed for industrial and construction sites.";
+    ViewBag.keywords = "porto cabin offices Qatar, site office cabins Doha, modular office fabrication, portable cabins";
+
+    BestChoiceQatar.Models.BestChoiceQatarEntities db = new BestChoiceQatar.Models.BestChoiceQatarEntities();
+    var settings = db.Settings.FirstOrDefault();
 }
 
+<!-- ======= Premium UI Styles (Replicating Fabrication Page) ======= -->
 <style>
+    @@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700;900&display=swap');
 
-    #left-area {
-        width: 79.125%;
-        padding-bottom: 23px;
-        float: left;
-        font-family: "Open Sans", sans-serif;
+    :root {
+        --primary-yellow: #ffcc00;
+        --dark-bg: #111111;
+        --light-bg: #ffffff;
+        --transition-smooth: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
     }
 
-    .et_pb_post {
-        margin-bottom: 60px;
-        word-wrap: break-word;
+    body {
+        font-family: 'Outfit', sans-serif;
+        background-color: var(--light-bg);
+        color: var(--dark-bg);
     }
 
-    left-area .post-meta {
-        font-size: 14px;
-        padding-bottom: 15px;
+    /* Hero Section - Matching Screenshot */
+    .premium-hero {
+        position: relative;
+        height: 85vh;
+        min-height: 600px;
+        background: url('/Uploads/Products/cabin-1.jpg') center/cover no-repeat;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
     }
 
-    #main-content {
-        background-color: #fff;
-    }
-
-    body:not(.et-tb) #main-content .container, body:not(.et-tb-has-header) #main-content .container {
-        padding-top: 58px;
-    }
-
-    .et_right_sidebar #left-area {
-        /*float: left;*/
-        padding-right: 5.5%;
-    }
-
-    .et_right_sidebar #sidebar {
-        padding-left: 30px;
-    }
-
-    #sidebar {
-        float: left;
-        padding-bottom: 28px;
-        border-left: 2px solid #e2e2e2;
-        padding-left: 10px;
-    }
-
-        #sidebar .et_pb_widget {
-            margin-bottom: 30px;
-            width: 100%;
-            float: none;
-        }
-
-    .et_pb_widget {
-        max-width: 100%;
-        word-wrap: break-word;
-    }
-
-        .widget_search #searchform, .et_pb_widget .wp-block-search {
-            position: relative;
-        }
-
-        .widget_search .screen-reader-text, .et_pb_widget .wp-block-search__label {
-            display: none;
-        }
-
-    .wp-block-search .wp-block-search__label {
-        font-weight: 700;
-    }
-
-    block-search__input {
+    .hero-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
         width: 100%;
-        border-radius: 3px;
+        height: 100%;
+        background: linear-gradient(90deg, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.5) 100%);
     }
 
-    .et_pb_widget .wp-block-search__input, .et_pb_widget .wp-block-search__button {
-        padding: 0.7em;
-        height: 40px !important;
-        margin: 0;
-        font-size: 14px;
-        line-height: normal !important;
-        border: 1px solid #ddd;
+    .hero-content {
+        position: relative;
+        z-index: 2;
+        max-width: 900px;
+    }
+
+    .hero-label {
+        color: var(--primary-yellow);
+        text-transform: uppercase;
+        font-weight: 700;
+        letter-spacing: 2px;
+        font-size: 0.9rem;
+        display: block;
+        margin-bottom: 20px;
+    }
+
+    .hero-title {
+        font-weight: 900;
+        font-size: clamp(3rem, 8vw, 6rem);
+        line-height: 0.95;
+        text-transform: uppercase;
+        color: #fff;
+        margin-bottom: 2rem;
+        letter-spacing: -2px;
+    }
+
+    .hero-subtitle-container {
+        border-left: 4px solid var(--primary-yellow);
+        padding-left: 20px;
+        margin-bottom: 3rem;
+    }
+
+    .hero-subtitle {
+        font-size: clamp(1.1rem, 2vw, 1.4rem);
+        color: rgba(255, 255, 255, 0.8);
+        line-height: 1.6;
+        margin-bottom: 0;
+    }
+
+    .btn-premium {
+        padding: 18px 40px;
+        font-weight: 700;
+        text-transform: uppercase;
+        border-radius: 0;
+        transition: var(--transition-smooth);
+        letter-spacing: 1px;
+    }
+
+    .btn-yellow {
+        background-color: var(--primary-yellow);
+        color: #000;
+        border: 2px solid var(--primary-yellow);
+    }
+
+    .btn-yellow:hover {
+        background-color: transparent;
+        color: var(--primary-yellow);
+    }
+
+    .btn-outline-white {
+        background-color: transparent;
+        color: #fff;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        margin-left: 15px;
+    }
+
+    .btn-outline-white:hover {
+        border-color: #fff;
+        background-color: #fff;
+        color: #000;
+    }
+
+    /* Side Banner - Replicating "Creative Fabrication" */
+    .side-banner {
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%) rotate(-90deg);
+        transform-origin: left top;
+        background: #e02b20; /* Red from screenshot */
+        color: #fff;
+        padding: 10px 30px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        z-index: 10;
+        font-size: 0.9rem;
+        display: none; /* Desktop only */
+    }
+
+    @@media (min-width: 992px) {
+        .side-banner { display: block; left: 0; top: 60%; }
+    }
+
+    /* Trust Strip */
+    .trust-strip {
+        background: #000;
+        padding: 40px 0;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .trust-item h3 {
+        color: var(--primary-yellow);
+        font-weight: 800;
+        font-size: 2.5rem;
+        margin-bottom: 0;
+    }
+
+    .trust-item p {
+        color: #888;
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        font-weight: 600;
+        letter-spacing: 1px;
+    }
+
+    /* Content Sections */
+    section { padding: 100px 0; }
+    
+    .section-label {
+        color: var(--primary-yellow);
+        text-transform: uppercase;
+        font-weight: 700;
+        letter-spacing: 2px;
+        font-size: 0.8rem;
+        margin-bottom: 15px;
+        display: block;
+    }
+
+    .section-title {
+        font-weight: 900;
+        font-size: clamp(2rem, 4vw, 3rem);
+        text-transform: uppercase;
+        letter-spacing: -1px;
+        margin-bottom: 40px;
+    }
+
+    /* Feature Cards */
+    .feature-card {
+        padding: 40px;
+        background: #f9f9f9;
+        border-bottom: 4px solid #eee;
+        transition: var(--transition-smooth);
+        height: 100%;
+    }
+
+    .feature-card:hover {
+        border-bottom-color: var(--primary-yellow);
+        background: #fff;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+        transform: translateY(-10px);
+    }
+
+    .feature-card i {
+        font-size: 2.5rem;
+        color: var(--primary-yellow);
+        margin-bottom: 25px;
+        display: block;
+    }
+
+    .feature-card h4 {
+        font-weight: 800;
+        text-transform: uppercase;
+        margin-bottom: 15px;
+        font-size: 1.1rem;
+    }
+
+    /* Specifications Table */
+    .spec-box {
+        background: #111;
+        color: #fff;
+        padding: 60px;
+        margin-top: 60px;
+    }
+
+    .spec-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .spec-table th, .spec-table td {
+        padding: 15px 0;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .spec-table th {
+        color: var(--primary-yellow);
+        text-transform: uppercase;
+        font-size: 0.85rem;
+        letter-spacing: 1px;
+        width: 30%;
+        text-align: left;
+    }
+
+    .spec-table td {
+        color: #ccc;
+    }
+
+    /* Gallery */
+    .gallery-grid img {
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+        transition: var(--transition-smooth);
+    }
+
+    .gallery-grid img:hover { transform: scale(1.05); }
+
+    /* Comparison Table Styles */
+    .comparison-box {
+        background: #fff;
+        padding: 50px;
+        border: 1px solid #eee;
+        margin-top: 40px;
+    }
+
+    .comp-row {
+        display: flex;
+        align-items: center;
+        padding: 20px 0;
+        border-bottom: 1px solid #f0f0f0;
+    }
+
+    .comp-label {
+        font-weight: 700;
+        width: 30%;
+        color: #888;
+        text-transform: uppercase;
+        font-size: 0.8rem;
+    }
+
+    .comp-value {
+        width: 35%;
+        font-weight: 600;
+    }
+
+    .comp-value.best { color: #27ae60; }
+
+    /* FAQ Accordion */
+    .faq-item {
+        margin-bottom: 20px;
+        border: 1px solid #eee;
+    }
+
+    .faq-btn {
+        width: 100%;
+        text-align: left;
+        padding: 20px 30px;
+        background: #fff;
+        border: none;
+        font-weight: 700;
+        text-transform: uppercase;
+        font-size: 0.95rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .faq-btn:after {
+        content: '+';
+        font-size: 1.5rem;
+        color: var(--primary-yellow);
+    }
+
+    .faq-content {
+        padding: 0 30px 20px;
         color: #666;
+        line-height: 1.8;
+        display: none;
     }
 
-    #searchsubmit, .et_pb_widget .wp-block-search__button {
-        cursor: pointer;
+    /* Final CTA */
+    .final-cta { background: var(--primary-yellow); text-align: center; padding: 120px 0; }
+    .final-cta h2 { font-weight: 900; font-size: 4rem; text-transform: uppercase; line-height: 0.9; margin-bottom: 40px; }
+
+    /* Swiper Gallery Carousel */
+    .gallery-swiper {
+        padding: 40px 0 80px;
+        overflow: hidden;
     }
 
-    h1, h2, h3, h4, h5, h6 {
-        color: #333;
-        padding-bottom: 10px;
-        line-height: 1em;
-        font-weight: 500;
-        font-family: "Open Sans", sans-serif;
+    .swiper-slide {
+        height: 400px;
+        overflow: hidden;
+        border: 1px solid rgba(0,0,0,0.05);
+        transition: var(--transition-smooth);
     }
 
-    ol, ul {
-        list-style-type: decimal-leading-zero;
+    .swiper-slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 1.2s cubic-bezier(0.165, 0.84, 0.44, 1);
     }
 
-    .et_right_sidebar #sidebar {
-        padding-left: 30px;
+    .swiper-slide:hover img {
+        transform: scale(1.1);
     }
 
-    body, h1, h2, h3, p, span {
-        font-family: "Open Sans", sans-serif;
+    .swiper-button-next, .swiper-button-prev {
+        color: var(--primary-yellow);
+        background: rgba(0,0,0,0.8);
+        width: 50px;
+        height: 50px;
+        border-radius: 0;
     }
-    img {
-        max-width: 100%;
-        height: auto;
+
+    .swiper-button-next:after, .swiper-button-prev:after {
+        font-size: 1.2rem;
+        font-weight: 900;
     }
-    .entry-content {
-        padding-top: 15px;
+
+    .swiper-pagination-bullet {
+        background: #000;
+        opacity: 0.2;
+        width: 12px;
+        height: 12px;
+        border-radius: 0;
+    }
+
+    .swiper-pagination-bullet-active {
+        background: var(--primary-yellow);
+        opacity: 1;
+        width: 30px;
+    }
+
+    @@media (max-width: 767.98px) {
+        .hero-title { font-size: 2.8rem; }
+        .hero-subtitle-container { border-left: none; border-top: 4px solid var(--primary-yellow); padding-left: 0; padding-top: 15px; }
+        .btn-premium { width: 100%; margin: 5px 0 !important; }
+        .spec-box { padding: 30px; }
+        .final-cta h2 { font-size: 2.5rem; }
+        .swiper-slide { height: 300px; }
     }
 </style>
-<!-- ======= Header ======= -->
-<header id="header" class="d-flex align-items-center">
-    <div class="container d-flex align-items-center">
-
-        <div class="logo me-auto">
-            <a href="/index"><img class="img-responsive" src="~/content/assets/img/logo/animation.gif" alt=""></a></h1>
-
-            <!-- Uncomment below if you prefer to use an image logo -->
-            <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
-        </div>
-
-        <nav id="navbar" class="navbar">
-            <ul>
-                <li><a class="nav-link" href="/index">Home</a></li>
-                <li><a class="nav-link" href="/about">About</a></li>
-                <li class="dropdown">
-                    <a class="" href=""><span>Our Products</span> <i class="bi bi-chevron-down"></i></a>
-                    <ul>
-                        <li><a href="/portable-cabin-fabrication">Portable Cabin Fabrication</a></li>
-                        <li><a href="/building-painting-contractor">Building Painting Contractor</a></li>
-                        @*<li><a href="/designing">Designing & Printing </a></li>*@
-                        <li><a href="/steel-aluminum-fabrication">Steel & Aluminum Fabrication</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a class="" href=""><span>Our Services</span> <i class="bi bi-chevron-down"></i></a>
-                    <ul>
-                        <li><a href="/general-contracting">General Contracting</a></li>
-                        @*<li><a href="/car-rental">Rent a Car</a></li>*@
-                        <li><a href="/optical-fibre-networks">Optical Fibre Networks</a></li>
-                    </ul>
-                </li>
-
-                <li><a class="nav-link active" href="/blog">Blog</a></li>
-                <li><a class="nav-link" href="/contact">Contact</a></li>
-                <li><a target="_blank" href="~/Content/assets/Brochure/Brochure.html.pdf">Brochure</a></li>
-            </ul>
-            <i class="bi bi-list mobile-nav-toggle"></i>
-        </nav><!-- .navbar -->
-
-    </div>
-</header><!-- End Header -->
-
-
-
 
 <main id="main">
+    <!-- Side Banner -->
+    <div class="side-banner">Creative Fabrication</div>
 
-    <!-- ======= Whatsapp ======= -->
+    <!-- Hero Section -->
+    <section class="premium-hero p-0">
+        <div class="hero-overlay"></div>
+        <div class="container position-relative">
+            <div class="hero-content" data-aos="fade-up">
+                <span class="hero-label">Architecture & Fabrication</span>
+                <h1 class="hero-title">Porto Cabin<br><span style="color: var(--primary-yellow)">Offices</span></h1>
+                <div class="hero-subtitle-container">
+                    <p class="hero-subtitle">Engineering premium modular spaces that redefine versatility and durability in Qatar's landscape. From <strong>rapid site offices in Doha</strong> to large-scale <strong>labor camps in Ras Laffan</strong>, we deliver engineered excellence.</p>
+                </div>
+                <div class="hero-actions">
+                    <a href="#quote" class="btn btn-premium btn-yellow">Get a Quote</a>
+                    <a href="tel:@settings.Mobile1" class="btn btn-premium btn-outline-white">Call Specialist</a>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <link rel="stylesheet" href="">
-    <a href="https://wa.me/97450307568" class="float" target="_blank"><i class="bi bi-whatsapp"></i> </a>
-    <i class="fa fa-whatsapp my-float"></i>
-
-    <!-- ======= Call ======= -->
-    <link rel="stylesheet" href="">
-    <a href="tel:+974 5030 7568" class="call"><i class="bi bi-telephone"></i> </a>
-    <i class="fa fa-whatsapp my-call"></i>
-
-    <!-- ======= Tagline ======= -->
-    <link rel="stylesheet" href="">
-    <a href="" class="tagline"><i class=""></i> <h2>Creative Fabrication</h2></a>
-    <i class="fa fa-whatsapp my-tagline"></i>
-
-    <div id="et-main-area">
-        <div id="main-content">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-9">
-                        <div id="content-area" class="clearfix">
-                            <div id="left-area">
-                                <article id="post-1009" class="et_pb_post post-1009 post type-post status-publish format-standard hentry category-uncategorized">
-                                    <div class="et_post_meta_wrapper">
-                                        <h2 class="entry-title">Modular Cabins: Offices, Accommodation & Welfare</h2>
-                                        <p class="post-meta"> by <span class="author vcard"><a href="#" title="Posts by admin" rel="author">admin</a></span> | <span class="published">October 7, 2023</span> | <a href="#" rel="category tag">Uncategorized</a> | <span class="comments-number"><a href="#">0 comments</a></span></p>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-sm-4">
-                                                <img src="~/Content/assets/img/Products/cabin/cabin-11.jpg" width="200" height="200" class="img-responsive" />
-                                        </div>
-                                        <div class="col-sm-4">
-                                                <img src="~/Content/assets/img/Products/cabin/cabin-12.jpg" width="200" height="200" class="img-responsive" />
-                                        </div>
-                                        <div class="col-sm-4">
-                                                <img src="~/Content/assets/img/Products/cabin/cabin-13.jpg" width="200" height="200" class="img-responsive" />
-                                        </div>
-                                    </div>
-                                    <div class="entry-content">
-                                        <div class="et-l et-l--post">
-                                            <div class="et_builder_inner_content et_pb_gutters3">
-                                                <div class="et_pb_section et_pb_section_0 et_section_regular">
-                                                    <div class="et_pb_row et_pb_row_0">
-                                                        <div class="et_pb_column et_pb_column_1_2 et_pb_column_0  et_pb_css_mix_blend_mode_passthrough">
-                                                            <div class="et_pb_module et_pb_text et_pb_text_0  et_pb_text_align_left et_pb_bg_layout_light">
-                                                                <div class="et_pb_text_inner">
-                                                                   
-                                                                    <p><span>Bestchoice provide a variety of Site Cabins to clients throughout Qatar.</span></p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    <div class="et_pb_column et_pb_column_1_2 et_pb_column_1  et_pb_css_mix_blend_mode_passthrough et-last-child">
-                                                            <div class="et_pb_module et_pb_text et_pb_text_1  et_pb_text_align_left et_pb_bg_layout_light">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    
-                                                    <div class="et_pb_row et_pb_row_1">
-                                                        <div class="et_pb_column et_pb_column_4_4 et_pb_column_2  et_pb_css_mix_blend_mode_passthrough et-last-child">
-                                                            <div class="et_pb_module et_pb_text et_pb_text_2  et_pb_text_align_left et_pb_bg_layout_light">
-                                                                <div class="et_pb_text_inner">
-                                                                    <h2><span> Design and Installation of modular cabins:</span></h2>
-                                                                    <p><span>We are experts in the design and installation of modular cabins for a range of office, welfare or accommodation applications.</span></p>
-
-
-                                                                    <ul>
-                                                                        <li>Our modular cabins provide a customisable solution for any site requirement, whether its offices, accommodation, mosques, canteens or welfare facilities</li>
-                                                                        <li>The units are sourced and manufactured locally, ready to use on delivery and due to their size can be deployed rapidly</li>
-                                                                        <li>Specialised units are available for the oil & gas industry that feature fire resistant windows, doors and glass</li>
-                                                                        <li>Available with split or window type Air Conditioning as required</li>
-                                                                        <li>Full range of furniture and fittings available</li>
-                                                                        <li>
-                                                                            Can be combined in any set-up using standard 6m x 2.4m cabins. Suitable for use
-                                                                            up to G + 2
-                                                                        </li>
-                                                                        <li>Full design, drawing, delivery and erection service available</li>
-                                                                    </ul>
-
-
-                                                                </div>
-                                                            </div>
-                                                        
-                                                       
-                                                        </div>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </article>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-3">
-                        <div id="sidebar">
-                            <div id="block-3" class="et_pb_widget widget_block">
-                                <div class="wp-block-group is-layout-flow wp-block-group-is-layout-flow">
-                                    <h2 class="wp-block-heading">Recent Posts</h2><ul class="wp-block-latest-posts__list wp-block-latest-posts">
-                                        <li><a class="wp-block-latest-posts__post-title" href="/portable-cabin-manufacturers-in-qatar">Portable Cabin Manufacturers in Qatar</a></li>
-                                        <li><a class="wp-block-latest-posts__post-title" href="/guid-to-choose-best-container">A Guide to Choosing the Best Container Cabins, Office Cabins, and Caravans Manufacturers in Qatar</a></li>
-                                        <li> <a class="wp-block-latest-posts__post-title" href="/site-cabins-offices-welfare-accommodation">Modular Cabins: Offices, Accommodation & Welfare</a></li>
-                                    </ul>
-                                </div>
-                            </div><div id="block-4" class="et_pb_widget widget_block"><div class="wp-block-group is-layout-flow wp-block-group-is-layout-flow"><h2 class="wp-block-heading">Recent Comments</h2><div class="no-comments wp-block-latest-comments">No comments to show.</div></div></div>
-                        </div>
-                    </div>
+    <!-- Trust Strip -->
+    <div class="trust-strip">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-6 col-md-3 trust-item" data-aos="fade-up" data-aos-delay="100">
+                    <h3>10+</h3>
+                    <p>Years in Qatar</p>
+                </div>
+                <div class="col-6 col-md-3 trust-item" data-aos="fade-up" data-aos-delay="200">
+                    <h3>FAST</h3>
+                    <p>Turnaround Time</p>
+                </div>
+                <div class="col-6 col-md-3 trust-item" data-aos="fade-up" data-aos-delay="300">
+                    <h3>BESPOKE</h3>
+                    <p>Design Focus</p>
+                </div>
+                <div class="col-6 col-md-3 trust-item" data-aos="fade-up" data-aos-delay="400">
+                    <h3>BEST</h3>
+                    <p>Market Pricing</p>
                 </div>
             </div>
         </div>
     </div>
 
-</main><!-- End #main -->
+    <!-- Main Content -->
+    <section>
+        <div class="container">
+            <div class="row g-5 align-items-center mb-5">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <span class="section-label">Superior Standards</span>
+                    <h2 class="section-title">Design and Installation of modular cabins</h2>
+                    <p class="lead text-muted">We are experts in the design and installation of modular cabins for a range of office, welfare or accommodation applications.</p>
+                    <ul class="list-unstyled mt-4">
+                        <li class="mb-3 d-flex align-items-start"><i class="bi bi-check-circle-fill text-warning me-3 mt-1"></i> Customizable solutions for any site requirement (offices, mosques, canteens).</li>
+                        <li class="mb-3 d-flex align-items-start"><i class="bi bi-check-circle-fill text-warning me-3 mt-1"></i> Locally manufactured in Qatar for rapid deployment within 7-10 days.</li>
+                        <li class="mb-3 d-flex align-items-start"><i class="bi bi-check-circle-fill text-warning me-3 mt-1"></i> Fire-resistant specialized units for Oil & Gas industry (PIR/Rockwool insulation).</li>
+                        <li class="mb-3 d-flex align-items-start"><i class="bi bi-check-circle-fill text-warning me-3 mt-1"></i> Suitable for G+1 and G+2 multi-story configurations to optimize footprint.</li>
+                    </ul>
+                </div>
+                <div class="col-lg-12 mt-5" data-aos="fade-up">
+                    <div class="swiper gallery-swiper">
+                        <div class="swiper-wrapper">
+                            @{
+                                for (int j = 1; j <= 13; j++)
+                                {
+                                    string ext = (j == 5 || j == 6) ? "JPG" : "jpg";
+                                    var imgUrl = Url.Content("~/Content/assets/img/Products/cabin/cabin-" + j + "." + ext);
+                                    <div class="swiper-slide">
+                                        <a href="@imgUrl" class="glightbox">
+                                            <img src="@imgUrl" alt="Porta Cabin Office Qatar" loading="lazy">
+                                        </a>
+                                    </div>
+                                }
+                            }
+                        </div>
+                        <div class="swiper-pagination"></div>
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-4 mt-5">
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="feature-card">
+                        <i class="bi bi-snow"></i>
+                        <h4>Climate Controlled</h4>
+                        <p>Available with split or window type Air Conditioning as required to suit Qatar's heat.</p>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-card">
+                        <i class="bi bi-lamp"></i>
+                        <h4>Fully Fitted</h4>
+                        <p>Full range of furniture and fittings available for turnkey office occupation.</p>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="feature-card">
+                        <i class="bi bi-pencil-square"></i>
+                        <h4>Expert Drafting</h4>
+                        <p>Full design, drawing, delivery and erection service available by our engineering team.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-4 mt-5">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <span class="section-label">Why Modular?</span>
+                    <h2 class="section-title">Porta Cabin vs Traditional</h2>
+                    <p class="text-muted">Discover why top contractors in Mesaieed and Lusail prefer modular site mobilization for its speed and efficiency.</p>
+                    
+                    <div class="comparison-box">
+                        <div class="comp-row">
+                            <div class="comp-label">Feature</div>
+                            <div class="comp-value">Traditional</div>
+                            <div class="comp-value best">Modular</div>
+                        </div>
+                        <div class="comp-row">
+                            <div class="comp-label">Timeline</div>
+                            <div class="comp-value">6-12 Months</div>
+                            <div class="comp-value best">7-14 Days</div>
+                        </div>
+                        <div class="comp-row">
+                            <div class="comp-label">Foundation</div>
+                            <div class="comp-value">Deep Piling</div>
+                            <div class="comp-value best">Light Pad/Slab</div>
+                        </div>
+                        <div class="comp-row">
+                            <div class="comp-label">Relocation</div>
+                            <div class="comp-value">Impossible</div>
+                            <div class="comp-value best">100% Mobile</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6" data-aos="fade-left">
+                    <span class="section-label">Industry Verticals</span>
+                    <h2 class="section-title">Sector Applications</h2>
+                    <div class="row g-3">
+                        <div class="col-sm-6">
+                            <div class="feature-card p-4">
+                                <i class="bi bi-hammer" style="font-size: 1.5rem;"></i>
+                                <h5 class="fw-bold fs-6">COSTRUCTION</h5>
+                                <p class="small mb-0">Project management offices and staff welfare centers for major Doha infrastructure.</p>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="feature-card p-4">
+                                <i class="bi bi-droplet-half" style="font-size: 1.5rem;"></i>
+                                <h5 class="fw-bold fs-6">OIL & GAS</h5>
+                                <p class="small mb-0">Explosion-proof and fire-rated units for remote energy sites in Qatar.</p>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="feature-card p-4">
+                                <i class="bi bi-hospital" style="font-size: 1.5rem;"></i>
+                                <h5 class="fw-bold fs-6">HEALTHCARE</h5>
+                                <p class="small mb-0">Sterile mobile clinics and first-aid stations for remote deployment.</p>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="feature-card p-4">
+                                <i class="bi bi-calendar-event" style="font-size: 1.5rem;"></i>
+                                <h5 class="fw-bold fs-6">EVENTS</h5>
+                                <p class="small mb-0">VIP pods and registration kiosks for international exhibitions in Qatar.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="spec-box" data-aos="fade-up" id="quote">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <span class="section-label">Technical Data</span>
+                        <h2 class="section-title" style="color:#fff;">Engineering Specs</h2>
+                        <table class="spec-table">
+                            <tr>
+                                <th>Chassis</th>
+                                <td>ISMC 100/150 Galvanized Steel Frame</td>
+                            </tr>
+                            <tr>
+                                <th>Wall System</th>
+                                <td>50mm/75mm/100mm Sandwich Panels</td>
+                            </tr>
+                            <tr>
+                                <th>Insulation</th>
+                                <td>High-density EPS or Fire-rated Rockwool</td>
+                            </tr>
+                            <tr>
+                                <th>Electrical</th>
+                                <td>Concealed wiring, compliant with Kahramaa</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="col-lg-6 mt-4 mt-lg-0">
+                        <span class="section-label">Configuration</span>
+                        <h2 class="section-title" style="color:#fff;">Interior Finish</h2>
+                        <table class="spec-table">
+                            <tr>
+                                <th>Flooring</th>
+                                <td>Heavy-duty Vinyl or Ceramic tiling</td>
+                            </tr>
+                            <tr>
+                                <th>Ceiling</th>
+                                <td>60x60 Gypsy or Aluminum Panels</td>
+                            </tr>
+                            <tr>
+                                <th>A/C System</th>
+                                <td>T3 Tropical Rated Split/Window units</td>
+                            </tr>
+                            <tr>
+                                <th>Windows</th>
+                                <td>Double-Glazed Aluminum Sliding</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-5 pt-5">
+                <div class="section-header text-center" data-aos="fade-up">
+                    <span class="section-label">Get Informed</span>
+                    <h2 class="section-title">Frequently Asked Questions</h2>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="col-lg-10">
+                        <div class="faq-item" data-aos="fade-up">
+                            <button class="faq-btn">What is the life expectancy of a BestChoice Porta Cabin?</button>
+                            <div class="faq-content">Our cabins are engineered for durability, with a typical lifespan of 15-20 years with standard maintenance, even in Qatar's harsh climate.</div>
+                        </div>
+                        <div class="faq-item" data-aos="fade-up">
+                            <button class="faq-btn">Are your units compliant with Civil Defense standards?</button>
+                            <div class="faq-content">Yes, we fabricate fire-rated units using Rockwool insulation and fire-retardant accessories that meet the stringent requirements of Qatar Civil Defense.</div>
+                        </div>
+                        <div class="faq-item" data-aos="fade-up">
+                            <button class="faq-btn">Do you handle delivery and installation in remote areas?</button>
+                            <div class="faq-content">We manage end-to-end logistics, including delivery to sites in Ras Laffan, Dukhan, and industrial zones, utilizing our specialized crane trucks.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="final-cta p-0" id="final-cta">
+        <div class="container">
+            <div class="py-5" data-aos="fade-up">
+                <h2>Build Your Solution<br>With Experts</h2>
+                <div class="mt-5">
+                    <a href="tel:@settings.Mobile1" class="btn btn-premium btn-dark px-5 py-3 me-md-3 mb-3 mb-md-0 rounded-0">Request Callback</a>
+                    <a href="@settings.Whatsup" target="_blank" class="btn btn-premium btn-outline-dark px-5 py-3 rounded-0 border-dark">Instant Message</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Swiper Initialization & FAQ Toggle -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Swiper
+            new Swiper('.gallery-swiper', {
+                slidesPerView: 1,
+                spaceBetween: 30,
+                loop: true,
+                speed: 1000,
+                autoplay: {
+                    delay: 3000,
+                    disableOnInteraction: false,
+                },
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+                breakpoints: {
+                    768: { slidesPerView: 2 },
+                    1024: { slidesPerView: 3 }
+                }
+            });
+
+            // FAQ Accordion
+            const faqs = document.querySelectorAll('.faq-btn');
+            faqs.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const content = btn.nextElementSibling;
+                    const isOpen = content.style.display === 'block';
+                    
+                    // Reset all
+                    document.querySelectorAll('.faq-content').forEach(c => c.style.display = 'none');
+                    faqs.forEach(b => b.classList.remove('active'));
+
+                    if (!isOpen) {
+                        content.style.display = 'block';
+                        btn.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
+</main>

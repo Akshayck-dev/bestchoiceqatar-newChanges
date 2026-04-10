@@ -1,0 +1,61 @@
+﻿@model BestChoiceQatar.Models.Gallery
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Backend/Views/Shared/_Layout.cshtml";
+}
+
+@section JavaScript{
+    <script type="text/javascript">$(document).ready(function () { WebApp.Core.HighlightCurrentMenuItem('Products') });</script>
+}
+<div class="page-header">
+    <div class="page-header-content">
+        <div class="page-title">
+            <h4><span class="text-semibold">Manage Product</span></h4>
+        </div>
+        @*<div class="heading-elements">
+            <div class="heading-btn-group">
+                <a class="btn btn-link btn-float has-text" href="/backend/gallery/create"><i class="icon-googleplus5 text-primary"></i><span>Create Gallery</span></a>
+            </div>
+        </div>*@
+    </div>
+    <div class="breadcrumb-line">
+        <ul class="breadcrumb">
+            @{
+                <li><a href="/backend/default/dashboard"><i class="icon-home4 position-left"></i>Dashboard</a></li>
+
+            }
+        <li class="active">Product</li>
+        </ul>
+    </div>
+</div>
+<div class="content">
+    <div class="panel panel-flat">
+
+        <table class="table data-table table-bordered table-striped table-hover" data-source="/backend/gallery/list" data-key="3">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Title)
+                    </th>
+                    @*<th style="width:200px;">
+                        @Html.DisplayNameFor(model => model.Description)
+                    </th>*@
+
+
+                    <th>
+                         Image
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CreatedOn)
+                    </th>
+                    <th class="no-sort">Options</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+</div>
+
+
+

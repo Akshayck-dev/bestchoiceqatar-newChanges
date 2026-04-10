@@ -1,0 +1,93 @@
+﻿@model BestChoiceQatar.Models.Gallery
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Backend/Views/Shared/_Layout.cshtml";
+}
+
+@section JavaScript{
+   <script type="text/javascript">$(document).ready(function () { WebApp.Core.HighlightCurrentMenuItem('Clients') });</script>
+}
+
+<div class="page-header">
+    <div class="page-header-content">
+        <div class="page-title">
+            <h4><span class="text-semibold">Client Details</span></h4>
+        </div>
+        <div class="heading-elements">
+            <div class="heading-btn-group">
+            </div>
+        </div>
+    </div>
+    <div class="breadcrumb-line">
+        <ul class="breadcrumb">
+            <li><a href="/backend/default/dashboard"><i class="icon-home4 position-left"></i>Dashboard</a></li>
+            <li><a href="/backend/client/index"> Client</a></li>
+
+            <li class="active">Client Details</li>
+        </ul>
+    </div>
+</div>
+<div class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-flat">
+                <div class="panel-body">
+                    <div class="row">
+
+                        <div class="col-md-12">
+                            <div class="main">
+                                <table class="table table-borderless table-xs content-group-sm">
+                                    <tbody>
+                                        <tr>
+                                            <td class="col-lg-3">@Html.DisplayNameFor(model => model.Title)</td>
+                                            <td class="col-lg-1">:</td>
+                                            <td> @Model.Title</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-lg-3">@Html.DisplayNameFor(model => model.Description)</td>
+                                            <td class="col-lg-1">:</td>
+                                            <td> @Model.Description</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-lg-3">@Html.DisplayNameFor(model => model.Image)</td>
+                                            <td class="col-lg-1">:</td>
+                                           @* <td class="col-lg-1">@Model.Image</td>*@
+                                            <td>
+                                                @{
+                                                    if (Model.Image != null)
+                                                    {
+                                                        string path = System.Web.HttpContext.Current.Server.MapPath(@"~/uploads/" + (Model.Image));
+                                                        FileInfo file = new FileInfo(path);
+                                                        <div class="form-group col-md-1">
+                                                            <a href="~/Uploads/@Model.Image" target="_blank"><img src="~/Uploads/@Model.Image" style="height:100px;width:100px;" /></a>
+
+                                                        </div>
+                                                    }
+
+                                                }
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-lg-3">@Html.DisplayNameFor(model => model.CreatedOn)</td>
+                                            <td class="col-lg-1">:</td>
+                                            <td> @Model.CreatedOn.ToString("dd/MM/yyyy hh:mm ss")</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="col-lg-3">@Html.DisplayNameFor(model => model.LastUpdatedOn)</td>
+                                            <td class="col-lg-1">:</td>
+                                            <td> @Model.LastUpdatedOn.ToString("dd/MM/yyyy hh:mm ss")</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
