@@ -1,4 +1,4 @@
-<!-- BESTCHOICE_NAV_RELOAD_FORCE_V4.0 -->
+<!-- BESTCHOICE_NAV_RELOAD_FORCE_V5.0 -->
 @using BestChoiceQatar.Core.Entities.Common
 @{ 
     BestChoiceQatar.Models.BestChoiceQatarEntities db = new BestChoiceQatar.Models.BestChoiceQatarEntities();
@@ -36,7 +36,7 @@
 
 
     <!-- Template Main CSS File (w/ Cache Buster V2.5) -->
-    <link href="~/Content/assets/css/style.css?v=4.0" rel="stylesheet">
+    <link href="~/Content/assets/css/style.css?v=5.0" rel="stylesheet">
     
     <!-- JSON-LD Local Business Schema -->
     <script type="application/ld+json">
@@ -115,7 +115,9 @@
                         </div>
                     </li>
                 </ul>
-                <i class="bi bi-list mobile-nav-toggle"></i>
+                <div class="mobile-nav-toggle-placeholder d-lg-none">
+                    <!-- Toggle relocated to bottom of body for strict visibility -->
+                </div>
             </nav>
 
             <div class="header-cta d-none d-lg-flex align-items-center gap-3">
@@ -369,7 +371,8 @@
     <script src="~/Scripts/app.js"></script>
     <!-- Template Main JS File (w/ Cache Buster V2.5) -->
     <script src="~/Content/assets/js/main.js?v=4.0"></script>
-    <script src="https://www.chatbase.co/embed.min.js" chatbotId="Bh3opGpJSXUX7p-WJMamC" defer></script>
+    <script src="~/Content/assets/js/main.js?v=5.0"></script>
+    @* <script src="https://www.chatbase.co/embed.min.js" chatbotId="Bh3opGpJSXUX7p-WJMamC" defer></script> *@
     <script>
         $(document).ready(function () {
             App.init();
@@ -541,6 +544,55 @@
         }
     </style>
 
+    <!-- v5.0 Global Mobile Navigation & Viewport Lockdown -->
+    <i class="bi bi-list mobile-nav-toggle"></i>
+
+    <!-- v5.0 Emergency Force-Action Script -->
+    <script>
+        (function() {
+            console.log("BestChoice Global Nav v5.0 Armed");
+            
+            function toggleMenu() {
+                const nav = document.getElementById('navbar');
+                const overlay = document.getElementById('navbar-overlay');
+                const btn = document.querySelector('.mobile-nav-toggle');
+                
+                nav.classList.toggle('navbar-mobile');
+                overlay.classList.toggle('active');
+                document.body.classList.toggle('mobile-nav-active');
+                
+                if (nav.classList.contains('navbar-mobile')) {
+                    if(btn) btn.innerHTML = '<i class="bi bi-x"></i>';
+                    btn.classList.add('navbar-active-btn');
+                    document.documentElement.style.overflow = 'hidden';
+                } else {
+                    if(btn) btn.innerHTML = '<i class="bi bi-list"></i>';
+                    btn.classList.remove('navbar-active-btn');
+                    document.documentElement.style.overflow = '';
+                }
+            }
+
+            document.addEventListener('click', function(e) {
+                if (e.target.closest('.mobile-nav-toggle')) {
+                    toggleMenu();
+                }
+                
+                if (e.target.id === 'navbar-overlay' || e.target.id === 'mobile-nav-close') {
+                    if (document.getElementById('navbar').classList.contains('navbar-mobile')) {
+                        toggleMenu();
+                    }
+                }
+            });
+
+            // Prevent horizontal overflow stretching
+            window.addEventListener('load', function() {
+                setTimeout(() => {
+                    document.documentElement.style.overflowX = 'hidden';
+                    document.body.style.overflowX = 'hidden';
+                }, 100);
+            });
+        })();
+    </script>
 </body>
 
 </html>

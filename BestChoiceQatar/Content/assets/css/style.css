@@ -354,50 +354,78 @@ h1, h2, h3, h4, h5, h6, .font-primary {
         z-index: 10000;
     }
 
-    /* The actual Drawer (Sidebar) - Simplified Right Side Flow */
-    .navbar-mobile > ul {
-        display: flex !important;
-        flex-direction: column !important;
-        position: fixed;
-        top: 0;
-        right: 0 !important; /* FORCED OVERRIDE for the 672px positioning bug */
-        left: auto !important;
-        bottom: 0;
-        width: 300px;
-        background: #111111 !important;
-        padding: 0;
-        margin: 0;
-        overflow-y: auto;
-        transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), opacity 0.3s ease;
-        transform: translateX(100%); /* Start off-screen to the right */
-        opacity: 0;
-        visibility: hidden;
-        z-index: 999999 !important; /* Nuclear Boost v4.0 */
-        box-shadow: -10px 0 40px rgba(0, 0, 0, 0.8);
-        list-style: none;
-        height: 100vh;
-    }
+/* v5.0 Viewport Lockdown & Layout Restoration */
+html, body {
+    overflow-x: hidden !important;
+    width: 100% !important;
+    position: relative !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
 
-    /* Force Header to Top when Nav is Active */
-    .navbar-mobile-active #header {
-        z-index: 999998 !important;
-    }
+/* The actual Drawer (Sidebar) - Forced v5.0 Restoration */
+.navbar-mobile > ul {
+    display: flex !important;
+    flex-direction: column !important;
+    position: fixed !important;
+    top: 0 !important;
+    right: 0 !important; /* STRICT POSITIONING */
+    left: auto !important;
+    bottom: 0 !important;
+    width: 300px !important;
+    max-width: 80vw !important;
+    background: #111111 !important;
+    padding: 0;
+    margin: 0;
+    overflow-y: auto;
+    transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), opacity 0.3s ease;
+    transform: translateX(100%); /* Start off-screen */
+    opacity: 0;
+    visibility: hidden;
+    z-index: 9999999 !important; /* Ultimate Boost v5.0 */
+    box-shadow: -10px 0 50px rgba(0, 0, 0, 0.9) !important;
+    list-style: none;
+    height: 100vh !important;
+}
 
-    .navbar-mobile.navbar-mobile > ul {
-        transform: translateX(0); /* Slide in to view */
-        opacity: 1 !important;
-        visibility: visible !important;
-    }
+.navbar-mobile.navbar-mobile > ul {
+    transform: translateX(0) !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
 
-    /* Mobile Link Readability v4.0 */
-    .navbar-mobile a {
-        color: #ffffff !important;
-        font-size: 1.1rem !important;
-        padding: 15px 25px !important;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        width: 100%;
-        display: block;
-    }
+/* Mobile Toggle - Top Right Fixed v5.0 */
+.mobile-nav-toggle {
+    position: fixed !important;
+    top: 15px !important;
+    right: 15px !important;
+    z-index: 99999999 !important; /* Above everything */
+    background: #ffcc00 !important;
+    color: #000 !important;
+    width: 45px !important;
+    height: 45px !important;
+    border-radius: 5px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 28px !important;
+    cursor: pointer !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3) !important;
+}
+
+@media (min-width: 992px) {
+    .mobile-nav-toggle { display: none !important; }
+}
+
+/* Mobile Link Readability v5.0 */
+.navbar-mobile a {
+    color: #ffffff !important;
+    font-size: 1.15rem !important;
+    padding: 18px 25px !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    width: 100%;
+    display: block;
+}
 
     .navbar-mobile a:hover {
         color: #ffcc00 !important;
