@@ -1,5 +1,6 @@
 @{
-    var slug = ViewContext.RouteData.Values["slug"]?.ToString() ?? Request.QueryString["slug"];
+    var slugObj = ViewContext.RouteData.Values["slug"];
+    var slug = (slugObj != null ? slugObj.ToString() : null) ?? Request.QueryString["slug"];
     var product = GetProductData().FirstOrDefault(p => p.Slug == (slug ?? "").ToLower());
     
     BestChoiceQatar.Models.BestChoiceQatarEntities db = new BestChoiceQatar.Models.BestChoiceQatarEntities();
