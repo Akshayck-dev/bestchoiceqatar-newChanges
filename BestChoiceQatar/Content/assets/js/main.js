@@ -146,12 +146,16 @@
    */
   on('click', '.deskHamburger', function(e) {
     const popup = select('.deskHamburgerPopup')
+    const overlay = select('.deskHamburgerOverlay')
     if (popup) popup.classList.add('visible')
+    if (overlay) overlay.classList.add('visible')
   })
 
   on('click', '#deskHamburgerClose', function(e) {
     const popup = select('.deskHamburgerPopup')
+    const overlay = select('.deskHamburgerOverlay')
     if (popup) popup.classList.remove('visible')
+    if (overlay) overlay.classList.remove('visible')
   })
 
   on('click', '.deskHamburgerOverlay', function(e) {
