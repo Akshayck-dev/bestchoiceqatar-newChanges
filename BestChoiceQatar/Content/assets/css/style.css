@@ -367,8 +367,10 @@ h1, h2, h3, h4, h5, h6, .font-primary {
         padding: 0;
         margin: 0;
         overflow-y: auto;
-        transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), opacity 0.3s ease;
         transform: translateX(100%); /* Start off-screen to the right */
+        opacity: 0;
+        visibility: hidden;
         z-index: 10005 !important;
         box-shadow: -10px 0 40px rgba(0, 0, 0, 0.5);
         list-style: none;
@@ -377,6 +379,8 @@ h1, h2, h3, h4, h5, h6, .font-primary {
 
     .navbar-mobile.navbar-mobile > ul {
         transform: translateX(0); /* Slide in to view */
+        opacity: 1 !important;
+        visibility: visible !important;
     }
 
     /* Sidebar Header (With Logo & Close Button) */
