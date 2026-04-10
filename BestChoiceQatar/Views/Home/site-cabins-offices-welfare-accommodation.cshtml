@@ -372,12 +372,74 @@
     }
 
     @@media (max-width: 767.98px) {
-        .hero-title { font-size: 2.8rem; }
-        .hero-subtitle-container { border-left: none; border-top: 4px solid var(--primary-yellow); padding-left: 0; padding-top: 15px; }
-        .btn-premium { width: 100%; margin: 5px 0 !important; }
-        .spec-box { padding: 30px; }
-        .final-cta h2 { font-size: 2.5rem; }
         .swiper-slide { height: 300px; }
+    }
+
+    /* Product Showcase Cards */
+    .product-showcase-card {
+        position: relative;
+        height: 400px;
+        overflow: hidden;
+        border-radius: 0;
+        transition: var(--transition-smooth);
+        cursor: pointer;
+        display: block;
+        text-decoration: none;
+        border: 1px solid rgba(0,0,0,0.1);
+    }
+
+    .showcase-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 1s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+
+    .product-showcase-card:hover .showcase-img {
+        transform: scale(1.1);
+    }
+
+    .showcase-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 40%, transparent 100%);
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding: 30px;
+        transition: var(--transition-smooth);
+    }
+
+    .product-showcase-card:hover .showcase-overlay {
+        background: linear-gradient(to top, rgba(215, 223, 33, 0.9) 0%, rgba(0,0,0,0.4) 60%, transparent 100%);
+    }
+
+    .showcase-title {
+        color: #fff;
+        font-weight: 800;
+        font-family: 'Outfit', sans-serif;
+        font-size: 1.4rem;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+    }
+
+    .product-showcase-card:hover .showcase-title {
+        color: #111;
+    }
+
+    .showcase-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--primary-yellow);
+        font-weight: 700;
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        letter-spacing: 1px;
+    }
+
+    .product-showcase-card:hover .showcase-btn {
+        color: #000;
     }
 </style>
 
@@ -426,6 +488,63 @@
             </div>
         </div>
     </div>
+
+    <!-- Product Showcase grid -->
+    <section class="bg-light">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <span class="section-label">Specialist Solutions</span>
+                <h2 class="section-title">Explore Our Cabin Range</h2>
+            </div>
+            <div class="row g-4 justify-content-center">
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <a href="/product/single-double-story-cabins" class="product-showcase-card">
+                        <img src="/Content/assets/img/Products/cabin/cabin-1.jpg" class="showcase-img" alt="Single Story Cabin">
+                        <div class="showcase-overlay">
+                            <h3 class="showcase-title">Single & Double Story</h3>
+                            <div class="showcase-btn">View Specification <i class="bi bi-arrow-right"></i></div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <a href="/product/labor-camps-accommodation" class="product-showcase-card">
+                        <img src="/Content/assets/img/Products/cabin/cabin-2.jpg" class="showcase-img" alt="Labor Camp Qatar">
+                        <div class="showcase-overlay">
+                            <h3 class="showcase-title">Labor & Welfare Camps</h3>
+                            <div class="showcase-btn">View Specification <i class="bi bi-arrow-right"></i></div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                    <a href="/product/security-guard-cabins" class="product-showcase-card">
+                        <img src="/Content/assets/img/Products/cabin/cabin-3.jpg" class="showcase-img" alt="Security Cabins">
+                        <div class="showcase-overlay">
+                            <h3 class="showcase-title">Security & Guard Cabins</h3>
+                            <div class="showcase-btn">View Specification <i class="bi bi-arrow-right"></i></div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+                    <a href="/product/toilet-sanitary-cabins" class="product-showcase-card">
+                        <img src="/Content/assets/img/Products/cabin/cabin-4.jpg" class="showcase-img" alt="Toilet Units">
+                        <div class="showcase-overlay">
+                            <h3 class="showcase-title">Toilet & Sanitary Units</h3>
+                            <div class="showcase-btn">View Specification <i class="bi bi-arrow-right"></i></div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
+                    <a href="/product/container-office-cabins" class="product-showcase-card">
+                        <img src="/Content/assets/img/Products/cabin/cabin-11.jpg" class="showcase-img" alt="Container Office">
+                        <div class="showcase-overlay">
+                            <h3 class="showcase-title">Container Office Cabins</h3>
+                            <div class="showcase-btn">View Specification <i class="bi bi-arrow-right"></i></div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Main Content -->
     <section>
