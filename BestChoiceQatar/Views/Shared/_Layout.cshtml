@@ -65,11 +65,12 @@
 
     <!-- ======= Header ======= -->
     <header id="header" class="d-flex align-items-center">
-        <div class="container d-flex align-items-center">
+        <div class="container-fluid px-lg-5 d-flex align-items-center justify-content-between w-100">
             <div class="logo">
                 <a href="/index"><img class="img-responsive" src="~/content/assets/img/logo/animation.gif" alt="Bestchoice Contracting"></a>
             </div>
-            <nav id="navbar" class="navbar mx-auto">
+
+            <nav id="navbar" class="navbar">
                 <ul>
                     <li class="mobile-nav-header d-lg-none">
                         <div class="sidebar-header-wrapper">
@@ -98,10 +99,9 @@
                     <li><a class="nav-link" href="/blog">Blog</a></li>
                     <li><a class="nav-link" href="/#faq">FAQ</a></li>
                     <li><a class="nav-link" href="/contact">Contact</a></li>
-                    <li><a target="_blank" href="~/Content/assets/Brochure/Brochure.html.pdf">Brochure</a></li>
-                    <li class="d-none d-lg-block ms-5 deskHamburger"><i class="bi bi-list"></i></li>
+                    <li><a class="nav-link" target="_blank" href="~/Content/assets/Brochure/Brochure.html.pdf">Brochure</a></li>
 
-                    <!-- Sidebar Bottom CTA Section -->
+                    <!-- Sidebar Bottom CTA Section (Mobile Only) -->
                     <li class="sidebar-cta-container d-lg-none">
                         <div class="sidebar-cta-wrapper">
                             <a href="tel:@settings.Mobile1" class="s-cta-btn s-cta-call">
@@ -117,6 +117,10 @@
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav>
+
+            <div class="header-cta d-none d-lg-block">
+                <a href="#quote" class="header-pill-cta" data-bs-toggle="modal" data-bs-target="#quoteModal">GET A QUOTE</a>
+            </div>
         </div>
     </header>
 

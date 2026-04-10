@@ -123,13 +123,17 @@ h1, h2, h3, h4, h5, h6, .font-primary {
 --------------------------------------------------------------*/
 #header {
     height: 90px;
-    background: rgba(255, 255, 255, 0.72) !important;
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
+    background: rgba(255, 255, 255, 0.85) !important;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     z-index: 999;
-    box-shadow: 0px 5px 25px 0px rgba(0, 0, 0, 0.05);
-    position: relative;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.03);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    transition: all 0.5s;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 @media(min-width:991px) {
@@ -206,13 +210,15 @@ h1, h2, h3, h4, h5, h6, .font-primary {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 10px 0 10px 30px;
+        padding: 10px 15px;
         font-family: 'Outfit', sans-serif;
-        font-size: 16px;
+        font-size: 15px;
         font-weight: 500;
         color: #111111;
         white-space: nowrap;
         transition: 0.3s;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
     }
 
         .navbar a i, .navbar a:focus i {
@@ -245,6 +251,27 @@ h1, h2, h3, h4, h5, h6, .font-primary {
         .navbar .dropdown ul li {
             min-width: 200px;
         }
+
+    /* Header Pill CTA Style */
+    .header-pill-cta {
+        border: 2px solid #ffcc00;
+        color: #111 !important;
+        padding: 12px 28px !important;
+        border-radius: 50px;
+        font-weight: 700 !important;
+        font-size: 13px !important;
+        letter-spacing: 1px;
+        background: transparent;
+        transition: all 0.3s ease;
+        display: inline-block;
+        text-decoration: none;
+    }
+
+    .header-pill-cta:hover {
+        background: #ffcc00;
+        color: #000 !important;
+        box-shadow: 0 5px 15px rgba(255, 204, 0, 0.3);
+    }
 
         .navbar .dropdown ul a {
             padding: 10px 20px;
