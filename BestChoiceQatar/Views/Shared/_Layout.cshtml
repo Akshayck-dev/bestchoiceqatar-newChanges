@@ -1,4 +1,4 @@
-<!-- BESTCHOICE_NAV_RELOAD_FORCE_V6.0 -->
+<!-- BESTCHOICE_NAV_RELOAD_FORCE_V7.0 -->
 @using BestChoiceQatar.Core.Entities.Common
 @{ 
     BestChoiceQatar.Models.BestChoiceQatarEntities db = new BestChoiceQatar.Models.BestChoiceQatarEntities();
@@ -9,7 +9,7 @@
 <head>
     <meta name="google-site-verification" content="kq6PNeESITpcDxOOHZ2B4VgLbnzfu9sh0jzhC9Bpa1E" />
     <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="width=device-width, initial-scale=1.0, shrink-to-fit=no" name="viewport">
     <title>@ViewBag.Title</title>
     <meta content="@ViewBag.description" name="description">
     <meta content="@ViewBag.keywords" name="keywords">
@@ -36,7 +36,7 @@
 
 
     <!-- Template Main CSS File (w/ Cache Buster V2.5) -->
-    <link href="~/Content/assets/css/style.css?v=6.0" rel="stylesheet">
+    <link href="~/Content/assets/css/style.css?v=7.0" rel="stylesheet">
     
     <!-- JSON-LD Local Business Schema -->
     <script type="application/ld+json">
@@ -544,49 +544,81 @@
         }
     </style>
 
-    <!-- v6.0 Integrated Navigation Logic (As Requested) -->
+    <!-- v7.0 SENIOR HARD FIX - NAVIGATION LOGIC -->
     <i class="bi bi-list mobile-nav-toggle" id="menuBtn"></i>
 
     <script>
         (function() {
+            "use strict";
             const menuBtn = document.getElementById("menuBtn");
             const navbar = document.getElementById("navbar");
             const overlay = document.getElementById("navbar-overlay");
             const body = document.body;
+            const html = document.documentElement;
 
-            if (menuBtn) {
-                menuBtn.addEventListener("click", function () {
-                    console.log("v6.0 Menu Action Triggered");
-                    body.classList.toggle("drawer-open");
-                    navbar.classList.toggle("navbar-mobile");
-                    overlay.classList.toggle("active");
-                    
-                    // User Request: Toggle icon state
-                    if (navbar.classList.contains("navbar-mobile")) {
-                        menuBtn.classList.replace("bi-list", "bi-x");
-                        document.documentElement.style.overflow = "hidden";
-                    } else {
-                        menuBtn.classList.replace("bi-x", "bi-list");
-                        document.documentElement.style.overflow = "";
-                    }
-                });
+            if (!menuBtn || !navbar) {
+                console.error("v7.0 Logic: Required navigation elements not found.");
+                return;
             }
 
-            // Overlay/Close logic
-            document.addEventListener("click", function(e) {
-                if (e.target.id === "navbar-overlay" || e.target.closest("#mobile-nav-close")) {
-                    if (navbar.classList.contains("navbar-mobile")) {
-                        menuBtn.click(); // Reuse existing logic
-                    }
+            console.log("v7.0 Senior Navigation Armed");
+
+            const toggleDrawer = (forceClose = false) => {
+                const isOpen = navbar.classList.contains("navbar-mobile");
+                
+                if (isOpen || forceClose) {
+                    // Close Action
+                    navbar.classList.remove("navbar-mobile");
+                    overlay.classList.remove("active");
+                    body.classList.remove("drawer-open");
+                    body.classList.remove("mobile-nav-active");
+                    menuBtn.classList.add("bi-list");
+                    menuBtn.classList.remove("bi-x");
+                    html.style.overflow = "";
+                    body.style.overflow = "";
+                } else {
+                    // Open Action
+                    navbar.classList.add("navbar-mobile");
+                    overlay.classList.add("active");
+                    body.classList.add("drawer-open");
+                    body.classList.add("mobile-nav-active");
+                    menuBtn.classList.remove("bi-list");
+                    menuBtn.classList.add("bi-x");
+                    // Hard Viewport Lockdown when open
+                    html.style.overflow = "hidden";
+                    body.style.overflow = "hidden";
+                }
+            };
+
+            menuBtn.addEventListener("click", (e) => {
+                e.preventDefault();
+                toggleDrawer();
+            });
+
+            overlay.addEventListener("click", () => toggleDrawer(true));
+            
+            // Catch clicks on close buttons inside the drawer
+            document.addEventListener("click", (e) => {
+                if (e.target.closest("#mobile-nav-close")) {
+                    toggleDrawer(true);
                 }
             });
 
-            // v6.0 Global Viewport Lockdown Guard
-            window.addEventListener("load", function() {
-                setTimeout(() => {
-                    document.documentElement.style.overflowX = 'hidden';
-                    document.body.style.overflowX = 'hidden';
-                }, 100);
+            // v7.0 Global Viewport Sentinel: Force-reset overflow on rotation/resize
+            window.addEventListener("resize", () => {
+                if (window.innerWidth >= 992 && navbar.classList.contains("navbar-mobile")) {
+                    toggleDrawer(true);
+                }
+            });
+            
+            // Final check on load to ensure no horizontal scroll
+            window.addEventListener("load", () => {
+                 setTimeout(() => {
+                    html.style.maxWidth = "100vw";
+                    body.style.maxWidth = "100vw";
+                    html.style.overflowX = "hidden";
+                    body.style.overflowX = "hidden";
+                 }, 500);
             });
         })();
     </script>

@@ -1,19 +1,30 @@
-/* v6.0 Global Interaction & Reset v6.0 */
-* {
-    box-sizing: border-box !important;
-}
-
+/* 🚨 SENIOR HARD FIX - VIEWPORT LOCKDOWN v7.0 */
 html, body {
+    margin: 0 !important;
+    padding: 0 !important;
     overflow-x: hidden !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    position: relative;
-    margin: 0;
-    padding: 0;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    position: relative !important;
+    -webkit-overflow-scrolling: touch;
 }
 
-section, div {
+/* UNIVERSAL RESET */
+*, *::before, *::after {
+    box-sizing: border-box !important;
+    max-width: 100%;
+}
+
+/* PREVENT MEDIA OVERFLOW */
+img, video, iframe, canvas {
     max-width: 100% !important;
+    height: auto !important;
+}
+
+/* FORCE BODY CHILDREN INSIDE VIEWPORT */
+body > * {
+    max-width: 100vw !important;
+    overflow-x: hidden !important;
 }
 
 body {
@@ -371,66 +382,78 @@ html, body {
     padding: 0 !important;
 }
 
-/* v6.0 Unified Drawer (Sidebar) Fix */
+/* 🚨 DEFINITIVE DRAWER FIX v7.0 */
 .navbar-mobile > ul, .drawer {
-    display: flex !important;
-    flex-direction: column !important;
     position: fixed !important;
     top: 0 !important;
     right: 0 !important;
     left: auto !important;
     bottom: 0 !important;
-    width: 280px !important; /* User Requested Width */
-    height: 100vh !important;
+    width: 280px !important;
+    max-width: 80vw !important;
+    height: 100dvh !important; /* Dynamic Viewport Height */
     background: #111111 !important;
+    display: flex !important;
+    flex-direction: column !important;
     padding: 0;
     margin: 0;
     overflow-y: auto;
-    transition: transform 0.3s ease !important; /* User Requested Easing */
-    transform: translateX(100%) !important;
-    z-index: 9999 !important; /* User Requested Priority */
-    box-shadow: -10px 0 50px rgba(0, 0, 0, 0.9);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    transform: translateX(101%) !important; /* Hidden beyond edge */
+    z-index: 99999 !important;
+    box-shadow: -15px 0 50px rgba(0, 0, 0, 0.9);
     list-style: none;
 }
 
-/* User Class Mapping */
-.navbar-mobile.open > ul, 
+/* Toggled State */
 .navbar-mobile.active > ul, 
+.navbar-mobile.open > ul, 
 .navbar-mobile.navbar-mobile > ul {
     transform: translateX(0) !important;
 }
 
-/* Overlay Reset */
+/* OVERLAY HARD FIX */
 .navbar-overlay {
     position: fixed !important;
     top: 0 !important;
     left: 0 !important;
-    width: 100% !important;
-    height: 100% !important;
-    background: rgba(0, 0, 0, 0.5) !important;
-    z-index: 9998 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    background: rgba(0, 0, 0, 0.6) !important;
+    backdrop-filter: blur(4px);
+    z-index: 99998 !important;
     display: none;
+    cursor: pointer;
 }
 
 .navbar-overlay.active {
     display: block !important;
 }
 
-/* Floating Element Fix v6.0 */
-.modern-mobile-cta-bar,
+/* 🚨 FLOATING ELEMENT LOCKDOWN v7.0 */
 #chatbase-message-bubbles,
-#chatbase-bubble-button {
-    max-width: 100vw !important;
+#chatbase-bubble-button,
+.modern-mobile-cta-bar,
+.premium-floating-nav {
+    position: fixed !important;
     right: 15px !important;
     left: auto !important;
+    max-width: calc(100vw - 30px) !important;
+    overflow: hidden !important;
+    z-index: 9997 !important; /* Below Drawer */
 }
 
-/* Hide Floating Widgets when Drawer Open */
+/* CLEANUP: Hide offensive floating items when drawer is open to prevent stacking bugs */
 body.drawer-open #chatbase-message-bubbles,
-body.drawer-open #chatbase-bubble-button,
-body.drawer-open .modern-mobile-cta-bar {
+body.drawer-open .modern-mobile-cta-bar,
+body.drawer-open .premium-floating-nav {
     display: none !important;
 }
+
+/* Layout Debugging Aid (Comment out for production) */
+/*
+* { outline: 1px solid rgba(255, 0, 0, 0.1); }
+*/
 
 .navbar-mobile.navbar-mobile > ul {
     transform: translateX(0) !important;
