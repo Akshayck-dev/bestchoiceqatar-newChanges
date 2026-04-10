@@ -74,7 +74,7 @@
                     <li class="mobile-nav-header d-lg-none">
                         <div class="sidebar-header-wrapper">
                             <div class="sidebar-logo">
-                                <img src="~/Content/assets/img/logo/logo-1.png" alt="BestChoice Logo">
+                                <img src="~/content/assets/img/logo/animation.gif" alt="BestChoice Logo">
                             </div>
                             <button type="button" class="mobile-nav-close-btn" id="mobile-nav-close" aria-label="Close Menu">
                                 <i class="bi bi-x"></i>
@@ -86,12 +86,20 @@
                     <li class="dropdown">
                         <a class="nav-link" href="#"><span>Our Products / Services</span> <i class="bi bi-chevron-down"></i></a>
                         <ul>
-                            <li><a href="/site-cabins-offices-welfare-accommodation">Porta Cabin Offices</a></li>
-                            <li><a href="/product/single-double-story-cabins">Single & Double Story</a></li>
-                            <li><a href="/product/labor-camps-accommodation">Labor & Welfare Camps</a></li>
-                            <li><a href="/product/security-guard-cabins">Security & Guard Cabins</a></li>
-                            <li><a href="/product/toilet-sanitary-cabins">Toilet & Sanitary Units</a></li>
-                            <li><a href="/product/container-office-cabins">Container Office Cabins</a></li>
+                            <li class="dropdown">
+                                <a href="/site-cabins-offices-welfare-accommodation" class="parent-highlight"><span>Porta Cabin Offices</span> <i class="bi bi-chevron-right"></i></a>
+                                <ul>
+                                    <li><a href="/product/single-double-story-cabins">Single & Double Story</a></li>
+                                    <li><a href="/product/labor-camps-accommodation">Labor & Welfare Camps</a></li>
+                                    <li><a href="/product/security-guard-cabins">Security & Guard Cabins</a></li>
+                                    <li><a href="/product/toilet-sanitary-cabins">Toilet & Sanitary Units</a></li>
+                                    <li><a href="/product/container-office-cabins">Container Office Cabins</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="/building-painting-contractor">Building Painting Contractor</a></li>
+                            <li><a href="/steel-aluminum-fabrication">Steel & Aluminum Fabrication</a></li>
+                            <li><a href="/general-contracting">General Contracting</a></li>
+                            <li><a href="/optical-fibre-networks">Optical Fibre Networks</a></li>
                         </ul>
                     </li>
                     <li><a class="nav-link" href="/blog">Blog</a></li>
@@ -291,6 +299,30 @@
         .mobileLogo img { max-height: 40px; margin-bottom: 20px; }
         .deskHamburger { cursor: pointer; font-size: 2rem; color: #000; transition: color 0.3s; }
         .deskHamburger:hover { color: var(--primary-bc); }
+
+        /* Attractive Multi-level Menu Styles */
+        .navbar .dropdown .parent-highlight {
+            color: #ffcc00 !important; /* Premium Yellow Highlight */
+            font-weight: 800 !important;
+            border-bottom: 1px solid rgba(255,204,0,0.2) !important;
+        }
+        
+        /* Animation and alignment for fly-outs */
+        .navbar .dropdown .dropdown ul {
+            left: calc(100% - 10px) !important;
+            border-left: 2px solid #ffcc00;
+        }
+
+        .navbar .dropdown .dropdown:hover > ul {
+            left: 100% !important;
+        }
+
+        /* Mobile specific attractive adjustments */
+        .navbar-mobile .dropdown .parent-highlight {
+            background: rgba(255,204,0,0.1) !important;
+            margin: 5px 0;
+            padding-left: 30px !important;
+        }
     </style>
 
     <!-- Vendor JS Files -->

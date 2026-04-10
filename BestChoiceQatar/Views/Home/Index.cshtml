@@ -11,6 +11,9 @@
     var _services = (from b in db.Galleries
                      where b.IsDataActive && b.Category == "Service"
                      select new { b.ID, b.Title, b.Description, b.Image }).ToList();
+    var _clients = (from b in db.Galleries
+                    where b.IsDataActive && b.Category == "Clients"
+                    select new { b.ID, b.Title, b.Image }).ToList();
     var settings = db.Settings.FirstOrDefault();
 }
 
@@ -388,6 +391,33 @@
         .premium-card { aspect-ratio: 3/4; }
         .card-overlay { padding: 25px; }
         .card-title { font-size: 1.25rem; }
+    }
+
+    /* Clients Section Styles */
+    .clients-section {
+        background: #fff;
+        padding: 60px 0;
+        border-top: 1px solid #f0f0f0;
+    }
+    .client-logo-wrap {
+        height: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        transition: var(--transition-premium);
+    }
+    .client-logo {
+        max-width: 140px;
+        max-height: 60px;
+        filter: grayscale(100%);
+        opacity: 0.6;
+        transition: var(--transition-premium);
+    }
+    .client-logo-wrap:hover .client-logo {
+        filter: grayscale(0%);
+        opacity: 1;
+        transform: scale(1.1);
     }
 </style>
 
@@ -916,7 +946,44 @@
         </div>
     </section>
 
-    <!-- 6. PROJECT / ICON SECTION -->
+    <!-- 6. OUR CLIENTS SECTION -->
+    <section class="clients-section">
+        <div class="container">
+            <div class="section-header text-center mb-5" data-aos="fade-up">
+                <span class="text-bc-yellow fw-bold font-headline mb-2 d-block" style="letter-spacing: 4px; font-size: 0.8rem;">OUR VALUED PARTNERS</span>
+                <h2 class="h-black h3">Trusted By Leading Organizations</h2>
+            </div>
+            
+            <div class="swiper clients-swiper" data-aos="fade-up">
+                <div class="swiper-wrapper">
+                    @if (_clients != null && _clients.Any())
+                    {
+                        foreach (var client in _clients)
+                        {
+                            <div class="swiper-slide">
+                                <div class="client-logo-wrap">
+                                    <img src="~/Uploads/@client.Image" alt="@client.Title" class="client-logo" loading="lazy">
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        for (int k = 1; k <= 12; k++)
+                        {
+                            <div class="swiper-slide">
+                                <div class="client-logo-wrap">
+                                    <img src="~/Content/assets/img/clients/client-@k.png" alt="Client @k" class="client-logo" loading="lazy">
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. PROJECT / ICON SECTION -->
     <section class="icon-strip">
         <div class="container">
             <div class="row g-5">
@@ -1081,6 +1148,23 @@
                         centeredSlides: true,
                         spaceBetween: 50
                     }
+                }
+            });
+
+            // Client Swiper
+            const clientsSwiper = new Swiper('.clients-swiper', {
+                slidesPerView: 2,
+                spaceBetween: 30,
+                loop: true,
+                speed: 1000,
+                autoplay: {
+                    delay: 2000,
+                    disableOnInteraction: false,
+                },
+                breakpoints: {
+                    576: { slidesPerView: 3 },
+                    768: { slidesPerView: 4 },
+                    1024: { slidesPerView: 6 }
                 }
             });
         });

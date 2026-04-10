@@ -372,7 +372,7 @@ h1, h2, h3, h4, h5, h6, .font-primary {
     }
 
     .navbar-mobile a, .navbar-mobile a:focus {
-        padding: 15px 25px;
+        padding: 8px 20px;
         font-family: "Raleway", sans-serif;
         font-size: 15px;
         font-weight: 600;
@@ -415,7 +415,7 @@ h1, h2, h3, h4, h5, h6, .font-primary {
         }
 
         .navbar-mobile .dropdown ul a {
-            padding: 12px 40px;
+            padding: 8px 30px;
             font-size: 14px;
             color: #ffffff !important; /* White color for sub-menu items */
         }
@@ -1798,9 +1798,9 @@ section {
     /* Premium Mobile Sidebar Header Fixes */
     .mobile-nav-header {
         background: #111; /* Dark header */
-        padding: 25px 30px;
-        border-bottom: 1px solid rgba(0,0,0,0.05);
-        margin-bottom: 10px;
+        padding: 15px 20px;
+        border-bottom: 1px solid rgba(255,255,255,0.05);
+        margin-bottom: 5px;
         display: block;
         width: 100%;
     }
@@ -1811,8 +1811,8 @@ section {
         width: 100% !important;
     }
     .sidebar-logo img {
-        max-height: 48px;
-        filter: brightness(0) invert(1) !important; /* Logo to white */
+        max-height: 50px;
+        width: auto;
     }
     .mobile-nav-close-btn {
         background: rgba(0,0,0,0.03) !important;
