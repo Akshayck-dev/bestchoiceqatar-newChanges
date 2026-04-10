@@ -219,17 +219,17 @@
     .hero-content {
         position: relative;
         z-index: 2;
-        max-width: 800px;
+        max-width: 1100px;
     }
 
     .hero-title {
         font-weight: 900;
-        font-size: clamp(2.5rem, 6vw, 4.5rem);
-        line-height: 0.95;
+        font-size: clamp(2.2rem, 5vw, 4rem);
+        line-height: 1.1;
         text-transform: uppercase;
         color: #fff;
         margin-bottom: 2rem;
-        letter-spacing: -2px;
+        letter-spacing: -1px;
     }
 
     .hero-subtitle {
@@ -507,7 +507,7 @@
                     <span style="color:rgba(255,255,255,0.5)">@product.Title</span>
                 </nav>
                 <span class="section-label">@product.SectionLabel</span>
-                <h1 class="hero-title">@Html.Raw(product.Title.Replace(" ", "<br>"))</h1>
+                <h1 class="hero-title">@product.Title</h1>
                 <p class="hero-subtitle">@product.Subtitle</p>
             </div>
         </div>
