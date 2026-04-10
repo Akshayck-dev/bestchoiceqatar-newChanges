@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Bestchoice Contracting | Testing Preview</title>
+    
+    <!-- External Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|Raleway:300,400,600,700,900|Outfit:wght@800;900|Inter:wght@400;700" rel="stylesheet">
+
+    <!-- Local Asset Mappings (Resolved from ~/Content/) -->
+    <link href="./Content/assets/vendor/animate.css/animate.min.css" rel="stylesheet">
+    <link href="./Content/assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="./Content/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="./Content/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="./Content/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="./Content/assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="./Content/assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <link href="./Content/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="./Content/assets/css/style.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-bc: #ffcc00;
+            --dark-bc: #111111;
+            --white-bc: #ffffff;
+            --font-headline: 'Outfit', sans-serif;
+            --font-body: 'Inter', sans-serif;
+        }
+        body { font-family: var(--font-body); }
+        .hero-preview { height: 60vh; background: #222; display: flex; align-items: center; justify-content: center; color: #fff; text-align: center; }
+        .test-banner { background: #ffcc00; color: #000; padding: 10px; text-align: center; font-weight: bold; position: sticky; top: 0; z-index: 9999; }
+    </style>
+</head>
+
+<body>
+    <div class="test-banner">DEVELOPMENT PREVIEW MODE - OFFLINE TESTING</div>
+
+    <!-- ======= Header (Resolved from _Layout) ======= -->
+    <header id="header" class="d-flex align-items-center">
+        <div class="container d-flex align-items-center">
+            <div class="logo me-auto">
+                <a href="#"><img src="./Content/assets/img/logo/logo-1.png" alt="Bestchoice" style="max-height: 50px;"></a>
+            </div>
+            <nav id="navbar" class="navbar">
+                <ul>
+                    <li><a class="nav-link" href="#">Home</a></li>
+                    <li><a class="nav-link" href="#">About</a></li>
+                    <li class="dropdown">
+                        <a class="nav-link" href="#"><span>Our Products / Services</span> <i class="bi bi-chevron-down"></i></a>
+                        <ul>
+                            <li><a href="#">Portable Cabin Fabrication</a></li>
+                            <li><a href="#">Welfare & Labor accommodation</a></li>
+                            <li><a href="#">Security & Guard Cabins</a></li>
+                            <li><a href="#">Toilet & Sanitary Units</a></li>
+                            <li><a href="#">Building Painting Contractor</a></li>
+                            <li><a href="#">Steel & Aluminum Fabrication</a></li>
+                            <li><a href="#">General Contracting</a></li>
+                            <li><a href="#">Optical Fibre Networks</a></li>
+                            <li><a href="#">Professional Printing</a></li>
+                            <li><a href="#">Architectural Designing</a></li>
+                        </ul>
+                    </li>
+                    <li><a class="nav-link" href="#">Blog</a></li>
+                    <li><a class="nav-link" href="#">Contact</a></li>
+                </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+            </nav>
+        </div>
+    </header>
+
+    <main id="main">
+        <div class="hero-preview">
+            <div>
+                <h1 style="font-family: var(--font-headline); font-size: 3rem;">BESTCHOICE QATAR</h1>
+                <p>Testing Environment for Chatbot & Navigation Audit</p>
+                <div class="btn-group mt-4">
+                    <button class="btn btn-warning p-3">OUR SERVICES</button>
+                    <button class="btn btn-outline-light p-3 ms-3">CONTACT US</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- ======= Footer (Resolved from _Layout) ======= -->
+    <footer id="footer">
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 footer-contact">
+                        <h3>Bestchoice</h3>
+                        <p>Doha, Qatar</p>
+                    </div>
+                    <div class="col-lg-3 col-md-6 footer-links">
+                        <h4>Technical Resources</h4>
+                        <ul>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Container Buying Guide</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Manufacturers Info</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Site Mobilization Guide</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Vendor JS Files -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="./Content/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="./Content/assets/vendor/aos/aos.js"></script>
+    <script src="./Content/assets/js/main.js"></script>
+
+    <!-- Chatbot Restoration Script (Version 1136 - Black Icon) -->
+    <script src="https://askelliebots.blob.core.windows.net/askelliefiles/widget-integration-1136.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            console.log("Static Preview Loaded Successfully");
+            AOS.init();
+        });
+    </script>
+</body>
+</html>
