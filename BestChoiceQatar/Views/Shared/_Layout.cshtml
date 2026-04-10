@@ -1,4 +1,4 @@
-<!-- BESTCHOICE_NAV_RELOAD_FORCE_V9.0 -->
+<!-- BESTCHOICE_NAV_RELOAD_FORCE_V10.0 -->
 @using BestChoiceQatar.Core.Entities.Common
 @{ 
     BestChoiceQatar.Models.BestChoiceQatarEntities db = new BestChoiceQatar.Models.BestChoiceQatarEntities();
@@ -36,7 +36,7 @@
 
 
     <!-- Template Main CSS File (w/ Cache Buster V2.5) -->
-    <link href="~/Content/assets/css/style.css?v=9.0" rel="stylesheet">
+    <link href="~/Content/assets/css/style.css?v=10.0" rel="stylesheet">
     
     <!-- JSON-LD Local Business Schema -->
     <script type="application/ld+json">
@@ -71,7 +71,7 @@
             </div>
 
             <nav id="navbar" class="navbar">
-                <ul>
+                <ul class="drawer">
                     <li class="mobile-nav-header d-lg-none">
                         <div class="sidebar-header-wrapper">
                             <div class="sidebar-logo">
@@ -119,6 +119,7 @@
                     <!-- Toggle relocated to bottom of body for strict visibility -->
                 </div>
             </nav>
+            <div id="navbar-overlay" class="navbar-overlay"></div>
 
             <div class="header-cta d-none d-lg-flex align-items-center gap-3">
                 <a href="#quote" class="header-pill-cta" data-bs-toggle="modal" data-bs-target="#quoteModal">GET A QUOTE</a>
@@ -544,55 +545,42 @@
         }
     </style>
 
-    <!-- v9.0 ABSOLUTE AUTHORITY NAVIGATION -->
+    <!-- v10.0 ABSOLUTE HARD FIX LOGIC -->
     <i class="bi bi-list mobile-nav-toggle" id="menuBtn"></i>
 
     <script>
         (function() {
             "use strict";
             const menuBtn = document.getElementById("menuBtn");
-            const body = document.body;
-
             if (!menuBtn) return;
 
-            console.log("v9.0 Absolute Authority Navigation Armed");
-
-            const toggleMobileNav = () => {
-                body.classList.toggle("mobile-nav-active");
+            menuBtn.addEventListener("click", function () {
+                console.log("v10.0 Hard Toggle Fired");
+                document.body.classList.toggle("drawer-open");
+                document.querySelector(".drawer").classList.toggle("open");
+                document.querySelector(".navbar-overlay").classList.toggle("active");
                 
-                // Toggle Icon
-                if (body.classList.contains("mobile-nav-active")) {
+                // Safety icon swap logic
+                if (document.querySelector(".drawer").classList.contains("open")) {
                     menuBtn.classList.replace("bi-list", "bi-x");
                     document.documentElement.style.overflow = "hidden";
                 } else {
                     menuBtn.classList.replace("bi-x", "bi-list");
                     document.documentElement.style.overflow = "";
                 }
-            };
-
-            menuBtn.addEventListener("click", (e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                e.stopImmediatePropagation();
-                console.log("v9.0 Toggle Fired");
-                toggleMobileNav();
-            }, true);
-
-            // Overlay Close
-            document.addEventListener("click", (e) => {
-                if (e.target.id === "navbar-overlay" || e.target.classList.contains("navbar-overlay")) {
-                    if (body.classList.contains("mobile-nav-active")) {
-                        toggleMobileNav();
-                    }
-                }
             });
 
-            // Prevent scroll stretching
-            window.addEventListener("load", () => {
+            // v10.0 Overlay Close Binding
+            document.querySelector(".navbar-overlay").addEventListener("click", function() {
+                menuBtn.click();
+            });
+            
+            // v10.0 Scroll Lockdown Guard
+            window.addEventListener("load", function() {
                 setTimeout(() => {
                     document.documentElement.style.overflowX = 'hidden';
                     document.body.style.overflowX = 'hidden';
-                }, 100);
+                }, 200);
             });
         })();
     </script>
