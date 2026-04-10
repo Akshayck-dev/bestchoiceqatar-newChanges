@@ -338,13 +338,17 @@
     <script src="~/Content/bootstrap-toastr/toastr.min.js"></script>
     <script src="~/Content/app.js" type="text/javascript"></script>
     <script src="~/Scripts/app.js"></script>
-    @* <script src="~/Areas/backend/assets/js/jquery.livequery.js" type="text/javascript"></script>*@
+    <script src="~/Areas/backend/assets/js/jquery.livequery.js" type="text/javascript"></script>
     <!-- Template Main JS File (w/ Cache Buster V2.5) -->
     <script src="~/Content/assets/js/main.js?v=2.5"></script>
     <script src="https://www.chatbase.co/embed.min.js" chatbotId="Bh3opGpJSXUX7p-WJMamC" defer></script>
-    @*<script src="~/Scripts/jquery.livequery.js"></script>*@
     <script>
         $(document).ready(function () {
+            // Initialize PureCounter manually to fix reference errors
+            if (typeof PureCounter !== 'undefined') {
+                new PureCounter();
+            }
+            
             App.init();
             @{
                 if (TempData["Notification"] != null)
