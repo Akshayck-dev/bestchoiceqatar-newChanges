@@ -1,4 +1,4 @@
-<!-- BESTCHOICE_NAV_RELOAD_FORCE_V5.0 -->
+<!-- BESTCHOICE_NAV_RELOAD_FORCE_V6.0 -->
 @using BestChoiceQatar.Core.Entities.Common
 @{ 
     BestChoiceQatar.Models.BestChoiceQatarEntities db = new BestChoiceQatar.Models.BestChoiceQatarEntities();
@@ -36,7 +36,7 @@
 
 
     <!-- Template Main CSS File (w/ Cache Buster V2.5) -->
-    <link href="~/Content/assets/css/style.css?v=5.0" rel="stylesheet">
+    <link href="~/Content/assets/css/style.css?v=6.0" rel="stylesheet">
     
     <!-- JSON-LD Local Business Schema -->
     <script type="application/ld+json">
@@ -544,48 +544,45 @@
         }
     </style>
 
-    <!-- v5.0 Global Mobile Navigation & Viewport Lockdown -->
-    <i class="bi bi-list mobile-nav-toggle"></i>
+    <!-- v6.0 Integrated Navigation Logic (As Requested) -->
+    <i class="bi bi-list mobile-nav-toggle" id="menuBtn"></i>
 
-    <!-- v5.0 Emergency Force-Action Script -->
     <script>
         (function() {
-            console.log("BestChoice Global Nav v5.0 Armed");
-            
-            function toggleMenu() {
-                const nav = document.getElementById('navbar');
-                const overlay = document.getElementById('navbar-overlay');
-                const btn = document.querySelector('.mobile-nav-toggle');
-                
-                nav.classList.toggle('navbar-mobile');
-                overlay.classList.toggle('active');
-                document.body.classList.toggle('mobile-nav-active');
-                
-                if (nav.classList.contains('navbar-mobile')) {
-                    if(btn) btn.innerHTML = '<i class="bi bi-x"></i>';
-                    btn.classList.add('navbar-active-btn');
-                    document.documentElement.style.overflow = 'hidden';
-                } else {
-                    if(btn) btn.innerHTML = '<i class="bi bi-list"></i>';
-                    btn.classList.remove('navbar-active-btn');
-                    document.documentElement.style.overflow = '';
-                }
+            const menuBtn = document.getElementById("menuBtn");
+            const navbar = document.getElementById("navbar");
+            const overlay = document.getElementById("navbar-overlay");
+            const body = document.body;
+
+            if (menuBtn) {
+                menuBtn.addEventListener("click", function () {
+                    console.log("v6.0 Menu Action Triggered");
+                    body.classList.toggle("drawer-open");
+                    navbar.classList.toggle("navbar-mobile");
+                    overlay.classList.toggle("active");
+                    
+                    // User Request: Toggle icon state
+                    if (navbar.classList.contains("navbar-mobile")) {
+                        menuBtn.classList.replace("bi-list", "bi-x");
+                        document.documentElement.style.overflow = "hidden";
+                    } else {
+                        menuBtn.classList.replace("bi-x", "bi-list");
+                        document.documentElement.style.overflow = "";
+                    }
+                });
             }
 
-            document.addEventListener('click', function(e) {
-                if (e.target.closest('.mobile-nav-toggle')) {
-                    toggleMenu();
-                }
-                
-                if (e.target.id === 'navbar-overlay' || e.target.id === 'mobile-nav-close') {
-                    if (document.getElementById('navbar').classList.contains('navbar-mobile')) {
-                        toggleMenu();
+            // Overlay/Close logic
+            document.addEventListener("click", function(e) {
+                if (e.target.id === "navbar-overlay" || e.target.closest("#mobile-nav-close")) {
+                    if (navbar.classList.contains("navbar-mobile")) {
+                        menuBtn.click(); // Reuse existing logic
                     }
                 }
             });
 
-            // Prevent horizontal overflow stretching
-            window.addEventListener('load', function() {
+            // v6.0 Global Viewport Lockdown Guard
+            window.addEventListener("load", function() {
                 setTimeout(() => {
                     document.documentElement.style.overflowX = 'hidden';
                     document.body.style.overflowX = 'hidden';
