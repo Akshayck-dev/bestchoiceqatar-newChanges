@@ -360,7 +360,8 @@ h1, h2, h3, h4, h5, h6, .font-primary {
         flex-direction: column !important;
         position: fixed;
         top: 0;
-        right: 0; /* Align to right edge */
+        right: 0 !important; /* FORCED OVERRIDE for the 672px positioning bug */
+        left: auto !important;
         bottom: 0;
         width: 300px;
         background: #111111 !important;
