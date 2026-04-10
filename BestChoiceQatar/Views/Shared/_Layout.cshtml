@@ -1,4 +1,4 @@
-<!-- BESTCHOICE_NAV_RELOAD_FORCE_V3.5 -->
+<!-- BESTCHOICE_NAV_RELOAD_FORCE_V4.0 -->
 @using BestChoiceQatar.Core.Entities.Common
 @{ 
     BestChoiceQatar.Models.BestChoiceQatarEntities db = new BestChoiceQatar.Models.BestChoiceQatarEntities();
@@ -36,7 +36,7 @@
 
 
     <!-- Template Main CSS File (w/ Cache Buster V2.5) -->
-    <link href="~/Content/assets/css/style.css?v=3.5" rel="stylesheet">
+    <link href="~/Content/assets/css/style.css?v=4.0" rel="stylesheet">
     
     <!-- JSON-LD Local Business Schema -->
     <script type="application/ld+json">
@@ -125,7 +125,7 @@
         </div>
     </header>
 
-    <div id="navbar-overlay" class="navbar-overlay"></div>
+    <!-- No Overlay Here - Relocated to Bottom -->
 
 
 
@@ -235,43 +235,72 @@
         </div>
     </footer><!-- End Footer -->
 
-    <div class="deskHamburgerOverlay">
-        <div class="deskHamburgerPopup">
+    <!-- Drawer Overlays (Top Level Stacking) -->
+    <div id="navbar-overlay" class="navbar-overlay" style="z-index: 999997 !important;"></div>
+
+    <div class="deskHamburgerOverlay" style="z-index: 999996 !important;">
+        <div class="deskHamburgerPopup" style="z-index: 999999 !important;">
             <button class="deskHamburgerClose" id="deskHamburgerClose"><i class="bi bi-x"></i></button>
-            <div>
-                <img class="img-fluid logo" src="./Content/assets/img/logo/animation.gif" alt="">
-                <p class="mb-5">Welcome to Best Choice Contracting, a leading provider of prefabricated structures and painting services in Qatar. Established in 2009, we have years of experience in the industry and a team of skilled professionals who are committed to delivering high-quality solutions to our clients.</p>
-                <h3>Contact Info</h3>
-                <div class="contactItem">
-                    <i class="bi bi-geo-alt"></i>
-                    <p>@settings.Location</p>
+            <div class="p-4 popup-content-box">
+                <img class="img-fluid logo mb-4" src="./Content/assets/img/logo/animation.gif" alt="" style="max-width: 150px;">
+                <p class="mb-5 lead text-white">Welcome to Best Choice Contracting, a leading provider of prefabricated structures and painting services in Qatar. Established in 2009, we have years of experience in the industry and a team of skilled professionals who are committed to delivering high-quality solutions to our clients.</p>
+                <h3 class="text-warning mb-4">Contact Info</h3>
+                <div class="contactItem mb-3 d-flex align-items-center gap-3">
+                    <i class="bi bi-geo-alt fs-4 text-warning"></i>
+                    <p class="mb-0">@settings.Location</p>
                 </div>
-                <div class="contactItem">
-                    <i class="bi bi-envelope"></i>
-                    <p>@settings.Email</p>
+                <div class="contactItem mb-3 d-flex align-items-center gap-3">
+                    <i class="bi bi-envelope fs-4 text-warning"></i>
+                    <p class="mb-0">@settings.Email</p>
                 </div>
-                <div class="contactItem">
-                    <i class="bi bi-telephone"></i>
-                    <p>@settings.Mobile1</p>
-                    <p>@settings.Mobile2</p>
+                <div class="contactItem mb-3 d-flex align-items-center gap-3">
+                    <i class="bi bi-telephone fs-4 text-warning"></i>
+                    <p class="mb-0">@settings.Mobile1<br>@settings.Mobile2</p>
                 </div>
-                <div class="socials mt-5">
-                    <div class="item">
-                        <a href="@settings.Whatsup"><i class="bi bi-whatsapp"></i></a>
-                    </div>
-                    <div class="item">
-                        <a href="@settings.Instagram"><i class="bi bi-instagram"></i></a>
-                    </div>
-                    <div class="item">
-                        <a href="@settings.Facebook"><i class="bi bi-facebook"></i></a>
-                    </div>
-                    <div class="item">
-                        <a href="@settings.Twitter"><i class="bi bi-twitter"></i></a>
-                    </div>
+                <div class="socials mt-5 d-flex gap-3">
+                    <a href="@settings.Whatsup" class="btn btn-outline-warning rounded-circle"><i class="bi bi-whatsapp"></i></a>
+                    <a href="@settings.Instagram" class="btn btn-outline-warning rounded-circle"><i class="bi bi-instagram"></i></a>
+                    <a href="@settings.Facebook" class="btn btn-outline-warning rounded-circle"><i class="bi bi-facebook"></i></a>
+                    <a href="@settings.Twitter" class="btn btn-outline-warning rounded-circle"><i class="bi bi-twitter"></i></a>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- v4.0 Emergency Navigation Script -->
+    <script>
+        (function() {
+            console.log("BestChoice Navigation v4.0 Logic Initialized");
+            
+            // Indestructible Toggle for Mobile
+            document.addEventListener('click', function(e) {
+                if(e.target.closest('.mobile-nav-toggle')) {
+                    const nav = document.getElementById('navbar');
+                    const overlay = document.getElementById('navbar-overlay');
+                    nav.classList.toggle('navbar-mobile');
+                    overlay.classList.toggle('active');
+                    document.body.classList.toggle('mobile-nav-active');
+                    document.body.classList.toggle('navbar-mobile-active');
+                    
+                    const btn = e.target.closest('.mobile-nav-toggle');
+                    btn.classList.toggle('bi-list');
+                    btn.classList.toggle('bi-x');
+                    console.log("Mobile Nav Toggled:", nav.classList.contains('navbar-mobile'));
+                }
+                
+                // Overlay click closure
+                if(e.target.id === 'navbar-overlay' || e.target.id === 'mobile-nav-close') {
+                    document.getElementById('navbar').classList.remove('navbar-mobile');
+                    document.getElementById('navbar-overlay').classList.remove('active');
+                    document.body.classList.remove('mobile-nav-active');
+                    document.body.classList.remove('navbar-mobile-active');
+                    const btn = document.querySelector('.mobile-nav-toggle');
+                    btn.classList.add('bi-list');
+                    btn.classList.remove('bi-x');
+                }
+            });
+        })();
+    </script>
 
 
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
@@ -339,7 +368,7 @@
     <script src="~/Content/app.js" type="text/javascript"></script>
     <script src="~/Scripts/app.js"></script>
     <!-- Template Main JS File (w/ Cache Buster V2.5) -->
-    <script src="~/Content/assets/js/main.js?v=3.5"></script>
+    <script src="~/Content/assets/js/main.js?v=4.0"></script>
     <script src="https://www.chatbase.co/embed.min.js" chatbotId="Bh3opGpJSXUX7p-WJMamC" defer></script>
     <script>
         $(document).ready(function () {

@@ -130,6 +130,10 @@
     const overlay = select('#navbar-overlay')
     if (overlay) overlay.classList.toggle('active')
 
+    // v4.0 Body Toggling for Stacking Context
+    document.body.classList.toggle('mobile-nav-active')
+    document.body.classList.toggle('navbar-mobile-active')
+
     const toggleBtn = select('.mobile-nav-toggle')
     if (toggleBtn) {
       toggleBtn.classList.toggle('bi-list')

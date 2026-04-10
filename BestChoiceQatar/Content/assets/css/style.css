@@ -372,16 +372,36 @@ h1, h2, h3, h4, h5, h6, .font-primary {
         transform: translateX(100%); /* Start off-screen to the right */
         opacity: 0;
         visibility: hidden;
-        z-index: 10005 !important;
-        box-shadow: -10px 0 40px rgba(0, 0, 0, 0.5);
+        z-index: 999999 !important; /* Nuclear Boost v4.0 */
+        box-shadow: -10px 0 40px rgba(0, 0, 0, 0.8);
         list-style: none;
         height: 100vh;
+    }
+
+    /* Force Header to Top when Nav is Active */
+    .navbar-mobile-active #header {
+        z-index: 999998 !important;
     }
 
     .navbar-mobile.navbar-mobile > ul {
         transform: translateX(0); /* Slide in to view */
         opacity: 1 !important;
         visibility: visible !important;
+    }
+
+    /* Mobile Link Readability v4.0 */
+    .navbar-mobile a {
+        color: #ffffff !important;
+        font-size: 1.1rem !important;
+        padding: 15px 25px !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        width: 100%;
+        display: block;
+    }
+
+    .navbar-mobile a:hover {
+        color: #ffcc00 !important;
+        background: rgba(255, 255, 255, 0.02);
     }
 
     /* Sidebar Header (With Logo & Close Button) */
