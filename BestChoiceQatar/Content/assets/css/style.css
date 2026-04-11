@@ -525,24 +525,55 @@ body.drawer-open .premium-floating-nav {
   display: none !important;
 }
 
-/* 🚨 FLOATING ELEMENT LOCKDOWN v7.0 */
-#chatbase-message-bubbles,
-#chatbase-bubble-button,
-.modern-mobile-cta-bar,
+/* 🚨 PREMIUM FLOATING CONTACT ICONS v15.0 - AUTHORITY STYLING */
 .premium-floating-nav {
     position: fixed !important;
-    right: 15px !important;
-    left: auto !important;
-    max-width: calc(100vw - 30px) !important;
-    overflow: hidden !important;
-    z-index: 9997 !important; /* Below Drawer */
+    right: 20px !important;
+    bottom: 110px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+    z-index: 9999999 !important;
 }
 
-/* CLEANUP: Hide offensive floating items when drawer is open to prevent stacking bugs */
-body.drawer-open #chatbase-message-bubbles,
-body.drawer-open .modern-mobile-cta-bar,
-body.drawer-open .premium-floating-nav {
-    display: none !important;
+.floating-item {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff !important;
+    font-size: 28px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-decoration: none !important;
+    box-shadow: -4px 0 15px rgba(0,0,0,0.15) !important;
+    border-radius: 12px !important;
+}
+
+.floating-item i {
+    line-height: 0;
+}
+
+.floating-item:hover {
+    transform: translateX(-3px);
+    width: 63px;
+    color: #fff !important;
+}
+
+.phone-link { background-color: #00AAE5 !important; }
+.whatsapp-link { background-color: #25D366 !important; }
+.email-link { background-color: #ED2B29 !important; }
+
+/* HIDE FLOATING ITEMS WHEN DRAWER OPEN OR ON SMALL MOBILE */
+body.drawer-open .premium-floating-nav,
+body.lock-scroll .premium-floating-nav {
+  display: none !important;
+}
+
+@media (max-width: 768px) {
+    .premium-floating-nav {
+        display: none !important;
+    }
 }
 
 /* Layout Debugging Aid (Comment out for production) */
@@ -1974,66 +2005,7 @@ section {
         background: linear-gradient(45deg,#d32c19 8%,#da6e30 100%);
     }
 
-.fixedIcons {
-    position: fixed;
-    inset: auto 80px 80px auto;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    z-index: 998;
-}
-
-@media(max-width:991px) {
-    .fixedIcons {
-        display: none;
-    }
-}
-
-.fixedIcons .icon {
-    width: 50px;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 24px;
-    position: relative;
-}
-
-    .fixedIcons .icon.call, .fixedIcons .icon.call a span {
-        background-color: #00AAE5;
-    }
-
-    .fixedIcons .icon.whatsapp, .fixedIcons .icon.whatsapp a span {
-        background-color: #25D366;
-    }
-
-    .fixedIcons .icon.email, .fixedIcons .icon.email a span {
-        background-color: #ED2B29;
-    }
-
-    .fixedIcons .icon i, .fixedIcons .icon a span {
-        color: white;
-    }
-
-    .fixedIcons .icon a span {
-        line-height: 50px;
-        right: 60px;
-        position: absolute;
-        text-align: center;
-        width: 120px;
-        visibility: hidden;
-        transition-duration: 0.5s;
-        z-index: 1;
-        opacity: 0;
-        font-size: 18px;
-        top: 0;
-    }
-
-    .fixedIcons .icon a:hover > span {
-        visibility: visible;
-        right: 55px;
-        opacity: 1;
-    }
+/* .fixedIcons styles removed in favor of .premium-floating-nav v15.0 */
 
 /* Mobile Sidebar Elements Consolidated Above */
 
