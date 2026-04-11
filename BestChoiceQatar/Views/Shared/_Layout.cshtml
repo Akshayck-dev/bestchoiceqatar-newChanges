@@ -101,20 +101,13 @@
 
             <div class="header-cta d-none d-lg-flex align-items-center gap-3">
                 <a href="#quote" class="header-pill-cta" data-bs-toggle="modal" data-bs-target="#quoteModal">GET A QUOTE</a>
-                <!-- v15.0 Integrated Drawer Trigger -->
-                <button id="servicesDrawerBtn" class="services-drawer-trigger" title="Our Services" aria-label="Open Services Menu">
-                    <i class="bi bi-grid-3x3-gap"></i>
+                <button id="deskHamburgerBtn" class="desk-menu-trigger" title="Menu" aria-label="Open Navigation Menu">
+                    <i class="bi bi-list"></i>
                 </button>
             </div>
 
         </div>
     </header>
-
-    <!-- No Overlay Here - Relocated to Bottom -->
-
-
-
-    <!-- Navbar/Drawer Elements will be at the bottom for unified stacking -->
 
     <!-- ======= Top Bar ======= -->
     <section id="topbar" class="d-flex align-items-center">
@@ -122,11 +115,8 @@
             <div class="contact-info d-flex align-items-center">
                 <i class="bi bi-envelope-fill"></i><a href="">@settings.Email</a>
                                                    <a href="tel:@settings.Mobile1" class="facebook"><i class="bi bi-phone-fill phone-icon"></i> @settings.Mobile1</a>
-
-
             </div>
             <div class="social-links d-none d-md-block">
-
                 <a target="_blank" href="@settings.Twitter" class="twitter"><i class="bi bi-twitter"></i></a>
                 <a target="_blank" href="@settings.Facebook" class="facebook"><i class="bi bi-facebook"></i></a>
                 <a target="_blank" href="@settings.Instagram" class="instagram"><i class="bi bi-instagram"></i></a>
@@ -135,23 +125,17 @@
         </div>
     </section>
 
-    <!-- ======= Hero Section ======= -->
-
-
     @RenderBody()
-
 
     <!-- ======= Footer ======= -->
     <footer id="footer">
         <div class="footer-top">
             <div class="container">
                 <div class="row">
-
                     <div class="col-lg-3 col-md-6 footer-contact">
                         <div class="footer-logo mb-3">
                              <img src="~/content/assets/img/logo/logo-1.png" width="220" alt="BestChoice Contracting Logo">
                         </div>
-
                         <p class="mt-3">
                             Bestchoice Contracting WLL, Office - 43, 1st floor,<br>
                             Sharq Capital Building, C - ring Road, Doha - Qatar
@@ -161,7 +145,6 @@
                             <strong>Email:</strong> info@bestchoiceqatar.net<br>
                         </p>
                     </div>
-
                     <div class="col-lg-2 col-md-6 footer-links">
                         <h4>Useful Links</h4>
                         <ul>
@@ -173,7 +156,6 @@
                             <li><i class="bx bx-chevron-right"></i> <a href="/contact">Contact</a></li>
                         </ul>
                     </div>
-
                     <div class="col-lg-3 col-md-6 footer-links">
                         <h4>Product & Services</h4>
                         <ul>
@@ -184,7 +166,6 @@
                             <li><i class="bx bx-chevron-right"></i> <a href="/optical-fibre-networks">Optical Fibre Networks</a></li>
                         </ul>
                     </div>
-
                     <div class="col-lg-4 col-md-6 footer-links">
                         <h4>Working Hours</h4>
                         <p>We work 6 days a week, every day excluding major holidays. Contact us if you have an emergency, with our Hotline and Contact form.</p>
@@ -193,11 +174,9 @@
                             <p><strong>Friday:</strong> Holiday</p>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
-
         <div class="footer-bottom-bar py-3">
             <div class="container d-md-flex justify-content-between align-items-center">
                 <div class="copyright text-center text-md-start">
@@ -208,12 +187,14 @@
                 </div>
             </div>
         </div>
-    </footer><!-- End Footer -->
+    </footer>
 
-    <!-- Drawer Overlays (Unified v13 Stacking) -->
+
+    <!-- ======= OFF-CANVAS COMPONENTS (Unified v14.0) ======= -->
+    
     <div id="navbar-overlay" class="navbar-overlay"></div>
+    <div id="servicesDrawerOverlay" class="services-drawer-overlay"></div>
 
-    <!-- ======= MOBILE NAV DRAWER ======= -->
     <ul id="mobileDrawer" class="drawer" role="dialog" aria-label="Mobile Navigation Menu" aria-modal="true" aria-hidden="true">
         <li class="mobile-nav-header">
             <div class="sidebar-header-wrapper">
@@ -232,7 +213,7 @@
                 <li class="dropdown">
                     <a class="nav-link" href="#"><span><i class="bi bi-box-seam me-2"></i>Our Products / Services</span> <i class="bi bi-chevron-down"></i></a>
                     <ul>
-                        <li><a href="/site-cabins-offices-welfare-accommodation" class="parent-highlight"><span>Porta Cabin Offices</span></a></li>
+                        <li><a href="/site-cabins-offices-welfare-accommodation">Porta Cabin Offices</a></li>
                         <li><a href="/building-painting-contractor">Building Painting Contractor</a></li>
                         <li><a href="/steel-aluminum-fabrication">Steel & Aluminum Fabrication</a></li>
                         <li><a href="/general-contracting">General Contracting</a></li>
@@ -245,451 +226,198 @@
                 <li><a class="nav-link" target="_blank" href="~/Content/assets/Brochure/Brochure.html.pdf"><i class="bi bi-file-earmark-pdf me-2"></i>Brochure</a></li>
             </ul>
         </li>
-
-        <!-- Bottom CTA -->
         <li class="drawer-footer">
             <div class="sidebar-cta-wrapper">
-                <a href="tel:@settings.Mobile1" class="s-cta-btn s-cta-call">
-                    <i class="bi bi-telephone"></i>
-                    <span>Call Now</span>
-                </a>
-                <a href="@settings.Whatsup" target="_blank" class="s-cta-btn s-cta-wa">
-                    <i class="bi bi-whatsapp"></i>
-                    <span>WhatsApp</span>
-                </a>
+                <a href="tel:@settings.Mobile1" class="s-cta-btn s-cta-call"><i class="bi bi-telephone"></i><span>Call Now</span></a>
+                <a href="@settings.Whatsup" target="_blank" class="s-cta-btn s-cta-wa"><i class="bi bi-whatsapp"></i><span>WhatsApp</span></a>
             </div>
         </li>
     </ul>
 
-    <!-- ======= LEFT SERVICES DRAWER ======= -->
-    <div id="servicesDrawerOverlay" class="services-drawer-overlay"></div>
     <aside id="servicesDrawer" class="services-drawer" role="navigation" aria-label="Services Menu">
         <div class="services-drawer-header">
             <img src="~/Content/assets/img/logo/animation.gif" alt="BestChoice" class="services-drawer-logo">
-            <button id="servicesDrawerClose" class="services-drawer-close" aria-label="Close Services Menu">
-                <i class="bi bi-x-lg"></i>
-            </button>
+            <button id="servicesDrawerClose" class="services-drawer-close" aria-label="Close Services Menu"><i class="bi bi-x-lg"></i></button>
         </div>
         <div class="services-drawer-body">
-            <p class="services-drawer-tagline">Premium Construction &amp; Fabrication Solutions in Qatar</p>
+            <p class="services-drawer-tagline">Premium Construction &amp; Fabrication Solutions</p>
             <h5 class="services-drawer-section-title"><i class="bi bi-box-seam"></i> Products</h5>
             <ul class="services-drawer-links">
-                <li>
-                    <a href="/site-cabins-offices-welfare-accommodation" class="services-drawer-link">
-                        <span class="sdl-icon"><i class="bi bi-building"></i></span>
-                        <span class="sdl-info">
-                            <strong>Porta Cabin Offices</strong>
-                            <small>Modular site offices &amp; welfare units</small>
-                        </span>
-                        <i class="bi bi-chevron-right sdl-arrow"></i>
-                    </a>
-                </li>
-                <li>
-                    <a href="/portable-cabin-fabrication" class="services-drawer-link">
-                        <span class="sdl-icon"><i class="bi bi-house-gear"></i></span>
-                        <span class="sdl-info">
-                            <strong>Portable Cabin Fabrication</strong>
-                            <small>Custom-built cabins &amp; site shelters</small>
-                        </span>
-                        <i class="bi bi-chevron-right sdl-arrow"></i>
-                    </a>
-                </li>
-                <li>
-                    <a href="/product/security-guard-cabins" class="services-drawer-link">
-                        <span class="sdl-icon"><i class="bi bi-shield-check"></i></span>
-                        <span class="sdl-info">
-                            <strong>Security Guard Cabins</strong>
-                            <small>Robust prefab guard posts</small>
-                        </span>
-                        <i class="bi bi-chevron-right sdl-arrow"></i>
-                    </a>
-                </li>
-                <li>
-                    <a href="/product/labor-camps-accommodation" class="services-drawer-link">
-                        <span class="sdl-icon"><i class="bi bi-people"></i></span>
-                        <span class="sdl-info">
-                            <strong>Labour Camp Accommodation</strong>
-                            <small>Compliant, comfortable camps</small>
-                        </span>
-                        <i class="bi bi-chevron-right sdl-arrow"></i>
-                    </a>
-                </li>
+                <li><a href="/site-cabins-offices-welfare-accommodation" class="services-drawer-link"><strong>Porta Cabin Offices</strong></a></li>
+                <li><a href="/portable-cabin-fabrication" class="services-drawer-link"><strong>Portable Cabin Fabrication</strong></a></li>
+                <li><a href="/product/security-guard-cabins" class="services-drawer-link"><strong>Security Guard Cabins</strong></a></li>
             </ul>
-
             <h5 class="services-drawer-section-title mt-4"><i class="bi bi-tools"></i> Services</h5>
             <ul class="services-drawer-links">
-                <li>
-                    <a href="/steel-aluminum-fabrication" class="services-drawer-link">
-                        <span class="sdl-icon"><i class="bi bi-layers"></i></span>
-                        <span class="sdl-info">
-                            <strong>Steel &amp; Aluminum Fabrication</strong>
-                            <small>Precision metal works &amp; structures</small>
-                        </span>
-                        <i class="bi bi-chevron-right sdl-arrow"></i>
-                    </a>
-                </li>
-                <li>
-                    <a href="/building-painting-contractor" class="services-drawer-link">
-                        <span class="sdl-icon"><i class="bi bi-brush"></i></span>
-                        <span class="sdl-info">
-                            <strong>Building Painting</strong>
-                            <small>Interior &amp; exterior painting services</small>
-                        </span>
-                        <i class="bi bi-chevron-right sdl-arrow"></i>
-                    </a>
-                </li>
-                <li>
-                    <a href="/general-contracting" class="services-drawer-link">
-                        <span class="sdl-icon"><i class="bi bi-hammer"></i></span>
-                        <span class="sdl-info">
-                            <strong>General Contracting</strong>
-                            <small>End-to-end project execution</small>
-                        </span>
-                        <i class="bi bi-chevron-right sdl-arrow"></i>
-                    </a>
-                </li>
-                <li>
-                    <a href="/optical-fibre-networks" class="services-drawer-link">
-                        <span class="sdl-icon"><i class="bi bi-router"></i></span>
-                        <span class="sdl-info">
-                            <strong>Optical Fibre Networks</strong>
-                            <small>High-speed cabling &amp; infrastructure</small>
-                        </span>
-                        <i class="bi bi-chevron-right sdl-arrow"></i>
-                    </a>
-                </li>
+                <li><a href="/steel-aluminum-fabrication" class="services-drawer-link"><strong>Steel &amp; Aluminum Fabrication</strong></a></li>
+                <li><a href="/building-painting-contractor" class="services-drawer-link"><strong>Building Painting</strong></a></li>
             </ul>
-        </div>
-        <div class="services-drawer-footer">
-            <a href="/contact" class="services-drawer-cta">
-                <i class="bi bi-chat-dots"></i> Get a Free Quote
-            </a>
-            <a href="~/Content/assets/Brochure/Brochure.html.pdf" target="_blank" class="services-drawer-cta-outline">
-                <i class="bi bi-file-earmark-pdf"></i> Download Brochure
-            </a>
         </div>
     </aside>
 
-    <div class="deskHamburgerOverlay" style="z-index: 999996 !important;">
-        <div class="deskHamburgerPopup" style="z-index: 999999 !important;">
+    <!-- Mobile Menu Toggle Button -->
+    <button id="menuBtn" class="d-lg-none" aria-label="Open Navigation Menu" aria-expanded="false" aria-controls="mobileDrawer" 
+            style="position: fixed; top: 18px; right: 18px; z-index: 2000005; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; background: #111; color: #fff; border: none; border-radius: 6px; font-size: 26px; cursor: pointer; box-shadow: 0 4px 20px rgba(0,0,0,0.4);">
+        <i class="bi bi-list"></i>
+    </button>
+
+    <!-- Floating Navigation Components -->
+    <div class="modern-mobile-cta-bar d-md-none">
+        <div class="cta-inner">
+            <a href="/index" class="cta-btn cta-home"><i class="bi bi-house"></i><span>Home</span></a>
+            <div class="cta-divider"></div>
+            <a href="tel:@settings.Mobile1" class="cta-btn cta-phone"><i class="bi bi-telephone"></i><span>Call</span></a>
+            <div class="cta-divider"></div>
+            <a href="@settings.Whatsup" target="_blank" class="cta-btn cta-whatsapp"><i class="bi bi-whatsapp"></i><span>WhatsApp</span></a>
+        </div>
+    </div>
+
+    <div class="premium-floating-nav">
+        <a href="tel:@settings.Mobile1" class="floating-item phone-link"><i class="bi bi-telephone"></i></a>
+        <a href="@settings.Whatsup" target="_blank" class="floating-item whatsapp-link"><i class="bi bi-whatsapp"></i></a>
+        <a href="mailto:@settings.Email" class="floating-item email-link"><i class="bi bi-envelope"></i></a>
+    </div>
+
+    <div class="deskHamburgerOverlay">
+        <div class="deskHamburgerPopup">
             <button class="deskHamburgerClose" id="deskHamburgerClose"><i class="bi bi-x"></i></button>
-            <div class="p-4 popup-content-box">
-                <img class="img-fluid logo mb-4" src="./Content/assets/img/logo/animation.gif" alt="" style="max-width: 150px;">
-                <p class="mb-5 lead text-white">Welcome to Best Choice Contracting, a leading provider of prefabricated structures and painting services in Qatar. Established in 2009, we have years of experience in the industry and a team of skilled professionals who are committed to delivering high-quality solutions to our clients.</p>
-                <h3 class="text-warning mb-4">Contact Info</h3>
-                <div class="contactItem mb-3 d-flex align-items-center gap-3">
-                    <i class="bi bi-geo-alt fs-4 text-warning"></i>
-                    <p class="mb-0">@settings.Location</p>
+            <div class="p-5 popup-content-box">
+                <div class="mb-5">
+                    <img class="img-fluid logo mb-4" src="~/content/assets/img/logo/animation.gif" alt="BestChoice" style="max-width: 180px;">
                 </div>
-                <div class="contactItem mb-3 d-flex align-items-center gap-3">
-                    <i class="bi bi-envelope fs-4 text-warning"></i>
-                    <p class="mb-0">@settings.Email</p>
+
+                <div class="content-section mb-5">
+                    <h4 class="text-white fw-bold mb-3" style="font-size: 1.4rem;">About Us</h4>
+                    <p class="text-white-50" style="font-size: 1.05rem; line-height: 1.8;">
+                        Bestchoice Contracting WLL is a leading manufacturer and supplier of Porta Cabins, Steel Fabrication, 
+                        and General Contracting units in Doha, serving clients across the State of Qatar. We specialize in 
+                        building high-quality, durable, and fully customizable cabins for construction, industrial, and 
+                        commercial use since 2009.
+                    </p>
                 </div>
-                <div class="contactItem mb-3 d-flex align-items-center gap-3">
-                    <i class="bi bi-telephone fs-4 text-warning"></i>
-                    <p class="mb-0">@settings.Mobile1<br>@settings.Mobile2</p>
-                </div>
-                <div class="socials mt-5 d-flex gap-3">
-                    <a href="@settings.Whatsup" class="btn btn-outline-warning rounded-circle"><i class="bi bi-whatsapp"></i></a>
-                    <a href="@settings.Instagram" class="btn btn-outline-warning rounded-circle"><i class="bi bi-instagram"></i></a>
-                    <a href="@settings.Facebook" class="btn btn-outline-warning rounded-circle"><i class="bi bi-facebook"></i></a>
-                    <a href="@settings.Twitter" class="btn btn-outline-warning rounded-circle"><i class="bi bi-twitter"></i></a>
+
+                <div class="content-section">
+                    <h4 class="text-white fw-bold mb-4" style="font-size: 1.4rem;">Contact Info</h4>
+                    
+                    <div class="contact-row mb-4 d-flex align-items-start gap-3">
+                        <i class="bi bi-geo-alt-fill text-bc-yellow fs-4"></i>
+                        <p class="mb-0 text-white-50" style="font-size: 1.05rem;">
+                            Office - 43, 1st floor, Sharq Capital Building,<br>
+                            C - ring Road, Doha - Qatar
+                        </p>
+                    </div>
+
+                    <div class="contact-row mb-4 d-flex align-items-center gap-3">
+                        <i class="bi bi-telephone-fill text-bc-yellow fs-4"></i>
+                        <div class="text-white-50" style="font-size: 1.05rem;">
+                            <a href="tel:@settings.Mobile1" class="text-white-50 d-block">@settings.Mobile1</a>
+                            <a href="tel:+97444095443" class="text-white-50 d-block">+974 44095443</a>
+                        </div>
+                    </div>
+
+                    <div class="contact-row d-flex align-items-center gap-3">
+                        <i class="bi bi-envelope-fill text-bc-yellow fs-4"></i>
+                        <a href="mailto:@settings.Email" class="text-white-50" style="font-size: 1.05rem;">@settings.Email</a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- v4.0 Emergency Navigation Script -->
-    <script>
-        (function() {
-            console.log("BestChoice Navigation v4.0 Logic Initialized");
-            
-            // Indestructible Toggle for Mobile
-            document.addEventListener('click', function(e) {
-                if(e.target.closest('.mobile-nav-toggle')) {
-                    const nav = document.getElementById('navbar');
-                    const overlay = document.getElementById('navbar-overlay');
-                    nav.classList.toggle('navbar-mobile');
-                    overlay.classList.toggle('active');
-                    document.body.classList.toggle('mobile-nav-active');
-                    document.body.classList.toggle('navbar-mobile-active');
-                    
-                    const btn = e.target.closest('.mobile-nav-toggle');
-                    btn.classList.toggle('bi-list');
-                    btn.classList.toggle('bi-x');
-                    console.log("Mobile Nav Toggled:", nav.classList.contains('navbar-mobile'));
-                }
-                
-                // Overlay click closure
-                if(e.target.id === 'navbar-overlay' || e.target.id === 'mobile-nav-close') {
-                    document.getElementById('navbar').classList.remove('navbar-mobile');
-                    document.getElementById('navbar-overlay').classList.remove('active');
-                    document.body.classList.remove('mobile-nav-active');
-                    document.body.classList.remove('navbar-mobile-active');
-                    const btn = document.querySelector('.mobile-nav-toggle');
-                    btn.classList.add('bi-list');
-                    btn.classList.remove('bi-x');
-                }
-            });
-        })();
-    </script>
-
-
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
 
     <!-- Vendor JS Files -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-    
-    <!-- JavaScript Bundle with Popper -->
-    <script src="@("https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js")" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
-    
-    <!-- Modern Counter & Animations -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="@("https://cdn.jsdelivr.net/npm/@srexi/purecounterjs/dist/purecounter_vanilla.js")"></script>
     <script src="~/Content/assets/vendor/aos/aos.js"></script>
-    
-    <!-- Vendor Extras -->
     <script src="~/Content/assets/vendor/glightbox/js/glightbox.min.js"></script>
-    <script src="~/Content/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
     <script src="~/Content/assets/vendor/swiper/swiper-bundle.min.js"></script>
-    <script src="~/Content/assets/vendor/php-email-form/validate.js"></script>
     <script src="~/Content/bootstrap-toastr/toastr.min.js"></script>
-    <script src="@("https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js")"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
-
-    <!-- Application Core (Cleaned v11.0) -->
-    <script src="~/Content/app.js?v=11.0" type="text/javascript"></script>
-    <script src="~/Scripts/app.js?v=11.0"></script>
-    
-    <!-- Template Main (Consolidated) -->
+    <!-- Application Core Scripts -->
+    <script src="~/Content/app.js?v=11.0"></script>
     <script src="~/Content/assets/js/main.js?v=11.0"></script>
-
-    <!-- Chatbase Enabling (Black Chatbot) -->
-    <script src="https://www.chatbase.co/embed.min.js" chatbotId="Bh3opGpJSXUX7p-WJMamC" defer></script>
-
-    <script>
-        $(document).ready(function () {
-            // Initialize Core App
-            if (typeof App !== 'undefined') App.init();
-            
-            // Initialize PureCounter
-            try {
-                if (typeof PureCounter !== 'undefined') {
-                    new PureCounter();
-                }
-            } catch (e) { console.error("PureCounter Init Error:", e); }
-
-            @{
-                if (TempData["Notification"] != null)
-                {
-                    Notification notification = (Notification)TempData["Notification"];
-                    <text>if(typeof WebApp !== 'undefined') WebApp.Notifications.Show('@notification.Type', '@notification.Text');</text>
-                }
-             }
-        });
-    </script>
-
-    <!-- Modern Centered Mobile Floating CTA Bar -->
-    <div class="modern-mobile-cta-bar d-md-none">
-        <div class="cta-inner">
-            <a href="/index" class="cta-btn cta-home" title="Go to Home">
-                <i class="bi bi-house"></i>
-                <span>Home</span>
-            </a>
-            <div class="cta-divider"></div>
-            <a href="tel:@settings.Mobile1" class="cta-btn cta-phone" title="Call Us">
-                <i class="bi bi-telephone"></i>
-                <span>Call</span>
-            </a>
-            <div class="cta-divider"></div>
-            <a href="@settings.Whatsup" target="_blank" class="cta-btn cta-whatsapp" title="WhatsApp Chat">
-                <i class="bi bi-whatsapp"></i>
-                <span>WhatsApp</span>
-            </a>
-            <div class="cta-divider"></div>
-            <a href="mailto:@settings.Email" class="cta-btn cta-email" title="Email Us">
-                <i class="bi bi-envelope"></i>
-                <span>Email</span>
-            </a>
-        </div>
-    </div>
-
-    <!-- Unified Premium Floating Stack (Right Side) -->
-    <div class="premium-floating-nav">
-        <a href="tel:@settings.Mobile1" class="floating-item phone-link" title="Call Us Now">
-            <i class="bi bi-telephone"></i>
-        </a>
-        <a href="@settings.Whatsup" target="_blank" class="floating-item whatsapp-link" title="WhatsApp Chat">
-            <i class="bi bi-whatsapp"></i>
-        </a>
-        <a href="mailto:@settings.Email" class="floating-item email-link" title="Email Us">
-            <i class="bi bi-envelope"></i>
-        </a>
-    </div>
-
-    <style>
-        /* [MAINTAINED FROM v10.0 HARD FIX] */
-        .premium-floating-nav { position: fixed; right: 20px; bottom: 100px; z-index: 10000; display: flex; flex-direction: column; gap: 8px; }
-        .floating-item { width: 52px; height: 52px; background: #111; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 22px; text-decoration: none; border-radius: 5px; box-shadow: 0 8px 15px rgba(0,0,0,0.2); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); border: 1px solid rgba(255,204,0,0.1); }
-        .floating-item.phone-link { background: #000; color: #ffcc00; }
-        .floating-item.whatsapp-link { background: #25D366; }
-        .floating-item:hover { transform: scale(1.1) translateX(-5px); box-shadow: 0 12px 20px rgba(0,0,0,0.3); color: #fff; }
-        @@media (max-width: 767.98px) { .premium-floating-nav { display: none !important; } }
-        .modern-mobile-cta-bar { position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%); z-index: 9999; width: 92%; max-width: 400px; }
-        .cta-inner { background: rgba(17, 17, 17, 0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 50px; display: flex; align-items: center; justify-content: space-around; padding: 8px 15px; box-shadow: 0 15px 35px rgba(0,0,0,0.4); }
-        .cta-btn { display: flex; flex-direction: column; align-items: center; justify-content: center; text-decoration: none !important; color: #fff; padding: 6px 8px; transition: all 0.3s ease; flex: 1; }
-        .cta-btn i { font-size: 20px; margin-bottom: 2px; }
-        .cta-btn span { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; opacity: 0.8; }
-        .cta-phone i { color: #ffcc00; } 
-        .cta-whatsapp i { color: #25D366; }
-        .cta-divider { width: 1px; height: 30px; background: rgba(255, 255, 255, 0.1); }
-    </style>
-
-    <!-- v13.0 Mobile Hamburger Toggle (Always On Top) -->
-    <button id="menuBtn"
-            class="d-lg-none"
-            aria-label="Open Navigation Menu"
-            aria-expanded="false"
-            aria-controls="mobileDrawer"
-            style="position: fixed; top: 18px; right: 18px; z-index: 2000005; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; background: #111; color: #fff; border: none; border-radius: 6px; font-size: 26px; cursor: pointer; box-shadow: 0 4px 20px rgba(0,0,0,0.4);">
-        <i class="bi bi-list"></i>
-    </button>
 
     <script>
         (function() {
             "use strict";
+            const lockClass = "lock-scroll";
+            const html = document.documentElement;
+            const body = document.body;
 
-            /* ── UNIFIED DRAWER ENGINE v13.0 ── */
             function forceCloseAll() {
-                const mobileDrawer = document.getElementById("mobileDrawer");
-                const servicesDrawer = document.getElementById("servicesDrawer");
-                const navOverlay = document.getElementById("navbar-overlay");
-                const servOverlay = document.getElementById("servicesDrawerOverlay");
+                const els = [
+                    document.getElementById("mobileDrawer"),
+                    document.getElementById("servicesDrawer"),
+                    document.getElementById("navbar-overlay"),
+                    document.getElementById("servicesDrawerOverlay"),
+                    document.querySelector(".deskHamburgerOverlay")
+                ];
+                els.forEach(el => el && el.classList.remove("open", "active", "show"));
                 const menuBtn = document.getElementById("menuBtn");
-
-                mobileDrawer && mobileDrawer.classList.remove("open");
-                servicesDrawer && servicesDrawer.classList.remove("open");
-                navOverlay && navOverlay.classList.remove("active");
-                servOverlay && servOverlay.classList.remove("active");
                 if (menuBtn) menuBtn.innerHTML = '<i class="bi bi-list"></i>';
-                document.documentElement.style.overflow = "";
-                console.log("v13.0: All drawers forced closed");
+                html.classList.remove(lockClass);
+                body.classList.remove(lockClass);
             }
 
-            /* ── RIGHT MOBILE NAV DRAWER ── */
-            function initMobileDrawer() {
-                const menuBtn = document.getElementById("menuBtn");
-                const drawer  = document.getElementById("mobileDrawer");
-                const overlay = document.getElementById("navbar-overlay");
-                if (!menuBtn || !drawer || !overlay) {
-                    console.warn("v13.0 Mobile Drawer: missing element", { menuBtn, drawer, overlay });
-                    return;
+            function openDrawer(drawerId, overlayId, btnId) {
+                forceCloseAll();
+                const drawer = document.getElementById(drawerId);
+                const overlay = document.getElementById(overlayId);
+                const btn = document.getElementById(btnId);
+                drawer && drawer.classList.add("open");
+                overlay && overlay.classList.add("active");
+                if (btn && btnId === "menuBtn") btn.innerHTML = '<i class="bi bi-x"></i>';
+                html.classList.add(lockClass);
+                body.classList.add(lockClass);
+            }
+
+            const menuBtn = document.getElementById("menuBtn");
+            if (menuBtn) menuBtn.onclick = () => {
+                const drawer = document.getElementById("mobileDrawer");
+                drawer.classList.contains("open") ? forceCloseAll() : openDrawer("mobileDrawer", "navbar-overlay", "menuBtn");
+            };
+
+            const servBtn = document.getElementById("servicesDrawerBtn");
+            if (servBtn) servBtn.onclick = () => {
+                const drawer = document.getElementById("servicesDrawer");
+                drawer.classList.contains("open") ? forceCloseAll() : openDrawer("servicesDrawer", "servicesDrawerOverlay", "servicesDrawerBtn");
+            };
+
+            const deskBtn = document.getElementById("deskHamburgerBtn");
+            if (deskBtn) deskBtn.onclick = () => {
+                const overlay = document.querySelector(".deskHamburgerOverlay");
+                if (overlay.classList.contains("open")) {
+                    forceCloseAll();
+                } else {
+                    forceCloseAll();
+                    overlay.classList.add("open");
+                    html.classList.add(lockClass);
+                    body.classList.add(lockClass);
                 }
+            };
 
-                console.log("v13.0 Mobile Drawer Engine Active");
+            ["navbar-overlay", "servicesDrawerOverlay", "mobile-nav-close", "servicesDrawerClose", "deskHamburgerClose"].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.onclick = forceCloseAll;
+            });
 
-                function openMobileDrawer() {
-                    // Close others first
-                    const servicesDrawer = document.getElementById("servicesDrawer");
-                    const servOverlay = document.getElementById("servicesDrawerOverlay");
-                    servicesDrawer && servicesDrawer.classList.remove("open");
-                    servOverlay && servOverlay.classList.remove("active");
+            // Extra support for custom close class
+            document.querySelectorAll(".deskHamburgerClose").forEach(el => el.onclick = forceCloseAll);
 
-                    drawer.classList.add("open");
-                    overlay.classList.add("active");
-                    menuBtn.innerHTML = '<i class="bi bi-x"></i>';
-                    document.documentElement.style.overflow = "hidden";
-                    menuBtn.setAttribute("aria-expanded", "true");
-                    console.log("v13.0 Mobile Drawer Opened");
-                }
-
-                function toggleMobileDrawer() {
-                    drawer.classList.contains("open") ? forceCloseAll() : openMobileDrawer();
-                }
-
-                menuBtn.onclick = function(e) {
+            document.querySelectorAll("#mobileDrawer .dropdown > a").forEach(link => {
+                link.onclick = function(e) {
                     e.preventDefault();
-                    e.stopPropagation();
-                    toggleMobileDrawer();
+                    const sub = this.nextElementSibling;
+                    if (sub) sub.classList.toggle("dropdown-active");
                 };
+            });
 
-                overlay.onclick = forceCloseAll;
-
-                const closeBtn = document.getElementById("mobile-nav-close");
-                if (closeBtn) closeBtn.onclick = forceCloseAll;
-
-                // Dropdown toggles inside mobile drawer
-                drawer.querySelectorAll(".dropdown > a").forEach(function(link) {
-                    link.addEventListener("click", function(e) {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        var subMenu = this.nextElementSibling;
-                        if (subMenu) {
-                            subMenu.classList.toggle("dropdown-active");
-                            // Toggle chevron icon
-                            const icon = this.querySelector("i:last-child");
-                            if (icon) {
-                                icon.classList.toggle("bi-chevron-up");
-                                icon.classList.toggle("bi-chevron-down");
-                            }
-                        }
-                    });
-                });
-            }
-
-            /* ── LEFT SERVICES DRAWER ── */
-            function initServicesDrawer() {
-                const openBtn  = document.getElementById("servicesDrawerBtn");
-                const closeBtn = document.getElementById("servicesDrawerClose");
-                const drawer   = document.getElementById("servicesDrawer");
-                const overlay  = document.getElementById("servicesDrawerOverlay");
-                if (!openBtn || !drawer || !overlay) return;
-
-                console.log("v13.0 Services Drawer Engine Active");
-
-                function openServicesDrawer() {
-                    // Close Mobile Nav first
-                    const mobileDrawer = document.getElementById("mobileDrawer");
-                    const navOverlay = document.getElementById("navbar-overlay");
-                    const menuBtn = document.getElementById("menuBtn");
-                    mobileDrawer && mobileDrawer.classList.remove("open");
-                    navOverlay && navOverlay.classList.remove("active");
-                    if(menuBtn) menuBtn.innerHTML = '<i class="bi bi-list"></i>';
-
-                    drawer.classList.add("open");
-                    overlay.classList.add("active");
-                    document.documentElement.style.overflow = "hidden";
-                    openBtn.setAttribute("aria-expanded", "true");
-                    console.log("v13.0 Services Drawer Opened");
-                }
-
-                openBtn.onclick  = function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    drawer.classList.contains("open") ? forceCloseAll() : openServicesDrawer();
-                };
-                overlay.onclick  = forceCloseAll;
-                if (closeBtn) closeBtn.onclick = forceCloseAll;
-
-                // ESC key to close all
-                document.addEventListener("keydown", function(e) {
-                    if (e.key === "Escape") forceCloseAll();
-                });
-            }
-
-            // Boot both engines
-            function boot() {
-                initMobileDrawer();
-                initServicesDrawer();
-            }
-
-            if (document.readyState === "loading") {
-                document.addEventListener("DOMContentLoaded", boot);
-            } else {
-                boot();
-            }
+            document.addEventListener("keydown", e => { if (e.key === "Escape") forceCloseAll(); });
         })();
     </script>
+    <script src="https://www.chatbase.co/embed.min.js" chatbotId="Bh3opGpJSXUX7p-WJMamC" defer></script>
 </body>
-
 </html>
