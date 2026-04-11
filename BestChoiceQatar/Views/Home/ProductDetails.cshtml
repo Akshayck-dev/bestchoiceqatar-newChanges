@@ -192,7 +192,8 @@
     }
 
     body {
-        font-family: 'Outfit', sans-serif;
+        font-family: var(--font-body);
+        font-size: var(--fs-base);
         background-color: var(--light-bg);
     }
 
@@ -224,21 +225,21 @@
 
     .hero-title {
         font-weight: 900;
-        font-size: clamp(2.2rem, 5vw, 4rem);
+        font-size: var(--fs-h1);
         line-height: 1.1;
         text-transform: uppercase;
         color: #fff;
         margin-bottom: 2rem;
-        letter-spacing: -1px;
+        letter-spacing: var(--ls-tight);
     }
 
     .hero-subtitle {
-        font-size: clamp(1rem, 1.8vw, 1.3rem);
+        font-size: var(--fs-md);
         color: rgba(255, 255, 255, 0.8);
         margin-bottom: 3rem;
         border-left: 4px solid var(--primary-yellow);
         padding-left: 20px;
-        line-height: 1.6;
+        line-height: var(--lh-body);
     }
 
     .section-label {
@@ -264,15 +265,17 @@
     }
 
     .main-description {
-        font-size: 1.15rem;
-        line-height: 1.8;
-        color: #444;
+        font-size: var(--fs-md);
+        line-height: var(--lh-body);
+        color: #111;
         margin-bottom: 40px;
+        font-weight: 500;
     }
 
     .detailed-text {
-        color: #666;
-        line-height: 1.8;
+        color: #444;
+        line-height: var(--lh-body);
+        font-size: var(--fs-base);
         margin-bottom: 60px;
     }
 
@@ -303,7 +306,7 @@
     .feature-item p {
         margin-bottom: 0;
         font-weight: 600;
-        font-size: 0.95rem;
+        font-size: var(--fs-base);
         color: #333;
     }
 
@@ -336,8 +339,8 @@
     }
 
     .spec-table td {
-        color: #aaa;
-        font-size: 1rem;
+        color: #ccc;
+        font-size: var(--fs-base);
     }
 
     /* Sidebar Navigation */

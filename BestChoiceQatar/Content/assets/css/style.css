@@ -3,27 +3,27 @@
   --font-heading: 'Poppins', 'Raleway', sans-serif;
   --font-body: 'Inter', system-ui, -apple-system, sans-serif;
 
-  /* Responsive Font Scale (Clamp) */
-  --fs-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.8125rem);    /* ~12px to 13px */
-  --fs-sm: clamp(0.8125rem, 0.75rem + 0.3vw, 0.875rem);   /* ~13px to 14px */
-  --fs-base: clamp(0.9375rem, 0.85rem + 0.4vw, 1.0625rem); /* ~15px to 17px */
-  --fs-md: clamp(1.125rem, 1rem + 0.6vw, 1.25rem);        /* ~18px to 20px */
-  --fs-lg: clamp(1.25rem, 1.1rem + 0.8vw, 1.5rem);        /* ~20px to 24px */
-  --fs-xl: clamp(1.5rem, 1.3rem + 1vw, 2rem);             /* ~24px to 32px */
+  /* Responsive Font Scale (Clamp) - Increased for better readability */
+  --fs-xs: clamp(0.8125rem, 0.75rem + 0.3vw, 0.875rem);   /* ~13px to 14px */
+  --fs-sm: clamp(0.875rem, 0.8rem + 0.4vw, 1rem);        /* ~14px to 16px */
+  --fs-base: clamp(1rem, 0.95rem + 0.5vw, 1.125rem);     /* ~16px to 18px */
+  --fs-md: clamp(1.125rem, 1.05rem + 0.8vw, 1.375rem);   /* ~18px to 22px */
+  --fs-lg: clamp(1.375rem, 1.25rem + 1vw, 1.75rem);      /* ~22px to 28px */
+  --fs-xl: clamp(1.75rem, 1.5rem + 1.5vw, 2.5rem);       /* ~28px to 40px */
   
-  --fs-h4: clamp(1.25rem, 1.1rem + 0.8vw, 1.5rem);        /* ~20px to 24px */
-  --fs-h3: clamp(1.5rem, 1.3rem + 1vw, 2rem);             /* ~24px to 32px */
-  --fs-h2: clamp(2rem, 1.7rem + 1.5vw, 3rem);             /* ~32px to 48px */
-  --fs-h1: clamp(2.5rem, 2rem + 3vw, 4.5rem);             /* ~40px to 72px */
+  --fs-h4: clamp(1.375rem, 1.25rem + 1vw, 1.75rem);      /* ~22px to 28px */
+  --fs-h3: clamp(1.75rem, 1.5rem + 1.5vw, 2.5rem);       /* ~28px to 40px */
+  --fs-h2: clamp(2.25rem, 2rem + 2.5vw, 3.75rem);        /* ~36px to 60px */
+  --fs-h1: clamp(2.75rem, 2.5rem + 4vw, 5rem);           /* ~44px to 80px */
 
   /* Line Heights */
-  --lh-body: 1.6;
-  --lh-heading: 1.2;
+  --lh-body: 1.7; /* Slightly more breathing room */
+  --lh-heading: 1.15;
 
   /* Letter Spacing */
   --ls-tight: -0.02em;
   --ls-normal: 0;
-  --ls-wide: 0.02em;
+  --ls-wide: 0.03em;
 }
 
 /* Layout Restoration - v12.0 Core Baseline */
@@ -1579,11 +1579,12 @@ section {
 #Products .Products-title {
     color: #333;
     font-weight: 700;
-    font-size: 28px;
+    font-size: var(--fs-h3);
 }
 
 #Products .Products-text {
-    line-height: 26px;
+    line-height: var(--lh-body);
+    font-size: var(--fs-base);
     margin-bottom: 15px;
 }
 
@@ -1593,8 +1594,8 @@ section {
 
 .about .content h3 {
     font-weight: 700;
-    font-size: 28px;
-    font-family: "Poppins", sans-serif;
+    font-size: var(--fs-h3);
+    font-family: var(--font-heading);
 }
 
 .Products .content ul {
