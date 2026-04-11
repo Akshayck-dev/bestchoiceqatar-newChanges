@@ -573,6 +573,19 @@ body.drawer-open .premium-floating-nav {
     .mobile-nav-toggle { display: none !important; }
 }
 
+@media (min-width: 992px) {
+    .drawer, 
+    .services-drawer, 
+    .services-drawer-overlay, 
+    .navbar-overlay, 
+    .mobile-nav-toggle,
+    #menuBtn { 
+        display: none !important; 
+        visibility: hidden !important;
+        pointer-events: none !important;
+    }
+}
+
 /* Mobile Link Readability v5.0 */
 .navbar-mobile a {
     color: #ffffff !important;
