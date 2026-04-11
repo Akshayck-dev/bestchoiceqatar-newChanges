@@ -3,18 +3,18 @@
   --font-heading: 'Poppins', 'Raleway', sans-serif;
   --font-body: 'Inter', system-ui, -apple-system, sans-serif;
 
-  /* Responsive Font Scale (Significant Increase) */
-  --fs-xs: clamp(0.9375rem, 0.85rem + 0.4vw, 1rem);      /* ~15px to 16px */
-  --fs-sm: clamp(1rem, 0.95rem + 0.5vw, 1.125rem);      /* ~16px to 18px */
-  --fs-base: clamp(1.125rem, 1.05rem + 0.8vw, 1.3125rem); /* ~18px to 21px */
-  --fs-md: clamp(1.25rem, 1.15rem + 1vw, 1.625rem);      /* ~20px to 26px */
-  --fs-lg: clamp(1.5rem, 1.35rem + 1.5vw, 2rem);        /* ~24px to 32px */
-  --fs-xl: clamp(2rem, 1.75rem + 2vw, 3rem);            /* ~32px to 48px */
+  /* Responsive Font Scale (v3.0 - Extreme Visibility) */
+  --fs-xs: clamp(1rem, 0.95rem + 0.5vw, 1.125rem);       /* ~16px to 18px */
+  --fs-sm: clamp(1.125rem, 1.05rem + 0.6vw, 1.25rem);    /* ~18px to 20px */
+  --fs-base: clamp(1.25rem, 1.15rem + 1vw, 1.5rem);      /* ~20px to 24px */
+  --fs-md: clamp(1.5rem, 1.35rem + 1.2vw, 1.875rem);     /* ~24px to 30px */
+  --fs-lg: clamp(1.75rem, 1.5rem + 1.8vw, 2.5rem);       /* ~28px to 40px */
+  --fs-xl: clamp(2.5rem, 2rem + 3vw, 4rem);             /* ~40px to 64px */
   
-  --fs-h4: clamp(1.625rem, 1.5rem + 1.2vw, 2.25rem);    /* ~26px to 36px */
-  --fs-h3: clamp(2rem, 1.75rem + 2vw, 3rem);            /* ~32px to 48px */
-  --fs-h2: clamp(2.75rem, 2.5rem + 3vw, 4.5rem);        /* ~44px to 72px */
-  --fs-h1: clamp(3.5rem, 3rem + 5vw, 6.5rem);           /* ~56px to 104px */
+  --fs-h4: clamp(1.875rem, 1.75rem + 1.5vw, 2.75rem);    /* ~30px to 44px */
+  --fs-h3: clamp(2.5rem, 2rem + 3vw, 4rem);             /* ~40px to 64px */
+  --fs-h2: clamp(3.5rem, 3rem + 5vw, 6rem);             /* ~56px to 96px */
+  --fs-h1: clamp(4.5rem, 4rem + 8vw, 8.5rem);           /* ~72px to 136px */
 
   /* Line Heights */
   --lh-body: 1.7; /* Slightly more breathing room */
@@ -35,14 +35,15 @@
 body {
     font-family: var(--font-body);
     font-size: var(--fs-base);
-    line-height: var(--lh-body);
-    color: #444;
+    line-height: 1.6; /* Tightened for larger font blocks */
+    color: #111; /* Coal Black for Maximum Contrast */
+    font-weight: 500; /* Medium weight for better strike visibility */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
 
 a {
-    color: #444444;
+    color: #111111;
     text-decoration: none;
     transition: 0.3s;
 }

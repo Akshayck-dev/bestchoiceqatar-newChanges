@@ -20,9 +20,10 @@
     }
 
     body {
-        font-family: 'Outfit', sans-serif;
+        font-family: var(--font-body);
         background-color: var(--light-bg);
-        color: var(--dark-bg);
+        color: #111;
+        font-weight: 500;
     }
 
     /* Hero Section - Matching Screenshot */
@@ -63,12 +64,12 @@
 
     .hero-title {
         font-weight: 900;
-        font-size: clamp(3rem, 8vw, 6rem);
-        line-height: 0.95;
+        font-size: var(--fs-h1);
+        line-height: 1.05;
         text-transform: uppercase;
         color: #fff;
         margin-bottom: 2rem;
-        letter-spacing: -2px;
+        letter-spacing: var(--ls-tight);
     }
 
     .hero-subtitle-container {
@@ -78,10 +79,11 @@
     }
 
     .hero-subtitle {
-        font-size: clamp(1.1rem, 2vw, 1.4rem);
-        color: rgba(255, 255, 255, 0.8);
+        font-size: var(--fs-md);
+        color: rgba(255, 255, 255, 0.9);
         line-height: 1.6;
         margin-bottom: 0;
+        font-weight: 500;
     }
 
     .btn-premium {
@@ -154,10 +156,10 @@
     }
 
     .trust-item p {
-        color: #888;
+        color: #ddd;
         text-transform: uppercase;
-        font-size: 0.8rem;
-        font-weight: 600;
+        font-size: var(--fs-xs);
+        font-weight: 700;
         letter-spacing: 1px;
     }
 
@@ -206,10 +208,16 @@
     }
 
     .feature-card h4 {
-        font-weight: 800;
+        font-weight: 900;
         text-transform: uppercase;
         margin-bottom: 15px;
-        font-size: 1.1rem;
+        font-size: var(--fs-md);
+        color: #000;
+    }
+    .feature-card p {
+        font-size: var(--fs-base);
+        line-height: 1.5;
+        color: #222;
     }
 
     /* Specifications Table */
@@ -240,7 +248,8 @@
     }
 
     .spec-table td {
-        color: #ccc;
+        color: #fff;
+        font-size: var(--fs-base);
     }
 
     /* Gallery */
@@ -311,9 +320,11 @@
 
     .faq-content {
         padding: 0 30px 20px;
-        color: #666;
-        line-height: 1.8;
+        color: #111;
+        font-size: var(--fs-base);
+        line-height: 1.6;
         display: none;
+        font-weight: 500;
     }
 
     /* Final CTA */
