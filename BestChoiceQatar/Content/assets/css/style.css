@@ -548,11 +548,7 @@ body.drawer-open .premium-floating-nav {
 * { outline: 1px solid rgba(255, 0, 0, 0.1); }
 */
 
-.navbar-mobile.navbar-mobile > ul {
-    transform: translateX(0) !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-}
+/* Legacy navbar-mobile rule removed - v13.0 Drawer Engine handles visibility */
 
 /* Mobile Toggle - Top Right Fixed v5.0 */
 .mobile-nav-toggle {
