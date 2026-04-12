@@ -1,29 +1,29 @@
 :root {
-  /* Font Families */
-  --font-heading: 'Poppins', 'Raleway', sans-serif;
+  /* Font Families - Modern & Premium Strategy */
+  --font-heading: 'Outfit', 'Poppins', sans-serif;
   --font-body: 'Inter', system-ui, -apple-system, sans-serif;
 
-  /* Responsive Font Scale (v3.0 - Extreme Visibility) */
-  --fs-xs: clamp(1rem, 0.95rem + 0.5vw, 1.125rem);       /* ~16px to 18px */
-  --fs-sm: clamp(1.125rem, 1.05rem + 0.6vw, 1.25rem);    /* ~18px to 20px */
-  --fs-base: clamp(1.25rem, 1.15rem + 1vw, 1.5rem);      /* ~20px to 24px */
-  --fs-md: clamp(1.5rem, 1.35rem + 1.2vw, 1.875rem);     /* ~24px to 30px */
-  --fs-lg: clamp(1.75rem, 1.5rem + 1.8vw, 2.5rem);       /* ~28px to 40px */
-  --fs-xl: clamp(2.5rem, 2rem + 3vw, 4rem);             /* ~40px to 64px */
-  
-  --fs-h4: clamp(1.875rem, 1.75rem + 1.5vw, 2.75rem);    /* ~30px to 44px */
-  --fs-h3: clamp(2.5rem, 2rem + 3vw, 4rem);             /* ~40px to 64px */
-  --fs-h2: clamp(3.5rem, 3rem + 5vw, 6rem);             /* ~56px to 96px */
-  --fs-h1: clamp(4.5rem, 4rem + 8vw, 8.5rem);           /* ~72px to 136px */
+  /* Refined Modular Scale (Major Third 1.25) using Fluid Typography */
+  --fs-xs: clamp(0.75rem, 0.71rem + 0.18vw, 0.875rem);   /* 12px - 14px */
+  --fs-sm: clamp(0.875rem, 0.84rem + 0.18vw, 1rem);      /* 14px - 16px */
+  --fs-base: clamp(0.9375rem, 0.88rem + 0.27vw, 1.125rem); /* 15px - 18px */
+  --fs-md: clamp(1.125rem, 1.02rem + 0.54vw, 1.5rem);    /* 18px - 24px */
+  --fs-lg: clamp(1.375rem, 1.2rem + 0.89vw, 2rem);       /* 22px - 32px */
+  --fs-xl: clamp(1.75rem, 1.4rem + 1.79vw, 3rem);        /* 28px - 48px */
+  --fs-2xl: clamp(2rem, 1.4rem + 2.8vw, 4rem);           /* 32px - 64px */
 
-  /* Line Heights */
-  --lh-body: 1.7; /* Slightly more breathing room */
+  /* Semantic Typography Mapping */
+  --fs-h1: var(--fs-2xl);
+  --fs-h2: var(--fs-xl);
+  --fs-h3: var(--fs-lg);
+  --fs-h4: var(--fs-md);
+
+  /* Micro-Typography & Rhythm */
+  --lh-body: 1.6;
   --lh-heading: 1.15;
-
-  /* Letter Spacing */
   --ls-tight: -0.02em;
   --ls-normal: 0;
-  --ls-wide: 0.03em;
+  --ls-wide: 0.05em;
 }
 
 /* Layout Restoration - v12.0 Core Baseline */
@@ -35,11 +35,12 @@
 body {
     font-family: var(--font-body);
     font-size: var(--fs-base);
-    line-height: 1.6; /* Tightened for larger font blocks */
+    line-height: var(--lh-body);
     color: #111; /* Coal Black for Maximum Contrast */
-    font-weight: 500; /* Medium weight for better strike visibility */
+    font-weight: 400; 
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
 }
 
 a {
@@ -58,14 +59,25 @@ h1, h2, h3, h4, h5, h6, .font-primary {
     line-height: var(--lh-heading);
     letter-spacing: var(--ls-tight);
     color: #111;
+    margin-top: 0;
+    margin-bottom: 0.75em; /* Optimized vertical rhythm */
 }
 
-h1 { font-size: var(--fs-h1); font-weight: 700; }
+h1 { font-size: var(--fs-h1); font-weight: 800; }
 h2 { font-size: var(--fs-h2); font-weight: 700; }
-h3 { font-size: var(--fs-h3); font-weight: 600; }
+h3 { font-size: var(--fs-h3); font-weight: 700; }
 h4 { font-size: var(--fs-h4); font-weight: 600; }
 h5 { font-size: var(--fs-lg); font-weight: 600; }
 h6 { font-size: var(--fs-md); font-weight: 600; }
+
+p {
+    margin-bottom: 1.5rem;
+    line-height: var(--lh-body);
+}
+
+small {
+    font-size: var(--fs-xs);
+}
 
 /*--------------------------------------------------------------
 # Back to top button
@@ -85,7 +97,7 @@ h6 { font-size: var(--fs-md); font-weight: 600; }
 }
 
     .back-to-top i {
-        font-size: 28px;
+        font-size: var(--fs-lg);
         color: #252325;
         line-height: 0;
     }
@@ -108,70 +120,22 @@ h6 { font-size: var(--fs-md); font-weight: 600; }
         transition-delay: 0 !important;
     }
 }
-/*--------------------------------------------------------------
-# Top Bar
---------------------------------------------------------------*/
-#topbar {
-    background: rgba(17, 17, 17, 0.82) !important;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    font-size: var(--fs-sm);
-    height: 40px;
-    padding: 0;
-    z-index: 1000; /* Stays above header glass */
-}
 
-    #topbar .contact-info a {
-        line-height: 0;
-        color: #d7df21;
-        transition: 0.3s;
-    }
-
-        #topbar .contact-info a:hover {
-            color: #ffffff;
-        }
-
-    #topbar .contact-info i {
-        color: #d7df21;
-        line-height: 0;
-        margin-right: 5px;
-    }
-
-    #topbar .contact-info .phone-icon {
-        margin-left: 15px;
-    }
-
-    #topbar .contact-info {
-        color: #d7df21;
-    }
-
-    #topbar .social-links a {
-        color: #d7df21;
-        padding: 4px 12px;
-        display: inline-block;
-        line-height: 1px;
-        transition: 0.3s;
-    }
-
-        #topbar .social-links a:hover {
-            color: #ffffff;
-        }
 
 /*--------------------------------------------------------------
 # Header
 --------------------------------------------------------------*/
 #header {
-    height: 100px;
-    background: #fff;
+    height: 80px;
+    background: #d4e157; /* Premium Lime Yellow to match reference image */
     z-index: 1000;
-    box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.03);
+    box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.1);
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     transition: all 0.5s;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    border-bottom: 2px solid rgba(0, 0, 0, 0.05);
 }
 
 @media(min-width:991px) {
@@ -223,7 +187,7 @@ h6 { font-size: var(--fs-md); font-weight: 600; }
 #header .logo img {
     padding: 0;
     margin: 0;
-    max-height: 70px;
+    max-height: 60px;
 }
 
 .scrolled-offset {
@@ -256,23 +220,25 @@ h6 { font-size: var(--fs-md); font-weight: 600; }
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 10px 0 10px 30px;
+        padding: 5px 0 5px 25px;
         font-family: var(--font-heading);
-        font-size: var(--fs-base);
-        font-weight: 600;
-        color: #444444;
+        font-size: 1rem; /* Standard web font size */
+        font-weight: 500;
+        color: #000000; /* Black text on Lime background */
         white-space: nowrap;
         transition: 0.3s;
     }
 
         .navbar a i, .navbar a:focus i {
-            font-size: 12px;
+            font-size: var(--fs-xs);
             line-height: 0;
             margin-left: 5px;
         }
 
         .navbar a:hover, .navbar .active, .navbar .active:focus, .navbar li:hover > a {
-            color: #1c5c93;
+            color: #000000;
+            font-weight: 700; /* Bolder active as seen in reference */
+            opacity: 1;
         }
 
     .navbar .dropdown ul {
@@ -295,13 +261,13 @@ h6 { font-size: var(--fs-md); font-weight: 600; }
             min-width: 200px;
         }
 
-    /* Header Pill CTA Style */
+    /* Header Pill CTA Style - Matched to Lime Theme */
     .header-pill-cta {
-        border: 2px solid #ffcc00;
-        color: #111 !important;
+        border: 2px solid #000000;
+        color: #000000 !important;
         padding: 14px 32px !important;
         border-radius: 50px;
-        font-weight: 700 !important;
+        font-weight: 800 !important;
         font-size: var(--fs-xs) !important;
         letter-spacing: 1px;
         background: transparent;
@@ -311,9 +277,9 @@ h6 { font-size: var(--fs-md); font-weight: 600; }
     }
 
     .header-pill-cta:hover {
-        background: #ffcc00;
-        color: #000 !important;
-        box-shadow: 0 5px 15px rgba(255, 204, 0, 0.3);
+        background: #000000;
+        color: #d4e157 !important;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     }
 
         .navbar .dropdown ul a {
@@ -373,7 +339,7 @@ h6 { font-size: var(--fs-md); font-weight: 600; }
         top: 20px !important;
         right: 20px !important;
         color: #ffcc00 !important; 
-        font-size: 36px !important;
+        font-size: var(--fs-xl) !important;
         cursor: pointer;
         z-index: 999999 !important;
         background: rgba(0, 0, 0, 0.6);
@@ -564,7 +530,6 @@ body.lock-scroll {
 
 /* HIDE FLOATING ITEMS WHEN DRAWER OPEN */
 body.drawer-open #chatbase-message-bubbles,
-body.drawer-open .modern-mobile-cta-bar,
 body.drawer-open .premium-floating-nav {
   display: none !important;
 }
@@ -663,8 +628,8 @@ body.lock-scroll .premium-floating-nav {
 /* Desktop Menu Trigger Styling */
 .desk-menu-trigger {
     background: #000;
-    color: #ffcc00;
-    border: 2px solid #ffcc00;
+    color: #d4e157;
+    border: 2px solid #000;
     width: 45px;
     height: 45px;
     display: flex;
@@ -677,8 +642,46 @@ body.lock-scroll .premium-floating-nav {
 }
 
 .desk-menu-trigger:hover {
-    background: #ffcc00;
-    color: #000;
+    background: #222;
+    color: #fff;
+}
+
+/* Sidebar Social Styling v1.0 */
+.social-circle-link {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff !important;
+    font-size: 1.25rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    text-decoration: none !important;
+}
+
+.social-circle-link:hover {
+    background: #d4e157; /* Industrial Lime Accent */
+    color: #000 !important;
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(212, 225, 87, 0.4);
+    border-color: #d4e157;
+}
+
+.drawer-socials a {
+    font-size: 1.4rem;
+    color: #fff;
+    opacity: 0.8;
+    transition: 0.3s;
+    text-decoration: none;
+}
+
+.drawer-socials a:hover {
+    color: #d4e157;
+    opacity: 1;
+    transform: translateY(-2px);
 }
 
 /* Mobile Link Readability v5.0 */
@@ -731,7 +734,7 @@ body.lock-scroll .premium-floating-nav {
     .navbar-mobile a, .navbar-mobile a:focus {
         padding: 15px 25px;
         font-family: 'Outfit', sans-serif;
-        font-size: 16px;
+        font-size: var(--fs-base);
         font-weight: 500;
         color: #ffffff !important;
         border-bottom: 1px solid rgba(255, 255, 255, 0.03);
@@ -762,7 +765,7 @@ body.lock-scroll .premium-floating-nav {
 
     .navbar-mobile .dropdown ul a {
         padding: 12px 25px 12px 40px;
-        font-size: 14px;
+        font-size: var(--fs-sm);
         color: rgba(255, 255, 255, 0.7) !important;
     }
 
@@ -791,7 +794,7 @@ body.lock-scroll .premium-floating-nav {
         padding: 14px 10px !important;
         border-radius: 12px;
         font-weight: 700;
-        font-size: 13px;
+        font-size: var(--fs-xs);
         text-transform: uppercase;
         letter-spacing: 0.5px;
         transition: 0.3s;
@@ -912,7 +915,7 @@ body.lock-scroll .premium-floating-nav {
 
 #hero .carousel-control-next-icon, #hero .carousel-control-prev-icon {
     background: none;
-    font-size: 48px;
+    font-size: var(--fs-2xl);
     line-height: 1;
     width: auto;
     height: auto;
@@ -925,7 +928,7 @@ body.lock-scroll .premium-floating-nav {
 #hero .btn-get-started {
     font-family: "Raleway", sans-serif;
     font-weight: 600;
-    font-size: 16px;
+    font-size: var(--fs-base);
     letter-spacing: 1px;
     display: inline-block;
     padding: 15px 32px;
@@ -1039,7 +1042,7 @@ section {
             position: absolute;
             left: 0;
             top: 2px;
-            font-size: 20px;
+            font-size: var(--fs-md);
             color: #d7df21;
             line-height: 1;
         }
@@ -1051,7 +1054,7 @@ section {
     .about .content .btn-learn-more {
         font-family: "Raleway", sans-serif;
         font-weight: 600;
-        font-size: 14px;
+        font-size: var(--fs-sm);
         letter-spacing: 1px;
         display: inline-block;
         padding: 12px 32px;
@@ -1091,10 +1094,10 @@ section {
     }
 
     .breadcrumbs h2 {
-        font-size: 56px;
-        font-weight: 400;
+        font-size: var(--fs-2xl);
+        font-weight: 800;
         color: #fff;
-        font-family: var(--font-secondary);
+        font-family: var(--font-heading);
     }
 
     .breadcrumbs ol {
@@ -1103,7 +1106,7 @@ section {
         list-style: none;
         padding: 0 0 10px 0;
         margin: 0;
-        font-size: 16px;
+        font-size: var(--fs-base);
         font-weight: 600;
         color: #fff;
     }
@@ -1140,7 +1143,7 @@ section {
 }
 
 .section-title {
-    font-size: 32px;
+    font-size: var(--fs-lg);
     color: #111;
     text-transform: uppercase;
     text-align: center;
@@ -1194,7 +1197,7 @@ section {
 #about .about-title {
     color: #333;
     font-weight: 700;
-    font-size: 28px;
+    font-size: var(--fs-lg);
 }
 
 #about .about-text {
@@ -1212,7 +1215,7 @@ section {
 --------------------------------------------------------------*/
 .about .content h3 {
     font-weight: 700;
-    font-size: 28px;
+    font-size: var(--fs-lg);
     font-family: "Poppins", sans-serif;
 }
 
@@ -1228,7 +1231,7 @@ section {
 
     .about .content ul i {
         position: absolute;
-        font-size: 20px;
+        font-size: var(--fs-md);
         left: 0;
         top: -3px;
         color: #ffc451;
@@ -1370,7 +1373,7 @@ section {
     }
 
 .service_title {
-    font-size: 24px;
+    font-size: var(--fs-md);
     font-weight: 700;
     color: #232323;
     padding-top: 41px;
@@ -1390,25 +1393,22 @@ section {
 # Clients
 --------------------------------------------------------------*/
 
-section {
-    padding: 30px 0;
-    overflow: hidden;
-}
+
 
 .section-title {
     padding-bottom: 5px;
 }
 
     .section-title h2 {
-        font-size: 20px;
+        font-size: var(--fs-md);
         font-weight: 500;
         padding: 0;
-        line-height: 1px;
+        line-height: 1.2;
         margin: 0 0 5px 0;
         letter-spacing: 2px;
         text-transform: uppercase;
         color: #858b00;
-        font-family: "Poppins", sans-serif;
+        font-family: var(--font-heading);
     }
 
         .section-title h2::after {
@@ -1423,10 +1423,10 @@ section {
     .section-title p {
         margin: 0;
         margin-bottom: 40px;
-        font-size: 36px;
-        font-weight: 500;
+        font-size: var(--fs-xl);
+        font-weight: 800;
         text-transform: uppercase;
-        font-family: "Poppins", sans-serif;
+        font-family: var(--font-heading);
         color: #2a2c39;
     }
 
@@ -1479,7 +1479,7 @@ section {
     border-bottom-left-radius: 10px;
     border-top-left-radius: 10px;
     text-align: center;
-    font-size: 30px;
+    font-size: var(--fs-xl);
     z-index: 100;
 }
 
@@ -1528,7 +1528,7 @@ section {
     .tagline h2 {
         position: fixed;
         color: #ffffff;
-        font-size: 20px;
+        font-size: var(--fs-md);
         font-weight: 100;
         writing-mode: vertical-rl;
         rotate: 180deg;
@@ -1611,7 +1611,7 @@ section {
 
     .Products .content ul i {
         position: absolute;
-        font-size: 20px;
+        font-size: var(--fs-md);
         left: 0;
         top: -3px;
         color: #ffc451;
@@ -1635,7 +1635,7 @@ section {
 }
 
     .contact .info i {
-        font-size: 20px;
+        font-size: var(--fs-md);
         color: #252325;
         float: left;
         width: 44px;
@@ -1737,7 +1737,7 @@ section {
     .contact .php-email-form textarea {
         border-radius: 0;
         box-shadow: none;
-        font-size: 14px;
+        font-size: var(--fs-sm);
     }
 
     .contact .php-email-form input {

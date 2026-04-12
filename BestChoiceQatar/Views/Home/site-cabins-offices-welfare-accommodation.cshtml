@@ -21,9 +21,11 @@
 
     body {
         font-family: var(--font-body);
+        font-size: var(--fs-base);
+        line-height: var(--lh-body);
         background-color: var(--light-bg);
         color: #111;
-        font-weight: 500;
+        font-weight: 400;
     }
 
     /* Hero Section - Matching Screenshot */
@@ -63,9 +65,9 @@
     }
 
     .hero-title {
-        font-weight: 900;
+        font-weight: 800;
         font-size: var(--fs-h1);
-        line-height: 1.05;
+        line-height: 1.15;
         text-transform: uppercase;
         color: #fff;
         margin-bottom: 2rem;
@@ -151,7 +153,7 @@
     .trust-item h3 {
         color: var(--primary-yellow);
         font-weight: 800;
-        font-size: 2.5rem;
+        font-size: var(--fs-xl);
         margin-bottom: 0;
     }
 
@@ -160,7 +162,7 @@
         text-transform: uppercase;
         font-size: var(--fs-xs);
         font-weight: 700;
-        letter-spacing: 1px;
+        letter-spacing: 0.1em;
     }
 
     /* Content Sections */
@@ -177,10 +179,10 @@
     }
 
     .section-title {
-        font-weight: 900;
-        font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 800;
+        font-size: var(--fs-h2);
         text-transform: uppercase;
-        letter-spacing: -1px;
+        letter-spacing: -0.01em;
         margin-bottom: 40px;
     }
 
@@ -329,7 +331,7 @@
 
     /* Final CTA */
     .final-cta { background: var(--primary-yellow); text-align: center; padding: 120px 0; }
-    .final-cta h2 { font-weight: 900; font-size: 4rem; text-transform: uppercase; line-height: 0.9; margin-bottom: 40px; }
+    .final-cta h2 { font-weight: 800; font-size: var(--fs-h1); text-transform: uppercase; line-height: 1.1; margin-bottom: 40px; letter-spacing: -0.01em; }
 
     /* Swiper Gallery Carousel */
     .gallery-swiper {

@@ -30,12 +30,12 @@
         --font-body: var(--font-body);
     }
 
-    /* Force database-driven text to be readable */
+    /* Professional typography integration */
     .content p, .about-check-list li {
-        font-size: var(--fs-base) !important;
+        font-size: var(--fs-base);
         line-height: var(--lh-body);
-        color: #000 !important;
-        font-weight: 500 !important;
+        color: #111;
+        font-weight: 400;
     }
     :root {
         --transition-fast: all 0.3s ease;
@@ -48,7 +48,7 @@
     /* Global Image Safety */
     img { max-width: 100% !important; height: auto !important; }
 
-    section { padding: 100px 0; overflow: hidden; width: 100%; }
+    section { padding: 80px 0; overflow: hidden; width: 100%; }
 
     .h-black { font-weight: 900; text-transform: uppercase; font-family: var(--font-headline); letter-spacing: -1px; }
     .text-bc-yellow { color: var(--primary-bc); }
@@ -59,71 +59,146 @@
         background-size: 30px 30px;
     }
 
-    /* 1. Hero Section */
-    .hero-wrap { position: relative; height: 95vh; min-height: 750px; background: #000; display: flex; align-items: center; overflow: hidden; }
+    /* 1. Hero Section - Refined Industrial Style */
+    .hero-wrap { position: relative; height: 100vh; min-height: 800px; background: #000; display: flex; align-items: center; overflow: hidden; }
     
-    .hero-swiper-premium {
-        position: absolute;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 0;
-    }
+    .hero-swiper-premium { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
+    .hero-swiper-premium .swiper-slide { height: 100%; width: 100%; overflow: hidden; opacity: 0; transition: opacity 1.2s ease; --slide-accent: #ffcc00; }
+    .hero-swiper-premium .swiper-slide-active { opacity: 1; }
     
-    .hero-swiper-premium .swiper-slide {
-        height: 100%;
-        width: 100%;
-        overflow: hidden;
-        opacity: 0; /* Default hidden for fade Swiper */
-        transition: opacity 1s ease;
-    }
-    
-    /* Ensure first slide is visible if JS fails */
-    .hero-swiper-premium .swiper-slide:first-child {
-        opacity: 1;
-    }
+    /* Theme overrides for specific slides */
+    .theme-lime { --slide-accent: #d4e157 !important; }
 
-    .hero-bg { 
-        position: absolute;
-        inset: 0;
-        width: 100%; 
-        height: 100%; 
-        object-fit: cover; 
-        opacity: 1; /* Maximum brightness */
-        display: block;
-    }
+    .hero-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transform: scale(1); transition: transform 8s linear; }
+    .swiper-slide-active .hero-bg { transform: scale(1.15); }
 
+    /* Professional Compound Overlay: Directional Gradient + Backdrop separator */
     .hero-overlay { 
         position: absolute; 
         inset: 0; 
-        background: radial-gradient(circle at center, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.6) 100%); 
+        background: linear-gradient(90deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 40%, rgba(0,0,0,0) 80%); 
         z-index: 1; 
+        backdrop-filter: brightness(0.9) contrast(1.1);
+        -webkit-backdrop-filter: brightness(0.9) contrast(1.1);
     }
-
     
-    /* Ken Burns Zoom Effect */
-    @* Escape @ for Razor *@
-    @@keyframes kenBurns {
-        0% { transform: scale(1); }
-        100% { transform: scale(1.15); }
+    .hero-content { 
+        position: absolute; 
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        z-index: 10; 
+        color: #fff !important; 
+        text-align: left; 
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        width: 100%;
     }
-
     
-    .swiper-slide-active .hero-bg {
-        animation: kenBurns 8s linear forwards;
+    /* Animation Keyframes */
+    @@keyframes heroFadeInUp {
+        from { opacity: 0; transform: translateY(40px); }
+        to { opacity: 1; transform: translateY(0); }
     }
 
-    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.8) 100%); z-index: 1; }
-    .hero-content { position: relative; z-index: 10; color: #fff; text-align: center; width: 100%; }
-    .hero-h1 { font-family: var(--font-headline); font-size: var(--fs-h1); font-weight: 900; line-height: 1.05; margin-bottom: 2rem; }
-    .hero-subtext { font-size: var(--fs-md); color: rgba(255,255,255,0.95); max-width: 1000px; margin: 0 auto 3rem; border-top: 5px solid var(--primary-bc); padding-top: 1.5rem; line-height: 1.6; font-weight: 500; }
+    .hero-label { 
+        display: inline-block; 
+        color: var(--slide-accent) !important; 
+        font-weight: 800; 
+        letter-spacing: 5px; 
+        font-size: 0.85rem; 
+        margin-bottom: 25px; 
+        opacity: 0;
+        text-transform: uppercase;
+        border-left: 3px solid var(--slide-accent);
+        padding-left: 12px;
+        text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    }
+    .hero-h1 { 
+        font-family: var(--font-headline); 
+        font-size: var(--fs-h1); 
+        font-weight: 900; 
+        line-height: 1.0; 
+        margin-bottom: 30px; 
+        letter-spacing: -0.01em; 
+        text-transform: uppercase;
+        opacity: 0;
+        color: #fff !important;
+        text-shadow: 0 4px 30px rgba(0,0,0,0.8), 0 0 10px rgba(0,0,0,0.3);
+    }
+    .hero-subtext { 
+        font-size: var(--fs-md); 
+        color: #fff !important; 
+        max-width: 750px; 
+        margin: 0 0 45px; 
+        line-height: 1.7; 
+        font-weight: 400; 
+        opacity: 0;
+        text-shadow: 0 2px 15px rgba(0,0,0,0.8);
+    }
+    .hero-actions { opacity: 0; display: flex; gap: 20px; flex-wrap: wrap; justify-content: flex-start; }
 
+    /* Trigger animations specifically for the active slide's inner content - Sharper Speed */
+    .swiper-slide-active .hero-label { animation: heroFadeInUp 0.6s ease forwards 0.1s; }
+    .swiper-slide-active .hero-h1 { animation: heroFadeInUp 0.6s ease forwards 0.25s; }
+    .swiper-slide-active .hero-subtext { animation: heroFadeInUp 0.6s ease forwards 0.4s; }
+    .swiper-slide-active .hero-actions { animation: heroFadeInUp 0.6s ease forwards 0.55s; }
 
-    .btn-bc { padding: 18px 45px; border-radius: 0; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; transition: var(--transition-premium); display: inline-flex; align-items: center; gap: 15px; border: none; text-decoration: none; }
-    .btn-bc-yellow { background: var(--primary-bc); color: #000; }
-    .btn-bc-yellow:hover { background: #fff; color: #000; transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
-    .btn-bc-outline { border: 2px solid rgba(255,255,255,0.3); color: #fff; background: transparent; }
-    .btn-bc-outline:hover { border-color: #fff; background: #fff; color: #000; transform: translateY(-5px); }
+    .btn-bc { padding: 14px 35px; border-radius: 0; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; transition: var(--transition-premium); display: inline-flex; align-items: center; gap: 10px; border: none; text-decoration: none; font-size: 0.85rem; }
+    .btn-bc-yellow { background: var(--slide-accent); color: #000; }
+    .btn-bc-yellow:hover { background: #fff; color: #000; transform: translateX(8px); }
+    .btn-bc-outline { border: 2px solid #fff; color: #fff; background: transparent; }
+    .btn-bc-outline:hover { border-color: var(--slide-accent); background: var(--slide-accent); color: #000; transform: translateX(8px); }
+    
+    .btn-bc-small { padding: 10px 20px; font-size: 0.75rem; }
+
+    /* Vertical Pagination on Right */
+    .hero-pagination {
+        position: absolute;
+        right: 50px;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 20;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+    .hero-pagination .swiper-pagination-bullet {
+        width: 12px;
+        height: 12px;
+        background: #fff;
+        opacity: 0.3;
+        margin: 0 !important;
+        border-radius: 0;
+        transition: all 0.4s ease;
+    }
+    .hero-pagination .swiper-pagination-bullet-active {
+        background: var(--primary-bc);
+        opacity: 1;
+        height: 40px;
+    }
+
+    /* Mobile Responsiveness for Hero */
+    @@media (max-width: 991.98px) {
+        .hero-wrap { height: auto; min-height: 100vh; padding: 120px 0 80px; }
+        .hero-content { text-align: center; }
+        .hero-subtext { margin: 0 auto 40px; }
+        .hero-actions { justify-content: center; }
+        .hero-pagination { 
+            right: 20px; 
+            top: auto; 
+            bottom: 30px; 
+            transform: none; 
+            flex-direction: row;
+        }
+        .hero-pagination .swiper-pagination-bullet-active {
+            width: 40px;
+            height: 12px;
+        }
+        .hero-overlay { background: rgba(0,0,0,0.6); }
+    }
 
     /* Corner Rivets Detail */
     .rivet { position: absolute; width: 8px; height: 8px; background: var(--primary-bc); z-index: 20; }
@@ -139,8 +214,8 @@
     .about-badge { position: absolute; color: #fff; padding: 22px 28px; line-height: 1.2; z-index: 10; }
     .about-badge-years { background: var(--primary-bc); color: #000; bottom: 0; left: 0; }
     .about-badge-experts { background: #111; right: 0; top: 20%; }
-    .about-badge .badge-num { font-size: var(--fs-xl); font-weight: 900; font-family: var(--font-headline); display: block; line-height: 1; }
-    .about-badge .badge-label { font-size: var(--fs-xs); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; display: block; margin-top: 4px; opacity: 0.9; }
+    .about-badge .badge-num { font-size: var(--fs-xl); font-weight: 800; font-family: var(--font-headline); display: block; line-height: 1; }
+    .about-badge .badge-label { font-size: var(--fs-xs); font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-top: 4px; opacity: 0.9; }
     .about-check-list { list-style: none; padding: 0; margin: 0; }
     .about-check-list li { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid #f0f0f0; font-weight: 600; color: #333; }
     .about-check-list li:last-child { border-bottom: none; }
@@ -223,7 +298,7 @@
     .work-banner { position: relative; background: #1a2035; padding: 90px 0; overflow: hidden; text-align: center; }
     .work-banner-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.2; }
     .work-banner-content { position: relative; z-index: 10; }
-    .work-banner h2 { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 900; color: #fff; font-family: var(--font-headline); letter-spacing: -1px; margin-bottom: 35px; }
+    .work-banner h2 { font-size: var(--fs-h1); font-weight: 800; color: #fff; font-family: var(--font-headline); letter-spacing: -0.01em; margin-bottom: 35px; }
     .btn-bc-work { display: inline-block; padding: 16px 50px; background: var(--primary-bc); color: #000; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; font-size: 0.95rem; text-decoration: none; transition: var(--transition-premium); border: 2px solid var(--primary-bc); }
     .btn-bc-work:hover { background: transparent; color: #fff; }
 
@@ -246,7 +321,7 @@
     .cta-industrial { position: relative; background: #000; padding: 160px 0; overflow: hidden; }
     .cta-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0.45; }
     .cta-content-wrap { position: relative; z-index: 10; padding: 0 15px; }
-    .cta-h2 { font-size: clamp(2.5rem, 6vw, 5rem); }
+    .cta-h2 { font-size: var(--fs-h1); font-weight: 800; letter-spacing: -0.02em; }
 
     /* --- COMPREHENSIVE MOBILE RESPONSIVENESS --- */
     @@media (max-width: 991.98px) {
@@ -278,9 +353,9 @@
     }
     .premium-title {
         font-family: var(--font-headline);
-        font-weight: 900;
-        font-size: clamp(1.8rem, 3vw, 2.5rem);
-        line-height: 1.1;
+        font-weight: 800;
+        font-size: var(--fs-h2);
+        line-height: 1.2;
         margin-bottom: 20px;
     }
     .premium-desc {
@@ -451,48 +526,112 @@
             
             <div class="swiper hero-swiper-premium">
                 <div class="swiper-wrapper">
+                    <!-- Slide 1: Welcome -->
                     <div class="swiper-slide">
-                        <img src="/Uploads/img1.jpg" class="hero-bg" alt="Bestchoice Qatar Industrial 1" data-swiper-parallax="20%">
+                        <img src="/Uploads/img1.jpg" class="hero-bg" alt="Bestchoice Qatar Welcome">
+                        <div class="container hero-content">
+                            <div class="row">
+                                <div class="col-lg-9 col-xl-8">
+                                    <span class="hero-label">ENGINEERING EXCELLENCE</span>
+                                    <h1 class="hero-h1">Welcome to Bestchoice for <br> Cabins In All Over QATAR</h1>
+                                    <p class="hero-subtext">Bestchoice was established in 2009. We have already created a name for itself in Qatar market as a GREEN company in various industrial fields.</p>
+                                    <div class="hero-actions">
+                                        <a href="/about" class="btn-bc btn-bc-yellow">
+                                            READ MORE
+                                            <span class="material-symbols-outlined">arrow_forward</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
+                    <!-- Slide 2: Services -->
+                    <div class="swiper-slide theme-lime">
+                        <img src="/Uploads/img2.jpg" class="hero-bg" alt="Bestchoice Qatar Services">
+                        <div class="container hero-content">
+                            <div class="row">
+                                <div class="col-lg-9 col-xl-8">
+                                    <span class="hero-label">OUR CORE EXPERTISE</span>
+                                    <h1 class="hero-h1">Services</h1>
+                                    <p class="hero-subtext">One of the fast growing companies in Qatar performing the following professional services:</p>
+                                    <div class="hero-actions">
+                                        <a href="#" class="btn-bc btn-bc-yellow btn-bc-small">General Contracting</a>
+                                        <a href="#" class="btn-bc btn-bc-outline btn-bc-small">Optical Fibre Networks</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 3: Products -->
+                    <div class="swiper-slide theme-lime">
+                        <img src="/Uploads/img3.jpg" class="hero-bg" alt="Bestchoice Qatar Products">
+                        <div class="container hero-content">
+                            <div class="row">
+                                <div class="col-lg-9 col-xl-8">
+                                    <span class="hero-label">PREMIUM SOLUTIONS</span>
+                                    <h1 class="hero-h1">Products</h1>
+                                    <p class="hero-subtext">Expertly performing the following product fabrication services across Qatar's major industrial sectors:</p>
+                                    <div class="hero-actions">
+                                        <a href="#" class="btn-bc btn-bc-yellow btn-bc-small">Portable Cabin Fabrication</a>
+                                        <a href="#" class="btn-bc btn-bc-outline btn-bc-small">Building Painting</a>
+                                        <a href="#" class="btn-bc btn-bc-outline btn-bc-small">Steel & Aluminum</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 4: Manufacturer -->
                     <div class="swiper-slide">
-                        <img src="/Uploads/img2.jpg" class="hero-bg" alt="Bestchoice Qatar Industrial 2" data-swiper-parallax="20%">
+                        <img src="/Uploads/img4.jpg" class="hero-bg" alt="Bestchoice Qatar Manufacturer">
+                        <div class="container hero-content">
+                            <div class="row">
+                                <div class="col-lg-9 col-xl-8">
+                                    <span class="hero-label">QATAR'S PREMIER CHOICE</span>
+                                    <h1 class="hero-h1">Leading Portable Cabin <br> Manufacturer in QATAR.</h1>
+                                    <p class="hero-subtext">Top-quality, durable, and customizable portable cabins built to exceed industrial expectations and site requirements.</p>
+                                    <div class="hero-actions">
+                                        <button type="button" class="btn-bc btn-bc-yellow" data-bs-toggle="modal" data-bs-target="#quoteModal">
+                                            GET FREE QUOTE
+                                            <span class="material-symbols-outlined">description</span>
+                                        </button>
+                                        <a href="tel:@settings.Mobile1" class="btn-bc btn-bc-outline">
+                                            CALL OUR TEAM
+                                            <span class="material-symbols-outlined">call</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
+                    <!-- Slide 5: Quick Setup -->
                     <div class="swiper-slide">
-                        <img src="/Uploads/img3.jpg" class="hero-bg" alt="Bestchoice Qatar Industrial 3" data-swiper-parallax="20%">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="/Uploads/img4.jpg" class="hero-bg" alt="Bestchoice Qatar Industrial 4" data-swiper-parallax="20%">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="/Uploads/img5.jpg" class="hero-bg" alt="Bestchoice Qatar Industrial 5" data-swiper-parallax="20%">
-                    </div>
-                </div>
-            </div>
-
-
-
-
-            <div class="hero-overlay"></div>
-
-            <div class="container hero-content">
-                <div class="row justify-content-center">
-                    <div class="col-lg-12" data-aos="fade-up">
-                        <span class="text-uppercase fw-bold text-bc-yellow mb-3 d-block" style="letter-spacing: 5px; font-size: 0.8rem;">ENGINEERING EXCELLENCE IN QATAR</span>
-                        <h1 class="hero-h1">Cabin & <br> Steel Fabrication in Qatar</h1>
-                        <p class="hero-subtext">Providing industrial-grade <strong>porta cabin Qatar</strong> solutions and <strong>prefab cabins Qatar</strong>. Our modular construction expertise ensures rapid site mobilization and high-durability steel structures for Doha's major projects.</p>
-                        <div class="d-flex gap-4 justify-content-center flex-wrap mt-4">
-                            <button type="button" class="btn-bc btn-bc-yellow" data-bs-toggle="modal" data-bs-target="#quoteModal">
-                                GET FREE QUOTE
-                                <span class="material-symbols-outlined">arrow_forward</span>
-                            </button>
-                            <a href="tel:@settings.Mobile1" class="btn-bc btn-bc-outline">
-                                CALL OUR TEAM
-                                <span class="material-symbols-outlined">call</span>
-                            </a>
+                        <img src="/Uploads/img5.jpg" class="hero-bg" alt="Bestchoice Qatar Performance">
+                        <div class="container hero-content">
+                            <div class="row">
+                                <div class="col-lg-9 col-xl-8">
+                                    <span class="hero-label">FAST & EFFICIENT</span>
+                                    <h1 class="hero-h1">Quick Setup-Premium <br> Quality-Low Cost.</h1>
+                                    <p class="hero-subtext">Get porta cabins that are fast to install, built to last, and budget-friendly – engineered exclusively for BestChoice Qatar.</p>
+                                    <div class="hero-actions">
+                                        <a href="/services" class="btn-bc btn-bc-yellow">
+                                            EXPLORE SOLUTIONS
+                                            <span class="material-symbols-outlined">bolt</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <div class="hero-overlay"></div>
+
+            <div class="hero-pagination"></div>
         </div>
     </section>
 
@@ -885,7 +1024,7 @@
             <div class="row g-5 align-items-center">
                 <div class="col-lg-6" data-aos="fade-right">
                     <span class="text-uppercase fw-bold mb-3 d-block" style="color: var(--primary-bc); letter-spacing: 2px; font-size: 0.85rem;">Qatar's Leading Fabrication Experts</span>
-                    <h2 class="font-headline fw-bold mb-4" style="font-size: clamp(2rem, 4vw, 3rem); line-height: 1.1; color: #111;">Premium Portable Cabins &amp; Contracting Solutions in Doha</h2>
+                    <h2 class="font-headline fw-bold mb-4" style="font-size: var(--fs-h2); line-height: 1.2; color: #111;">Premium Portable Cabins &amp; Contracting Solutions in Doha</h2>
                     <p class="text-muted mb-4" style="font-size: 1.05rem; line-height: 1.8;">
                         As a premier <strong>porta cabin manufacturer in Qatar</strong>, BestChoice Contracting supplies highly durable, engineered modular building solutions suitable for the most robust industrial and commercial applications. With over 15 years of operational excellence, we specialize in delivering everything from bespoke <a href="/site-cabins-offices-welfare-accommodation" class="text-dark fw-bold text-decoration-none border-bottom border-warning">portable site offices</a> to comprehensive <a href="/labor-camps-accommodation" class="text-dark fw-bold text-decoration-none border-bottom border-warning">labor camp accommodations</a> designed explicitly for Qatar's unique environmental conditions.
                     </p>
@@ -1082,7 +1221,7 @@
                         disableOnInteraction: false,
                     },
                     pagination: {
-                        el: '.swiper-pagination',
+                        el: '.hero-pagination',
                         clickable: true,
                     },
                 });

@@ -57,7 +57,9 @@
     }
 
     body {
-        font-family: 'Outfit', sans-serif;
+        font-family: var(--font-body);
+        font-size: var(--fs-base);
+        line-height: var(--lh-body);
         background-color: var(--light-bg);
         color: var(--dark-bg);
     }
@@ -89,21 +91,22 @@
     }
 
     .hero-title {
-        font-weight: 900;
-        font-size: clamp(3rem, 8vw, 6rem);
-        line-height: 0.95;
+        font-weight: 800;
+        font-size: var(--fs-h1);
+        line-height: 1.15;
         text-transform: uppercase;
         color: #fff;
         margin-bottom: 2rem;
-        letter-spacing: -2px;
+        letter-spacing: var(--ls-tight);
     }
 
     .hero-subtitle {
-        font-size: clamp(1.1rem, 2vw, 1.4rem);
-        color: rgba(255, 255, 255, 0.8);
+        font-size: var(--fs-md);
+        color: rgba(255, 255, 255, 0.9);
         margin-bottom: 3rem;
         border-left: 4px solid var(--primary-yellow);
         padding-left: 20px;
+        line-height: var(--lh-body);
     }
 
     .btn-premium {
@@ -149,16 +152,16 @@
     .trust-item h3 {
         color: var(--primary-yellow);
         font-weight: 800;
-        font-size: 2.5rem;
+        font-size: var(--fs-xl);
         margin-bottom: 0;
     }
 
     .trust-item p {
         color: #888;
         text-transform: uppercase;
-        font-size: 0.8rem;
-        font-weight: 600;
-        letter-spacing: 1px;
+        font-size: var(--fs-xs);
+        font-weight: 700;
+        letter-spacing: 0.1em;
     }
 
     body { overflow-x: hidden; width: 100%; position: relative; }
@@ -190,9 +193,9 @@
 
     .section-title {
         font-weight: 800;
-        font-size: clamp(2rem, 5vw, 3.5rem);
+        font-size: var(--fs-h2);
         text-transform: uppercase;
-        letter-spacing: -1px;
+        letter-spacing: -0.01em;
     }
 
     /* Cabin Types */
@@ -354,12 +357,13 @@
     }
 
     .final-cta h2 {
-        font-weight: 900;
-        font-size: 4.5rem;
+        font-weight: 800;
+        font-size: var(--fs-h1);
         text-transform: uppercase;
         margin-bottom: 50px;
         color: #000;
-        line-height: 1;
+        line-height: 1.1;
+        letter-spacing: -0.01em;
     }
 
     /* --- COMPREHENSIVE MOBILE RESPONSIVENESS --- */
@@ -645,7 +649,7 @@
             <div class="row g-5 align-items-center">
                 <div class="col-lg-6" data-aos="fade-right">
                     <span class="text-uppercase fw-bold mb-3 d-block" style="color: var(--primary-yellow); letter-spacing: 2px; font-size: 0.85rem;">Qatar's Top Cabin Manufacturers</span>
-                    <h2 class="hero-title fw-bold mb-4" style="font-size: clamp(2rem, 3.5vw, 2.8rem); line-height: 1.1; color: #fff; letter-spacing: -1px; text-transform:none;">High-Quality Porta Cabin Fabrication in Doha</h2>
+                    <h2 class="hero-title fw-bold mb-4" style="font-size: var(--fs-h2); line-height: 1.2; color: #fff; letter-spacing: -0.01em; text-transform:none;">High-Quality Porta Cabin Fabrication in Doha</h2>
                     <p class="mb-4" style="font-size: 1.05rem; line-height: 1.8; color: #aaa;">
                         Operating as a trusted <strong>portable cabin supplier in Qatar</strong>, BestChoice Contracting leads the industry in fabricating versatile, climate-proof modular structures. For over 15 years, our team has engineered specialized <a href="/porta-cabin-offices" style="color:#fff; text-decoration:none; border-bottom: 2px solid var(--primary-yellow);">temporary site offices</a>, expansive <a href="/labor-camps-accommodation" style="color:#fff; text-decoration:none; border-bottom: 2px solid var(--primary-yellow);">labor camp accommodations</a>, and secure <a href="/security-guard-cabins" style="color:#fff; text-decoration:none; border-bottom: 2px solid var(--primary-yellow);">guard cabins</a> customized for the demanding environment of the Middle East.
                     </p>

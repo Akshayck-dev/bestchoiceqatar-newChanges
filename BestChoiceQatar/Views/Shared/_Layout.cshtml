@@ -22,7 +22,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;600;700&family=Raleway:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;700;800;900&family=Poppins:wght@400;600;700&family=Raleway:wght@300;400;600;700&display=swap" rel="stylesheet">
 
     <!-- Vendor CSS Files -->
     <link href="~/Content/assets/vendor/animate.css/animate.min.css" rel="stylesheet">
@@ -102,7 +102,6 @@
             </nav>
 
             <div class="header-cta d-none d-lg-flex align-items-center gap-3">
-                <a href="#quote" class="header-pill-cta" data-bs-toggle="modal" data-bs-target="#quoteModal">GET A QUOTE</a>
                 <button id="deskHamburgerBtn" class="desk-menu-trigger" title="Menu" aria-label="Open Navigation Menu">
                     <i class="bi bi-list"></i>
                 </button>
@@ -111,21 +110,7 @@
         </div>
     </header>
 
-    <!-- ======= Top Bar ======= -->
-    <section id="topbar" class="d-flex align-items-center">
-        <div class="container d-flex justify-content-center justify-content-md-between">
-            <div class="contact-info d-flex align-items-center">
-                <i class="bi bi-envelope-fill"></i><a href="">@settings.Email</a>
-                                                   <a href="tel:@settings.Mobile1" class="facebook"><i class="bi bi-phone-fill phone-icon"></i> @settings.Mobile1</a>
-            </div>
-            <div class="social-links d-none d-md-block">
-                <a target="_blank" href="@settings.Twitter" class="twitter"><i class="bi bi-twitter"></i></a>
-                <a target="_blank" href="@settings.Facebook" class="facebook"><i class="bi bi-facebook"></i></a>
-                <a target="_blank" href="@settings.Instagram" class="instagram"><i class="bi bi-instagram"></i></a>
-                <a target="_blank" href="@settings.LinkedIn" class="linkedin"><i class="bi bi-linkedin"></i></i></a>
-            </div>
-        </div>
-    </section>
+
 
     @RenderBody()
 
@@ -229,6 +214,17 @@
             </ul>
         </li>
         <li class="drawer-footer">
+            <div class="drawer-contact-info px-4 mb-3">
+                <a href="mailto:@settings.Email" class="text-white-50 d-flex align-items-center gap-2 mb-2" style="font-size: 0.9rem;">
+                    <i class="bi bi-envelope-fill"></i> @settings.Email
+                </a>
+                <div class="drawer-socials d-flex gap-3 mt-3">
+                    <a href="@settings.Twitter" class="text-white"><i class="bi bi-twitter"></i></a>
+                    <a href="@settings.Facebook" class="text-white"><i class="bi bi-facebook"></i></a>
+                    <a href="@settings.Instagram" class="text-white"><i class="bi bi-instagram"></i></a>
+                    <a href="@settings.LinkedIn" class="text-white"><i class="bi bi-linkedin"></i></a>
+                </div>
+            </div>
             <div class="sidebar-cta-wrapper">
                 <a href="tel:@settings.Mobile1" class="s-cta-btn s-cta-call"><i class="bi bi-telephone"></i><span>Call Now</span></a>
                 <a href="@settings.Whatsup" target="_blank" class="s-cta-btn s-cta-wa"><i class="bi bi-whatsapp"></i><span>WhatsApp</span></a>
@@ -263,16 +259,7 @@
         <i class="bi bi-list"></i>
     </button>
 
-    <!-- Floating Navigation Components -->
-    <div class="modern-mobile-cta-bar d-md-none">
-        <div class="cta-inner">
-            <a href="/index" class="cta-btn cta-home"><i class="bi bi-house"></i><span>Home</span></a>
-            <div class="cta-divider"></div>
-            <a href="tel:@settings.Mobile1" class="cta-btn cta-phone"><i class="bi bi-telephone"></i><span>Call</span></a>
-            <div class="cta-divider"></div>
-            <a href="@settings.Whatsup" target="_blank" class="cta-btn cta-whatsapp"><i class="bi bi-whatsapp"></i><span>WhatsApp</span></a>
-        </div>
-    </div>
+
 
     <div class="premium-floating-nav">
         <a href="tel:@settings.Mobile1" class="floating-item phone-link"><i class="bi bi-telephone"></i></a>
@@ -320,6 +307,16 @@
                     <div class="contact-row d-flex align-items-center gap-3">
                         <i class="bi bi-envelope-fill text-bc-yellow fs-4"></i>
                         <a href="mailto:@settings.Email" class="text-white-50" style="font-size: 1.05rem;">@settings.Email</a>
+                    </div>
+
+                    <div class="social-section mt-5">
+                        <h4 class="text-white fw-bold mb-4" style="font-size: 1.4rem;">Follow Us</h4>
+                        <div class="d-flex gap-3">
+                            <a href="@settings.Twitter" class="social-circle-link"><i class="bi bi-twitter"></i></a>
+                            <a href="@settings.Facebook" class="social-circle-link"><i class="bi bi-facebook"></i></a>
+                            <a href="@settings.Instagram" class="social-circle-link"><i class="bi bi-instagram"></i></a>
+                            <a href="@settings.LinkedIn" class="social-circle-link"><i class="bi bi-linkedin"></i></a>
+                        </div>
                     </div>
                 </div>
             </div>
