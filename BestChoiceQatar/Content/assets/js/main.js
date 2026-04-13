@@ -375,6 +375,65 @@ const glightbox = GLightbox({
   selector: '.glightbox'
 });
 
+  /**
+   * Modern Loading System Integration (v1.0)
+   * Handles Global Full-screen Loader and Skeleton Shimmers
+   */
+  let loaderTimer = null;
+  const globalLoader = select('#global-loader');
 
+  // Global AJAX Setup
+  $(document).ajaxStart(function() {
+      // Only show loader if request takes more than 300ms
+      loaderTimer = setTimeout(function() {
+          if (globalLoader) globalLoader.classList.add('show');
+          // Fallback cleanup (10s)
+          setTimeout(() => { if (globalLoader) globalLoader.classList.remove('show'); }, 10000);
+      }, 300);
+  });
+
+  $(document).ajaxStop(function() {
+      if (loaderTimer) clearTimeout(loaderTimer);
+      if (globalLoader) globalLoader.classList.remove('show');
+  });
+
+  /**
+   * Manual Loading Controllers
+   */
+  window.BC_Loader = {
+      show: function() {
+          if (globalLoader) globalLoader.classList.add('show');
+      },
+      hide: function() {
+          if (globalLoader) globalLoader.classList.remove('show');
+      },
+      // Show skeleton in a specific container
+      showSkeleton: function(containerId, count = 4) {
+          const container = document.getElementById(containerId);
+          if (!container) return;
+          
+          container.setAttribute('data-original-html', container.innerHTML);
+          let skeletonHtml = '<div class="row g-4">';
+          for(let i=0; i<count; i++) {
+              skeletonHtml += `
+                  <div class="col-md-6 col-lg-3">
+                      <div class="bc-skeleton p-4 border h-100">
+                          <div class="bc-skeleton-img"></div>
+                          <div class="bc-skeleton-title"></div>
+                          <div class="bc-skeleton-text"></div>
+                          <div class="bc-skeleton-text" style="width: 60%"></div>
+                      </div>
+                  </div>`;
+          }
+          skeletonHtml += '</div>';
+          container.innerHTML = skeletonHtml;
+      },
+      hideSkeleton: function(containerId) {
+          const container = document.getElementById(containerId);
+          if (!container || !container.hasAttribute('data-original-html')) return;
+          container.innerHTML = container.getAttribute('data-original-html');
+          container.removeAttribute('data-original-html');
+      }
+  };
 
 })()

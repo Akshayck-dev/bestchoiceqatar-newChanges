@@ -207,15 +207,16 @@
     .rivet-bl { bottom: 40px; left: 40px; }
     .rivet-br { bottom: 40px; right: 40px; }
 
-    /* 2. About Section — Reference Layout */
+    /* 2. About Section - Reference Layout */
     .about-img-stack { position: relative; }
     .about-img-top { width: 58%; aspect-ratio: 3/4; object-fit: cover; display: block; }
     .about-img-bottom { width: 58%; aspect-ratio: 3/4; object-fit: cover; position: absolute; right: 0; top: 30%; border: 6px solid #fff; }
-    .about-badge { position: absolute; color: #fff; padding: 22px 28px; line-height: 1.2; z-index: 10; }
-    .about-badge-years { background: var(--primary-bc); color: #000; bottom: 0; left: 0; }
-    .about-badge-experts { background: #111; right: 0; top: 20%; }
-    .about-badge .badge-num { font-size: var(--fs-xl); font-weight: 800; font-family: var(--font-headline); display: block; line-height: 1; }
-    .about-badge .badge-label { font-size: var(--fs-xs); font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-top: 4px; opacity: 0.9; }
+    .about-badge { position: absolute; color: #fff; padding: 25px; line-height: 1.1; z-index: 20; display: flex; flex-direction: column; justify-content: center; align-items: start; min-width: 160px; aspect-ratio: 1/1; box-shadow: 0 15px 35px rgba(0,0,0,0.2); transition: var(--transition-premium); }
+    .about-badge:hover { transform: scale(1.05) rotate(2deg); z-index: 30; }
+    .about-badge-years { background: var(--primary-bc); color: #000; bottom: -15px; left: -15px; border: 5px solid #fff; }
+    .about-badge-experts { background: #111; right: -15px; top: 15%; border: 5px solid #fff; }
+    .about-badge .badge-num { font-size: 3rem; font-weight: 900; font-family: var(--font-headline); display: inline-block; line-height: 1; letter-spacing: -2px; }
+    .about-badge .badge-label { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; display: block; margin-top: 8px; opacity: 0.9; line-height: 1.3; }
     .about-check-list { list-style: none; padding: 0; margin: 0; }
     .about-check-list li { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid #f0f0f0; font-weight: 600; color: #333; }
     .about-check-list li:last-child { border-bottom: none; }
@@ -234,24 +235,32 @@
     .benefit-title { font-weight: 900; font-family: var(--font-headline); margin-bottom: 8px; font-size: var(--fs-md); color: #000; }
     .benefit-desc { font-size: var(--fs-base); color: #111; margin-bottom: 0; line-height: 1.5; font-weight: 500; }
 
-    /* 4. Price Calculator Section */
-    .calc-section { background: #111; color: #fff; padding: 60px 0; }
-    .calc-card { background: #1a1a1a; border: 1px solid #2a2a2a; padding: 35px; max-width: 700px; margin: 0 auto; position: relative; }
+    /* 4. Price Calculator Section - Industrial Premium */
+    .calc-section { background: #0a0a0a; color: #fff; padding: 100px 0; position: relative; overflow: hidden; }
+    .calc-section::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(255,204,0,0.03) 0%, transparent 70%); pointer-events: none; }
+    .calc-card { background: rgba(30, 30, 30, 0.6); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.08); padding: 50px; max-width: 800px; margin: 0 auto; position: relative; box-shadow: 0 40px 80px rgba(0,0,0,0.5); }
+    .calc-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 60px; background: var(--primary-bc); box-shadow: 0 0 20px var(--primary-bc); }
+    
+    .calc-label { font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 2.5px; color: rgba(255,255,255,0.5); margin-bottom: 12px; display: block; }
+    .calc-select { width: 100%; padding: 18px 25px; background: rgba(0,0,0,0.4); color: #fff; border: 1px solid rgba(255,255,255,0.1); font-family: var(--font-body); font-size: 1.05rem; appearance: none; -webkit-appearance: none; cursor: pointer; transition: var(--transition-fast); }
+    .calc-select:focus { outline: none; border-color: var(--primary-bc); background: rgba(0,0,0,0.6); }
 
-    .calc-card::before { content: ''; position: absolute; top: 0; left: 0; width: 5px; height: 100%; background: var(--primary-bc); }
-    .calc-label { font-size: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; color: var(--primary-bc); margin-bottom: 10px; display: block; }
-    .calc-select { width: 100%; padding: 16px 20px; background: #111; color: #fff; border: 1px solid #333; font-family: var(--font-body); font-size: 1rem; appearance: none; -webkit-appearance: none; cursor: pointer; }
-    .calc-select:focus { outline: none; border-color: var(--primary-bc); }
-    .qty-wrap { display: flex; align-items: center; gap: 0; }
-    .qty-btn { width: 52px; height: 52px; background: var(--primary-bc); color: #000; border: none; font-size: 1.5rem; font-weight: 900; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: var(--transition-fast); flex-shrink: 0; }
-    .qty-btn:hover { background: #fff; }
-    .qty-input { flex: 1; height: 52px; padding: 0 20px; background: #111; color: #fff; border: 1px solid #333; border-left: none; border-right: none; font-size: 1.1rem; font-weight: 700; text-align: center; font-family: var(--font-body); }
+    .qty-wrap { display: flex; align-items: center; background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1); }
+    .qty-btn { width: 60px; height: 60px; background: transparent; color: var(--primary-bc); border: none; font-size: 1.5rem; font-weight: 300; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: var(--transition-fast); }
+    .qty-btn:hover { background: var(--primary-bc); color: #000; }
+    .qty-input { flex: 1; height: 60px; background: transparent; color: #fff; border: none; font-size: 1.25rem; font-weight: 800; text-align: center; font-family: var(--font-body); }
     .qty-input:focus { outline: none; }
-    .price-display { padding: 20px 24px; background: #000; border: 2px solid var(--primary-bc); display: flex; align-items: center; justify-content: space-between; margin-top: 5px; }
-    .price-amount { font-size: 2.5rem; font-weight: 900; color: var(--primary-bc); font-family: var(--font-headline); }
-    .price-currency { font-size: 0.9rem; color: #888; font-weight: 600; }
-    .calc-note { font-size: 0.78rem; color: #666; margin-top: 8px; }
-    .calc-cta { margin-top: 30px; display: flex; gap: 15px; flex-wrap: wrap; }
+    /* Remove arrows from number input */
+    .qty-input::-webkit-outer-spin-button, .qty-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+
+    .price-display { padding: 30px; background: rgba(255, 204, 0, 0.03); border: 1px solid rgba(255, 204, 0, 0.2); display: flex; align-items: center; justify-content: space-between; margin-top: 10px; position: relative; overflow: hidden; }
+    .price-display::after { content: ''; position: absolute; bottom: 0; right: 0; width: 60px; height: 60px; background: linear-gradient(135deg, transparent 50%, rgba(255,204,0,0.1) 50%); }
+    .price-amount { font-size: 3.2rem; font-weight: 900; color: var(--primary-bc); font-family: var(--font-headline); line-height: 1; text-shadow: 0 0 30px rgba(255,204,0,0.2); }
+    .price-currency { font-size: 0.8rem; color: rgba(255,255,255,0.4); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; display: block; }
+    
+    .calc-note { font-size: 0.8rem; color: rgba(255,255,255,0.3); margin-top: 15px; line-height: 1.5; font-style: italic; }
+    .calc-cta { margin-top: 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    @@media (max-width: 576px) { .calc-cta { grid-template-columns: 1fr; } .price-amount { font-size: 2.5rem; } }
 
     /* 5. Services Section */
     .service-img-wrap { height: 260px; overflow: hidden; }
@@ -278,7 +287,7 @@
     .prod-read-more:hover { color: var(--primary-bc); gap: 10px; }
     .prod-read-more .material-symbols-outlined { font-size: 1rem; }
 
-    /* 5b. Product Card — Image Overlay Style (Style 2) */
+    /* 5b. Product Card - Image Overlay Style (Style 2) */
     .prod-card-overlay { position: relative; overflow: hidden; height: 320px; cursor: pointer; }
     .prod-card-overlay img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s ease; display: block; }
     .prod-card-overlay:hover img { transform: scale(1.08); }
@@ -615,7 +624,7 @@
                                 <div class="col-lg-9 col-xl-8">
                                     <span class="hero-label">FAST & EFFICIENT</span>
                                     <h1 class="hero-h1">Quick Setup-Premium <br> Quality-Low Cost.</h1>
-                                    <p class="hero-subtext">Get porta cabins that are fast to install, built to last, and budget-friendly – engineered exclusively for BestChoice Qatar.</p>
+                                    <p class="hero-subtext">Get porta cabins that are fast to install, built to last, and budget-friendly - engineered exclusively for BestChoice Qatar.</p>
                                     <div class="hero-actions">
                                         <a href="/services" class="btn-bc btn-bc-yellow">
                                             EXPLORE SOLUTIONS
@@ -665,19 +674,19 @@
                         <ul class="about-check-list mb-5">
                             <li>
                                 <span class="material-symbols-outlined">check_circle</span>
-                                Cost-Effectiveness — Premium cabins at competitive Qatar market rates
+                                Cost-Effectiveness - Premium cabins at competitive Qatar market rates
                             </li>
                             <li>
                                 <span class="material-symbols-outlined">check_circle</span>
-                                Timely Delivery — On-site delivery and installation across all of Qatar
+                                Timely Delivery - On-site delivery and installation across all of Qatar
                             </li>
                             <li>
                                 <span class="material-symbols-outlined">check_circle</span>
-                                Quality With Innovation — ISO-grade materials, modern engineering standards
+                                Quality With Innovation - ISO-grade materials, modern engineering standards
                             </li>
                             <li>
                                 <span class="material-symbols-outlined">check_circle</span>
-                                Custom Solutions — Designed to your exact project specifications
+                                Custom Solutions - Designed to your exact project specifications
                             </li>
                         </ul>
                         <a href="/about" class="btn-bc btn-bc-yellow">READ COMPANY PROFILE <span class="material-symbols-outlined">arrow_forward</span></a>
@@ -725,7 +734,7 @@
                         </div>
                         <div>
                             <h4 class="benefit-title">Fast delivery & installation</h4>
-                            <p class="benefit-desc">We ensure fast delivery and smooth installation for every project — on time, every time, across all of Qatar.</p>
+                            <p class="benefit-desc">We ensure fast delivery and smooth installation for every project - on time, every time, across all of Qatar.</p>
                         </div>
                     </div>
                 </div>
@@ -759,14 +768,14 @@
                     <span class="calc-label">Select Cabin Type</span>
                     <div style="position:relative;">
                         <select id="cabinType" class="calc-select" onchange="calcPrice()">
-                            <option value="8000">Office Cabin — Standard (3M × 6M)</option>
-                            <option value="14000">Office Cabin — Large (3.75M × 7M)</option>
-                            <option value="20000">Accommodation Cabin — Single (3M × 9M)</option>
-                            <option value="28000">Accommodation Cabin — Double (3.75M × 9M)</option>
-                            <option value="12000">Toilet / Bathroom Cabin (2.4M × 4.8M)</option>
+                            <option value="8000">Office Cabin - Standard (3M x 6M)</option>
+                            <option value="14000">Office Cabin - Large (3.75M x 7M)</option>
+                            <option value="20000">Accommodation Cabin - Single (3M x 9M)</option>
+                            <option value="28000">Accommodation Cabin - Double (3.75M x 9M)</option>
+                            <option value="12000">Toilet / Bathroom Cabin (2.4M x 4.8M)</option>
                             <option value="35000">Container Office (20ft Conversion)</option>
                             <option value="55000">Container Office (40ft Conversion)</option>
-                            <option value="22000">Security / Guard Cabin (2M × 3M)</option>
+                            <option value="22000">Security / Guard Cabin (2M x 3M)</option>
                             <option value="60000">Labor Accommodation Block (10 Rooms)</option>
                         </select>
                         <span class="material-symbols-outlined" style="position:absolute;right:16px;top:50%;transform:translateY(-50%);color:#888;pointer-events:none;">expand_more</span>
@@ -776,7 +785,7 @@
                 <div class="mb-3">
                     <span class="calc-label">Enter Quantity</span>
                     <div class="qty-wrap">
-                        <button class="qty-btn" id="qtyMinus" onclick="changeQty(-1)">−</button>
+                        <button class="qty-btn" id="qtyMinus" onclick="changeQty(-1)">-</button>
                         <input type="number" id="cabinQty" class="qty-input" value="1" min="1" max="999" onchange="calcPrice()" oninput="calcPrice()">
                         <button class="qty-btn" id="qtyPlus" onclick="changeQty(1)">+</button>
                     </div>
@@ -812,17 +821,47 @@
     </section>
 
     <script>
+        let priceAnimation;
+        function animatePrice(targetValue) {
+            const el = document.getElementById('estimatedPrice');
+            const startValue = parseInt(el.innerText.replace(/,/g, '')) || 0;
+            const duration = 600; 
+            let startTimestamp = null;
+
+            if (priceAnimation) cancelAnimationFrame(priceAnimation);
+
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                // Easing function: Cubic Out
+                const easeProgress = 1 - Math.pow(1 - progress, 3);
+                const current = Math.floor(easeProgress * (targetValue - startValue) + startValue);
+                
+                el.innerText = current.toLocaleString('en-QA');
+                
+                if (progress < 1) {
+                    priceAnimation = requestAnimationFrame(step);
+                }
+            };
+            priceAnimation = requestAnimationFrame(step);
+        }
+
         function calcPrice() {
             var price = parseInt(document.getElementById('cabinType').value) || 0;
-            var qty = parseInt(document.getElementById('cabinQty').value) || 1;
-            if (qty < 1) { qty = 1; document.getElementById('cabinQty').value = 1; }
+            var qtyInput = document.getElementById('cabinQty');
+            var qty = parseInt(qtyInput.value) || 1;
+            
+            if (qty < 1) { qty = 1; qtyInput.value = 1; }
+            if (qty > 999) { qty = 999; qtyInput.value = 999; }
+            
             var total = price * qty;
-            document.getElementById('estimatedPrice').innerText = total.toLocaleString('en-QA');
+            animatePrice(total);
         }
+
         function changeQty(delta) {
             var input = document.getElementById('cabinQty');
             var val = parseInt(input.value) || 1;
-            val = Math.max(1, val + delta);
+            val = Math.max(1, Math.min(999, val + delta));
             input.value = val;
             calcPrice();
         }
@@ -1226,8 +1265,9 @@
                     },
                 });
 
-                // Initialize PureCounter (Self-starting library)
-                console.log("Hero Swiper Initialized Successfully");
+                // Initialize PureCounter (Self-starting library) 
+                new PureCounter();
+                console.log("Hero Swiper & PureCounter Initialized Successfully");
             } catch (e) {
                 console.error("Hero Swiper Initialization Failed:", e);
                 // Fallback: ensure first slide is visible

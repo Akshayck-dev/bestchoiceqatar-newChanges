@@ -1,0 +1,165 @@
+<!-- Global Premium Loader Container -->
+<div id="global-loader" class="bc-loader-overlay">
+    <div class="bc-loader-content text-center">
+        <div class="bc-spinner">
+            <div class="bc-spinner-inner"></div>
+            <div class="bc-spinner-logo">
+                <img src="/content/assets/img/logo/favicon.png" alt="B" width="32">
+            </div>
+        </div>
+        <div class="bc-loader-text mt-3">
+            <span class="text-uppercase fw-bold tracking-widest text-white-50">Loading Excellence</span>
+            <div class="bc-progress-bar mt-2">
+                <div class="bc-progress-bar-value"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Reusable Section Loader Template (Hidden by default, cloned via JS) -->
+<template id="section-loader-template">
+    <div class="bc-section-loader">
+        <div class="bc-skeleton-shimmer"></div>
+    </div>
+</template>
+
+<style>
+    /* 1. Global Overlay */
+    .bc-loader-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.4);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        z-index: 9999999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.4s ease, visibility 0.4s ease;
+    }
+
+    .bc-loader-overlay.show {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    /* 2. Modern Spinner Animation */
+    .bc-spinner {
+        position: relative;
+        width: 100px;
+        height: 100px;
+        margin: 0 auto;
+    }
+
+    .bc-spinner-inner {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        border: 2px solid rgba(255, 204, 0, 0.1);
+        border-top: 2px solid #ffcc00;
+        border-radius: 50%;
+        animation: bc-spin 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    }
+
+    .bc-spinner-logo {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        animation: bc-pulse 2s ease-in-out infinite;
+    }
+
+    .bc-loader-text span {
+        font-size: 0.75rem;
+        letter-spacing: 4px;
+        color: #ffcc00 !important;
+    }
+
+    .bc-progress-bar {
+        width: 120px;
+        height: 2px;
+        background: rgba(255, 255, 255, 0.05);
+        margin: 0 auto;
+        overflow: hidden;
+        border-radius: 2px;
+    }
+
+    .bc-progress-bar-value {
+        width: 100%;
+        height: 100%;
+        background: #ffcc00;
+        animation: bc-progress 2s infinite linear;
+        transform-origin: 0% 50%;
+    }
+
+    @@keyframes bc-spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    @@keyframes bc-pulse {
+        0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(0.9); }
+        50% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+    }
+
+    @@keyframes bc-progress {
+        0% { transform: translateX(-100%); }
+        100% { transform: translateX(100%); }
+    }
+
+    /* 3. Skeleton Shimmer System */
+    .bc-skeleton {
+        position: relative;
+        overflow: hidden;
+        background-color: #f6f7f8;
+        border-radius: 4px;
+    }
+
+    .bc-skeleton::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        transform: translateX(-100%);
+        background-image: linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0) 0,
+            rgba(255, 255, 255, 0.2) 20%,
+            rgba(255, 255, 255, 0.5) 60%,
+            rgba(255, 255, 255, 0)
+        );
+        animation: bc-shimmer 2s infinite;
+    }
+
+    .dark-mode .bc-skeleton {
+        background-color: #222;
+    }
+
+    .dark-mode .bc-skeleton::after {
+        background-image: linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0) 0,
+            rgba(255, 255, 255, 0.05) 20%,
+            rgba(255, 255, 255, 0.1) 60%,
+            rgba(255, 255, 255, 0)
+        );
+    }
+
+    @@keyframes bc-shimmer {
+        100% { transform: translateX(100%); }
+    }
+
+    /* Skeleton Helper Classes */
+    .bc-skeleton-img { aspect-ratio: 16/9; width: 100%; margin-bottom: 20px; }
+    .bc-skeleton-title { height: 24px; width: 80%; margin-bottom: 12px; }
+    .bc-skeleton-text { height: 14px; width: 100%; margin-bottom: 8px; }
+    .bc-skeleton-btn { height: 40px; width: 120px; margin-top: 15px; }
+
+</style>
