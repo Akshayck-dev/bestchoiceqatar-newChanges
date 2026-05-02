@@ -127,15 +127,38 @@ small {
 --------------------------------------------------------------*/
 #header {
     height: 80px;
-    background: #d4e157; /* Premium Lime Yellow to match reference image */
+    background: #ffffff;
     z-index: 1000;
-    box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.05);
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    transition: all 0.5s;
-    border-bottom: 2px solid rgba(0, 0, 0, 0.05);
+    transition: all 0.4s ease;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+#header.header-transparent {
+    background: transparent !important;
+    box-shadow: none !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#header.header-transparent .navbar a,
+#header.header-transparent .desk-menu-trigger i {
+    color: #ffffff !important;
+}
+
+#header.header-transparent .header-pill-cta {
+    border-color: #ffffff;
+    color: #ffffff !important;
+}
+
+#header.header-scrolled {
+    background: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(10px);
+    height: 70px;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
 }
 
 @media(min-width:991px) {
@@ -166,6 +189,12 @@ small {
 
     #header .logo h1 a {
         color: #fff !important;
+    }
+}
+
+@media(min-width: 992px) {
+    #menuBtn {
+        display: none !important;
     }
 }
 
@@ -573,7 +602,7 @@ body.drawer-open .premium-floating-nav {
 .whatsapp-link { background-color: #25D366 !important; }
 .email-link { background-color: #ED2B29 !important; }
 
-/* HIDE FLOATING ITEMS WHEN DRAWER OPEN OR ON SMALL MOBILE */
+/* HIDE FLOATING ITEMS WHEN DRAWER OPEN */
 body.drawer-open .premium-floating-nav,
 body.lock-scroll .premium-floating-nav {
   display: none !important;
@@ -581,7 +610,16 @@ body.lock-scroll .premium-floating-nav {
 
 @media (max-width: 768px) {
     .premium-floating-nav {
-        display: none !important;
+        right: 15px !important;
+        bottom: 90px !important;
+        gap: 8px !important;
+        display: flex !important; /* Force display on mobile */
+    }
+    .floating-item {
+        width: 48px !important;
+        height: 48px !important;
+        font-size: 22px !important;
+        border-radius: 10px !important;
     }
 }
 

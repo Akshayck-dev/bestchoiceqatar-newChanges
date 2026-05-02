@@ -573,26 +573,34 @@
                         <li class="mb-3 d-flex align-items-start"><i class="bi bi-check-circle-fill text-warning me-3 mt-1"></i> Fire-resistant specialized units for Oil & Gas industry (PIR/Rockwool insulation).</li>
                         <li class="mb-3 d-flex align-items-start"><i class="bi bi-check-circle-fill text-warning me-3 mt-1"></i> Suitable for G+1 and G+2 multi-story configurations to optimize footprint.</li>
                     </ul>
-                </div>
-                <div class="col-lg-12 mt-5" data-aos="fade-up">
-                    <div class="swiper gallery-swiper">
-                        <div class="swiper-wrapper">
-                            @{
-                                for (int j = 1; j <= 13; j++)
-                                {
-                                    string ext = (j == 5 || j == 6) ? "JPG" : "jpg";
-                                    var imgUrl = Url.Content("~/Content/assets/img/Products/cabin/cabin-" + j + "." + ext);
-                                    <div class="swiper-slide">
-                                        <a href="@imgUrl" class="glightbox">
-                                            <img src="@imgUrl" alt="Porta Cabin Office Qatar" loading="lazy">
-                                        </a>
-                                    </div>
-                                }
-                            }
+                <div class="col-lg-6" data-aos="fade-left">
+                    <div class="position-relative">
+                        <img src="/Uploads/WhatsApp Image 2026-04-22 at 3.41.42 PM.jpeg" class="img-fluid shadow-lg" alt="Modular Cabin Installation" style="border-radius: 20px;">
+                        <div class="bg-primary-yellow position-absolute p-4 d-none d-md-block" style="bottom: -30px; right: -30px; border-radius: 15px; max-width: 250px;">
+                            <h5 class="fw-bold mb-0 text-dark">Durable & Rapid Site Setup</h5>
                         </div>
-                        <div class="swiper-pagination"></div>
-                        <div class="swiper-button-next"></div>
-                        <div class="swiper-button-prev"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-5 pt-5" data-aos="fade-up">
+                <div class="col-lg-12 text-center mb-5">
+                    <span class="section-label">Project Gallery</span>
+                    <h2 class="section-title">Our Recent Modular Installations</h2>
+                </div>
+                <div class="col-lg-12">
+                    <div class="row g-4">
+                        @for (int j = 1; j <= 6; j++)
+                        {
+                            var imgUrl = Url.Content("~/Uploads/WhatsApp Image 2026-04-22 at 3.41." + (41 + j) + " PM.jpeg");
+                            <div class="col-md-4 col-sm-6">
+                                <a href="@imgUrl" class="glightbox">
+                                    <div class="position-relative overflow-hidden" style="height: 280px; border-radius: 15px;">
+                                        <img src="@imgUrl" class="w-100 h-100 object-fit-cover transition-premium" alt="Modular Cabin Installation">
+                                    </div>
+                                </a>
+                            </div>
+                        }
                     </div>
                 </div>
             </div>

@@ -28,80 +28,97 @@
     </div>
 </div><!-- End Breadcrumbs -->
 <!-- ======= Contact Section ======= -->
-<section id="contact" class="contact">
-    <div class="container">
+<section id="contact" class="contact py-5 bg-white">
+    <div class="container" data-aos="fade-up">
 
-        <div class="section-title" data-aos="zoom-out">
-            <h2>Contact</h2>
-            <p>Contact Us</p>
+        <div class="section-title text-center mb-5" data-aos="zoom-out">
+            <h6 class="text-primary-bc fw-bold text-uppercase" style="letter-spacing: 2px;">Get In Touch</h6>
+            <h2 class="display-5 fw-bold font-headline">CONTACT US</h2>
+            <div class="mx-auto bg-primary-bc" style="width: 60px; height: 3px; margin-top: 15px;"></div>
         </div>
 
-        <div class="row mt-5">
-
-            <div class="col-lg-4" data-aos="fade-right">
-                <div class="info">
-                    <div class="address">
-                        <i class="bi bi-geo-alt"></i>
-                        <h4>Location:</h4>
-                        <p>@settings.Location</p>
-                    </div>
-
-                    <div class="email">
-                        <i class="bi bi-envelope"></i>
-                        <h4>Email:</h4>
-                        <p>@settings.Email</p>
-                    </div>
-
-                    <div class="phone">
-                        <i class="bi bi-phone"></i>
-                        <h4>Call:</h4>
-                        <p>@settings.Mobile1</p>
-                        <p>@settings.Mobile2</p>
-                    </div>
-
+        <div class="row g-0 shadow-lg" style="border-radius: 20px; overflow: hidden; border: 1px solid #eee;">
+            <!-- Map Column -->
+            <div class="col-lg-6">
+                <div class="h-100" style="min-height: 450px;">
+                    <iframe style="border:0; width: 100%; height: 100%; min-height: 450px;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3608.1642935287487!2d51.51278228225872!3d25.26505812008409!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e45c530207cf0d3%3A0xa1706c3c15804683!2sSharq%20Capital%20Business%20Center!5e0!3m2!1sen!2sin!4v1777748988874!5m2!1sen!2sin" frameborder="0" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
-
             </div>
 
-            <div class="col-lg-8 mt-5 mt-lg-0" data-aos="fade-left">              
+            <!-- Info & Form Column -->
+            <div class="col-lg-6 bg-light p-4 p-md-5">
+                <div class="info-wrap">
+                    <div class="row g-4 mb-5">
+                        <div class="col-md-6">
+                            <div class="info-item d-flex align-items-center">
+                                <div class="icon-box bg-white shadow-sm d-flex align-items-center justify-content-center me-3" style="width: 50px; height: 50px; border-radius: 10px; color: var(--primary-bc);">
+                                    <i class="bi bi-geo-alt fs-4"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-0 fw-bold">Our Location</h5>
+                                    <p class="small text-muted mb-0">@settings.Location</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="info-item d-flex align-items-center">
+                                <div class="icon-box bg-white shadow-sm d-flex align-items-center justify-content-center me-3" style="width: 50px; height: 50px; border-radius: 10px; color: var(--primary-bc);">
+                                    <i class="bi bi-envelope fs-4"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-0 fw-bold">Email Us</h5>
+                                    <p class="small text-muted mb-0">@settings.Email</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="info-item d-flex align-items-center">
+                                <div class="icon-box bg-white shadow-sm d-flex align-items-center justify-content-center me-3" style="width: 50px; height: 50px; border-radius: 10px; color: var(--primary-bc);">
+                                    <i class="bi bi-telephone fs-4"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-0 fw-bold">Call Us</h5>
+                                    <p class="small text-muted mb-0">@settings.Mobile1</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="info-item d-flex align-items-center">
+                                <div class="icon-box bg-white shadow-sm d-flex align-items-center justify-content-center me-3" style="width: 50px; height: 50px; border-radius: 10px; color: var(--primary-bc);">
+                                    <i class="bi bi-clock fs-4"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-0 fw-bold">Working Hours</h5>
+                                    <p class="small text-muted mb-0">Sat - Thu: 8AM - 6PM</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <form action="/Contact" method="post" role="form" class="php-email-form">
-                        <div class="row">
+                        <div class="row g-3">
                             <div class="col-md-6 form-group">
-                                <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
+                                <input type="text" name="name" class="form-control py-3 shadow-none" style="border-radius: 10px;" id="name" placeholder="Your Name" required>
                             </div>
-                            <div class="col-md-6 form-group mt-3 mt-md-0">
-                                <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
+                            <div class="col-md-6 form-group">
+                                <input type="email" class="form-control py-3 shadow-none" style="border-radius: 10px;" name="email" id="email" placeholder="Your Email" required>
+                            </div>
+                            <div class="col-12 form-group">
+                                <input type="text" class="form-control py-3 shadow-none" style="border-radius: 10px;" name="subject" id="subject" placeholder="Subject" required>
+                            </div>
+                            <div class="col-12 form-group">
+                                <textarea class="form-control py-3 shadow-none" style="border-radius: 10px;" name="message" rows="5" placeholder="Message" required></textarea>
+                            </div>
+                            <div class="col-12 mt-4">
+                                <button type="submit" class="btn-bc btn-bc-yellow w-100 py-3 fw-bold text-uppercase" style="border-radius: 10px; letter-spacing: 1px;">Send Message</button>
                             </div>
                         </div>
-                        <div class="form-group mt-3">
-                            <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
-                        </div>
-                        <div class="form-group mt-3">
-                            <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
-                        </div>
-                        <div class="my-3">
-                            <div class="loading">Loading</div>
-                            <div class="error-message"></div>
-                            <div class="sent-message">Your message has been sent. Thank you!</div>
-                        </div>
-                        <div class="text-center"><button type="submit">Send Message</button></div>
                     </form>
-
+                </div>
             </div>
-
         </div>
-
     </div>
-</section><!-- End Contact Section -->
-
-<section id="contact-us" class="contact-us">
-    <div class="container">
-
-        <div>
-            <iframe style="border:0; width: 100%; height: 270px;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d225.47256451716277!2d51.53732614402442!3d25.28534807571044!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e45c56ab558c94b%3A0xa4967e22f4d83102!2sDIRA%20COMMERCIAL!5e0!3m2!1sen!2sqa!4v1661953067758!5m2!1sen!2sqa" frameborder="0" allowfullscreen></iframe>
-        </div>
-
-
-</section><!-- End Contact Us Section -->
+</section>
+<!-- End Contact Us Section -->
 
 <main id="main">

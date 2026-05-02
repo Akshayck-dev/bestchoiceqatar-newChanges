@@ -163,6 +163,11 @@ namespace BestChoiceQatar.Controllers
             return View();
         }
 
+        public ActionResult Gallery()
+        {
+            return View();
+        }
+
         public ActionResult ProductDetails(string slug)
         {
             return View();

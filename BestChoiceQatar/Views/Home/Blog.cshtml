@@ -10,131 +10,116 @@
 <style>
 
     #left-area {
-        width: 79.125%;
+        width: 100%;
         padding-bottom: 23px;
-        float: left;
-        font-family: "Open Sans", sans-serif;
+        font-family: var(--font-body);
+        font-size: var(--fs-base);
+        line-height: var(--lh-body);
     }
 
     .et_pb_post {
         margin-bottom: 60px;
         word-wrap: break-word;
+        padding-bottom: 40px;
+        border-bottom: 1px solid #eee;
     }
 
-    left-area .post-meta {
-        font-size: 14px;
+    .post-meta {
+        font-size: 0.85rem;
         padding-bottom: 15px;
+        color: #888;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        align-items: center;
     }
 
     #main-content {
         background-color: #fff;
-    }
-
-    body:not(.et-tb) #main-content .container, body:not(.et-tb-has-header) #main-content .container {
-        padding-top: 58px;
-    }
-
-    .et_right_sidebar #left-area {
-        /*float: left;*/
-        padding-right: 5.5%;
-    }
-
-    .et_right_sidebar #sidebar {
-        padding-left: 30px;
+        padding: 80px 0;
     }
 
     #sidebar {
-        float: left;
-        padding-bottom: 28px;
-        border-left: 2px solid #e2e2e2;
-        padding-left: 10px;
-    }
-
-        #sidebar .et_pb_widget {
-            margin-bottom: 30px;
-            width: 100%;
-            float: none;
-        }
-
-    .et_pb_widget {
-        max-width: 100%;
-        word-wrap: break-word;
-    }
-
-        .widget_search #searchform, .et_pb_widget .wp-block-search {
-            position: relative;
-        }
-
-        .widget_search .screen-reader-text, .et_pb_widget .wp-block-search__label {
-            display: none;
-        }
-
-    .wp-block-search .wp-block-search__label {
-        font-weight: 700;
-    }
-
-    block-search__input {
-        width: 100%;
-        border-radius: 3px;
-    }
-
-    .et_pb_widget .wp-block-search__input, .et_pb_widget .wp-block-search__button {
-        padding: 0.7em;
-        height: 40px !important;
-        margin: 0;
-        font-size: 14px;
-        line-height: normal !important;
-        border: 1px solid #ddd;
-        color: #666;
-    }
-
-    #searchsubmit, .et_pb_widget .wp-block-search__button {
-        cursor: pointer;
+        padding-left: 30px;
+        border-left: 1px solid #eee;
     }
 
     h1, h2, h3, h4, h5, h6 {
-        color: #333;
-        padding-bottom: 10px;
-        line-height: 1em;
-        font-weight: 500;
-        font-family: "Open Sans", sans-serif;
-    }
-
-    ol, ul {
-        list-style-type: decimal-leading-zero;
-    }
-
-    .et_right_sidebar #sidebar {
-        padding-left: 30px;
+        color: #111;
+        padding-bottom: 15px;
+        line-height: 1.25;
+        font-weight: 800;
+        font-family: var(--font-heading);
+        letter-spacing: var(--ls-tight);
     }
 
     .readmore {
-        cursor: pointer;
-        color: green;
-        font-weight: bold;
-        text-decoration: underline;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 15px;
+        color: #000;
+        font-weight: 800;
+        text-decoration: none;
+        text-transform: uppercase;
+        font-size: 0.85rem;
+        letter-spacing: 1px;
+        border-bottom: 2px solid var(--primary-bc);
+        padding-bottom: 2px;
+        transition: all 0.3s ease;
+    }
+    .readmore:hover {
+        color: var(--primary-bc);
+        gap: 12px;
+    }
+
+    .entry-title a {
+        color: #111;
+        text-decoration: none;
+        transition: color 0.3s;
+    }
+    .entry-title a:hover {
+        color: var(--primary-bc);
     }
 </style>
 
+<!-- ======= Breadcrumbs ======= -->
+<div class="breadcrumbs d-flex align-items-center" style="background-image: url('../content/assets/img/header/about-header.jpg');">
+    <div class="container position-relative d-flex flex-column align-items-center">
+        <h2>Blog</h2>
+        <ol>
+            <li><a href="/index">Home</a></li>
+            <li>Blog</li>
+        </ol>
+    </div>
+</div>
+
+<main id="main">
     <div id="main-content">
         <div class="container">
             <div class="row">
                 <div class="col-sm-9">
                     <div id="content-area" class="clearfix">
                         <div id="left-area">
-                            <article id="post-1009" class="et_pb_post post-1009 post type-post status-publish format-standard hentry category-uncategorized">
+                            <article id="post-1010" class="et_pb_post">
                                 <h2 class="entry-title"><a href="/portable-cabin-manufacturers-in-qatar">Portable Cabin Manufacturers in Qatar</a></h2>
-                                <p class="post-meta"> by <span class="author vcard"><a href="/porta-cabin-manufacturers-in-qatar" title="Posts by admin" rel="author">admin</a></span> | <span class="published">January 10, 2023</span> | <a href="#" rel="category tag">Uncategorized</a></p>Introduction: In the bustling country of Qatar, where rapid urbanization and infrastructural development are on the rise, the demand for flexible and efficient space solutions has become paramount. Among the many innovative companies contributing to this...<a href="/portable-cabin-manufacturers-in-qatar" class="readmore">Read more</a>
+                                <p class="post-meta"> by <span class="author vcard"><a href="/portable-cabin-manufacturers-in-qatar" title="Posts by admin" rel="author">admin</a></span> | <span class="published">January 10, 2023</span> | <span class="material-symbols-outlined fs-6">category</span> Uncategorized</p>
+                                <p>In the bustling country of Qatar, where rapid urbanization and infrastructural development are on the rise, the demand for flexible and efficient space solutions has become paramount. Among the many innovative companies contributing to this transformation...</p>
+                                <a href="/portable-cabin-manufacturers-in-qatar" class="readmore">Read more <span class="material-symbols-outlined fs-6">arrow_forward</span></a>
                             </article>
 
-                            <article id="post-766" class="et_pb_post post-766 post type-post status-publish format-standard hentry category-uncategorized">
+                            <article id="post-766" class="et_pb_post">
                                 <h2 class="entry-title"><a href="/guid-to-choose-best-container">A Guide to Choosing the Best Container Cabins, Office Cabins, and Caravans Manufacturers in Qatar</a></h2>
-                                <p class="post-meta"> by <span class="author vcard"><a href="/guid-to-choose-best-container" title="Posts by admin" rel="author">admin</a></span> | <span class="published">August 15, 2023</span> | <a href="#" rel="category tag">Uncategorized</a></p>Introduction: Qatar, a country known for its rapid development and booming economy, is witnessing an increased demand for quality container cabins, office cabins, and caravans. Whether you need a temporary living space, a portable office, or a mobile home, selecting...<a href="/guid-to-choose-best-container" class="readmore">Read more</a>
+                                <p class="post-meta"> by <span class="author vcard"><a href="/guid-to-choose-best-container" title="Posts by admin" rel="author">admin</a></span> | <span class="published">August 15, 2023</span> | <span class="material-symbols-outlined fs-6">category</span> Uncategorized</p>
+                                <p>Qatar, a country known for its rapid development and booming economy, is witnessing an increased demand for quality container cabins, office cabins, and caravans. Whether you need a temporary living space, a portable office, or a mobile home, selecting...</p>
+                                <a href="/guid-to-choose-best-container" class="readmore">Read more <span class="material-symbols-outlined fs-6">arrow_forward</span></a>
                             </article>
 
-                            <article id="post-766" class="et_pb_post post-766 post type-post status-publish format-standard hentry category-uncategorized">
+                            <article id="post-767" class="et_pb_post">
                                 <h2 class="entry-title"><a href="/site-cabins-offices-welfare-accommodation">Modular Cabins: Offices, Accommodation & Welfare</a></h2>
-                                <p class="post-meta"> by <span class="author vcard"><a href="#" title="Posts by admin" rel="author">admin</a></span> | <span class="published">October 7, 2023</span> | <a href="/site-cabins-offices-welfare-accommodation" rel="category tag">Uncategorized</a></p>Introduction: Qatar, a country known for its rapid development and booming economy, is witnessing an increased demand for quality container cabins, office cabins, and caravans. Whether you need a temporary living space, a portable office, or a mobile home, selecting...<a href="/site-cabins-offices-welfare-accommodation" class="readmore">Read more</a>
+                                <p class="post-meta"> by <span class="author vcard"><a href="/site-cabins-offices-welfare-accommodation" title="Posts by admin" rel="author">admin</a></span> | <span class="published">October 7, 2023</span> | <span class="material-symbols-outlined fs-6">category</span> Uncategorized</p>
+                                <p>Qatar, a country known for its rapid development and booming economy, is witnessing an increased demand for quality container cabins, office cabins, and caravans. Whether you need a temporary living space, a portable office, or a mobile home, selecting...</p>
+                                <a href="/site-cabins-offices-welfare-accommodation" class="readmore">Read more <span class="material-symbols-outlined fs-6">arrow_forward</span></a>
                             </article>
 
 

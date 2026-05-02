@@ -80,6 +80,7 @@
         z-index: 1; 
         backdrop-filter: brightness(0.9) contrast(1.1);
         -webkit-backdrop-filter: brightness(0.9) contrast(1.1);
+        pointer-events: none;
     }
     
     .hero-content { 
@@ -147,12 +148,21 @@
     .swiper-slide-active .hero-actions { animation: heroFadeInUp 0.6s ease forwards 0.55s; }
 
     .btn-bc { padding: 14px 35px; border-radius: 0; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; transition: var(--transition-premium); display: inline-flex; align-items: center; gap: 10px; border: none; text-decoration: none; font-size: 0.85rem; }
-    .btn-bc-yellow { background: var(--slide-accent); color: #000; }
+    .btn-bc-yellow { background: var(--slide-accent, var(--primary-bc)); color: #000; }
     .btn-bc-yellow:hover { background: #fff; color: #000; transform: translateX(8px); }
-    .btn-bc-outline { border: 2px solid #fff; color: #fff; background: transparent; }
-    .btn-bc-outline:hover { border-color: var(--slide-accent); background: var(--slide-accent); color: #000; transform: translateX(8px); }
+    .btn-bc-outline { border: 2px solid rgba(255,255,255,0.8); color: #fff; background: rgba(255,255,255,0.05); backdrop-filter: blur(5px); }
+    .btn-bc-outline:hover { border-color: var(--slide-accent, var(--primary-bc)); background: var(--slide-accent, var(--primary-bc)); color: #000; transform: translateX(8px); }
+    
+    .products-swiper-premium { padding-bottom: 80px !important; }
+    .swiper-pagination-premium { bottom: 10px !important; }
     
     .btn-bc-small { padding: 10px 20px; font-size: 0.75rem; }
+
+    .btn-bc, .card-link, .nav-link, .floating-item { 
+        pointer-events: auto !important; 
+        position: relative; 
+        z-index: 25 !important; 
+    }
 
     /* Vertical Pagination on Right */
     .hero-pagination {
@@ -182,7 +192,9 @@
 
     /* Mobile Responsiveness for Hero */
     @@media (max-width: 991.98px) {
-        .hero-wrap { height: auto; min-height: 100vh; padding: 120px 0 80px; }
+        .hero-wrap { height: 100svh; min-height: 700px; padding: 100px 0 60px; }
+        .hero-h1 { font-size: 2.5rem; margin-bottom: 20px; }
+        .hero-subtext { font-size: 1rem; margin-bottom: 30px; }
         .hero-content { text-align: center; }
         .hero-subtext { margin: 0 auto 40px; }
         .hero-actions { justify-content: center; }
@@ -241,7 +253,7 @@
     .calc-card { background: rgba(30, 30, 30, 0.6); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.08); padding: 50px; max-width: 800px; margin: 0 auto; position: relative; box-shadow: 0 40px 80px rgba(0,0,0,0.5); }
     .calc-card::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 60px; background: var(--primary-bc); box-shadow: 0 0 20px var(--primary-bc); }
     
-    .calc-label { font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 2.5px; color: rgba(255,255,255,0.5); margin-bottom: 12px; display: block; }
+    .calc-label { font-size: 0.85rem; font-weight: 800; text-transform: uppercase; letter-spacing: 2.5px; color: rgba(255,255,255,0.8); margin-bottom: 12px; display: block; }
     .calc-select { width: 100%; padding: 18px 25px; background: rgba(0,0,0,0.4); color: #fff; border: 1px solid rgba(255,255,255,0.1); font-family: var(--font-body); font-size: 1.05rem; appearance: none; -webkit-appearance: none; cursor: pointer; transition: var(--transition-fast); }
     .calc-select:focus { outline: none; border-color: var(--primary-bc); background: rgba(0,0,0,0.6); }
 
@@ -256,9 +268,9 @@
     .price-display { padding: 30px; background: rgba(255, 204, 0, 0.03); border: 1px solid rgba(255, 204, 0, 0.2); display: flex; align-items: center; justify-content: space-between; margin-top: 10px; position: relative; overflow: hidden; }
     .price-display::after { content: ''; position: absolute; bottom: 0; right: 0; width: 60px; height: 60px; background: linear-gradient(135deg, transparent 50%, rgba(255,204,0,0.1) 50%); }
     .price-amount { font-size: 3.2rem; font-weight: 900; color: var(--primary-bc); font-family: var(--font-headline); line-height: 1; text-shadow: 0 0 30px rgba(255,204,0,0.2); }
-    .price-currency { font-size: 0.8rem; color: rgba(255,255,255,0.4); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; display: block; }
+    .price-currency { font-size: 0.9rem; color: rgba(255,255,255,0.7); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; display: block; }
     
-    .calc-note { font-size: 0.8rem; color: rgba(255,255,255,0.3); margin-top: 15px; line-height: 1.5; font-style: italic; }
+    .calc-note { font-size: 0.85rem; color: rgba(255,255,255,0.5); margin-top: 15px; line-height: 1.5; font-style: italic; }
     .calc-cta { margin-top: 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
     @@media (max-width: 576px) { .calc-cta { grid-template-columns: 1fr; } .price-amount { font-size: 2.5rem; } }
 
@@ -420,12 +432,23 @@
     .card-overlay {
         position: absolute;
         inset: 0;
-        background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.2) 60%, transparent 100%);
+        background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.4) 60%, transparent 100%);
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
-        padding: 25px;
+        padding: 30px;
         transition: var(--transition-premium);
+    }
+
+    .card-text {
+        color: rgba(255,255,255,0.8);
+        font-size: 0.9rem;
+        margin-bottom: 20px;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        line-height: 1.5;
     }
 
     .card-title {
@@ -446,13 +469,15 @@
         font-weight: 800;
         text-transform: uppercase;
         letter-spacing: 2px;
-        font-size: 0.8rem;
-        padding-bottom: 5px;
-        border-bottom: 2px solid transparent;
+        font-size: 0.9rem;
+        padding: 8px 15px;
+        border: 2px solid var(--primary-bc);
         transition: var(--transition-fast);
+        background: transparent;
     }
     .card-link:hover {
-        border-color: var(--primary-bc);
+        background: var(--primary-bc);
+        color: #000 !important;
         gap: 15px;
     }
 
@@ -518,6 +543,15 @@
     .client-logo-wrap:hover .client-logo {
         transform: scale(1.1);
     }
+
+    /* Modular Cabin Showcase Styles */
+    .modular-hero-wrap h2 {
+        text-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    }
+    .modular-hero-wrap p {
+        text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        color: rgba(255,255,255,0.9) !important;
+    }
 </style>
 
 
@@ -546,8 +580,8 @@
                                     <p class="hero-subtext">Bestchoice was established in 2009. We have already created a name for itself in Qatar market as a GREEN company in various industrial fields.</p>
                                     <div class="hero-actions">
                                         <a href="/about" class="btn-bc btn-bc-yellow">
-                                            READ MORE
-                                            <span class="material-symbols-outlined">arrow_forward</span>
+                                            READ MORE ABOUT US
+                                            <span class="material-symbols-outlined">info</span>
                                         </a>
                                     </div>
                                 </div>
@@ -565,8 +599,14 @@
                                     <h1 class="hero-h1">Services</h1>
                                     <p class="hero-subtext">One of the fast growing companies in Qatar performing the following professional services:</p>
                                     <div class="hero-actions">
-                                        <a href="#" class="btn-bc btn-bc-yellow btn-bc-small">General Contracting</a>
-                                        <a href="#" class="btn-bc btn-bc-outline btn-bc-small">Optical Fibre Networks</a>
+                                        <a href="/general-contracting" class="btn-bc btn-bc-yellow btn-bc-small">
+                                            General Contracting
+                                            <span class="material-symbols-outlined">architecture</span>
+                                        </a>
+                                        <a href="/optical-fibre-networks" class="btn-bc btn-bc-outline btn-bc-small">
+                                            Optical Fibre Networks
+                                            <span class="material-symbols-outlined">settings_input_component</span>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -583,9 +623,18 @@
                                     <h1 class="hero-h1">Products</h1>
                                     <p class="hero-subtext">Expertly performing the following product fabrication services across Qatar's major industrial sectors:</p>
                                     <div class="hero-actions">
-                                        <a href="#" class="btn-bc btn-bc-yellow btn-bc-small">Portable Cabin Fabrication</a>
-                                        <a href="#" class="btn-bc btn-bc-outline btn-bc-small">Building Painting</a>
-                                        <a href="#" class="btn-bc btn-bc-outline btn-bc-small">Steel & Aluminum</a>
+                                        <a href="/portable-cabin-fabrication" class="btn-bc btn-bc-yellow btn-bc-small">
+                                            Portable Cabin Fabrication
+                                            <span class="material-symbols-outlined">precision_manufacturing</span>
+                                        </a>
+                                        <a href="/building-painting-contractor" class="btn-bc btn-bc-outline btn-bc-small">
+                                            Building Painting
+                                            <span class="material-symbols-outlined">format_paint</span>
+                                        </a>
+                                        <a href="/steel-aluminum-fabrication" class="btn-bc btn-bc-outline btn-bc-small">
+                                            Steel & Aluminum
+                                            <span class="material-symbols-outlined">hardware</span>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -626,7 +675,7 @@
                                     <h1 class="hero-h1">Quick Setup-Premium <br> Quality-Low Cost.</h1>
                                     <p class="hero-subtext">Get porta cabins that are fast to install, built to last, and budget-friendly - engineered exclusively for BestChoice Qatar.</p>
                                     <div class="hero-actions">
-                                        <a href="/services" class="btn-bc btn-bc-yellow">
+                                        <a href="/portable-cabin-fabrication" class="btn-bc btn-bc-yellow">
                                             EXPLORE SOLUTIONS
                                             <span class="material-symbols-outlined">bolt</span>
                                         </a>
@@ -805,7 +854,7 @@
                 </div>
                 <!-- CTA Buttons -->
                 <div class="calc-cta">
-                    <button type="button" class="btn-bc btn-bc-yellow" data-bs-toggle="modal" data-bs-target="#quoteModal">
+                    <button type="button" class="btn-bc btn-bc-yellow py-3" data-bs-toggle="modal" data-bs-target="#quoteModal">
                         GET FORMAL QUOTE
                         <span class="material-symbols-outlined">arrow_forward</span>
                     </button>
@@ -866,6 +915,7 @@
             calcPrice();
         }
     </script>
+
 
     <!-- 5. PREMIUM PRODUCTS & SERVICES SECTION -->
     <section id="products" class="premium-section">
@@ -991,6 +1041,178 @@
             </div>
         </div>
     </section>
+
+    <!-- MODULAR CABINS - OUR WORKS GALLERY -->
+    <section id="modular-works" class="py-5 bg-white">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <span class="premium-subtitle">Project Portfolio</span>
+                <h2 class="premium-title">MODULAR CABINS - OUR WORKS</h2>
+                <div class="mx-auto bg-primary-bc" style="width: 80px; height: 4px; margin-top: 15px;"></div>
+            </div>
+
+            <div class="row g-4" data-aos="fade-up">
+                <!-- Work 1 -->
+                <div class="col-lg-3 col-md-4 col-6">
+                    <div class="work-card position-relative overflow-hidden shadow-sm h-100" style="border-radius: 12px;">
+                        <img src="~/Uploads/WhatsApp Image 2026-04-22 at 3.41.42 PM (1).jpeg" class="img-fluid w-100" style="height: 250px; object-fit: cover;" alt="Site Project 1">
+                        <div class="work-overlay position-absolute d-flex flex-column justify-content-end p-3" style="background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); opacity: 0; transition: all 0.4s ease; top:0; left:0; right:0; bottom:0; pointer-events: none;">
+                            <h6 class="text-white fw-bold mb-0">Site Installation</h6>
+                        </div>
+                    </div>
+                </div>
+                <!-- Work 2 -->
+                <div class="col-lg-3 col-md-4 col-6">
+                    <div class="work-card position-relative overflow-hidden shadow-sm h-100" style="border-radius: 12px;">
+                        <img src="~/Uploads/WhatsApp Image 2026-04-22 at 3.41.42 PM.jpeg" class="img-fluid w-100" style="height: 250px; object-fit: cover;" alt="Site Project 2">
+                        <div class="work-overlay position-absolute d-flex flex-column justify-content-end p-3" style="background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); opacity: 0; transition: all 0.4s ease; top:0; left:0; right:0; bottom:0; pointer-events: none;">
+                            <h6 class="text-white fw-bold mb-0">Modular Unit</h6>
+                        </div>
+                    </div>
+                </div>
+                <!-- Work 3 -->
+                <div class="col-lg-3 col-md-4 col-6">
+                    <div class="work-card position-relative overflow-hidden shadow-sm h-100" style="border-radius: 12px;">
+                        <img src="~/Uploads/WhatsApp Image 2026-04-22 at 3.41.43 PM (1).jpeg" class="img-fluid w-100" style="height: 250px; object-fit: cover;" alt="Site Project 3">
+                        <div class="work-overlay position-absolute d-flex flex-column justify-content-end p-3" style="background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); opacity: 0; transition: all 0.4s ease; top:0; left:0; right:0; bottom:0; pointer-events: none;">
+                            <h6 class="text-white fw-bold mb-0">Custom Fabrication</h6>
+                        </div>
+                    </div>
+                </div>
+                <!-- Work 4 -->
+                <div class="col-lg-3 col-md-4 col-6">
+                    <div class="work-card position-relative overflow-hidden shadow-sm h-100" style="border-radius: 12px;">
+                        <img src="~/Uploads/WhatsApp Image 2026-04-22 at 3.41.43 PM (2).jpeg" class="img-fluid w-100" style="height: 250px; object-fit: cover;" alt="Site Project 4">
+                        <div class="work-overlay position-absolute d-flex flex-column justify-content-end p-3" style="background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); opacity: 0; transition: all 0.4s ease; top:0; left:0; right:0; bottom:0; pointer-events: none;">
+                            <h6 class="text-white fw-bold mb-0">Office Complex</h6>
+                        </div>
+                    </div>
+                </div>
+                <!-- Work 5 -->
+                <div class="col-lg-3 col-md-4 col-6">
+                    <div class="work-card position-relative overflow-hidden shadow-sm h-100" style="border-radius: 12px;">
+                        <img src="~/Uploads/WhatsApp Image 2026-04-22 at 3.41.43 PM (3).jpeg" class="img-fluid w-100" style="height: 250px; object-fit: cover;" alt="Site Project 5">
+                        <div class="work-overlay position-absolute d-flex flex-column justify-content-end p-3" style="background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); opacity: 0; transition: all 0.4s ease; top:0; left:0; right:0; bottom:0; pointer-events: none;">
+                            <h6 class="text-white fw-bold mb-0">Project Site</h6>
+                        </div>
+                    </div>
+                </div>
+                <!-- Work 6 -->
+                <div class="col-lg-3 col-md-4 col-6">
+                    <div class="work-card position-relative overflow-hidden shadow-sm h-100" style="border-radius: 12px;">
+                        <img src="~/Uploads/WhatsApp Image 2026-04-22 at 3.41.43 PM.jpeg" class="img-fluid w-100" style="height: 250px; object-fit: cover;" alt="Site Project 6">
+                        <div class="work-overlay position-absolute d-flex flex-column justify-content-end p-3" style="background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); opacity: 0; transition: all 0.4s ease; top:0; left:0; right:0; bottom:0; pointer-events: none;">
+                            <h6 class="text-white fw-bold mb-0">Cabin Interior</h6>
+                        </div>
+                    </div>
+                </div>
+                <!-- Work 7 -->
+                <div class="col-lg-3 col-md-4 col-6">
+                    <div class="work-card position-relative overflow-hidden shadow-sm h-100" style="border-radius: 12px;">
+                        <img src="~/Uploads/WhatsApp Image 2026-04-22 at 3.41.44 PM (1).jpeg" class="img-fluid w-100" style="height: 250px; object-fit: cover;" alt="Site Project 7">
+                        <div class="work-overlay position-absolute d-flex flex-column justify-content-end p-3" style="background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); opacity: 0; transition: all 0.4s ease; top:0; left:0; right:0; bottom:0; pointer-events: none;">
+                            <h6 class="text-white fw-bold mb-0">Industrial Unit</h6>
+                        </div>
+                    </div>
+                </div>
+                <!-- Work 8 -->
+                <div class="col-lg-3 col-md-4 col-6">
+                    <div class="work-card position-relative overflow-hidden shadow-sm h-100" style="border-radius: 12px;">
+                        <img src="~/Uploads/WhatsApp Image 2026-04-22 at 3.41.44 PM (2).jpeg" class="img-fluid w-100" style="height: 250px; object-fit: cover;" alt="Site Project 8">
+                        <div class="work-overlay position-absolute d-flex flex-column justify-content-end p-3" style="background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); opacity: 0; transition: all 0.4s ease; top:0; left:0; right:0; bottom:0; pointer-events: none;">
+                            <h6 class="text-white fw-bold mb-0">Doha Site Setup</h6>
+                        </div>
+                    </div>
+                </div>
+                <!-- Work 9 -->
+                <div class="col-lg-3 col-md-4 col-6">
+                    <div class="work-card position-relative overflow-hidden shadow-sm h-100" style="border-radius: 12px;">
+                        <img src="~/Uploads/WhatsApp Image 2026-04-22 at 3.41.45 PM.jpeg" class="img-fluid w-100" style="height: 250px; object-fit: cover;" alt="Site Project 9">
+                        <div class="work-overlay position-absolute d-flex flex-column justify-content-end p-3" style="background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); opacity: 0; transition: all 0.4s ease; top:0; left:0; right:0; bottom:0; pointer-events: none;">
+                            <h6 class="text-white fw-bold mb-0">Custom Complex</h6>
+                        </div>
+                    </div>
+                </div>
+                <!-- Work 10 -->
+                <div class="col-lg-3 col-md-4 col-6">
+                    <div class="work-card position-relative overflow-hidden shadow-sm h-100" style="border-radius: 12px;">
+                        <img src="~/Uploads/WhatsApp Image 2026-04-22 at 3.41.46 PM.jpeg" class="img-fluid w-100" style="height: 250px; object-fit: cover;" alt="Site Project 10">
+                        <div class="work-overlay position-absolute d-flex flex-column justify-content-end p-3" style="background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); opacity: 0; transition: all 0.4s ease; top:0; left:0; right:0; bottom:0; pointer-events: none;">
+                            <h6 class="text-white fw-bold mb-0">Mobile Unit</h6>
+                        </div>
+                    </div>
+                </div>
+                <!-- Work 11 -->
+                <div class="col-lg-3 col-md-4 col-6">
+                    <div class="work-card position-relative overflow-hidden shadow-sm h-100" style="border-radius: 12px;">
+                        <img src="~/Uploads/WhatsApp Image 2026-04-22 at 3.41.47 PM.jpeg" class="img-fluid w-100" style="height: 250px; object-fit: cover;" alt="Site Project 11">
+                        <div class="work-overlay position-absolute d-flex flex-column justify-content-end p-3" style="background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); opacity: 0; transition: all 0.4s ease; top:0; left:0; right:0; bottom:0; pointer-events: none;">
+                            <h6 class="text-white fw-bold mb-0">Industrial Office</h6>
+                        </div>
+                    </div>
+                </div>
+                <!-- Work 12 -->
+                <div class="col-lg-3 col-md-4 col-6">
+                    <div class="work-card position-relative overflow-hidden shadow-sm h-100" style="border-radius: 12px;">
+                        <img src="~/Uploads/WhatsApp Image 2026-04-22 at 3.41.48 PM.jpeg" class="img-fluid w-100" style="height: 250px; object-fit: cover;" alt="Site Project 12">
+                        <div class="work-overlay position-absolute d-flex flex-column justify-content-end p-3" style="background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); opacity: 0; transition: all 0.4s ease; top:0; left:0; right:0; bottom:0; pointer-events: none;">
+                            <h6 class="text-white fw-bold mb-0">Site Accommodation</h6>
+                        </div>
+                    </div>
+                </div>
+                <!-- Work 13 -->
+                <div class="col-lg-3 col-md-4 col-6">
+                    <div class="work-card position-relative overflow-hidden shadow-sm h-100" style="border-radius: 12px;">
+                        <img src="~/Uploads/WhatsApp Image 2026-04-22 at 3.41.49 PM.jpeg" class="img-fluid w-100" style="height: 250px; object-fit: cover;" alt="Site Project 13">
+                        <div class="work-overlay position-absolute d-flex flex-column justify-content-end p-3" style="background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); opacity: 0; transition: all 0.4s ease; top:0; left:0; right:0; bottom:0; pointer-events: none;">
+                            <h6 class="text-white fw-bold mb-0">Modular Build</h6>
+                        </div>
+                    </div>
+                </div>
+                <!-- Work 14 -->
+                <div class="col-lg-3 col-md-4 col-6">
+                    <div class="work-card position-relative overflow-hidden shadow-sm h-100" style="border-radius: 12px;">
+                        <img src="~/Uploads/WhatsApp Image 2026-04-22 at 3.41.50 PM.jpeg" class="img-fluid w-100" style="height: 250px; object-fit: cover;" alt="Site Project 14">
+                        <div class="work-overlay position-absolute d-flex flex-column justify-content-end p-3" style="background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); opacity: 0; transition: all 0.4s ease; top:0; left:0; right:0; bottom:0; pointer-events: none;">
+                            <h6 class="text-white fw-bold mb-0">Fabrication Yard</h6>
+                        </div>
+                    </div>
+                </div>
+                <!-- Work 15 -->
+                <div class="col-lg-3 col-md-4 col-6">
+                    <div class="work-card position-relative overflow-hidden shadow-sm h-100" style="border-radius: 12px;">
+                        <img src="~/Uploads/WhatsApp Image 2026-04-22 at 3.41.47 PM (1).jpeg" class="img-fluid w-100" style="height: 250px; object-fit: cover;" alt="Site Project 15">
+                        <div class="work-overlay position-absolute d-flex flex-column justify-content-end p-3" style="background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); opacity: 0; transition: all 0.4s ease; top:0; left:0; right:0; bottom:0; pointer-events: none;">
+                            <h6 class="text-white fw-bold mb-0">Office Project</h6>
+                        </div>
+                    </div>
+                </div>
+                <!-- Work 16 -->
+                <div class="col-lg-3 col-md-4 col-6">
+                    <div class="work-card position-relative overflow-hidden shadow-sm h-100" style="border-radius: 12px;">
+                        <img src="~/Uploads/WhatsApp Image 2026-04-22 at 3.41.49 PM (1).jpeg" class="img-fluid w-100" style="height: 250px; object-fit: cover;" alt="Site Project 16">
+                        <div class="work-overlay position-absolute d-flex flex-column justify-content-end p-3" style="background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); opacity: 0; transition: all 0.4s ease; top:0; left:0; right:0; bottom:0; pointer-events: none;">
+                            <h6 class="text-white fw-bold mb-0">Doha Infrastructure</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-5" data-aos="fade-up">
+                <a href="/gallery" class="btn-bc btn-bc-yellow px-5 py-3">VIEW ALL WORKS <span class="material-symbols-outlined">grid_view</span></a>
+            </div>
+        </div>
+    </section>
+
+    <style>
+        .work-card:hover .work-overlay { 
+            opacity: 1 !important; 
+            transform: translateY(0);
+        }
+        .work-card .work-overlay {
+            transform: translateY(10px);
+        }
+    </style>
 
     <!-- 6. WHY CHOOSE US -->
     <section>
@@ -1166,6 +1388,93 @@
         </div>
     </section>
 
+    <!-- FAQ SECTION -->
+    <section id="faq" class="py-5" style="background-color: #fff;">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <span class="text-bc-yellow fw-bold font-headline mb-2 d-block" style="letter-spacing: 4px; font-size: 0.8rem;">GET INFORMED</span>
+                <h2 class="h-black h3">Frequently Asked Questions</h2>
+                <div class="mx-auto bg-primary-bc" style="width: 60px; height: 3px; margin-top: 15px;"></div>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="accordion accordion-flush" id="faqAccordion">
+                        <!-- FAQ 1 -->
+                        <div class="accordion-item border mb-3 shadow-sm" data-aos="fade-up">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed fw-bold text-dark p-4" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                                    What types of porta cabins do you provide in Qatar?
+                                </button>
+                            </h2>
+                            <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body p-4 text-muted">
+                                    We provide a comprehensive range of modular solutions including high-end <strong>site offices</strong>, workforce <strong>accommodation units</strong>, specialized <strong>security guard cabins</strong>, durable <strong>portable toilets</strong>, and custom <strong>shipping container conversions</strong> tailored for industrial and commercial use.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- FAQ 2 -->
+                        <div class="accordion-item border mb-3 shadow-sm" data-aos="fade-up" data-aos-delay="100">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed fw-bold text-dark p-4" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                                    Are your cabins suitable for Qatar's extreme summer heat?
+                                </button>
+                            </h2>
+                            <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body p-4 text-muted">
+                                    Absolutely. Our cabins are specifically engineered for the Middle Eastern climate. We utilize high-density <strong>EPS or Rockwool insulation</strong> (50mm to 100mm) and install <strong>T3 tropical-rated AC systems</strong> to maintain a comfortable interior environment even when external temperatures exceed 50°C.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- FAQ 3 -->
+                        <div class="accordion-item border mb-3 shadow-sm" data-aos="fade-up" data-aos-delay="200">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed fw-bold text-dark p-4" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                                    How quickly can a porta cabin be delivered to my site?
+                                </button>
+                            </h2>
+                            <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body p-4 text-muted">
+                                    Efficiency is our priority. Standard <strong>portable office cabins</strong> and <strong>guard houses</strong> can typically be fabricated and delivered within <strong>7 to 10 business days</strong>. Larger modular complexes or highly customized projects may take longer depending on technical specifications.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- FAQ 4 -->
+                        <div class="accordion-item border mb-3 shadow-sm" data-aos="fade-up" data-aos-delay="300">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed fw-bold text-dark p-4" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                                    Do you handle on-site installation and maintenance?
+                                </button>
+                            </h2>
+                            <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body p-4 text-muted">
+                                    Yes, we provide a complete turnkey service. This includes precision loading, transportation with our specialized fleet, on-site crane lifting, professional assembly, and ongoing <strong>maintenance support</strong> to ensure your units remain in top condition throughout the project lifecycle.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- FAQ 5 -->
+                        <div class="accordion-item border mb-3 shadow-sm" data-aos="fade-up" data-aos-delay="400">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed fw-bold text-dark p-4" type="button" data-bs-toggle="collapse" data-bs-target="#faq5">
+                                    Are your modular buildings fully relocatable?
+                                </button>
+                            </h2>
+                            <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body p-4 text-muted">
+                                    Yes. All Bestchoice cabins are constructed on <strong>reinforced structural steel chassis</strong> (ISMC frames). These are specifically designed for repeated lifting and relocation, making them an ideal, long-term asset for contractors who move between different project sites across Qatar.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- 7. FINAL CTA SECTION EXACT CODE -->
     <section class="p-0 position-relative cta-industrial">
         <div class="position-absolute inset-0">
@@ -1249,6 +1558,21 @@
     <!-- Swiper Initialization -->
     <script>
         document.addEventListener('DOMContentLoaded', function () {
+            // Header Scroll Logic
+            const header = document.querySelector('#header');
+            if (header) {
+                header.classList.add('header-transparent');
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 100) {
+                        header.classList.add('header-scrolled');
+                        header.classList.remove('header-transparent');
+                    } else {
+                        header.classList.remove('header-scrolled');
+                        header.classList.add('header-transparent');
+                    }
+                });
+            }
+
             // Hero Swiper with Safety Block
             try {
                 const heroSwiper = new Swiper('.hero-swiper-premium', {
@@ -1311,6 +1635,7 @@
                     }
                 }
             });
+            
 
             // Client Swiper
             const clientsSwiper = new Swiper('.clients-swiper', {

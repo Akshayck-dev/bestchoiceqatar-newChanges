@@ -16,6 +16,12 @@ namespace BestChoiceQatar
             routes.MapMvcAttributeRoutes();
 
             routes.MapRoute(
+                name: "Gallery",
+                url: "gallery",
+                defaults: new { controller = "Home", action = "Gallery" }
+            );
+
+            routes.MapRoute(
                 name: "ProductDetails",
                 url: "product/{slug}",
                 defaults: new { controller = "Home", action = "ProductDetails" }

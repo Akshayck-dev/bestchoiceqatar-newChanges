@@ -1,0 +1,86 @@
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Project Gallery - Modular Cabin Works in Qatar";
+    ViewBag.description = "Explore our extensive portfolio of modular cabin installations, site offices, and industrial fabrication projects across Qatar.";
+    BestChoiceQatar.Models.BestChoiceQatarEntities db = new BestChoiceQatar.Models.BestChoiceQatarEntities();
+    var settings = db.Settings.FirstOrDefault();
+}
+
+<section class="gallery-hero py-5 bg-dark text-white text-center" style="background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('/Uploads/Products/modular-hero-hd.png') no-repeat center center/cover;">
+    <div class="container py-5">
+        <h1 class="display-3 fw-bold font-headline mb-3 text-uppercase" data-aos="fade-up" style="letter-spacing: 2px; color: #ffcc00;">MODULAR CABINS</h1>
+        <p class="lead mx-auto" style="max-width: 800px; opacity: 0.9;" data-aos="fade-up" data-aos-delay="100">
+            Leading the way in high-performance modular construction in Qatar. Our gallery showcases our specialized expertise in designing and fabricating premium site offices, durable labor accommodations, and custom modular complexes. 
+            From initial engineering to rapid site deployment, explore the quality and precision that makes us the first choice for Qatar's infrastructure leaders.
+        </p>
+</section>
+
+<section class="py-5 bg-white">
+    <div class="container">
+        <div class="row g-4" id="gallery-grid">
+            @{
+                string[] images = {
+                    "WhatsApp Image 2026-04-22 at 3.41.42 PM (1).jpeg",
+                    "WhatsApp Image 2026-04-22 at 3.41.42 PM.jpeg",
+                    "WhatsApp Image 2026-04-22 at 3.41.43 PM (1).jpeg",
+                    "WhatsApp Image 2026-04-22 at 3.41.43 PM (2).jpeg",
+                    "WhatsApp Image 2026-04-22 at 3.41.43 PM (3).jpeg",
+                    "WhatsApp Image 2026-04-22 at 3.41.43 PM.jpeg",
+                    "WhatsApp Image 2026-04-22 at 3.41.44 PM (1).jpeg",
+                    "WhatsApp Image 2026-04-22 at 3.41.44 PM (2).jpeg",
+                    "WhatsApp Image 2026-04-22 at 3.41.44 PM.jpeg",
+                    "WhatsApp Image 2026-04-22 at 3.41.45 PM (1).jpeg",
+                    "WhatsApp Image 2026-04-22 at 3.41.45 PM (2).jpeg",
+                    "WhatsApp Image 2026-04-22 at 3.41.45 PM (3).jpeg",
+                    "WhatsApp Image 2026-04-22 at 3.41.45 PM.jpeg",
+                    "WhatsApp Image 2026-04-22 at 3.41.46 PM.jpeg",
+                    "WhatsApp Image 2026-04-22 at 3.41.47 PM (1).jpeg",
+                    "WhatsApp Image 2026-04-22 at 3.41.47 PM (2).jpeg",
+                    "WhatsApp Image 2026-04-22 at 3.41.47 PM (3).jpeg",
+                    "WhatsApp Image 2026-04-22 at 3.41.47 PM.jpeg",
+                    "WhatsApp Image 2026-04-22 at 3.41.48 PM (1).jpeg",
+                    "WhatsApp Image 2026-04-22 at 3.41.48 PM (2).jpeg",
+                    "WhatsApp Image 2026-04-22 at 3.41.48 PM.jpeg",
+                    "WhatsApp Image 2026-04-22 at 3.41.49 PM (1).jpeg",
+                    "WhatsApp Image 2026-04-22 at 3.41.49 PM (2).jpeg",
+                    "WhatsApp Image 2026-04-22 at 3.41.49 PM (3).jpeg",
+                    "WhatsApp Image 2026-04-22 at 3.41.49 PM.jpeg",
+                    "WhatsApp Image 2026-04-22 at 3.41.50 PM (1).jpeg",
+                    "WhatsApp Image 2026-04-22 at 3.41.50 PM.jpeg"
+                };
+            }
+
+            @foreach (var img in images)
+            {
+                <div class="col-lg-3 col-md-4 col-sm-6" data-aos="fade-up">
+                    <a href="~/Uploads/@img" class="glightbox gallery-item position-relative overflow-hidden shadow-sm d-block" style="border-radius: 15px; cursor: pointer; border: 1px solid #eee;">
+                        <img src="~/Uploads/@img" class="img-fluid w-100" style="height: 250px; object-fit: cover;" alt="Project Gallery Image">
+                        <div class="gallery-overlay position-absolute inset-0 d-flex align-items-center justify-content-center" style="background: rgba(0,0,0,0.4); opacity: 0; transition: all 0.3s ease; top:0; left:0; right:0; bottom:0;">
+                            <span class="material-symbols-outlined text-white" style="font-size: 3rem; color: #ffcc00 !important;">zoom_in</span>
+                        </div>
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<!-- Include GLightbox JS -->
+<script src="~/Content/assets/vendor/glightbox/js/glightbox.min.js"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const lightbox = GLightbox({
+            selector: '.glightbox',
+            touchNavigation: true,
+            loop: true,
+            autoplayVideos: true
+        });
+    });
+</script>
+
+<style>
+    .gallery-item:hover .gallery-overlay { opacity: 1 !important; }
+    .gallery-item img { transition: transform 0.5s ease; }
+    .gallery-item:hover img { transform: scale(1.1); }
+</style>

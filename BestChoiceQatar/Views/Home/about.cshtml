@@ -7,6 +7,37 @@
     var settings = db.Settings.FirstOrDefault();
 }
 
+<style>
+    :root {
+        --primary-bc: #ffcc00;
+        --dark-bc: #111111;
+        --white-bc: #ffffff;
+    }
+    .btn-bc {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 12px 30px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: all 0.3s ease;
+        text-decoration: none !important;
+        border: none;
+        border-radius: 0;
+    }
+    .btn-bc-yellow {
+        background-color: var(--primary-bc);
+        color: #000 !important;
+    }
+    .btn-bc-yellow:hover {
+        background-color: #e6b800;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(255, 204, 0, 0.3);
+    }
+    .text-bc-yellow { color: var(--primary-bc); }
+</style>
+
 
 <!-- ======= Breadcrumbs ======= -->
 <div class="breadcrumbs d-flex align-items-center" style="background-image: url('../content/assets/img/header/about-header.jpg');">
@@ -24,49 +55,114 @@
 <section id="about" class="about">
     <div class="container" data-aos="fade-up">
 
-        <div class="row">
-            <div class="col-lg-6 order-1 order-lg-2" data-aos="fade-left" data-aos-delay="100">
-                <img src="~/Content/assets/img/about.jpg" class="img-fluid" alt="about-us">
-            </div>
-            <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content" data-aos="fade-right" data-aos-delay="100">
-                <h1>About </h1>
+        <div class="row align-items-center g-5">
+            <div class="col-lg-6 pt-4 pt-lg-0 content" data-aos="fade-right" data-aos-delay="100">
+                <h1>About Bestchoice Contracting</h1>
                 @if (settings != null)
                 {
                     @Html.Raw(settings.AboutText)
                 }
-                @*<p>
-                    Welcome to Best Choice Contracting, a leading provider of prefabricated structures and painting services in Qatar.
-                    Established in 2009, we have years of experience in the industry and a team of skilled professionals who are committed to
-                    delivering high-quality solutions to our clients.
+                
+                <div class="mt-4">
+                    <a href="/contact" class="btn-bc btn-bc-yellow">CONTACT US <span class="material-symbols-outlined ms-2">arrow_forward</span></a>
+                </div>
+            </div>
+            <div class="col-lg-6" data-aos="fade-left" data-aos-delay="100">
+                <div class="about-img-stack position-relative" style="min-height: 400px;">
+                    <img src="~/Content/assets/img/about.jpg" class="img-fluid shadow" alt="about-us" style="width: 80%; border: 5px solid #fff;">
+                    <img src="~/Uploads/slide-2.jpg" class="img-fluid shadow position-absolute" alt="Bestchoice Qatar" style="width: 60%; bottom: -20px; right: 0; border: 5px solid #fff;">
+                </div>
+            </div>
+        </div>
 
+        <!-- NEW SECTION: OUR PORTABLE CABINS (FROM HOME) -->
+        <div class="row mt-5 pt-5 align-items-center g-5">
+            <div class="col-lg-12 text-center mb-4">
+                <span class="text-bc-yellow fw-bold d-block mb-2" style="letter-spacing:4px; font-size:0.8rem;">ENGINEERING EXCELLENCE</span>
+                <h2 class="fw-bold display-6">Unmatched Quality And Innovation</h2>
+            </div>
+            <div class="col-lg-7">
+                <p class="text-muted mb-4" style="font-size:1.05rem;line-height:1.8;">At Bestchoice Contracting, we're dedicated to providing innovative solutions for your temporary space needs. Our <strong>portable cabins Qatar</strong> are expertly crafted using the finest materials, ensuring robustness, longevity, and superior functionality.</p>
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="d-flex align-items-center gap-3 p-3 border">
+                            <i class="bi bi-check-circle-fill text-bc-yellow fs-4"></i>
+                            <span class="fw-bold">Cost-Effectiveness</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex align-items-center gap-3 p-3 border">
+                            <i class="bi bi-check-circle-fill text-bc-yellow fs-4"></i>
+                            <span class="fw-bold">Timely Delivery</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex align-items-center gap-3 p-3 border">
+                            <i class="bi bi-check-circle-fill text-bc-yellow fs-4"></i>
+                            <span class="fw-bold">Quality With Innovation</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex align-items-center gap-3 p-3 border">
+                            <i class="bi bi-check-circle-fill text-bc-yellow fs-4"></i>
+                            <span class="fw-bold">Custom Solutions</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <!-- MODULAR CABIN SLIDER FOR ABOUT PAGE -->
+                <div class="swiper about-modular-swiper">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <img src="~/Uploads/Products/cabin-1.jpg" class="img-fluid rounded" alt="Modular Cabin">
+                        </div>
+                        <div class="swiper-slide">
+                            <img src="~/Uploads/Products/cabin-2.jpg" class="img-fluid rounded" alt="Modular Cabin">
+                        </div>
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            </div>
+        <!-- NEW SECTION: FABRICATION & CONTRACTING -->
+        <div class="row mt-5 pt-5 align-items-center g-5 flex-row-reverse">
+            <div class="col-lg-6" data-aos="fade-left">
+                <span class="text-bc-yellow fw-bold d-block mb-2" style="letter-spacing:4px; font-size:0.8rem;">INDUSTRIAL CAPACITY</span>
+                <h2 class="fw-bold display-6">Comprehensive Fabrication & Contracting</h2>
+                <p class="text-muted mt-4" style="line-height:1.8;">
+                    Beyond modular units, Bestchoice Contracting operates as a full-service industrial partner in Qatar. Our state-of-the-art manufacturing facility in Doha is equipped to handle complex <strong>steel and aluminum fabrication</strong> projects, ranging from structural framing to custom industrial enclosures.
                 </p>
-
-                <p>
-                    At Best Choice Contracting, we specialize in the fabrication of different types of prefabricated portacabins,
-                    accommodations, offices, toilets, container shops, used container stores, container offices, modular cabins,
-                    and more. Our structures are designed to meet the specific needs of our clients, with a focus on durability, portability,
-                    and functionality.
+                <p class="text-muted" style="line-height:1.8;">
+                    With a workforce of over 150 skilled specialists, we deliver turnkey solutions in <strong>general contracting</strong>, including large-scale building painting and infrastructure maintenance. Every project is executed with absolute precision, adhering to the highest safety protocols and Qatar's regulatory standards.
                 </p>
-                <p>
-                    In addition to our prefabricated structures, we are also experts in building exterior and interior painting.
-                    We use only the best paints and materials to ensure a flawless finish, and our team has the skills and experience
-                    to tackle even the most complex painting projects.
-                </p>
-
-                <p>
-                    At Best Choice Contracting, we pride ourselves on delivering exceptional service and building lasting relationships
-                    with our clients. We are committed to meeting our clients' needs, and we work closely with them to develop customized
-                    solutions that meet their specific requirements and budget.
-                </p>
-                <P>
-                    Contact us today to learn more about our prefabricated structures and painting services, or to schedule a consultation.
-                    We look forward to working with you to bring your vision to life.
-                </P>*@
+                <div class="d-flex gap-4 mt-4">
+                    <div class="text-center">
+                        <h4 class="fw-bold mb-0 text-bc-yellow">150+</h4>
+                        <span class="small text-uppercase fw-bold">Specialists</span>
+                    </div>
+                    <div class="text-center border-start ps-4">
+                        <h4 class="fw-bold mb-0 text-bc-yellow">500+</h4>
+                        <span class="small text-uppercase fw-bold">Projects Done</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6" data-aos="fade-right">
+                <img src="/Uploads/img3.jpg" class="img-fluid shadow-lg" alt="Bestchoice Qatar Fabrication" style="border-radius: 20px;">
             </div>
         </div>
 
     </div>
 </section><!-- End About Section -->
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        new Swiper('.about-modular-swiper', {
+            loop: true,
+            autoplay: { delay: 3000 },
+            pagination: { el: '.swiper-pagination', clickable: true }
+        });
+    });
+</script>
 
 
 <main id="main">
