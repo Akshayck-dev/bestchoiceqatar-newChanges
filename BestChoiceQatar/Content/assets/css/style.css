@@ -217,6 +217,8 @@ small {
     padding: 0;
     margin: 0;
     max-height: 60px;
+    display: block;
+    background: transparent !important;
 }
 
 .scrolled-offset {
@@ -280,10 +282,20 @@ small {
         z-index: 99;
         opacity: 0;
         visibility: hidden;
-        background: #ffffff; /* Premium White Background for Desktop Dropdown */
-        box-shadow: 0px 5px 30px rgba(0,0,0,0.1); /* Soft Shadow */
+        pointer-events: none;
+        background: #111111; /* Industrial Dark Slate for Dropdown */
+        box-shadow: 0px 10px 40px rgba(0,0,0,0.5); 
         transition: 0.3s;
         border-radius: 4px;
+        transform: translateY(10px);
+        border: 1px solid rgba(255, 204, 0, 0.1);
+    }
+
+    .navbar .dropdown:hover > ul {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transform: translateY(0);
     }
 
         .navbar .dropdown ul li {
@@ -314,6 +326,8 @@ small {
         .navbar .dropdown ul a {
             padding: 10px 20px;
             text-transform: none;
+            color: #ffffff !important; /* Force white text in dropdown */
+            font-weight: 500;
         }
 
             .navbar .dropdown ul a i {
@@ -323,11 +337,6 @@ small {
             .navbar .dropdown ul a:hover, .navbar .dropdown ul .active:hover, .navbar .dropdown ul li:hover > a {
                 color: #ffcc00; /* Yellow hover on white bg */
             }
-
-    .navbar .dropdown:hover > ul {
-        opacity: 1;
-        visibility: visible;
-    }
 
     .navbar .dropdown .dropdown ul {
         top: 0;
@@ -1751,12 +1760,6 @@ section {
         text-align: center;
         padding: 15px;
     }
-#header {
-    background: #fff;
-    transition: all 0.5s;
-    z-index: 10006 !important; /* Higher than any page elements */
-    padding: 15px 0;
-}
 
         .contact .php-email-form .loading:before {
             content: "";

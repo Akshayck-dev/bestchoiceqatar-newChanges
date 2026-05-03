@@ -163,7 +163,48 @@ namespace BestChoiceQatar.Controllers
             return View();
         }
 
+        [Route("portable-office-cabins")]
+        [ActionName("portable-office-cabins")]
+        public ActionResult PortableOfficeCabins()
+        {
+            return View();
+        }
+
+        [Route("portable-site-cabins")]
+        [ActionName("portable-site-cabins")]
+        public ActionResult PortableSiteCabins()
+        {
+            return View();
+        }
+
+        [Route("security-guard-cabins")]
+        [ActionName("security-guard-cabins")]
+        public ActionResult SecurityGuardCabins()
+        {
+            return View();
+        }
+
+        [Route("portable-toilets")]
+        [ActionName("portable-toilets")]
+        public ActionResult PortableToilets()
+        {
+            return View();
+        }
+
+        [Route("container-office-cabins")]
+        [ActionName("container-office-cabins")]
+        public ActionResult ContainerOfficeCabins()
+        {
+            return View();
+        }
+
         public ActionResult Gallery()
+        {
+            return View();
+        }
+
+        [Route("faq")]
+        public ActionResult FAQ()
         {
             return View();
         }

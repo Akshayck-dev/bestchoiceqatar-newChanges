@@ -81,6 +81,86 @@
     .entry-title a:hover {
         color: var(--primary-bc);
     }
+
+    /* --- Attractive Sidebar Styling --- */
+    #sidebar .wp-block-group {
+        margin-bottom: 40px;
+    }
+
+    #sidebar h2.wp-block-heading {
+        font-size: 1.5rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: -0.5px;
+        position: relative;
+        padding-bottom: 15px;
+        margin-bottom: 25px;
+        border-bottom: 2px solid #eee;
+    }
+
+    #sidebar h2.wp-block-heading::after {
+        content: "";
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 60px;
+        height: 2px;
+        background-color: var(--primary-bc);
+    }
+
+    #sidebar ul.wp-block-latest-posts {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    #sidebar ul.wp-block-latest-posts li {
+        padding: 12px 0;
+        border-bottom: 1px solid #f5f5f5;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    #sidebar ul.wp-block-latest-posts li::before {
+        content: "\e5cc"; /* Material symbols arrow_forward_ios */
+        font-family: 'Material Symbols Outlined';
+        font-size: 14px;
+        color: var(--primary-bc);
+        margin-top: 4px;
+        font-weight: 900;
+    }
+
+    #sidebar ul.wp-block-latest-posts li:last-child {
+        border-bottom: none;
+    }
+
+    #sidebar .wp-block-latest-posts__post-title {
+        color: #333;
+        text-decoration: none;
+        font-weight: 700;
+        line-height: 1.4;
+        font-size: 0.95rem;
+        transition: color 0.3s ease;
+    }
+
+    #sidebar ul.wp-block-latest-posts li:hover {
+        padding-left: 5px;
+    }
+
+    #sidebar ul.wp-block-latest-posts li:hover .wp-block-latest-posts__post-title {
+        color: var(--primary-bc);
+    }
+
+    .no-comments {
+        background: #f9f9f9;
+        padding: 20px;
+        border-left: 3px solid #ddd;
+        font-style: italic;
+        color: #888;
+        font-size: 0.9rem;
+    }
 </style>
 
 <!-- ======= Breadcrumbs ======= -->
