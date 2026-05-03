@@ -1997,7 +1997,7 @@ section {
     padding: 0; /* Padding handled by internal popup-content-box */
     transition: right 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
     box-shadow: -20px 0 60px rgba(0,0,0,0.5);
-    overflow-y: auto;
+    overflow: hidden;
     z-index: 1000002;
     border-left: 1px solid rgba(255, 255, 255, 0.05);
 }
