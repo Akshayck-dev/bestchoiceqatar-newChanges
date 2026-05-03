@@ -84,7 +84,7 @@
     <header id="header" class="d-flex align-items-center">
         <div class="container-fluid px-lg-5 d-flex align-items-center justify-content-between w-100">
             <div class="logo">
-                <a href="/index"><img class="img-fluid" src="@Url.Content("~/content/assets/img/logo/animation.gif")" alt="Bestchoice Contracting" style="max-height: 60px;"></a>
+                <a href="/index"><img class="img-fluid" src="@Url.Content("~/content/assets/img/logo/animation.gif")" alt="Bestchoice Contracting" style="max-height: 40px;"></a>
             </div>
 
             <!-- Desktop-only nav links -->
@@ -214,7 +214,7 @@
                     <img src="@Url.Content("~/content/assets/img/logo/animation.gif")" alt="BestChoice Logo">
                 </div>
                 <button type="button" class="mobile-nav-close-btn" id="mobile-nav-close" aria-label="Close Menu">
-                    <i class="bi bi-x"></i>
+                    <i class="bi bi-x-lg"></i>
                 </button>
             </div>
         </li>
@@ -305,54 +305,53 @@
 
     <div class="deskHamburgerOverlay">
         <div class="deskHamburgerPopup">
-            <button class="deskHamburgerClose" id="deskHamburgerClose"><i class="bi bi-x"></i></button>
-            <div class="p-4 popup-content-box">
-                <div class="mb-4">
-                    <img class="img-fluid logo mb-4" src="@Url.Content("~/content/assets/img/logo/animation.gif")" alt="BestChoice" style="max-width: 180px;">
+            <button class="deskHamburgerClose" id="deskHamburgerClose"><i class="bi bi-x-lg"></i></button>
+            <div class="pt-5 pb-5 px-4 popup-content-box" style="overflow: hidden !important;">
+                <div class="mb-4 logo-wrapper">
+                    <img class="logo" src="@Url.Content("~/content/assets/img/logo/animation.gif")" alt="BestChoice" style="width: 180px; height: auto; display: block !important; object-fit: contain;">
                 </div>
 
                 <div class="content-section mb-4">
-                    <h4 class="text-white fw-bold mb-3" style="font-size: 1.4rem;">About Us</h4>
-                    <p class="text-white-50" style="font-size: 1.05rem; line-height: 1.8;">
-                        Bestchoice Contracting WLL is a leading manufacturer and supplier of Porta Cabins, Steel Fabrication, 
-                        and General Contracting units in Doha, serving clients across the State of Qatar. We specialize in 
-                        building high-quality, durable, and fully customizable cabins for construction, industrial, and 
-                        commercial use since 2009.
+                    <h4 class="text-dark fw-bold mb-3" style="font-size: 1.4rem;">About Us</h4>
+                    <p class="text-muted" style="font-size: 1.05rem; line-height: 1.7;">
+                        Welcome to Best Choice Contracting, a leading provider of prefabricated structures 
+                        and painting services in Qatar. Established in 2009, we have years of experience 
+                        in the industry.
                     </p>
                 </div>
 
-                <div class="content-section">
-                    <h4 class="text-white fw-bold mb-4" style="font-size: 1.4rem;">Contact Info</h4>
+                <div class="content-section mb-3">
+                    <h4 class="text-dark fw-bold mb-3" style="font-size: 1.4rem;">Contact Info</h4>
                     
-                    <div class="contact-row mb-4 d-flex align-items-start gap-3">
-                        <i class="bi bi-geo-alt-fill text-bc-yellow fs-4"></i>
-                        <p class="mb-0 text-white-50" style="font-size: 1.05rem;">
-                            Office - 43, 1st floor, Sharq Capital Building,<br>
-                            C - ring Road, Doha - Qatar
+                    <div class="contact-row mb-3 d-flex align-items-start gap-3">
+                        <i class="bi bi-geo-alt-fill text-dark fs-4"></i>
+                        <p class="mb-0 text-muted" style="font-size: 1.05rem;">
+                            Bestchoice Contracting WLL, Office - 43, 1st floor,<br>
+                            Sharq Capital Building, C - ring Road, Doha - Qatar
                         </p>
                     </div>
 
-                    <div class="contact-row mb-4 d-flex align-items-center gap-3">
-                        <i class="bi bi-telephone-fill text-bc-yellow fs-4"></i>
-                        <div class="text-white-50" style="font-size: 1.05rem;">
-                            <a href="tel:@settings.Mobile1" class="text-white-50 d-block">@settings.Mobile1</a>
-                            <a href="tel:+97444095443" class="text-white-50 d-block">+974 44095443</a>
-                        </div>
+                    <div class="contact-row mb-3 d-flex align-items-center gap-3">
+                        <i class="bi bi-envelope-fill text-dark fs-4"></i>
+                        <a href="mailto:@settings.Email" class="text-muted" style="font-size: 1.05rem;">@settings.Email</a>
                     </div>
 
-                    <div class="contact-row d-flex align-items-center gap-3">
-                        <i class="bi bi-envelope-fill text-bc-yellow fs-4"></i>
-                        <a href="mailto:@settings.Email" class="text-white-50" style="font-size: 1.05rem;">@settings.Email</a>
-                    </div>
-
-                    <div class="social-section mt-5">
-                        <h4 class="text-white fw-bold mb-4" style="font-size: 1.4rem;">Follow Us</h4>
-                        <div class="d-flex gap-3">
-                            <a href="@settings.Whatsup" target="_blank" class="social-circle-link whatsapp-bg"><i class="bi bi-whatsapp"></i></a>
-                            <a href="@settings.Instagram" target="_blank" class="social-circle-link instagram-bg"><i class="bi bi-instagram"></i></a>
-                            <a href="@settings.Facebook" target="_blank" class="social-circle-link facebook-bg"><i class="bi bi-facebook"></i></a>
-                            <a href="@settings.Twitter" target="_blank" class="social-circle-link twitter-bg"><i class="bi bi-twitter"></i></a>
+                    <div class="contact-row mb-3 d-flex align-items-center gap-3">
+                        <i class="bi bi-telephone-fill text-dark fs-4"></i>
+                        <div class="text-muted" style="font-size: 1.05rem;">
+                            <a href="tel:@settings.Mobile1" class="text-muted d-block">@settings.Mobile1</a>
+                            <a href="tel:+97444095443" class="text-muted d-block">Tel - +974 44095443</a>
                         </div>
+                    </div>
+                </div>
+
+                <div class="social-section mt-auto pt-3">
+                    <h4 class="text-dark fw-bold mb-3" style="font-size: 1.4rem;">Follow Us</h4>
+                    <div class="d-flex gap-3">
+                        <a href="@settings.Whatsup" target="_blank" class="item whatsapp-bg text-white fs-5"><i class="bi bi-whatsapp"></i></a>
+                        <a href="@settings.Instagram" target="_blank" class="item instagram-bg text-white fs-5"><i class="bi bi-instagram"></i></a>
+                        <a href="@settings.Facebook" target="_blank" class="item facebook-bg text-white fs-5"><i class="bi bi-facebook"></i></a>
+                        <a href="@settings.Twitter" target="_blank" class="item twitter-bg text-white fs-5"><i class="bi bi-twitter"></i></a>
                     </div>
                 </div>
             </div>
@@ -404,7 +403,7 @@
                 const btn = document.getElementById(btnId);
                 drawer && drawer.classList.add("open");
                 overlay && overlay.classList.add("active");
-                if (btn && btnId === "menuBtn") btn.innerHTML = '<i class="bi bi-x"></i>';
+                if (btn && btnId === "menuBtn") btn.innerHTML = '<i class="bi bi-x-lg"></i>';
                 html.classList.add(lockClass);
                 body.classList.add(lockClass);
             }
