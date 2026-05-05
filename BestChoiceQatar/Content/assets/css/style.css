@@ -183,7 +183,7 @@ small {
     }
 
     #header .logo img {
-        max-height: 32px !important;
+        max-height: 38px !important;
         margin-left: 10px;
     }
 
@@ -216,7 +216,7 @@ small {
 #header .logo img {
     padding: 0;
     margin: 0;
-    max-height: 42px;
+    max-height: 55px;
     display: block;
     background: transparent !important;
 }
@@ -2003,11 +2003,11 @@ section {
 .deskHamburgerPopup {
     background: #ffffff; /* White Theme */
     color: #333333;
-    width: 480px;
+    width: 320px;
     height: 100%;
     position: fixed;
     top: 0;
-    right: -480px;
+    right: -320px;
     padding: 0;
     transition: right 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
     box-shadow: -10px 0 40px rgba(0,0,0,0.1);
@@ -2023,8 +2023,8 @@ section {
 /* Sidebar Custom Close */
 .deskHamburgerClose {
     position: absolute;
-    top: 25px;
-    right: 25px;
+    top: 20px;
+    right: 20px;
     background: #f2f2f2 !important;
     border: none;
     width: 44px;
