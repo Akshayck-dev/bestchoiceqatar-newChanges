@@ -293,11 +293,11 @@
 
     <!-- Mobile Menu Toggle Button -->
     <button id="menuBtn" class="mobile-nav-toggle d-lg-none" aria-label="Open Navigation Menu" aria-expanded="false" aria-controls="mobileDrawer" 
-            style="position: fixed; top: 20px; right: 20px; z-index: 2000005; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; background: #000; color: #ffcc00; border: none; border-radius: 8px; cursor: pointer; box-shadow: 0 4px 20px rgba(0,0,0,0.4);">
+            style="position: fixed; top: 20px; right: 20px; z-index: 2000005; width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; background: #ffcc00; color: #fff; border: none; border-radius: 8px; cursor: pointer; box-shadow: 0 4px 20px rgba(0,0,0,0.4);">
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M4 6H20" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
-            <path d="M4 12H14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
-            <path d="M4 18H18" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M4 7H20" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M4 12H20" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M4 17H20" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
         </svg>
     </button>
 
@@ -398,7 +398,7 @@
                 ];
                 els.forEach(el => el && el.classList.remove("open", "active", "show"));
                 const menuBtn = document.getElementById("menuBtn");
-                if (menuBtn) menuBtn.innerHTML = '<i class="bi bi-list"></i>';
+                if (menuBtn) menuBtn.innerHTML = '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 7H20" stroke="white" stroke-width="2.5" stroke-linecap="round"/><path d="M4 12H20" stroke="white" stroke-width="2.5" stroke-linecap="round"/><path d="M4 17H20" stroke="white" stroke-width="2.5" stroke-linecap="round"/></svg>';
                 html.classList.remove(lockClass);
                 body.classList.remove(lockClass);
             }
@@ -410,7 +410,7 @@
                 const btn = document.getElementById(btnId);
                 drawer && drawer.classList.add("open");
                 overlay && overlay.classList.add("active");
-                if (btn && btnId === "menuBtn") btn.innerHTML = '<i class="bi bi-x-lg"></i>';
+                if (btn && btnId === "menuBtn") btn.innerHTML = '<i class="bi bi-x-lg" style="color: white !important;"></i>';
                 html.classList.add(lockClass);
                 body.classList.add(lockClass);
             }
