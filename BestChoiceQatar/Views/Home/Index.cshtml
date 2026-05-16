@@ -28,6 +28,7 @@
         --gray-bc: #f8f9fa;
         --font-headline: var(--font-heading);
         --font-body: var(--font-body);
+        --hero-height: 620px;
     }
 
     /* Professional typography integration */
@@ -46,9 +47,15 @@
     html { overflow-x: hidden; width: 100%; }
     
     /* Global Image Safety */
-    img { max-width: 100% !important; height: auto !important; }
+    img:not(.hero-bg) { max-width: 100% !important; height: auto !important; }
 
-    section { padding: 80px 0; overflow: hidden; width: 100%; }
+    section:not(#hero) { padding: 80px 0; overflow: hidden; width: 100%; }
+
+    #hero {
+        margin-top: var(--header-height) !important;
+        padding: 0 !important;
+        overflow: visible !important;
+    }
 
     .h-black { font-weight: 900; text-transform: uppercase; font-family: var(--font-headline); letter-spacing: -1px; }
     .text-bc-yellow { color: var(--primary-bc); }
@@ -60,42 +67,82 @@
     }
 
     /* 1. Hero Section - Refined Industrial Style */
-    .hero-wrap { position: relative; height: 100vh; min-height: 800px; background: #000; display: flex; align-items: center; overflow: hidden; }
+    .hero-wrap {
+        position: relative;
+        height: var(--hero-height);
+        background: transparent;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+    }
     
     .hero-swiper-premium { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
-    .hero-swiper-premium .swiper-slide { height: 100%; width: 100%; overflow: hidden; opacity: 0; transition: opacity 1.2s ease; --slide-accent: #ffcc00; }
-    .hero-swiper-premium .swiper-slide-active { opacity: 1; }
+    .hero-swiper-premium .swiper-slide { height: 100%; width: 100%; overflow: hidden; --slide-accent: #ffcc00; }
     
     /* Theme overrides for specific slides */
     .theme-lime { --slide-accent: #d4e157 !important; }
 
-    .hero-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transform: scale(1); transition: transform 8s linear; }
-    .swiper-slide-active .hero-bg { transform: scale(1.15); }
-
-    /* Professional Compound Overlay: Directional Gradient + Backdrop separator */
-    .hero-overlay { 
-        position: absolute; 
-        inset: 0; 
-        background: linear-gradient(90deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 40%, rgba(0,0,0,0) 80%); 
-        z-index: 1; 
-        backdrop-filter: brightness(0.9) contrast(1.1);
-        -webkit-backdrop-filter: brightness(0.9) contrast(1.1);
-        pointer-events: none;
+    .hero-bg {
+        position: absolute;
+        inset: 0;
+        width: 100% !important;
+        height: 100% !important;
+        max-width: none !important;
+        object-fit: cover;
+        transform: scale(1);
+        transition: transform 8s linear;
+        background-color: #1a1a1a;
+        filter: brightness(0.7);
     }
-    
-    .hero-content { 
-        position: absolute; 
-        top: 0;
-        left: 0;
-        bottom: 0;
-        right: 0;
-        z-index: 10; 
-        color: #fff !important; 
-        text-align: left; 
+    .swiper-slide::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.4) 100%);
+        z-index: 1;
+    }
+    .swiper-slide-active .hero-bg { transform: scale(1.1); }
+
+    .hero-content {
+        position: absolute;
+        inset: 0;
+        z-index: 10;
         display: flex;
         align-items: center;
-        justify-content: flex-start;
+        justify-content: center;
+        padding: 24px 0 56px;
+        color: #fff !important;
+        text-align: center;
         width: 100%;
+        pointer-events: none;
+        box-sizing: border-box;
+    }
+
+    .hero-content .container,
+    .hero-content a,
+    .hero-content button {
+        pointer-events: auto;
+    }
+
+    .hero-copy {
+        max-width: 800px;
+        padding: 0;
+        background: none !important;
+        margin: 0 auto;
+    }
+
+    .hero-actions--compact {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .hero-actions--compact .btn-bc {
+        flex: 1 1 auto;
+        min-width: 140px;
+        justify-content: center;
+        padding: 8px 14px;
+        font-size: 0.68rem;
     }
     
     /* Animation Keyframes */
@@ -104,42 +151,51 @@
         to { opacity: 1; transform: translateY(0); }
     }
 
-    .hero-label { 
-        display: inline-block; 
-        color: var(--slide-accent) !important; 
-        font-weight: 800; 
-        letter-spacing: 5px; 
-        font-size: 0.85rem; 
-        margin-bottom: 25px; 
+    .hero-label {
+        display: block;
+        color: var(--slide-accent) !important;
+        font-weight: 800;
+        letter-spacing: 0.2em;
+        font-size: 0.7rem;
+        margin-bottom: 10px;
         opacity: 0;
         text-transform: uppercase;
-        border-left: 3px solid var(--slide-accent);
-        padding-left: 12px;
-        text-shadow: 0 2px 10px rgba(0,0,0,0.5);
     }
-    .hero-h1 { 
-        font-family: var(--font-headline); 
-        font-size: var(--fs-h1); 
-        font-weight: 900; 
-        line-height: 1.0; 
-        margin-bottom: 30px; 
-        letter-spacing: -0.01em; 
+    .hero-h1 {
+        font-family: var(--font-headline);
+        font-size: var(--fs-h1);
+        font-weight: 900;
+        line-height: 1.1;
+        margin-bottom: 20px;
+        letter-spacing: -0.02em;
         text-transform: uppercase;
         opacity: 0;
         color: #fff !important;
-        text-shadow: 0 4px 30px rgba(0,0,0,0.8), 0 0 10px rgba(0,0,0,0.3);
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
     }
-    .hero-subtext { 
-        font-size: var(--fs-md); 
-        color: #fff !important; 
-        max-width: 750px; 
-        margin: 0 0 45px; 
-        line-height: 1.7; 
-        font-weight: 400; 
+    .hero-subtext {
+        font-family: var(--font-body);
+        font-size: var(--fs-md);
+        color: rgba(255, 255, 255, 0.95) !important;
+        max-width: 700px;
+        margin: 0 auto 30px;
+        line-height: 1.6;
+        font-weight: 400;
         opacity: 0;
-        text-shadow: 0 2px 15px rgba(0,0,0,0.8);
+        text-shadow: 0 2px 15px rgba(0, 0, 0, 0.8);
     }
-    .hero-actions { opacity: 0; display: flex; gap: 20px; flex-wrap: wrap; justify-content: flex-start; }
+    .hero-actions {
+        opacity: 0;
+        display: flex;
+        gap: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .hero-actions .btn-bc {
+        padding: 10px 20px;
+        font-size: 0.72rem;
+        letter-spacing: 1px;
+    }
 
     /* Trigger animations specifically for the active slide's inner content - Sharper Speed */
     .swiper-slide-active .hero-label { animation: heroFadeInUp 0.6s ease forwards 0.1s; }
@@ -167,7 +223,8 @@
     /* Vertical Pagination on Right */
     .hero-pagination {
         position: absolute;
-        right: 50px;
+        right: 40px !important;
+        left: auto !important;
         top: 50%;
         transform: translateY(-50%);
         z-index: 20;
@@ -192,11 +249,16 @@
 
     /* Mobile Responsiveness for Hero */
     @@media (max-width: 991.98px) {
-        .hero-wrap { height: 100svh; min-height: 700px; padding: 100px 0 60px; }
-        .hero-h1 { font-size: 2.5rem; margin-bottom: 20px; }
-        .hero-subtext { font-size: 1rem; margin-bottom: 30px; }
-        .hero-content { text-align: center; }
-        .hero-subtext { margin: 0 auto 40px; }
+        :root { --hero-height: clamp(480px, 55vh, 560px); }
+        .hero-wrap { padding: 0; }
+        .hero-content { padding: 20px 0 48px; text-align: center; }
+        .hero-copy {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 0;
+        }
+        .hero-h1 { font-size: clamp(1.25rem, 5vw, 1.65rem); }
+        .hero-subtext { margin: 0 auto 16px; }
         .hero-actions { justify-content: center; }
         .hero-pagination { 
             right: 20px; 
@@ -209,7 +271,15 @@
             width: 40px;
             height: 12px;
         }
-        .hero-overlay { background: rgba(0,0,0,0.6); }
+    }
+
+    @@media (max-width: 575.98px) {
+        :root { --hero-height: clamp(400px, 50vh, 480px); }
+        .hero-content { padding: 16px 0 40px; }
+        .hero-copy { padding-top: 10px; }
+        .hero-h1 { font-size: 1.2rem; }
+        .hero-subtext { font-size: 0.85rem; line-height: 1.45; }
+        .hero-actions .btn-bc { width: 100%; justify-content: center; }
     }
 
 
@@ -342,8 +412,6 @@
     /* --- COMPREHENSIVE MOBILE RESPONSIVENESS --- */
     @@media (max-width: 991.98px) {
         section { padding: 60px 0; }
-        .hero-wrap { min-height: 100vh; height: auto; padding: 120px 0 80px; }
-        .hero-h1 { font-size: 3.5rem; }
         .about-badge { padding: 15px 20px; }
         .about-badge .badge-num { font-size: 2rem; }
         .calc-card { padding: 30px 20px; }
@@ -562,18 +630,20 @@
                 <div class="swiper-wrapper">
                     <!-- Slide 1: Welcome -->
                     <div class="swiper-slide">
-                        <img src="/Uploads/img1.jpg" class="hero-bg" alt="Bestchoice Qatar Welcome">
-                        <div class="container hero-content">
-                            <div class="row">
-                                <div class="col-lg-9 col-xl-8">
-                                    <span class="hero-label">ENGINEERING EXCELLENCE</span>
-                                    <h1 class="hero-h1">Welcome to Bestchoice for <br> Cabins In All Over QATAR</h1>
-                                    <p class="hero-subtext">Bestchoice was established in 2009. We have already created a name for itself in Qatar market as a GREEN company in various industrial fields.</p>
-                                    <div class="hero-actions">
-                                        <a href="/about" class="btn-bc btn-bc-yellow">
-                                            READ MORE ABOUT US
-                                            <span class="material-symbols-outlined">info</span>
-                                        </a>
+                        <img src="/Content/assets/img/slide/hero-slide-1.jpeg" class="hero-bg" alt="Bestchoice Qatar Engineering">
+                        <div class="hero-content">
+                            <div class="container">
+                                <div class="row justify-content-center">
+                                    <div class="col-lg-10 col-xl-9 hero-copy">
+                                        <span class="hero-label">ENGINEERING EXCELLENCE</span>
+                                        <h1 class="hero-h1">Welcome to Bestchoice - Cabins Across Qatar</h1>
+                                        <p class="hero-subtext">Bestchoice was established in 2009. We have already created a name for itself in Qatar market as a GREEN company in various industrial fields.</p>
+                                        <div class="hero-actions">
+                                            <a href="/about" class="btn-bc btn-bc-yellow">
+                                                READ MORE ABOUT US
+                                                <span class="material-symbols-outlined">info</span>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -582,22 +652,24 @@
 
                     <!-- Slide 2: Services -->
                     <div class="swiper-slide theme-lime">
-                        <img src="/Uploads/img2.jpg" class="hero-bg" alt="Bestchoice Qatar Services">
-                        <div class="container hero-content">
-                            <div class="row">
-                                <div class="col-lg-9 col-xl-8">
-                                    <span class="hero-label">OUR CORE EXPERTISE</span>
-                                    <h1 class="hero-h1">Services</h1>
-                                    <p class="hero-subtext">One of the fast growing companies in Qatar performing the following professional services:</p>
-                                    <div class="hero-actions">
-                                        <a href="/general-contracting" class="btn-bc btn-bc-yellow btn-bc-small">
-                                            General Contracting
-                                            <span class="material-symbols-outlined">architecture</span>
-                                        </a>
-                                        <a href="/optical-fibre-networks" class="btn-bc btn-bc-outline btn-bc-small">
-                                            Optical Fibre Networks
-                                            <span class="material-symbols-outlined">settings_input_component</span>
-                                        </a>
+                        <img src="/Content/assets/img/slide/hero-slide-2.jpeg" class="hero-bg" alt="Bestchoice Qatar Services">
+                        <div class="hero-content">
+                            <div class="container">
+                                <div class="row justify-content-center">
+                                    <div class="col-lg-10 col-xl-9 hero-copy">
+                                        <span class="hero-label">OUR CORE EXPERTISE</span>
+                                        <h1 class="hero-h1">Bestchoice Services - Engineering Excellence</h1>
+                                        <p class="hero-subtext">One of the fast growing companies in Qatar performing the following professional services:</p>
+                                        <div class="hero-actions hero-actions--compact">
+                                            <a href="/general-contracting" class="btn-bc btn-bc-yellow btn-bc-small">
+                                                General Contracting
+                                                <span class="material-symbols-outlined">architecture</span>
+                                            </a>
+                                            <a href="/optical-fibre-networks" class="btn-bc btn-bc-outline btn-bc-small">
+                                                Optical Fibre Networks
+                                                <span class="material-symbols-outlined">settings_input_component</span>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -606,26 +678,28 @@
 
                     <!-- Slide 3: Products -->
                     <div class="swiper-slide theme-lime">
-                        <img src="/Uploads/img3.jpg" class="hero-bg" alt="Bestchoice Qatar Products">
-                        <div class="container hero-content">
-                            <div class="row">
-                                <div class="col-lg-9 col-xl-8">
-                                    <span class="hero-label">PREMIUM SOLUTIONS</span>
-                                    <h1 class="hero-h1">Products</h1>
-                                    <p class="hero-subtext">Expertly performing the following product fabrication services across Qatar's major industrial sectors:</p>
-                                    <div class="hero-actions">
-                                        <a href="/portable-cabin-fabrication" class="btn-bc btn-bc-yellow btn-bc-small">
-                                            Portable Cabin Fabrication
-                                            <span class="material-symbols-outlined">precision_manufacturing</span>
-                                        </a>
-                                        <a href="/building-painting-contractor" class="btn-bc btn-bc-outline btn-bc-small">
-                                            Building Painting
-                                            <span class="material-symbols-outlined">format_paint</span>
-                                        </a>
-                                        <a href="/steel-aluminum-fabrication" class="btn-bc btn-bc-outline btn-bc-small">
-                                            Steel & Aluminum
-                                            <span class="material-symbols-outlined">hardware</span>
-                                        </a>
+                        <img src="/Content/assets/img/slide/hero-slide-3.jpeg" class="hero-bg" alt="Bestchoice Qatar Products">
+                        <div class="hero-content">
+                            <div class="container">
+                                <div class="row justify-content-center">
+                                    <div class="col-lg-10 col-xl-9 hero-copy">
+                                        <span class="hero-label">PREMIUM SOLUTIONS</span>
+                                        <h1 class="hero-h1">Premium Modular Solutions</h1>
+                                        <p class="hero-subtext">Product fabrication for Qatar's major industrial sectors.</p>
+                                        <div class="hero-actions hero-actions--compact">
+                                            <a href="/portable-cabin-fabrication" class="btn-bc btn-bc-yellow btn-bc-small">
+                                                Portable Cabin Fabrication
+                                                <span class="material-symbols-outlined">precision_manufacturing</span>
+                                            </a>
+                                            <a href="/building-painting-contractor" class="btn-bc btn-bc-outline btn-bc-small">
+                                                Building Painting
+                                                <span class="material-symbols-outlined">format_paint</span>
+                                            </a>
+                                            <a href="/steel-aluminum-fabrication" class="btn-bc btn-bc-outline btn-bc-small">
+                                                Steel & Aluminum
+                                                <span class="material-symbols-outlined">hardware</span>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -634,22 +708,24 @@
 
                     <!-- Slide 4: Manufacturer -->
                     <div class="swiper-slide">
-                        <img src="/Uploads/img4.jpg" class="hero-bg" alt="Bestchoice Qatar Manufacturer">
-                        <div class="container hero-content">
-                            <div class="row">
-                                <div class="col-lg-9 col-xl-8">
-                                    <span class="hero-label">QATAR'S PREMIER CHOICE</span>
-                                    <h1 class="hero-h1">Leading Portable Cabin <br> Manufacturer in QATAR.</h1>
-                                    <p class="hero-subtext">Top-quality, durable, and customizable portable cabins built to exceed industrial expectations and site requirements.</p>
-                                    <div class="hero-actions">
-                                        <button type="button" class="btn-bc btn-bc-yellow" data-bs-toggle="modal" data-bs-target="#quoteModal">
-                                            GET FREE QUOTE
-                                            <span class="material-symbols-outlined">description</span>
-                                        </button>
-                                        <a href="tel:@settings.Mobile1" class="btn-bc btn-bc-outline">
-                                            CALL OUR TEAM
-                                            <span class="material-symbols-outlined">call</span>
-                                        </a>
+                        <img src="/Content/assets/img/slide/hero-slide-4.jpeg" class="hero-bg" alt="Bestchoice Qatar Manufacturing">
+                        <div class="hero-content">
+                            <div class="container">
+                                <div class="row justify-content-center">
+                                    <div class="col-lg-10 col-xl-9 hero-copy">
+                                        <span class="hero-label">QATAR'S PREMIER CHOICE</span>
+                                        <h1 class="hero-h1">Leading Portable Cabin Manufacturer in Qatar</h1>
+                                        <p class="hero-subtext">Top-quality, durable, and customizable portable cabins built to exceed industrial expectations and site requirements.</p>
+                                        <div class="hero-actions">
+                                            <button type="button" class="btn-bc btn-bc-yellow" data-bs-toggle="modal" data-bs-target="#quoteModal">
+                                                GET FREE QUOTE
+                                                <span class="material-symbols-outlined">description</span>
+                                            </button>
+                                            <a href="tel:@settings.Mobile1" class="btn-bc btn-bc-outline">
+                                                CALL OUR TEAM
+                                                <span class="material-symbols-outlined">call</span>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -658,18 +734,20 @@
 
                     <!-- Slide 5: Quick Setup -->
                     <div class="swiper-slide">
-                        <img src="/Uploads/img5.jpg" class="hero-bg" alt="Bestchoice Qatar Performance">
-                        <div class="container hero-content">
-                            <div class="row">
-                                <div class="col-lg-9 col-xl-8">
-                                    <span class="hero-label">FAST & EFFICIENT</span>
-                                    <h1 class="hero-h1">Quick Setup-Premium <br> Quality-Low Cost.</h1>
-                                    <p class="hero-subtext">Get porta cabins that are fast to install, built to last, and budget-friendly - engineered exclusively for BestChoice Qatar.</p>
-                                    <div class="hero-actions">
-                                        <a href="/portable-cabin-fabrication" class="btn-bc btn-bc-yellow">
-                                            EXPLORE SOLUTIONS
-                                            <span class="material-symbols-outlined">bolt</span>
-                                        </a>
+                        <img src="/Content/assets/img/slide/hero-slide-5.jpeg" class="hero-bg" alt="Bestchoice Qatar Solutions">
+                        <div class="hero-content">
+                            <div class="container">
+                                <div class="row justify-content-center">
+                                    <div class="col-lg-10 col-xl-9 hero-copy">
+                                        <span class="hero-label">FAST & EFFICIENT</span>
+                                        <h1 class="hero-h1">Modular Innovation - Bestchoice Qatar</h1>
+                                        <p class="hero-subtext">Get porta cabins that are fast to install, built to last, and budget-friendly - engineered exclusively for BestChoice Qatar.</p>
+                                        <div class="hero-actions">
+                                            <a href="/portable-cabin-fabrication" class="btn-bc btn-bc-yellow">
+                                                EXPLORE SOLUTIONS
+                                                <span class="material-symbols-outlined">bolt</span>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -677,8 +755,6 @@
                     </div>
                 </div>
             </div>
-
-            <div class="hero-overlay"></div>
 
             <div class="hero-pagination"></div>
         </div>
@@ -1590,17 +1666,15 @@
     <!-- Swiper Initialization -->
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // Header Scroll Logic
+            // Header scroll — solid bar (no overlap with hero image)
             const header = document.querySelector('#header');
             if (header) {
-                header.classList.add('header-transparent');
+                header.classList.remove('header-transparent');
                 window.addEventListener('scroll', () => {
-                    if (window.scrollY > 100) {
+                    if (window.scrollY > 50) {
                         header.classList.add('header-scrolled');
-                        header.classList.remove('header-transparent');
                     } else {
                         header.classList.remove('header-scrolled');
-                        header.classList.add('header-transparent');
                     }
                 });
             }
@@ -1608,8 +1682,9 @@
             // Hero Swiper with Safety Block
             try {
                 const heroSwiper = new Swiper('.hero-swiper-premium', {
+                    effect: 'fade',
+                    fadeEffect: { crossFade: true },
                     speed: 1500,
-                    parallax: true,
                     loop: true,
                     autoplay: {
                         delay: 5000,
