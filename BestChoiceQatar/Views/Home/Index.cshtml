@@ -76,8 +76,25 @@
         overflow: hidden;
     }
     
-    .hero-swiper-premium { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; }
-    .hero-swiper-premium .swiper-slide { height: 100%; width: 100%; overflow: hidden; --slide-accent: #ffcc00; }
+    .hero-swiper-premium {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+    }
+    .hero-swiper-premium .swiper-slide {
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+        --slide-accent: #ffcc00;
+        z-index: 0 !important;
+        pointer-events: none !important;
+    }
+    .hero-swiper-premium .swiper-slide.swiper-slide-active {
+        z-index: 5 !important;
+        pointer-events: auto !important;
+    }
     
     /* Theme overrides for specific slides */
     .theme-lime { --slide-accent: #d4e157 !important; }
@@ -93,6 +110,8 @@
         transition: transform 8s linear;
         background-color: #1a1a1a;
         filter: brightness(0.7);
+        pointer-events: none !important;
+        z-index: 0;
     }
     .swiper-slide::after {
         content: '';
@@ -100,13 +119,14 @@
         inset: 0;
         background: linear-gradient(to bottom, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0.4) 100%);
         z-index: 1;
+        pointer-events: none !important;
     }
     .swiper-slide-active .hero-bg { transform: scale(1.1); }
 
     .hero-content {
         position: absolute;
         inset: 0;
-        z-index: 10;
+        z-index: 20;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -114,14 +134,31 @@
         color: #fff !important;
         text-align: center;
         width: 100%;
-        pointer-events: none;
         box-sizing: border-box;
     }
 
-    .hero-content .container,
-    .hero-content a,
-    .hero-content button {
-        pointer-events: auto;
+    .swiper-slide-active .hero-content {
+        z-index: 25;
+    }
+
+    .hero-swiper-premium .swiper-slide:not(.swiper-slide-active) .hero-content {
+        visibility: hidden;
+        pointer-events: none !important;
+    }
+
+    .hero-content .hero-copy {
+        pointer-events: auto !important;
+    }
+
+    .hero-content a.btn-bc,
+    .hero-content button.btn-bc,
+    .hero-content .hero-actions a,
+    .hero-content .hero-actions button {
+        pointer-events: auto !important;
+        cursor: pointer !important;
+        position: relative;
+        z-index: 50 !important;
+        touch-action: manipulation;
     }
 
     .hero-copy {
@@ -185,23 +222,37 @@
         text-shadow: 0 2px 15px rgba(0, 0, 0, 0.8);
     }
     .hero-actions {
-        opacity: 0;
+        opacity: 1;
         display: flex;
         gap: 15px;
         flex-wrap: wrap;
         justify-content: center;
+        pointer-events: auto !important;
+        position: relative;
+        z-index: 50;
     }
     .hero-actions .btn-bc {
         padding: 10px 20px;
         font-size: 0.72rem;
         letter-spacing: 1px;
+        pointer-events: auto !important;
+        cursor: pointer !important;
+    }
+
+    .swiper-slide:not(.swiper-slide-active) .hero-actions,
+    .swiper-slide:not(.swiper-slide-active) .hero-actions * {
+        pointer-events: none !important;
     }
 
     /* Trigger animations specifically for the active slide's inner content - Sharper Speed */
     .swiper-slide-active .hero-label { animation: heroFadeInUp 0.6s ease forwards 0.1s; }
     .swiper-slide-active .hero-h1 { animation: heroFadeInUp 0.6s ease forwards 0.25s; }
     .swiper-slide-active .hero-subtext { animation: heroFadeInUp 0.6s ease forwards 0.4s; }
-    .swiper-slide-active .hero-actions { animation: heroFadeInUp 0.6s ease forwards 0.55s; }
+    .swiper-slide-active .hero-actions {
+        animation: heroFadeInUp 0.6s ease forwards 0.55s;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+    }
 
     .btn-bc { padding: 14px 35px; border-radius: 0; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; transition: var(--transition-premium); display: inline-flex; align-items: center; gap: 10px; border: none; text-decoration: none; font-size: 0.85rem; }
     .btn-bc-yellow { background: var(--slide-accent, var(--primary-bc)); color: #000; }
@@ -227,7 +278,8 @@
         left: auto !important;
         top: 50%;
         transform: translateY(-50%);
-        z-index: 20;
+        pointer-events: auto;
+        z-index: 30;
         display: flex;
         flex-direction: column;
         gap: 15px;
@@ -240,6 +292,8 @@
         margin: 0 !important;
         border-radius: 0;
         transition: all 0.4s ease;
+        pointer-events: auto;
+        cursor: pointer;
     }
     .hero-pagination .swiper-pagination-bullet-active {
         background: var(--primary-bc);
@@ -259,7 +313,24 @@
         }
         .hero-h1 { font-size: clamp(1.25rem, 5vw, 1.65rem); }
         .hero-subtext { margin: 0 auto 16px; }
-        .hero-actions { justify-content: center; }
+        .hero-actions {
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .hero-actions .btn-bc,
+        .hero-actions--compact .btn-bc {
+            width: auto;
+            max-width: min(280px, 82vw);
+            flex: none;
+            min-width: 0;
+            justify-content: center;
+        }
+        .hero-actions--compact {
+            flex-direction: column;
+            align-items: center;
+        }
         .hero-pagination { 
             right: 20px; 
             top: auto; 
@@ -279,7 +350,13 @@
         .hero-copy { padding-top: 10px; }
         .hero-h1 { font-size: 1.2rem; }
         .hero-subtext { font-size: 0.85rem; line-height: 1.45; }
-        .hero-actions .btn-bc { width: 100%; justify-content: center; }
+        .hero-actions .btn-bc,
+        .hero-actions--compact .btn-bc {
+            max-width: min(240px, 78vw);
+            padding: 9px 14px;
+            font-size: 0.62rem;
+            letter-spacing: 0.4px;
+        }
     }
 
 
@@ -379,6 +456,115 @@
     /* 6. Why Choose Us Section */
     .feature-box { border-left: 4px solid var(--primary-bc); padding: 20px 30px; background: var(--gray-bc); height: 100%; }
     .feature-box h4 { font-weight: 800; font-family: var(--font-headline); margin-bottom: 10px; }
+
+    /* Project Portfolio Carousel */
+    .portfolio-carousel-wrap {
+        position: relative;
+        padding: 0 48px 56px;
+    }
+    .portfolio-swiper {
+        overflow: hidden;
+        padding: 8px 4px 12px;
+    }
+    .portfolio-swiper .swiper-slide {
+        height: auto;
+    }
+    .portfolio-swiper .work-card {
+        border-radius: 12px;
+        height: 280px;
+    }
+    .portfolio-swiper .work-card img {
+        height: 280px !important;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+    }
+    .portfolio-swiper .work-card:hover img {
+        transform: scale(1.06);
+    }
+    .portfolio-swiper-pagination {
+        bottom: 0 !important;
+    }
+    .portfolio-swiper-pagination .swiper-pagination-bullet {
+        background: #111;
+        opacity: 0.25;
+        width: 10px;
+        height: 10px;
+        transition: all 0.3s ease;
+    }
+    .portfolio-swiper-pagination .swiper-pagination-bullet-active {
+        background: var(--primary-bc) !important;
+        opacity: 1;
+        width: 28px;
+        border-radius: 6px;
+    }
+    .portfolio-swiper-prev,
+    .portfolio-swiper-next {
+        width: 44px !important;
+        height: 44px !important;
+        background: #fff !important;
+        border: 1px solid rgba(0, 0, 0, 0.1) !important;
+        border-radius: 50% !important;
+        color: #111 !important;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+    }
+    .portfolio-swiper-prev::after,
+    .portfolio-swiper-next::after {
+        font-size: 16px !important;
+        font-weight: 700;
+    }
+    .portfolio-swiper-prev:hover,
+    .portfolio-swiper-next:hover {
+        background: var(--primary-bc) !important;
+        color: #000 !important;
+        border-color: var(--primary-bc) !important;
+    }
+    /* Mobile-only portfolio slider (portrait project photos) */
+    .portfolio-mobile-wrap {
+        position: relative;
+        padding: 0 8px 48px;
+        max-width: 420px;
+        margin: 0 auto;
+    }
+    .portfolio-mobile-swiper {
+        overflow: hidden;
+        border-radius: 16px;
+    }
+    .portfolio-mobile-swiper .swiper-slide {
+        height: auto;
+    }
+    .portfolio-mobile-swiper .work-card {
+        border-radius: 16px;
+        height: clamp(380px, 72vh, 520px);
+        margin: 0 auto;
+        max-width: 100%;
+    }
+    .portfolio-mobile-swiper .work-card img {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover;
+        object-position: center;
+    }
+    .portfolio-mobile-swiper .work-overlay {
+        opacity: 1 !important;
+        transform: translateY(0);
+        background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 45%, transparent 100%) !important;
+    }
+    .portfolio-mobile-pagination {
+        bottom: 4px !important;
+    }
+    .portfolio-mobile-pagination .swiper-pagination-bullet {
+        background: #111;
+        opacity: 0.25;
+        width: 8px;
+        height: 8px;
+    }
+    .portfolio-mobile-pagination .swiper-pagination-bullet-active {
+        background: var(--primary-bc) !important;
+        opacity: 1;
+        width: 24px;
+        border-radius: 6px;
+    }
 
     /* 7. Work With Us Banner */
     .work-banner { position: relative; background: #1a2035; padding: 90px 0; overflow: hidden; text-align: center; }
@@ -631,14 +817,14 @@
                     <!-- Slide 1: Welcome -->
                     <div class="swiper-slide">
                         <img src="/Content/assets/img/slide/hero-slide-1.jpeg" class="hero-bg" alt="Bestchoice Qatar Engineering">
-                        <div class="hero-content">
+                        <div class="hero-content swiper-no-swiping">
                             <div class="container">
                                 <div class="row justify-content-center">
-                                    <div class="col-lg-10 col-xl-9 hero-copy">
+                                    <div class="col-lg-10 col-xl-9 hero-copy swiper-no-swiping">
                                         <span class="hero-label">ENGINEERING EXCELLENCE</span>
                                         <h1 class="hero-h1">Welcome to Bestchoice - Cabins Across Qatar</h1>
                                         <p class="hero-subtext">Bestchoice was established in 2009. We have already created a name for itself in Qatar market as a GREEN company in various industrial fields.</p>
-                                        <div class="hero-actions">
+                                        <div class="hero-actions swiper-no-swiping">
                                             <a href="/about" class="btn-bc btn-bc-yellow">
                                                 READ MORE ABOUT US
                                                 <span class="material-symbols-outlined">info</span>
@@ -653,14 +839,14 @@
                     <!-- Slide 2: Services -->
                     <div class="swiper-slide theme-lime">
                         <img src="/Content/assets/img/slide/hero-slide-2.jpeg" class="hero-bg" alt="Bestchoice Qatar Services">
-                        <div class="hero-content">
+                        <div class="hero-content swiper-no-swiping">
                             <div class="container">
                                 <div class="row justify-content-center">
-                                    <div class="col-lg-10 col-xl-9 hero-copy">
+                                    <div class="col-lg-10 col-xl-9 hero-copy swiper-no-swiping">
                                         <span class="hero-label">OUR CORE EXPERTISE</span>
                                         <h1 class="hero-h1">Bestchoice Services - Engineering Excellence</h1>
                                         <p class="hero-subtext">One of the fast growing companies in Qatar performing the following professional services:</p>
-                                        <div class="hero-actions hero-actions--compact">
+                                        <div class="hero-actions hero-actions--compact swiper-no-swiping">
                                             <a href="/general-contracting" class="btn-bc btn-bc-yellow btn-bc-small">
                                                 General Contracting
                                                 <span class="material-symbols-outlined">architecture</span>
@@ -679,14 +865,14 @@
                     <!-- Slide 3: Products -->
                     <div class="swiper-slide theme-lime">
                         <img src="/Content/assets/img/slide/hero-slide-3.jpeg" class="hero-bg" alt="Bestchoice Qatar Products">
-                        <div class="hero-content">
+                        <div class="hero-content swiper-no-swiping">
                             <div class="container">
                                 <div class="row justify-content-center">
-                                    <div class="col-lg-10 col-xl-9 hero-copy">
+                                    <div class="col-lg-10 col-xl-9 hero-copy swiper-no-swiping">
                                         <span class="hero-label">PREMIUM SOLUTIONS</span>
                                         <h1 class="hero-h1">Premium Modular Solutions</h1>
                                         <p class="hero-subtext">Product fabrication for Qatar's major industrial sectors.</p>
-                                        <div class="hero-actions hero-actions--compact">
+                                        <div class="hero-actions hero-actions--compact swiper-no-swiping">
                                             <a href="/portable-cabin-fabrication" class="btn-bc btn-bc-yellow btn-bc-small">
                                                 Portable Cabin Fabrication
                                                 <span class="material-symbols-outlined">precision_manufacturing</span>
@@ -709,14 +895,14 @@
                     <!-- Slide 4: Manufacturer -->
                     <div class="swiper-slide">
                         <img src="/Content/assets/img/slide/hero-slide-4.jpeg" class="hero-bg" alt="Bestchoice Qatar Manufacturing">
-                        <div class="hero-content">
+                        <div class="hero-content swiper-no-swiping">
                             <div class="container">
                                 <div class="row justify-content-center">
-                                    <div class="col-lg-10 col-xl-9 hero-copy">
+                                    <div class="col-lg-10 col-xl-9 hero-copy swiper-no-swiping">
                                         <span class="hero-label">QATAR'S PREMIER CHOICE</span>
                                         <h1 class="hero-h1">Leading Portable Cabin Manufacturer in Qatar</h1>
                                         <p class="hero-subtext">Top-quality, durable, and customizable portable cabins built to exceed industrial expectations and site requirements.</p>
-                                        <div class="hero-actions">
+                                        <div class="hero-actions swiper-no-swiping">
                                             <button type="button" class="btn-bc btn-bc-yellow" data-bs-toggle="modal" data-bs-target="#quoteModal">
                                                 GET FREE QUOTE
                                                 <span class="material-symbols-outlined">description</span>
@@ -735,14 +921,14 @@
                     <!-- Slide 5: Quick Setup -->
                     <div class="swiper-slide">
                         <img src="/Content/assets/img/slide/hero-slide-5.jpeg" class="hero-bg" alt="Bestchoice Qatar Solutions">
-                        <div class="hero-content">
+                        <div class="hero-content swiper-no-swiping">
                             <div class="container">
                                 <div class="row justify-content-center">
-                                    <div class="col-lg-10 col-xl-9 hero-copy">
+                                    <div class="col-lg-10 col-xl-9 hero-copy swiper-no-swiping">
                                         <span class="hero-label">FAST & EFFICIENT</span>
                                         <h1 class="hero-h1">Modular Innovation - Bestchoice Qatar</h1>
                                         <p class="hero-subtext">Get porta cabins that are fast to install, built to last, and budget-friendly - engineered exclusively for BestChoice Qatar.</p>
-                                        <div class="hero-actions">
+                                        <div class="hero-actions swiper-no-swiping">
                                             <a href="/portable-cabin-fabrication" class="btn-bc btn-bc-yellow">
                                                 EXPLORE SOLUTIONS
                                                 <span class="material-symbols-outlined">bolt</span>
@@ -1171,14 +1357,6 @@
 
 
 
-            <div class="text-center mt-5" data-aos="fade-up">
-                <a href="/portable-cabin-fabrication" class="btn-bc btn-bc-yellow">VIEW ALL PRODUCTS <span class="material-symbols-outlined">arrow_forward</span></a>
-            </div>
-        </div>
-    </section>
-
-
-
     <!-- MID-PAGE CTA: INTERESTED TO WORK WITH US -->
     <section class="p-0">
         <div class="work-banner">
@@ -1192,6 +1370,29 @@
 
     <!-- MODULAR CABINS - OUR WORKS GALLERY -->
     <section id="modular-works" class="py-5 bg-white">
+        @{
+            var portfolioMobileItems = new[] {
+                new { Src = "~/Uploads/portfolio-mobile/portfolio-mobile-1.png", Title = "Security Guard Cabin", Alt = "Premium security guard cabin Qatar" },
+                new { Src = "~/Uploads/portfolio-mobile/portfolio-mobile-2.png", Title = "Container Office", Alt = "Modular container office waterfront Qatar" },
+                new { Src = "~/Uploads/portfolio-mobile/portfolio-mobile-3.png", Title = "Crane Installation", Alt = "Modular unit crane installation Qatar" },
+                new { Src = "~/Uploads/portfolio-mobile/portfolio-mobile-4.png", Title = "Site Cabin Project", Alt = "Portable site cabin construction Qatar" },
+                new { Src = "~/Uploads/portfolio-mobile/portfolio-mobile-5.png", Title = "Fleet Delivery", Alt = "Modular cabin fleet logistics Qatar" }
+            };
+            var portfolioItems = new[] {
+                new { Src = "~/Uploads/WhatsApp Image 2026-04-22 at 3.41.42 PM (1).jpeg", Title = "Site Installation", Alt = "Site Project 1" },
+                new { Src = "~/Uploads/WhatsApp Image 2026-04-22 at 3.41.42 PM.jpeg", Title = "Modular Unit", Alt = "Site Project 2" },
+                new { Src = "~/Uploads/WhatsApp Image 2026-04-22 at 3.41.43 PM (1).jpeg", Title = "Custom Fabrication", Alt = "Site Project 3" },
+                new { Src = "~/Uploads/WhatsApp Image 2026-04-22 at 3.41.43 PM (2).jpeg", Title = "Office Complex", Alt = "Site Project 4" },
+                new { Src = "~/Uploads/WhatsApp Image 2026-04-22 at 3.41.43 PM (3).jpeg", Title = "Project Site", Alt = "Site Project 5" },
+                new { Src = "~/Uploads/WhatsApp Image 2026-04-22 at 3.41.43 PM.jpeg", Title = "Cabin Interior", Alt = "Site Project 6" },
+                new { Src = "~/Uploads/WhatsApp Image 2026-04-22 at 3.41.44 PM (1).jpeg", Title = "Industrial Unit", Alt = "Site Project 7" },
+                new { Src = "~/Uploads/WhatsApp Image 2026-04-22 at 3.41.44 PM (2).jpeg", Title = "Doha Site Setup", Alt = "Site Project 8" },
+                new { Src = "~/Uploads/WhatsApp Image 2026-04-22 at 3.41.45 PM.jpeg", Title = "Custom Complex", Alt = "Site Project 9" },
+                new { Src = "~/Uploads/WhatsApp Image 2026-04-22 at 3.41.46 PM.jpeg", Title = "Mobile Unit", Alt = "Site Project 10" },
+                new { Src = "~/Uploads/WhatsApp Image 2026-04-22 at 3.41.47 PM.jpeg", Title = "Industrial Office", Alt = "Site Project 11" },
+                new { Src = "~/Uploads/WhatsApp Image 2026-04-22 at 3.41.48 PM.jpeg", Title = "Site Accommodation", Alt = "Site Project 12" }
+            };
+        }
         <div class="container">
             <div class="text-center mb-5" data-aos="fade-up">
                 <span class="premium-subtitle">Project Portfolio</span>
@@ -1199,115 +1400,46 @@
                 <div class="mx-auto bg-primary-bc" style="width: 80px; height: 4px; margin-top: 15px;"></div>
             </div>
 
-            <div class="row g-4" data-aos="fade-up">
-                <!-- Work 1 -->
-                <div class="col-lg-3 col-md-4 col-6">
-                    <div class="work-card position-relative overflow-hidden shadow-sm" style="border-radius: 12px; height: 250px;">
-                        <img src="~/Uploads/WhatsApp Image 2026-04-22 at 3.41.42 PM (1).jpeg" class="img-fluid w-100" style="height: 250px !important; object-fit: cover;" alt="Site Project 1">
-                        <div class="work-overlay position-absolute d-flex flex-column justify-content-end p-3" style="background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); opacity: 0; transition: all 0.4s ease; top:0; left:0; right:0; bottom:0; pointer-events: none;">
-                            <h6 class="text-white fw-bold mb-0">Site Installation</h6>
+            <!-- Mobile-only portfolio slider -->
+            <div class="portfolio-mobile-wrap d-lg-none" data-aos="fade-up">
+                <div class="swiper portfolio-mobile-swiper">
+                    <div class="swiper-wrapper">
+                        @foreach (var item in portfolioMobileItems)
+                        {
+                        <div class="swiper-slide">
+                            <div class="work-card position-relative overflow-hidden shadow">
+                                <img src="@Url.Content(item.Src)" class="img-fluid w-100" alt="@item.Alt" loading="lazy">
+                                <div class="work-overlay position-absolute d-flex flex-column justify-content-end p-3">
+                                    <h6 class="text-white fw-bold mb-0">@item.Title</h6>
+                                </div>
+                            </div>
                         </div>
+                        }
                     </div>
                 </div>
-                <!-- Work 2 -->
-                <div class="col-lg-3 col-md-4 col-6">
-                    <div class="work-card position-relative overflow-hidden shadow-sm" style="border-radius: 12px; height: 250px;">
-                        <img src="~/Uploads/WhatsApp Image 2026-04-22 at 3.41.42 PM.jpeg" class="img-fluid w-100" style="height: 250px !important; object-fit: cover;" alt="Site Project 2">
-                        <div class="work-overlay position-absolute d-flex flex-column justify-content-end p-3" style="background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); opacity: 0; transition: all 0.4s ease; top:0; left:0; right:0; bottom:0; pointer-events: none;">
-                            <h6 class="text-white fw-bold mb-0">Modular Unit</h6>
+                <div class="swiper-pagination portfolio-mobile-pagination"></div>
+            </div>
+
+            <!-- Desktop / tablet portfolio carousel -->
+            <div class="portfolio-carousel-wrap d-none d-lg-block" data-aos="fade-up">
+                <div class="swiper portfolio-swiper">
+                    <div class="swiper-wrapper">
+                        @foreach (var item in portfolioItems)
+                        {
+                        <div class="swiper-slide">
+                            <div class="work-card position-relative overflow-hidden shadow-sm">
+                                <img src="@Url.Content(item.Src)" class="img-fluid w-100" alt="@item.Alt">
+                                <div class="work-overlay position-absolute d-flex flex-column justify-content-end p-3">
+                                    <h6 class="text-white fw-bold mb-0">@item.Title</h6>
+                                </div>
+                            </div>
                         </div>
+                        }
                     </div>
                 </div>
-                <!-- Work 3 -->
-                <div class="col-lg-3 col-md-4 col-6">
-                    <div class="work-card position-relative overflow-hidden shadow-sm" style="border-radius: 12px; height: 250px;">
-                        <img src="~/Uploads/WhatsApp Image 2026-04-22 at 3.41.43 PM (1).jpeg" class="img-fluid w-100" style="height: 250px !important; object-fit: cover;" alt="Site Project 3">
-                        <div class="work-overlay position-absolute d-flex flex-column justify-content-end p-3" style="background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); opacity: 0; transition: all 0.4s ease; top:0; left:0; right:0; bottom:0; pointer-events: none;">
-                            <h6 class="text-white fw-bold mb-0">Custom Fabrication</h6>
-                        </div>
-                    </div>
-                </div>
-                <!-- Work 4 -->
-                <div class="col-lg-3 col-md-4 col-6">
-                    <div class="work-card position-relative overflow-hidden shadow-sm" style="border-radius: 12px; height: 250px;">
-                        <img src="~/Uploads/WhatsApp Image 2026-04-22 at 3.41.43 PM (2).jpeg" class="img-fluid w-100" style="height: 250px !important; object-fit: cover;" alt="Site Project 4">
-                        <div class="work-overlay position-absolute d-flex flex-column justify-content-end p-3" style="background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); opacity: 0; transition: all 0.4s ease; top:0; left:0; right:0; bottom:0; pointer-events: none;">
-                            <h6 class="text-white fw-bold mb-0">Office Complex</h6>
-                        </div>
-                    </div>
-                </div>
-                <!-- Work 5 -->
-                <div class="col-lg-3 col-md-4 col-6">
-                    <div class="work-card position-relative overflow-hidden shadow-sm" style="border-radius: 12px; height: 250px;">
-                        <img src="~/Uploads/WhatsApp Image 2026-04-22 at 3.41.43 PM (3).jpeg" class="img-fluid w-100" style="height: 250px !important; object-fit: cover;" alt="Site Project 5">
-                        <div class="work-overlay position-absolute d-flex flex-column justify-content-end p-3" style="background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); opacity: 0; transition: all 0.4s ease; top:0; left:0; right:0; bottom:0; pointer-events: none;">
-                            <h6 class="text-white fw-bold mb-0">Project Site</h6>
-                        </div>
-                    </div>
-                </div>
-                <!-- Work 6 -->
-                <div class="col-lg-3 col-md-4 col-6">
-                    <div class="work-card position-relative overflow-hidden shadow-sm" style="border-radius: 12px; height: 250px;">
-                        <img src="~/Uploads/WhatsApp Image 2026-04-22 at 3.41.43 PM.jpeg" class="img-fluid w-100" style="height: 250px !important; object-fit: cover;" alt="Site Project 6">
-                        <div class="work-overlay position-absolute d-flex flex-column justify-content-end p-3" style="background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); opacity: 0; transition: all 0.4s ease; top:0; left:0; right:0; bottom:0; pointer-events: none;">
-                            <h6 class="text-white fw-bold mb-0">Cabin Interior</h6>
-                        </div>
-                    </div>
-                </div>
-                <!-- Work 7 -->
-                <div class="col-lg-3 col-md-4 col-6">
-                    <div class="work-card position-relative overflow-hidden shadow-sm" style="border-radius: 12px; height: 250px;">
-                        <img src="~/Uploads/WhatsApp Image 2026-04-22 at 3.41.44 PM (1).jpeg" class="img-fluid w-100" style="height: 250px !important; object-fit: cover;" alt="Site Project 7">
-                        <div class="work-overlay position-absolute d-flex flex-column justify-content-end p-3" style="background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); opacity: 0; transition: all 0.4s ease; top:0; left:0; right:0; bottom:0; pointer-events: none;">
-                            <h6 class="text-white fw-bold mb-0">Industrial Unit</h6>
-                        </div>
-                    </div>
-                </div>
-                <!-- Work 8 -->
-                <div class="col-lg-3 col-md-4 col-6">
-                    <div class="work-card position-relative overflow-hidden shadow-sm" style="border-radius: 12px; height: 250px;">
-                        <img src="~/Uploads/WhatsApp Image 2026-04-22 at 3.41.44 PM (2).jpeg" class="img-fluid w-100" style="height: 250px !important; object-fit: cover;" alt="Site Project 8">
-                        <div class="work-overlay position-absolute d-flex flex-column justify-content-end p-3" style="background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); opacity: 0; transition: all 0.4s ease; top:0; left:0; right:0; bottom:0; pointer-events: none;">
-                            <h6 class="text-white fw-bold mb-0">Doha Site Setup</h6>
-                        </div>
-                    </div>
-                </div>
-                <!-- Work 9 -->
-                <div class="col-lg-3 col-md-4 col-6">
-                    <div class="work-card position-relative overflow-hidden shadow-sm" style="border-radius: 12px; height: 250px;">
-                        <img src="~/Uploads/WhatsApp Image 2026-04-22 at 3.41.45 PM.jpeg" class="img-fluid w-100" style="height: 250px !important; object-fit: cover;" alt="Site Project 9">
-                        <div class="work-overlay position-absolute d-flex flex-column justify-content-end p-3" style="background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); opacity: 0; transition: all 0.4s ease; top:0; left:0; right:0; bottom:0; pointer-events: none;">
-                            <h6 class="text-white fw-bold mb-0">Custom Complex</h6>
-                        </div>
-                    </div>
-                </div>
-                <!-- Work 10 -->
-                <div class="col-lg-3 col-md-4 col-6">
-                    <div class="work-card position-relative overflow-hidden shadow-sm" style="border-radius: 12px; height: 250px;">
-                        <img src="~/Uploads/WhatsApp Image 2026-04-22 at 3.41.46 PM.jpeg" class="img-fluid w-100" style="height: 250px !important; object-fit: cover;" alt="Site Project 10">
-                        <div class="work-overlay position-absolute d-flex flex-column justify-content-end p-3" style="background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); opacity: 0; transition: all 0.4s ease; top:0; left:0; right:0; bottom:0; pointer-events: none;">
-                            <h6 class="text-white fw-bold mb-0">Mobile Unit</h6>
-                        </div>
-                    </div>
-                </div>
-                <!-- Work 11 -->
-                <div class="col-lg-3 col-md-4 col-6">
-                    <div class="work-card position-relative overflow-hidden shadow-sm" style="border-radius: 12px; height: 250px;">
-                        <img src="~/Uploads/WhatsApp Image 2026-04-22 at 3.41.47 PM.jpeg" class="img-fluid w-100" style="height: 250px !important; object-fit: cover;" alt="Site Project 11">
-                        <div class="work-overlay position-absolute d-flex flex-column justify-content-end p-3" style="background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); opacity: 0; transition: all 0.4s ease; top:0; left:0; right:0; bottom:0; pointer-events: none;">
-                            <h6 class="text-white fw-bold mb-0">Industrial Office</h6>
-                        </div>
-                    </div>
-                </div>
-                <!-- Work 12 -->
-                <div class="col-lg-3 col-md-4 col-6">
-                    <div class="work-card position-relative overflow-hidden shadow-sm" style="border-radius: 12px; height: 250px;">
-                        <img src="~/Uploads/WhatsApp Image 2026-04-22 at 3.41.48 PM.jpeg" class="img-fluid w-100" style="height: 250px !important; object-fit: cover;" alt="Site Project 12">
-                        <div class="work-overlay position-absolute d-flex flex-column justify-content-end p-3" style="background: linear-gradient(to top, rgba(0,0,0,0.8), transparent); opacity: 0; transition: all 0.4s ease; top:0; left:0; right:0; bottom:0; pointer-events: none;">
-                            <h6 class="text-white fw-bold mb-0">Site Accommodation</h6>
-                        </div>
-                    </div>
-                </div>
+                <div class="swiper-button-prev portfolio-swiper-prev"></div>
+                <div class="swiper-button-next portfolio-swiper-next"></div>
+                <div class="swiper-pagination portfolio-swiper-pagination"></div>
             </div>
 
             <div class="text-center mt-5" data-aos="fade-up">
@@ -1317,12 +1449,17 @@
     </section>
 
     <style>
-        .work-card:hover .work-overlay { 
-            opacity: 1 !important; 
-            transform: translateY(0);
-        }
         .work-card .work-overlay {
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            opacity: 0;
+            transition: all 0.4s ease;
+            inset: 0;
+            pointer-events: none;
             transform: translateY(10px);
+        }
+        .work-card:hover .work-overlay {
+            opacity: 1 !important;
+            transform: translateY(0);
         }
     </style>
 
@@ -1686,6 +1823,10 @@
                     fadeEffect: { crossFade: true },
                     speed: 1500,
                     loop: true,
+                    preventClicks: false,
+                    preventClicksPropagation: false,
+                    noSwipingClass: 'swiper-no-swiping',
+                    touchStartPreventDefault: false,
                     autoplay: {
                         delay: 5000,
                         disableOnInteraction: false,
@@ -1694,7 +1835,26 @@
                         el: '.hero-pagination',
                         clickable: true,
                     },
+                    on: {
+                        init: function () { updateHeroSlideClickability(this); },
+                        slideChangeTransitionEnd: function () { updateHeroSlideClickability(this); }
+                    }
                 });
+
+                function updateHeroSlideClickability(swiper) {
+                    const root = swiper.el;
+                    if (!root) return;
+                    root.querySelectorAll('.swiper-slide').forEach(function (slide) {
+                        const isActive = slide.classList.contains('swiper-slide-active');
+                        slide.style.pointerEvents = isActive ? 'auto' : 'none';
+                        slide.style.zIndex = isActive ? '5' : '0';
+                        const content = slide.querySelector('.hero-content');
+                        if (content) {
+                            content.style.visibility = isActive ? 'visible' : 'hidden';
+                            content.style.pointerEvents = isActive ? 'auto' : 'none';
+                        }
+                    });
+                }
 
                 // Initialize PureCounter (Self-starting library) 
                 new PureCounter();
@@ -1743,6 +1903,63 @@
                 }
             });
             
+
+            // Project Portfolio — mobile-only slider
+            const portfolioMobileEl = document.querySelector('.portfolio-mobile-swiper');
+            if (portfolioMobileEl) {
+                new Swiper('.portfolio-mobile-swiper', {
+                    slidesPerView: 1,
+                    spaceBetween: 0,
+                    loop: true,
+                    grabCursor: true,
+                    speed: 600,
+                    autoplay: {
+                        delay: 4000,
+                        disableOnInteraction: false,
+                    },
+                    pagination: {
+                        el: '.portfolio-mobile-pagination',
+                        clickable: true,
+                    },
+                });
+            }
+
+            // Project Portfolio — desktop / tablet carousel
+            const portfolioDesktopEl = document.querySelector('.portfolio-swiper');
+            if (portfolioDesktopEl) {
+            const portfolioSwiper = new Swiper('.portfolio-swiper', {
+                slidesPerView: 1.15,
+                spaceBetween: 16,
+                loop: true,
+                grabCursor: true,
+                autoplay: {
+                    delay: 3500,
+                    disableOnInteraction: false,
+                },
+                pagination: {
+                    el: '.portfolio-swiper-pagination',
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: '.portfolio-swiper-next',
+                    prevEl: '.portfolio-swiper-prev',
+                },
+                breakpoints: {
+                    576: {
+                        slidesPerView: 2,
+                        spaceBetween: 20,
+                    },
+                    992: {
+                        slidesPerView: 3,
+                        spaceBetween: 24,
+                    },
+                    1200: {
+                        slidesPerView: 4,
+                        spaceBetween: 28,
+                    }
+                }
+            });
+            }
 
             // Client Swiper
             const clientsSwiper = new Swiper('.clients-swiper', {
